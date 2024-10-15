@@ -4,8 +4,8 @@ gen = ModelGenerator()
 
 # Define activities
 check_inventory_level = gen.activity('Check current inventory level')
-signal_reorder_automated = gen.activity('Automated alert')
-signal_reorder_manual = gen.activity('Manual signal')
+signal_reorder_automated = gen.activity('Send an automated alert')
+signal_reorder_manual = gen.activity('Send a manual alert')
 place_order = gen.activity('Place order with suppliers')
 update_expected_delivery = gen.activity('Update inventory system with expected delivery dates')
 receive_stock = gen.activity('Receive stock')

@@ -10,22 +10,19 @@ collect_resumes = gen.activity('Collect resumes')
 screen_resumes = gen.activity('Screen resumes')
 conduct_phone_interviews = gen.activity('Conduct initial phone interviews')
 invite_candidates = gen.activity('Invite candidates for interviews')
-conduct_in_person_interviews = gen.activity('Conduct in-person interviews')
-conduct_virtual_interviews = gen.activity('Conduct virtual interviews')
+conduct_in_person_interview = gen.activity('Conduct an in-person interview')
+conduct_virtual_interview = gen.activity('Conduct a virtual interview')
 choose_candidate = gen.activity('Choose candidate')
 extend_offer = gen.activity('Extend offer')
-salary_negotiations = gen.activity('Salary negotiations')
+salary_negotiations = gen.loop(None, gen.activity('Negotiate salary'))
 begin_onboarding = gen.activity('Begin onboarding process')
-paperwork = gen.activity('Paperwork')
-orientation = gen.activity('Orientation')
-training = gen.activity('Training')
-process_concludes = gen.activity('Conclude with full integration')
+paperwork = gen.activity('Complete paperwork')
+orientation = gen.activity('Complete orientation')
+training = gen.activity('Complete training')
 
-# Define optional salary negotiations
-salary_negotiations_optional = gen.xor(salary_negotiations, None)
 
 # Define exclusive choice between in-person and virtual interviews
-interviews = gen.xor(conduct_in_person_interviews, conduct_virtual_interviews)
+interviews = gen.loop(gen.xor(conduct_in_person_interview, conduct_virtual_interview), None)
 
 # Define dependencies
 dependencies = [
@@ -38,14 +35,11 @@ dependencies = [
     (invite_candidates, interviews),
     (interviews, choose_candidate),
     (choose_candidate, extend_offer),
-    (extend_offer, salary_negotiations_optional),
-    (salary_negotiations_optional, begin_onboarding),
+    (extend_offer, salary_negotiations),
+    (salary_negotiations, begin_onboarding),
     (begin_onboarding, paperwork),
     (begin_onboarding, orientation),
-    (begin_onboarding, training),
-    (paperwork, process_concludes),
-    (orientation, process_concludes),
-    (training, process_concludes)
+    (begin_onboarding, training)
 ]
 
 # Create the final model

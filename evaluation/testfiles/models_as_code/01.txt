@@ -5,7 +5,6 @@ gen = ModelGenerator()
 # Define activities
 receive_inquiry = gen.activity('Receive customer inquiry')
 collect_info = gen.activity('Collect customer information')
-provide_responses = gen.activity('Provide detailed responses')
 address_concerns = gen.activity('Address customer concerns or questions')
 guide_selection = gen.activity('Guide customer in selecting product/service')
 provide_quote = gen.activity('Provide quote')
@@ -34,10 +33,8 @@ choice_after_initial = gen.xor(continuation_submodel, None)
 # Initial partial order with dependencies
 initial_poset = gen.partial_order(dependencies=[
     (receive_inquiry, collect_info),
-    (receive_inquiry, provide_responses),
     (receive_inquiry, address_concerns),
     (collect_info, choice_after_initial),
-    (provide_responses, choice_after_initial),
     (address_concerns, choice_after_initial)
 ])
 

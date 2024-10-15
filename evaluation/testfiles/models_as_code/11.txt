@@ -4,9 +4,9 @@ gen = ModelGenerator()
 
 # Define activities
 sign_up = gen.activity('Customer signs up')
-generate_account = gen.activity('System generates account')
-assign_access = gen.activity('System assigns access')
-trigger_billing = gen.activity('System sets automatic triggers for billing cycles')
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+trigger_billing = gen.activity('Set automatic triggers for billing cycles')
 
 # Initial dependencies
 initial_dependencies = [
@@ -18,9 +18,9 @@ initial_dependencies = [
 initial_poset = gen.partial_order(dependencies=initial_dependencies)
 
 # Define subscription activities
-receive_updates = gen.activity('Customer receives regular updates')
-receive_enhancements = gen.activity('Customer receives product enhancements')
-receive_notifications = gen.activity('Customer receives renewal notifications')
+receive_updates = gen.activity('Send regular updates')
+receive_enhancements = gen.activity('Send product enhancements')
+receive_notifications = gen.activity('Send renewal notifications')
 
 subscription_activities = gen.partial_order(dependencies=[
     (receive_updates,),
@@ -43,7 +43,7 @@ cancellation_dependencies = [
     (apply_refunds_charges, settle_balance)
 ]
 
-cancellation_process = gen.partial_order(dependencies=cancellation_dependencies)
+cancellation_process = gen.xor(None, gen.partial_order(dependencies=cancellation_dependencies))
 
 # Combine the overall process
 final_model = gen.partial_order(dependencies=[
