@@ -51,6 +51,7 @@ international_student_process = gen.xor(assist_with_visa, None)
 
 # Add/drop courses loop
 add_drop_loop = gen.loop(do=None, redo=add_drop_courses)
+add_drop_loop = gen.xor(None, gen.activity('Add/drop courses'))
 
 # Semester loop
 semester_loop = gen.loop(
@@ -72,10 +73,9 @@ enrollment = gen.partial_order([
 
     (set_up_IT_accounts, international_student_process),
     (send_orientation_materials, international_student_process),
-    (set_up_IT_accounts, course_registration),
-    (send_orientation_materials, course_registration),
 
     (international_student_process, obtain_student_ID),
+    (international_student_process, course_registration),
 
     (obtain_student_ID, semester_loop),
     (course_registration, semester_loop),

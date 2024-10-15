@@ -8,8 +8,7 @@ If the application is accepted, an acceptance letter is sent. Otherwise, a rejec
 After being accepted, the student must then confirm enrollment by a specified deadline; otherwise the application will be canceled.
 If the student confirms, they receive orientation materials and the IT department sets up student accounts for email, online portals, and library access.
 If the student is international, the international student office assists with visa processing.
-The student obtains a student ID card.
-Once the student has received the orientation materials and the access to their account, they can start the process of registering for classes, which includes:
+The student obtains a student ID card and starts creating their study plan, which includes:
 Meeting with an academic advisor.
 Selecting courses.
 Resolving any schedule conflicts.

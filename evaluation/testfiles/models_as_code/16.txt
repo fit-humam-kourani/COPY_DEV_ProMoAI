@@ -45,9 +45,9 @@ risk_evaluations = gen.partial_order(dependencies=[
 
 # Investigation loop
 investigation_activities = gen.partial_order(dependencies=[
-    (gen.loop(data_analysis, None),),
-    (gen.loop(interviews, None),),
-    (gen.loop(site_visits, None),)
+    (data_analysis,),
+    (interviews,),
+    (gen.xor(site_visits, None),)
 ])
 
 investigation_path = gen.partial_order(dependencies=[

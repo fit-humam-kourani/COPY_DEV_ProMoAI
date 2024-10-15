@@ -7,7 +7,7 @@ The regional office provides the necessary clarifications.
 Once all documents are reviewed without issues, the audit team conducts a risk assessment.
 The risk assessment includes evaluating financial risks, operational risks, and compliance risks, which can be done in any order but must all be completed.
 If high risk is identified, then a detailed investigation is launched.
-The investigation includes data analysis, interviews, and site visits, which can be repeated until the risk is mitigated.
+The investigation includes data analysis, interviews, and, in certain cases, site visits.
 After all risks are addressed, the audit team compiles the audit report.
 The report is reviewed by the audit director.
 The audit director may approve the report or send it back for revisions.
