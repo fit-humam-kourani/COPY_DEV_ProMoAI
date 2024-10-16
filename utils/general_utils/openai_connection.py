@@ -2,6 +2,7 @@ from typing import Callable, List, TypeVar, Any
 from utils import constants, shared
 import requests
 import sys
+import google.generativeai as genai
 
 T = TypeVar('T')
 
@@ -12,7 +13,7 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
                                         openai_model: str,
                                         api_url: str,
                                         max_iterations=5) \
-        -> tuple[T, List[dict[str:str]]]:
+        -> tuple[str, any, list[Any]]:
     error_history = []
 
     print_conversation(conversation)
@@ -20,15 +21,18 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
     for iteration in range(max_iterations):
         shared.LAST_ITERATIONS = iteration+1
 
-        response = generate_response_with_history(conversation, api_key, openai_model, api_url)
+        if api_url == "GOOGLE":
+            response = generate_response_with_history_google(conversation, api_key, openai_model)
+        else:
+            response = generate_response_with_history(conversation, api_key, openai_model, api_url)
 
         try:
             conversation.append({"role": "assistant", "content": response})
-            result = extraction_function(response, iteration)
+            code, result = extraction_function(response, iteration)
 
             print_conversation(conversation)
 
-            return result, conversation  # Break loop if execution is successful
+            return code, result, conversation  # Break loop if execution is successful
         except Exception as e:
             error_description = str(e)
             error_history.append(error_description)
@@ -90,5 +94,23 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
 
     try:
         return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        raise Exception("Connection failed! This is the response: " + str(response))
+
+
+def generate_response_with_history_google(conversation_history, api_key, google_model) -> str:
+    """
+    Generates a response from the LLM using the conversation history.
+
+    :param conversation_history: The conversation history to be included
+    :param api_key: Google API key
+    :param google_model: Google model to be used
+    :return: The content of the LLM response
+    """
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(google_model)
+    response = model.generate_content(str(conversation_history))
+    try:
+        return response.text
     except Exception as e:
         raise Exception("Connection failed! This is the response: " + str(response))

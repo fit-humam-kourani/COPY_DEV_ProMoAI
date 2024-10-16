@@ -2,8 +2,13 @@ import csv
 import os
 import pm4py
 import json
-from utils import llm_model_generator, shared
-from utils.general_utils import connection_utils
+from utils.model_generation.model_generation import generate_model
+from utils.prompting import create_conversation
+
+IDS_TO_CONSIDER = ['11', '15', '16']
+# IDS_TO_CONSIDER = None
+CREATE_FILES = True
+ITERATION = 1
 
 # Read API configurations
 api_url = open("../api_url.txt", "r").read().strip()
@@ -14,45 +19,52 @@ openai_model = open("../api_model.txt", "r").read().strip()
 description_folder = "../testfiles/long_descriptions"
 ground_truth_pn_folder = "../testfiles/ground_truth_pn"
 ground_truth_log_folder = "../testfiles/ground_truth_xes"
-base_dir = f"llm_com/{openai_model.replace('/', '_')}"
+base_dir = f"llm_com/{openai_model.replace('/', '_')}/IT{ITERATION}"
 
 # Ensure base directories exist for saving results
 if not os.path.exists(base_dir):
     os.makedirs(base_dir)
 
 pn_folder = os.path.join(base_dir, 'pn')
-if not os.path.exists(pn_folder):
-    os.makedirs(pn_folder)
-
 conv_folder = os.path.join(base_dir, 'conv')
-if not os.path.exists(conv_folder):
-    os.makedirs(conv_folder)
+code_folder = os.path.join(base_dir, 'code')
+if CREATE_FILES:
+    if not os.path.exists(pn_folder):
+        os.makedirs(pn_folder)
+    if not os.path.exists(conv_folder):
+        os.makedirs(conv_folder)
+    if not os.path.exists(code_folder):
+        os.makedirs(code_folder)
 
 # Results table to collect statistics
 results_table = []
 
 statistics_csv_file = os.path.join(base_dir, "results_statistics.csv")
-with open(statistics_csv_file, "w", newline='') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    # Write the header
-    csv_writer.writerow([
-        "log_name",
-        "conversation_length",
-        "visible_transitions_ground_truth",
-        "visible_transitions_generated",
-        "shared_activities",
-        "percFitTraces",
-        "averageFitness",
-        "percentage_of_fitting_traces",
-        "average_trace_fitness",
-        "log_fitness",
-        "precision"
-    ])
+if CREATE_FILES:
+    with open(statistics_csv_file, "a", newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        # Write the header
+        csv_writer.writerow([
+            "log_name",
+            "conversation_length",
+            "visible_transitions_ground_truth",
+            "visible_transitions_generated",
+            "shared_activities",
+            "percFitTraces",
+            "averageFitness",
+            "percentage_of_fitting_traces",
+            "average_trace_fitness",
+            "log_fitness",
+            "precision"
+        ])
 
 # Loop through each process description file
 for proc_file in os.listdir(description_folder):
     # Get process ID from file name (e.g., "01.txt")
     proc_id = os.path.splitext(proc_file)[0]
+
+    if IDS_TO_CONSIDER and proc_id not in IDS_TO_CONSIDER:
+        continue
 
     # Define paths for ground truth Petri net and log
     ground_truth_pn_path = os.path.join(ground_truth_pn_folder, f"{proc_id}_ground_truth_petri.pnml")
@@ -78,12 +90,16 @@ for proc_file in os.listdir(description_folder):
     proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
         log_activities)
 
-    # Initialize LLM model generation
     try:
-        obj = llm_model_generator.initialize(process_description=proc_descr, api_key=api_key, openai_model=openai_model,
-                                             api_url=api_url, debug=False)
-    except:
-        # Extract statistics
+        init_conversation = create_conversation(proc_descr)
+        code, process_model, conversation = generate_model(init_conversation,
+                                                           api_key=api_key,
+                                                           openai_model=openai_model,
+                                                           api_url=api_url)
+        print("THIS IS CODE")
+        print(code)
+        print("THIS IS CODE")
+    except Exception as e:
         stats = {
             "log_name": proc_file,
             "conversation_length": "Error",
@@ -91,24 +107,31 @@ for proc_file in os.listdir(description_folder):
             "visible_transitions_generated": "None",
             "shared_activities": "None",
             "fitness": "None",
-            "precision": "None"
+            "precision": "None",
+            "error": str(e)
         }
+        print(e)
 
     else:
-        # Convert resulting model to Petri net
-        conversation_history = obj.conversation
-        powl = obj.process_model
+        conversation_history = conversation
+        powl = process_model
         net, im, fm = pm4py.convert_to_petri_net(powl)
         activities_in_generated = [x for x in net.transitions if x.label is not None]
 
         # Save Petri net
         pnml_path = os.path.join(pn_folder, f"{proc_file}.pnml")
-        pm4py.write_pnml(net, im, fm, pnml_path)
+        if CREATE_FILES:
+            pm4py.write_pnml(net, im, fm, pnml_path)
 
         # Save conversation history
         conversation_path = os.path.join(conv_folder, f"{proc_file}.txt")
-        with open(conversation_path, "w", encoding="utf-8") as conv_file:
-            conv_file.write(str(conversation_history))
+        code_path = os.path.join(code_folder, f"{proc_file}.txt")
+
+        if CREATE_FILES:
+            with open(conversation_path, "w", encoding="utf-8") as conv_file:
+                conv_file.write(str(conversation_history))
+            with open(code_path, "w", encoding="utf-8") as code_file:
+                code_file.write(str(code))
 
         # Compare with ground truth
         shared_activities = len(set(t.label for t in net.transitions if t.label) & set(
@@ -130,24 +153,28 @@ for proc_file in os.listdir(description_folder):
     # Save statistics
     results_table.append(stats)
 
-    # Append to CSV for every iteration
-    with open(statistics_csv_file, "a", newline='', encoding="utf-8") as csv_file:
-        csv_writer = csv.writer(csv_file)
-        csv_writer.writerow([
-            stats["log_name"],
-            stats["conversation_length"],
-            stats["visible_transitions_ground_truth"],
-            stats["visible_transitions_generated"],
-            stats["shared_activities"],
-            stats["fitness"]["percFitTraces"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["averageFitness"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["percentage_of_fitting_traces"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["average_trace_fitness"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["log_fitness"] if stats["fitness"] != "None" else "None",
-            stats["precision"] if stats["precision"] != "None" else "None"
-        ])
+    if CREATE_FILES:
+        # Append to CSV for every iteration
+        with open(statistics_csv_file, "a", newline='', encoding="utf-8") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([
+                stats["log_name"],
+                stats["conversation_length"],
+                stats["visible_transitions_ground_truth"],
+                stats["visible_transitions_generated"],
+                stats["shared_activities"],
+                stats["fitness"]["percFitTraces"] if stats["fitness"] != "None" else "None",
+                stats["fitness"]["averageFitness"] if stats["fitness"] != "None" else "None",
+                stats["fitness"]["percentage_of_fitting_traces"] if stats["fitness"] != "None" else "None",
+                stats["fitness"]["average_trace_fitness"] if stats["fitness"] != "None" else "None",
+                stats["fitness"]["log_fitness"] if stats["fitness"] != "None" else "None",
+                stats["precision"] if stats["precision"] != "None" else "None"
+            ])
 
-    # Save the statistics table
-    statistics_file = os.path.join(base_dir, "results_statistics.json")
-    with open(statistics_file, "w") as stats_file:
-        json.dump(results_table, stats_file, indent=4)
+    print(stats)
+    if CREATE_FILES:
+        # Save the statistics table
+        statistics_file = os.path.join(base_dir, "results_statistics.json")
+        with open(statistics_file, "a") as stats_file:
+            json.dump(stats, stats_file, indent=4)
+

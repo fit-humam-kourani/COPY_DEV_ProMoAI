@@ -17,7 +17,7 @@ class LLMProcessModelGenerator(object):
         self.openai_model = openai_model
         init_conversation = create_conversation(process_description)
         if process_description is not None:
-            self.process_model, self.conversation = generate_model(init_conversation,
+            code, self.process_model, self.conversation = generate_model(init_conversation,
                                                                    api_key=self.api_key,
                                                                    openai_model=self.openai_model,
                                                                    api_url=self.api_url)
@@ -58,7 +58,7 @@ class LLMProcessModelGenerator(object):
         self.api_key = api_key
         self.openai_model = openai_model
         self.conversation = update_conversation(self.conversation, feedback)
-        self.process_model, self.conversation = generate_model(conversation=self.conversation,
+        code, self.process_model, self.conversation = generate_model(conversation=self.conversation,
                                                                api_key=self.api_key,
                                                                openai_model=self.openai_model,
                                                                api_url=self.api_url)
