@@ -5,10 +5,10 @@ import json
 from utils.model_generation.model_generation import generate_model
 from utils.prompting import create_conversation
 
-IDS_TO_CONSIDER = ['11', '15', '16']
+IDS_TO_CONSIDER = ['hotel', '18']
 # IDS_TO_CONSIDER = None
 CREATE_FILES = True
-ITERATION = 1
+ITERATION = 2
 
 # Read API configurations
 api_url = open("../api_url.txt", "r").read().strip()
@@ -82,10 +82,6 @@ for proc_file in os.listdir(description_folder):
     ground_truth_log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
     activities_in_ground_truth = [x for x in ground_truth_net.transitions if x.label is not None]
 
-    # Setting up output paths
-    # output_file = os.path.join(results_folder, clean_model_name, f"{proc_file}.csv")
-
-    # Extract activities from ground truth log and append to process description
     log_activities = set(event["concept:name"] for trace in ground_truth_log for event in trace)
     proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
         log_activities)
@@ -96,9 +92,6 @@ for proc_file in os.listdir(description_folder):
                                                            api_key=api_key,
                                                            openai_model=openai_model,
                                                            api_url=api_url)
-        print("THIS IS CODE")
-        print(code)
-        print("THIS IS CODE")
     except Exception as e:
         stats = {
             "log_name": proc_file,
