@@ -4,6 +4,8 @@ import pm4py
 import json
 from utils.model_generation.model_generation import generate_model
 from utils.prompting import create_conversation
+import time
+
 
 IDS_TO_CONSIDER = ['hotel', '18']
 # IDS_TO_CONSIDER = None
@@ -85,14 +87,18 @@ for proc_file in os.listdir(description_folder):
     log_activities = set(event["concept:name"] for trace in ground_truth_log for event in trace)
     proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
         log_activities)
-
+    init_conversation = create_conversation(proc_descr)
+    start_time = time.time()
     try:
-        init_conversation = create_conversation(proc_descr)
         code, process_model, conversation = generate_model(init_conversation,
                                                            api_key=api_key,
                                                            openai_model=openai_model,
                                                            api_url=api_url)
+        end_time = time.time()
+        time_difference = str(end_time - start_time)
     except Exception as e:
+        end_time = time.time()
+        time_difference = str(end_time - start_time)
         stats = {
             "log_name": proc_file,
             "conversation_length": "Error",
@@ -101,6 +107,7 @@ for proc_file in os.listdir(description_folder):
             "shared_activities": "None",
             "fitness": "None",
             "precision": "None",
+            "time (sec)": time_difference,
             "error": str(e)
         }
         print(e)
@@ -140,7 +147,8 @@ for proc_file in os.listdir(description_folder):
             "visible_transitions_generated": len(activities_in_generated),
             "shared_activities": shared_activities,
             "fitness": fitness,
-            "precision": precision
+            "precision": precision,
+            "time (sec)": time_difference
         }
 
     # Save statistics
@@ -161,7 +169,8 @@ for proc_file in os.listdir(description_folder):
                 stats["fitness"]["percentage_of_fitting_traces"] if stats["fitness"] != "None" else "None",
                 stats["fitness"]["average_trace_fitness"] if stats["fitness"] != "None" else "None",
                 stats["fitness"]["log_fitness"] if stats["fitness"] != "None" else "None",
-                stats["precision"] if stats["precision"] != "None" else "None"
+                stats["precision"],
+                stats["time (sec)"]
             ])
 
     print(stats)
