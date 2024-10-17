@@ -148,4 +148,89 @@
     },
     "precision": 1.0,
     "time (sec)": "31.823532104492188"
+}{
+    "log_name": "07.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "286.80728578567505",
+    "error": "gpt-4 failed to fix the errors after 10 iterations! This is the error history: ['Error occurred at line 23: \"info_payment_flow = gen.partial_order(dependencies=[(select_date_time, provide_info), (provide_info, provide_payment)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Select date and time).', 'Error occurred at line 27: \"ticket_flow = gen.partial_order(dependencies=[(provide_payment, generate_ticket), (generate_ticket, ticket_delivery_options), (ticket_delivery_options, update_inventory)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Provide payment details).', 'Error occurred at line 23: \"info_payment_flow = gen.partial_order(dependencies=[(select_date_time, provide_info), (provide_info, provide_payment.copy())])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Select date and time).', 'Error occurred at line 29: \"ticket_flow = gen.partial_order(dependencies=[(provide_payment, generate_ticket), (generate_ticket, ticket_delivery_options), (ticket_delivery_options, update_inventory)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Provide payment details).', 'Error occurred at line 25: \"info_payment_flow = gen.partial_order(dependencies=[(select_date_time, provide_info), (provide_info, provide_payment.copy())])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Select date and time).', 'Error occurred at line 29: \"ticket_flow = gen.partial_order(dependencies=[(provide_payment, generate_ticket), (generate_ticket, ticket_delivery_options), (ticket_delivery_options, update_inventory)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Provide payment details).', 'Error occurred at line 25: \"info_payment_flow = gen.partial_order(dependencies=[(select_date_time, provide_info), (provide_info, provide_payment.copy())])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Select date and time).', 'Error occurred at line 29: \"ticket_flow = gen.partial_order(dependencies=[(provide_payment, generate_ticket), (generate_ticket, ticket_delivery_options), (ticket_delivery_options, update_inventory)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Provide payment details).', 'Error occurred at line 32: \"reminder_instruction_flow = gen.partial_order(dependencies=[(update_inventory, send_reminder), (send_reminder, send_instructions), (send_instructions, complete_journey)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Update seat inventory).', 'Error occurred at line 35: \"post_travel_flow = gen.partial_order(dependencies=[(complete_journey, post_feedback)])\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Customer completes journey).']"
+}{
+    "log_name": "08.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 15,
+    "shared_activities": 12,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.90590476190477,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.90590476190477,
+        "log_fitness": 0.9058961343225302
+    },
+    "precision": 0.2914746543778802,
+    "time (sec)": "49.42270517349243"
+}{
+    "log_name": "09.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 15,
+    "shared_activities": 13,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.6702768549280245,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.6702768549280245,
+        "log_fitness": 0.6689380526503395
+    },
+    "precision": 0.9827586206896551,
+    "time (sec)": "55.39443373680115"
+}{
+    "log_name": "14.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8888971768388684,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8888971768388684,
+        "log_fitness": 0.8854724184537754
+    },
+    "precision": 0.8651775029916234,
+    "time (sec)": "28.787467002868652"
+}{
+    "log_name": "15.txt",
+    "conversation_length": 8,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 13,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.813043478260872,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.813043478260872,
+        "log_fitness": 0.8154897494305239
+    },
+    "precision": 0.8888888888888888,
+    "time (sec)": "106.45019316673279"
+}{
+    "log_name": "16.txt",
+    "conversation_length": 8,
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": 28,
+    "shared_activities": 24,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.7532051794674848,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.7532051794674848,
+        "log_fitness": 0.7510671591378264
+    },
+    "precision": 0.9166666666666666,
+    "time (sec)": "163.8974084854126"
 }
