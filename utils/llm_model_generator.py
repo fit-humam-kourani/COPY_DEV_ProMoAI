@@ -29,7 +29,7 @@ class LLMProcessModelGenerator(object):
             self.process_model = powl_model
             self.conversation = conversation
         elif powl_model_code:
-            process_model = extract_model_from_response(powl_model_code, 0)
+            code, process_model = extract_model_from_response(powl_model_code, 0)
             conversation = list(init_conversation)
             conversation.append({"role": "assistant", "content": "The following code is used to generate the process model:\n\n"+powl_model_code})
             self.process_model = process_model

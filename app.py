@@ -208,7 +208,7 @@ def run_app():
             with col2:
                 st.write("Export Model")
                 powl = st.session_state['model_gen'].get_powl()
-                pn, im, fm = powl_to_pn(powl)
+                pn, im, fm = pm4py.convert_to_petri_net(powl)
                 bpmn = pn_to_bpmn(pn, im, fm)
                 bpmn = layouter.apply(bpmn)
 
