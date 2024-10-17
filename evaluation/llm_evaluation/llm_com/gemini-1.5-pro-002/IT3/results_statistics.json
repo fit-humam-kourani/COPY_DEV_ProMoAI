@@ -543,4 +543,169 @@
     "precision": "None",
     "time (sec)": "0.3458564281463623",
     "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "15.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "15.703335762023926",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.37184882164001465",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.35028791427612305",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "18.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "20.57439422607422",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "order.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.37499165534973145",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "15.txt",
+    "conversation_length": 10,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 23.6,
+        "averageFitness": 0.8912111111111175,
+        "percentage_of_fitting_traces": 23.6,
+        "average_trace_fitness": 0.8912111111111175,
+        "log_fitness": 0.8941424802110818
+    },
+    "precision": 1.0,
+    "time (sec)": "36.66923117637634"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.8630449771881104",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.8409559726715088",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "18.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.4521946907043457",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "order.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.8552761077880859",
+    "error": "429 Resource has been exhausted (e.g. check quota)."
+}{
+    "log_name": "16.txt",
+    "conversation_length": 8,
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": 31,
+    "shared_activities": 24,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.9167083569629545,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.9167083569629545,
+        "log_fitness": 0.9170088645268428
+    },
+    "precision": 0.7590361445783133,
+    "time (sec)": "76.35139274597168"
+}{
+    "log_name": "17.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": 25,
+    "shared_activities": 25,
+    "fitness": {
+        "percFitTraces": 54.0,
+        "averageFitness": 0.9105965535127932,
+        "percentage_of_fitting_traces": 54.0,
+        "average_trace_fitness": 0.9105965535127932,
+        "log_fitness": 0.8792552223864865
+    },
+    "precision": 0.7764273848037073,
+    "time (sec)": "15.697118282318115"
+}{
+    "log_name": "18.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": 27,
+    "shared_activities": 26,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8966610552876819,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8966610552876819,
+        "log_fitness": 0.8956115945391385
+    },
+    "precision": 0.791769440477736,
+    "time (sec)": "34.2514386177063"
+}{
+    "log_name": "order.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 8,
+    "shared_activities": 8,
+    "fitness": {
+        "percFitTraces": 100.0,
+        "averageFitness": 1.0,
+        "percentage_of_fitting_traces": 100.0,
+        "average_trace_fitness": 1.0,
+        "log_fitness": 0.9999784642111081
+    },
+    "precision": 1.0,
+    "time (sec)": "1.3123626708984375"
 }

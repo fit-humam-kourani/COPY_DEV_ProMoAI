@@ -7,10 +7,10 @@ from utils.prompting import create_conversation
 import time
 
 
-IDS_TO_CONSIDER = ['hotel', '18']
+IDS_TO_CONSIDER = ['order', '16', '17', '18']
 # IDS_TO_CONSIDER = None
 CREATE_FILES = True
-ITERATION = 2
+ITERATION = 3
 
 # Read API configurations
 api_url = open("../api_url.txt", "r").read().strip()
@@ -95,7 +95,7 @@ for proc_file in os.listdir(description_folder):
                                                            openai_model=openai_model,
                                                            api_url=api_url)
         end_time = time.time()
-        time_difference = str(end_time - start_time)
+        time_difference = str(end_time - start_time - 5.0)
     except Exception as e:
         end_time = time.time()
         time_difference = str(end_time - start_time)
