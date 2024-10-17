@@ -1,0 +1,151 @@
+{
+    "log_name": "01.txt",
+    "conversation_length": 14,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 12,
+    "shared_activities": 8,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.47814117647058557,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.47814117647058557,
+        "log_fitness": 0.4987698769876988
+    },
+    "precision": 0.9178334561532793,
+    "time (sec)": "174.36609935760498"
+}{
+    "log_name": "02.txt",
+    "conversation_length": 16,
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": 18,
+    "shared_activities": 16,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.7476705160815597,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.7476705160815597,
+        "log_fitness": 0.7468609865470852
+    },
+    "precision": 0.8,
+    "time (sec)": "293.9650282859802"
+}{
+    "log_name": "03.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 12,
+    "shared_activities": 11,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8211295762174988,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8211295762174988,
+        "log_fitness": 0.8178904137032956
+    },
+    "precision": 0.9835113359565298,
+    "time (sec)": "60.42825746536255"
+}{
+    "log_name": "10.txt",
+    "conversation_length": 10,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": {
+        "percFitTraces": 2.7,
+        "averageFitness": 0.6374386356438346,
+        "percentage_of_fitting_traces": 2.7,
+        "average_trace_fitness": 0.6374386356438346,
+        "log_fitness": 0.6782455903223626
+    },
+    "precision": 1.0,
+    "time (sec)": "151.54892945289612"
+}{
+    "log_name": "11.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 13,
+    "shared_activities": 12,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.6436750866043673,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.6436750866043673,
+        "log_fitness": 0.6428611225396337
+    },
+    "precision": 0.8571428571428572,
+    "time (sec)": "66.49828124046326"
+}{
+    "log_name": "12.txt",
+    "conversation_length": 10,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 13,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.6196179868507833,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.6196179868507833,
+        "log_fitness": 0.6195138312563974
+    },
+    "precision": 0.6666666666666667,
+    "time (sec)": "152.30880165100098"
+}{
+    "log_name": "13.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 13,
+    "shared_activities": 9,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8677071428571353,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8677071428571353,
+        "log_fitness": 0.8679968737683783
+    },
+    "precision": 0.6825864779874213,
+    "time (sec)": "62.63044762611389"
+}{
+    "log_name": "04.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 11,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.7161476190476248,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.7161476190476248,
+        "log_fitness": 0.7168451801363194
+    },
+    "precision": 0.9429590017825312,
+    "time (sec)": "53.4240927696228"
+}{
+    "log_name": "05.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 12,
+    "shared_activities": 11,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.6851771769844903,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.6851771769844903,
+        "log_fitness": 0.6840312352602065
+    },
+    "precision": 0.7059433310297167,
+    "time (sec)": "57.450852155685425"
+}{
+    "log_name": "06.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 26.6,
+        "averageFitness": 0.8922590762586204,
+        "percentage_of_fitting_traces": 26.6,
+        "average_trace_fitness": 0.8922590762586204,
+        "log_fitness": 0.8870088677724224
+    },
+    "precision": 1.0,
+    "time (sec)": "31.823532104492188"
+}
