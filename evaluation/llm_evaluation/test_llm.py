@@ -119,13 +119,13 @@ for proc_file in os.listdir(description_folder):
         activities_in_generated = [x for x in net.transitions if x.label is not None]
 
         # Save Petri net
-        pnml_path = os.path.join(pn_folder, f"{proc_file}.pnml")
+        pnml_path = os.path.join(pn_folder, f"{proc_id}.pnml")
         if CREATE_FILES:
             pm4py.write_pnml(net, im, fm, pnml_path)
 
         # Save conversation history
-        conversation_path = os.path.join(conv_folder, f"{proc_file}.txt")
-        code_path = os.path.join(code_folder, f"{proc_file}.txt")
+        conversation_path = os.path.join(conv_folder, f"{proc_id}.txt")
+        code_path = os.path.join(code_folder, f"{proc_id}.txt")
 
         if CREATE_FILES:
             with open(conversation_path, "w", encoding="utf-8") as conv_file:
