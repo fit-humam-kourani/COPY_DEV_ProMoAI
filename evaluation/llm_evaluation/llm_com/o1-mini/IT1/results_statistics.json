@@ -1,0 +1,296 @@
+{
+    "log_name": "01.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 8,
+    "shared_activities": 8,
+    "fitness": {
+        "percFitTraces": 38.9,
+        "averageFitness": 0.7994090909090902,
+        "percentage_of_fitting_traces": 38.9,
+        "average_trace_fitness": 0.7994090909090902,
+        "log_fitness": 0.804548309241768
+    },
+    "precision": 1.0,
+    "time (sec)": "60.33943057060242"
+}{
+    "log_name": "02.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": 16,
+    "shared_activities": 16,
+    "fitness": {
+        "percFitTraces": 0.8097165991902834,
+        "averageFitness": 0.861406587971694,
+        "percentage_of_fitting_traces": 0.8097165991902834,
+        "average_trace_fitness": 0.861406587971694,
+        "log_fitness": 0.8602481359264073
+    },
+    "precision": 1.0,
+    "time (sec)": "76.65739369392395"
+}{
+    "log_name": "03.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 11,
+    "shared_activities": 11,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8211295762174988,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8211295762174988,
+        "log_fitness": 0.8178904137032956
+    },
+    "precision": 0.984037729004172,
+    "time (sec)": "26.76679253578186"
+}{
+    "log_name": "04.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 4.2,
+        "averageFitness": 0.8549263157894703,
+        "percentage_of_fitting_traces": 4.2,
+        "average_trace_fitness": 0.8549263157894703,
+        "log_fitness": 0.8556806550665301
+    },
+    "precision": 1.0,
+    "time (sec)": "25.63960576057434"
+}{
+    "log_name": "05.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 11,
+    "shared_activities": 11,
+    "fitness": {
+        "percFitTraces": 0.44052863436123346,
+        "averageFitness": 0.7612997745082716,
+        "percentage_of_fitting_traces": 0.44052863436123346,
+        "average_trace_fitness": 0.7612997745082716,
+        "log_fitness": 0.7588897663583649
+    },
+    "precision": 0.9994142912924638,
+    "time (sec)": "31.833828926086426"
+}{
+    "log_name": "06.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 26.6,
+        "averageFitness": 0.8922590762586204,
+        "percentage_of_fitting_traces": 26.6,
+        "average_trace_fitness": 0.8922590762586204,
+        "log_fitness": 0.8870088677724224
+    },
+    "precision": 1.0,
+    "time (sec)": "28.688507795333862"
+}{
+    "log_name": "07.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": {
+        "percFitTraces": 0.5319148936170213,
+        "averageFitness": 0.7827571672853864,
+        "percentage_of_fitting_traces": 0.5319148936170213,
+        "average_trace_fitness": 0.7827571672853864,
+        "log_fitness": 0.7820857506783799
+    },
+    "precision": 1.0,
+    "time (sec)": "68.58515477180481"
+}{
+    "log_name": "08.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 12,
+    "shared_activities": 12,
+    "fitness": {
+        "percFitTraces": 51.2,
+        "averageFitness": 0.951199999999993,
+        "percentage_of_fitting_traces": 51.2,
+        "average_trace_fitness": 0.951199999999993,
+        "log_fitness": 0.9512
+    },
+    "precision": 1.0,
+    "time (sec)": "29.72099781036377"
+}{
+    "log_name": "09.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": {
+        "percFitTraces": 50.0,
+        "averageFitness": 0.9676121681935634,
+        "percentage_of_fitting_traces": 50.0,
+        "average_trace_fitness": 0.9676121681935634,
+        "log_fitness": 0.9677991881665214
+    },
+    "precision": 0.9768339768339769,
+    "time (sec)": "63.280394077301025"
+}{
+    "log_name": "10.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": {
+        "percFitTraces": 31.6,
+        "averageFitness": 0.8325559800493598,
+        "percentage_of_fitting_traces": 31.6,
+        "average_trace_fitness": 0.8325559800493598,
+        "log_fitness": 0.8298065293502478
+    },
+    "precision": 1.0,
+    "time (sec)": "59.28199243545532"
+}{
+    "log_name": "11.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 15,
+    "shared_activities": 12,
+    "fitness": {
+        "percFitTraces": 18.68686868686869,
+        "averageFitness": 0.7711899574644652,
+        "percentage_of_fitting_traces": 18.68686868686869,
+        "average_trace_fitness": 0.7711899574644652,
+        "log_fitness": 0.7684675666227312
+    },
+    "precision": 1.0,
+    "time (sec)": "62.42425489425659"
+}{
+    "log_name": "12.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": {
+        "percFitTraces": 0.043936731107205626,
+        "averageFitness": 0.6174870565296618,
+        "percentage_of_fitting_traces": 0.043936731107205626,
+        "average_trace_fitness": 0.6174870565296618,
+        "log_fitness": 0.6145016173545779
+    },
+    "precision": 0.9996809189534142,
+    "time (sec)": "39.83201766014099"
+}{
+    "log_name": "13.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": {
+        "percFitTraces": 100.0,
+        "averageFitness": 1.0,
+        "percentage_of_fitting_traces": 100.0,
+        "average_trace_fitness": 1.0,
+        "log_fitness": 0.9999884118980432
+    },
+    "precision": 1.0,
+    "time (sec)": "62.365941762924194"
+}{
+    "log_name": "14.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.9441872177211603,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.9441872177211603,
+        "log_fitness": 0.9479058137111899
+    },
+    "precision": 0.8325847284605962,
+    "time (sec)": "28.594674110412598"
+}{
+    "log_name": "15.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": {
+        "percFitTraces": 47.5,
+        "averageFitness": 0.941666666666676,
+        "percentage_of_fitting_traces": 47.5,
+        "average_trace_fitness": 0.941666666666676,
+        "log_fitness": 0.9445910290237467
+    },
+    "precision": 1.0,
+    "time (sec)": "30.79103136062622"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "677.1848905086517",
+    "error": "o1-mini failed to fix the errors after 10 iterations! This is the error history: ['Error occurred at line 80: \"complete_risk_assessment_partial = gen.partial_order(\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Complete risk assessment/mitigation).', 'Error occurred at line 74: \"risk_assessment_with_evaluations = gen.partial_order(\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Evaluate financial risks).', 'Error occurred at line 75: \"final_distribution = gen.partial_order(\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Approve report).', 'Error occurred at line 94: \"    do=gen.partial_order(\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Send report for revision).', 'Error occurred at line 49: \"submission_review = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type PartialOrder.', 'Error occurred at line 52: \"submit_and_review = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type PartialOrder.', 'Error occurred at line 69: \"final_model = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Request clarifications of discrepancies).', 'Error occurred at line 64: \"revision_seq = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Send report for revision).', 'Error occurred at line 64: \"revision_seq = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Send report for revision).', 'Error occurred at line 99: \"final_closure = gen.partial_order([\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Distribute final report).']"
+}{
+    "log_name": "17.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": 24,
+    "shared_activities": 24,
+    "fitness": {
+        "percFitTraces": 49.4,
+        "averageFitness": 0.911095192651783,
+        "percentage_of_fitting_traces": 49.4,
+        "average_trace_fitness": 0.911095192651783,
+        "log_fitness": 0.8685822820055555
+    },
+    "precision": 0.5714285714285714,
+    "time (sec)": "109.50879263877869"
+}{
+    "log_name": "18.txt",
+    "conversation_length": 8,
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": 32,
+    "shared_activities": 24,
+    "fitness": {
+        "percFitTraces": 0.0,
+        "averageFitness": 0.8668815803714903,
+        "percentage_of_fitting_traces": 0.0,
+        "average_trace_fitness": 0.8668815803714903,
+        "log_fitness": 0.866083652698891
+    },
+    "precision": 0.49153153917989645,
+    "time (sec)": "164.8585660457611"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": {
+        "percFitTraces": 14.318181818181818,
+        "averageFitness": 0.9171115445819015,
+        "percentage_of_fitting_traces": 14.318181818181818,
+        "average_trace_fitness": 0.9171115445819015,
+        "log_fitness": 0.9168894479348138
+    },
+    "precision": 0.9916317991631799,
+    "time (sec)": "111.6706030368805"
+}{
+    "log_name": "order.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 9,
+    "shared_activities": 8,
+    "fitness": {
+        "percFitTraces": 39.0,
+        "averageFitness": 0.9262293248418294,
+        "percentage_of_fitting_traces": 39.0,
+        "average_trace_fitness": 0.9262293248418294,
+        "log_fitness": 0.9200806874223815
+    },
+    "precision": 0.9774030740995642,
+    "time (sec)": "47.20486617088318"
+}
