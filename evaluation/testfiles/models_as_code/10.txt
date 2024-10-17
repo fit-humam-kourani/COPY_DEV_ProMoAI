@@ -11,7 +11,7 @@ install_solution = gen.activity('Install the solution')
 test_solution = gen.activity('Test solution')
 roll_out_solution = gen.activity('Roll out solution to requesting department')
 provide_training = gen.activity('Provide training')
-provide_it_support = gen.loop(None, gen.activity('Provide support for troubleshooting'))
+provide_it_support = gen.xor(None, gen.loop(gen.activity('Provide support for troubleshooting'), None))
 
 # Optional training after rollout
 optional_training = gen.xor(provide_training, None)

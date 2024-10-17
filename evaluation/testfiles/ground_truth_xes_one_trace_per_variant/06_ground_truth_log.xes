@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order over the phone" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Customer places order online" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate and send order confirmation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Generate shipping label" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pick and pack items" />
+		</event>
+		<event>
+			<string key="concept:name" value="Hand over order to logistics provider" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send tracking information to customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Monitor shipment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Successful delivery" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process customer feedback or returns" />
+		</event>
+	</trace>
+</log>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Outline objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Draft plan" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct strategic alignment meeting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review budget feasibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide feedback" />
+		</event>
+		<event>
+			<string key="concept:name" value="Approve final budget" />
+		</event>
+		<event>
+			<string key="concept:name" value="Distribute budget" />
+		</event>
+		<event>
+			<string key="concept:name" value="Implement plan" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Outline objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Draft plan" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct strategic alignment meeting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review budget feasibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide feedback" />
+		</event>
+		<event>
+			<string key="concept:name" value="Adjust Plan" />
+		</event>
+		<event>
+			<string key="concept:name" value="Documented and approve adjustment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review budget feasibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide feedback" />
+		</event>
+		<event>
+			<string key="concept:name" value="Approve final budget" />
+		</event>
+		<event>
+			<string key="concept:name" value="Distribute budget" />
+		</event>
+		<event>
+			<string key="concept:name" value="Implement plan" />
+		</event>
+	</trace>
+</log>

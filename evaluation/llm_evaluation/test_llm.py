@@ -7,10 +7,10 @@ from utils.prompting import create_conversation
 import time
 
 
-IDS_TO_CONSIDER = ['04', '05', '09', '10']
-# IDS_TO_CONSIDER = None
+# IDS_TO_CONSIDER = ['18']
+IDS_TO_CONSIDER = None
 CREATE_FILES = True
-ITERATION = 4
+ITERATION = 1
 
 # Read API configurations
 api_url = open("../api_url.txt", "r").read().strip()

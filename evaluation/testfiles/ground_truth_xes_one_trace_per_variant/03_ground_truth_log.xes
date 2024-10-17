@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock on shelves" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send a manual alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Check current inventory level" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send an automated alert" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order with suppliers" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory system with expected delivery dates" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive stock" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record stock in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Inspect stock for quality" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place stock in storage" />
+		</event>
+		<event>
+			<string key="concept:name" value="Update inventory levels" />
+		</event>
+	</trace>
+</log>

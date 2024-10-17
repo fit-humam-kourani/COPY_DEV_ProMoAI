@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Change policy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Change policy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Implement fix" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Report incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log report into tracking system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign report to appropriate team" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather necessary information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify cause of incident" />
+		</event>
+		<event>
+			<string key="concept:name" value="Propose corrective actions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Implement fix" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct follow-up" />
+		</event>
+		<event>
+			<string key="concept:name" value="Close incident report" />
+		</event>
+		<event>
+			<string key="concept:name" value="Notify all stakeholders" />
+		</event>
+	</trace>
+</log>

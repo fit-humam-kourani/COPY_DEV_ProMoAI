@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Submit IT solution request" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate cost and resource needs" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assess compatibility" />
+		</event>
+		<event>
+			<string key="concept:name" value="Procure necessary tools or licenses" />
+		</event>
+		<event>
+			<string key="concept:name" value="Install the solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Test solution" />
+		</event>
+		<event>
+			<string key="concept:name" value="Roll out solution to requesting department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide support for troubleshooting" />
+		</event>
+	</trace>
+</log>

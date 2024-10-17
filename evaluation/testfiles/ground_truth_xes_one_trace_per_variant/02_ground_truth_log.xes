@@ -1,0 +1,5295 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct an in-person interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new hire" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Post job description" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Screen resumes" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct initial phone interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Invite candidates for interviews" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct a virtual interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Choose candidate" />
+		</event>
+		<event>
+			<string key="concept:name" value="Extend offer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Negotiate salary" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin onboarding process" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete orientation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete training" />
+		</event>
+		<event>
+			<string key="concept:name" value="Complete paperwork" />
+		</event>
+	</trace>
+</log>

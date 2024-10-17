@@ -1,0 +1,2601 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Define campaign objectives" />
+		</event>
+		<event>
+			<string key="concept:name" value="Design visuals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Create content" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select promotion channels" />
+		</event>
+		<event>
+			<string key="concept:name" value="Launch campaign" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect leads in CRM system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Track performance in real-time" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sales teams follows up on leads" />
+		</event>
+		<event>
+			<string key="concept:name" value="Campaign period ends" />
+		</event>
+		<event>
+			<string key="concept:name" value="Analyze performance for future optimization" />
+		</event>
+	</trace>
+</log>

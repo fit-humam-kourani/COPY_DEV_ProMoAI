@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Guide customer in selecting product/service" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide quote" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Guide customer in selecting product/service" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide quote" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record order in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send order confirmation to customer" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Guide customer in selecting product/service" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide quote" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Receive customer inquiry" />
+		</event>
+		<event>
+			<string key="concept:name" value="Collect customer information" />
+		</event>
+		<event>
+			<string key="concept:name" value="Address customer concerns or questions" />
+		</event>
+		<event>
+			<string key="concept:name" value="Guide customer in selecting product/service" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide quote" />
+		</event>
+		<event>
+			<string key="concept:name" value="Place order" />
+		</event>
+		<event>
+			<string key="concept:name" value="Record order in system" />
+		</event>
+		<event>
+			<string key="concept:name" value="Send order confirmation to customer" />
+		</event>
+	</trace>
+</log>

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct site visit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Identify need for new supplier or vendor" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue request for proposals (RFP)" />
+		</event>
+		<event>
+			<string key="concept:name" value="Receive supplier proposals" />
+		</event>
+		<event>
+			<string key="concept:name" value="Evaluate proposal" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct interview" />
+		</event>
+		<event>
+			<string key="concept:name" value="Select supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Begin contract negotiations" />
+		</event>
+		<event>
+			<string key="concept:name" value="Sign contract" />
+		</event>
+		<event>
+			<string key="concept:name" value="Onboard supplier" />
+		</event>
+		<event>
+			<string key="concept:name" value="Execute contract" />
+		</event>
+	</trace>
+</log>

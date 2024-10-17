@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Schedule compliance audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Prepare documentation" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather evidence" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct self-assessment" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct external audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Identify gaps or issues" />
+		</event>
+		<event>
+			<string key="concept:name" value="Make necessary corrections or improvements" />
+		</event>
+		<event>
+			<string key="concept:name" value="Conduct final audit" />
+		</event>
+		<event>
+			<string key="concept:name" value="Award certification" />
+		</event>
+		<event>
+			<string key="concept:name" value="Issue official documents" />
+		</event>
+	</trace>
+</log>

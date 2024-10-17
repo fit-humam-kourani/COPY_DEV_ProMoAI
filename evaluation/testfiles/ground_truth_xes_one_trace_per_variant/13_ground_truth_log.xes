@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="File complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign complaint to relevant department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review complaint details" />
+		</event>
+		<event>
+			<string key="concept:name" value="Reject and notify customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Resolve complaint" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="File complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign complaint to relevant department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review complaint details" />
+		</event>
+		<event>
+			<string key="concept:name" value="Approve and notify customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process reimbursement" />
+		</event>
+		<event>
+			<string key="concept:name" value="Resolve complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide feedback" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="File complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign complaint to relevant department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review complaint details" />
+		</event>
+		<event>
+			<string key="concept:name" value="Approve and notify customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Process reimbursement" />
+		</event>
+		<event>
+			<string key="concept:name" value="Resolve complaint" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="File complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Log complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Assign complaint to relevant department" />
+		</event>
+		<event>
+			<string key="concept:name" value="Review complaint details" />
+		</event>
+		<event>
+			<string key="concept:name" value="Reject and notify customer" />
+		</event>
+		<event>
+			<string key="concept:name" value="Resolve complaint" />
+		</event>
+		<event>
+			<string key="concept:name" value="Provide feedback" />
+		</event>
+	</trace>
+</log>
