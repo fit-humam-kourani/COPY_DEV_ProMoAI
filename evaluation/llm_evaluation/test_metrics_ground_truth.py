@@ -2,11 +2,10 @@ import csv
 import os
 import pm4py
 import json
-from utils import llm_model_generator
 
 long_desc_folder = "../testfiles/long_descriptions"
 ground_truth_pn_folder = "../testfiles/ground_truth_pn"
-ground_truth_log_folder = "../testfiles/ground_truth_xes"
+ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
 base_dir = f"llm_com"
 
 # Results table to collect statistics
@@ -19,7 +18,7 @@ with open(statistics_csv_file, "w", newline='') as csv_file:
     csv_writer.writerow([
         "log_name",
         "visible_transitions_ground_truth_log",
-        "visible_transitions_model",
+        "visible_transitions_ground_truth_model",
         "shared_activities",
         "percFitTraces",
         "averageFitness",
@@ -48,11 +47,10 @@ for proc_file in os.listdir(long_desc_folder):
     ground_truth_log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
     activities_in_ground_truth = [x for x in pm4py.get_event_attribute_values(ground_truth_log, 'concept:name').keys() if x is not None]
 
-    activities_in_generated = [x for x in ground_truth_net.transitions if x.label is not None]
+    activities_in_generated = [x.label for x in ground_truth_net.transitions if x.label is not None]
 
     # Compare with ground truth
-    shared_activities = len(set(t.label for t in ground_truth_net.transitions if t.label) & set(
-        t.label for t in ground_truth_net.transitions if t.label))
+    shared_activities = len([x for x in activities_in_ground_truth if x in activities_in_generated])
     fitness = pm4py.fitness_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
     precision = pm4py.precision_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
 
@@ -60,7 +58,7 @@ for proc_file in os.listdir(long_desc_folder):
     stats = {
         "log_name": proc_file,
         "visible_transitions_ground_truth_log": len(activities_in_ground_truth),
-        "visible_transitions_model": len(activities_in_generated),
+        "visible_transitions_ground_truth_model": len(activities_in_generated),
         "shared_activities": shared_activities,
         "fitness": fitness,
         "precision": precision
@@ -75,7 +73,7 @@ for proc_file in os.listdir(long_desc_folder):
         csv_writer.writerow([
             stats["log_name"],
             stats["visible_transitions_ground_truth_log"],
-            stats["visible_transitions_model"],
+            stats["visible_transitions_ground_truth_model"],
             stats["shared_activities"],
             stats["fitness"]["percFitTraces"] if stats["fitness"] != "None" else "None",
             stats["fitness"]["averageFitness"] if stats["fitness"] != "None" else "None",
@@ -86,6 +84,6 @@ for proc_file in os.listdir(long_desc_folder):
         ])
 
     # Save the statistics table
-    statistics_file = os.path.join(base_dir, "results_statistics.json")
+    statistics_file = os.path.join(base_dir, "ground_truth_statistics.json")
     with open(statistics_file, "w") as stats_file:
         json.dump(results_table, stats_file, indent=4)
