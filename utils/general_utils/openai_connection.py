@@ -19,10 +19,12 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
     print_conversation(conversation)
 
     for iteration in range(max_iterations):
-        shared.LAST_ITERATIONS = iteration+1
+        shared.LAST_ITERATIONS = iteration + 1
 
         if api_url == "GOOGLE":
             response = generate_response_with_history_google(conversation, api_key, openai_model)
+        if api_url == "https://api.anthropic.com/v1/messages":
+            response = generate_response_with_history_anthropic(conversation, api_key, openai_model)
         else:
             response = generate_response_with_history(conversation, api_key, openai_model, api_url)
 
@@ -90,7 +92,7 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
     if api_url.endswith("/"):
         api_url = api_url[:-1]
 
-    response = requests.post(api_url+"/chat/completions", headers=headers, json=payload).json()
+    response = requests.post(api_url + "/chat/completions", headers=headers, json=payload).json()
 
     try:
         return response["choices"][0]["message"]["content"]
@@ -114,3 +116,20 @@ def generate_response_with_history_google(conversation_history, api_key, google_
         return response.text
     except Exception as e:
         raise Exception("Connection failed! This is the response: " + str(response))
+
+
+def generate_response_with_history_anthropic(conversation, api_key, model):
+    import anthropic
+
+    client = anthropic.Anthropic(
+        api_key=api_key,
+    )
+    message = client.messages.create(
+        model=model,
+        max_tokens=8192,
+        messages=conversation
+    )
+    try:
+        return message.content[0].text
+    except Exception as e:
+        raise Exception("Connection failed! This is the response: " + str(message))
