@@ -233,4 +233,41 @@
     },
     "precision": 0.9166666666666666,
     "time (sec)": "163.8974084854126"
+}{
+    "log_name": "17.txt",
+    "conversation_length": 16,
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": 27,
+    "shared_activities": 22,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "303.54607009887695"
+}{
+    "log_name": "18.txt",
+    "conversation_length": 16,
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": 32,
+    "shared_activities": 25,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "345.7607750892639"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "373.80653500556946",
+    "error": "gpt-4 failed to fix the errors after 10 iterations! This is the error history: ['Error occurred at line 32: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Kitchen prepares food).', 'Error occurred at line 32: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type XOR.', 'Error occurred at line 32: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Kitchen prepares food).', 'Error occurred at line 33: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type XOR.', 'Error occurred at line 33: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Kitchen prepares food).', 'Error occurred at line 34: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type XOR.', 'Error occurred at line 34: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Waiter readies cart).', 'Error occurred at line 33: \"kitchen_sommelier_cart = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type XOR.', 'Error occurred at line 42: \"main_flow = gen.partial_order(dependencies=[\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type PartialOrder.', 'Error occurred at line 51: \"billing_option = gen.xor(waiter_debits_account, waiter_waits)\" with message: Exception: Ensure that each submodel is used uniquely! Avoid trying to reuse submodels that were used as children of other constructs (xor, loop, or partial_order) before! The error occured when trying to reuse a node of type Activity (Waiter debits guest\\'s account).']"
+}{
+    "log_name": "order.txt",
+    "conversation_length": 6,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 10,
+    "shared_activities": 8,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "85.20133972167969"
 }
