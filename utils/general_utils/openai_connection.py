@@ -18,20 +18,18 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
 
     print_conversation(conversation)
 
-    for iteration in range(max_iterations):
-        shared.LAST_ITERATIONS = iteration + 1
-
+    for iteration in range(max_iterations + 5):
         if api_url == "GOOGLE":
             response = generate_response_with_history_google(conversation, api_key, openai_model)
-        if api_url == "https://api.anthropic.com/v1/messages":
+        elif api_url == "https://api.anthropic.com/v1/messages":
             response = generate_response_with_history_anthropic(conversation, api_key, openai_model)
         else:
             response = generate_response_with_history(conversation, api_key, openai_model, api_url)
 
         try:
             conversation.append({"role": "assistant", "content": response})
-            code, result = extraction_function(response, iteration)
-
+            auto_duplicate = iteration >= max_iterations
+            code, result = extraction_function(response, auto_duplicate)
             print_conversation(conversation)
 
             return code, result, conversation  # Break loop if execution is successful
@@ -47,7 +45,7 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
 
         print_conversation(conversation)
 
-    raise Exception(openai_model + " failed to fix the errors after " + str(max_iterations) +
+    raise Exception(openai_model + " failed to fix the errors after " + str(max_iterations+5) +
                     " iterations! This is the error history: " + str(error_history))
 
 

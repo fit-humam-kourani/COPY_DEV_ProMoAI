@@ -7,8 +7,8 @@ from utils.prompting import create_conversation
 import time
 
 
-# IDS_TO_CONSIDER = ['18']
-IDS_TO_CONSIDER = None
+IDS_TO_CONSIDER = ['17']
+# IDS_TO_CONSIDER = None
 CREATE_FILES = True
 ITERATION = 1
 
@@ -20,7 +20,7 @@ openai_model = open("../api_model.txt", "r").read().strip()
 # Define directories for reading input and saving results
 description_folder = "../testfiles/long_descriptions"
 ground_truth_pn_folder = "../testfiles/ground_truth_pn"
-ground_truth_log_folder = "../testfiles/ground_truth_xes"
+ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
 base_dir = f"llm_com/{openai_model.replace('/', '_')}/IT{ITERATION}"
 
 # Ensure base directories exist for saving results
@@ -69,22 +69,23 @@ for proc_file in os.listdir(description_folder):
         continue
 
     # Define paths for ground truth Petri net and log
-    ground_truth_pn_path = os.path.join(ground_truth_pn_folder, f"{proc_id}_ground_truth_petri.pnml")
+    # ground_truth_pn_path = os.path.join(ground_truth_pn_folder, f"{proc_id}_ground_truth_petri.pnml")
     ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{proc_id}_ground_truth_log.xes")
 
     # Check if the corresponding ground truth files exist
-    if not os.path.exists(ground_truth_pn_path) or not os.path.exists(ground_truth_log_path):
+    if not os.path.exists(ground_truth_log_path):
         raise Exception(f"Ground truth files not found for {proc_file}, skipping.")
 
     # Load process description
     proc_descr = open(os.path.join(description_folder, proc_file), "r").read().strip()
 
     # Load ground truth Petri net and log
-    ground_truth_net, ground_truth_im, ground_truth_fm = pm4py.read_pnml(ground_truth_pn_path)
+    # ground_truth_net, ground_truth_im, ground_truth_fm = pm4py.read_pnml(ground_truth_pn_path)
     ground_truth_log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
-    activities_in_ground_truth = [x for x in ground_truth_net.transitions if x.label is not None]
+    # activities_in_ground_truth = [x for x in ground_truth_net.transitions if x.label is not None]
 
     log_activities = set(event["concept:name"] for trace in ground_truth_log for event in trace)
+    activities_in_ground_truth = log_activities
     proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
         log_activities)
     init_conversation = create_conversation(proc_descr)
@@ -134,10 +135,9 @@ for proc_file in os.listdir(description_folder):
                 code_file.write(str(code))
 
         # Compare with ground truth
-        shared_activities = len(set(t.label for t in net.transitions if t.label) & set(
-            t.label for t in ground_truth_net.transitions if t.label))
-        fitness = pm4py.fitness_alignments(ground_truth_log, net, im, fm)
-        precision = pm4py.precision_alignments(ground_truth_log, net, im, fm)
+        shared_activities = len(set(t.label for t in net.transitions if t.label) & log_activities)
+        # fitness = pm4py.fitness_alignments(ground_truth_log, net, im, fm)
+        # precision = pm4py.precision_alignments(ground_truth_log, net, im, fm)
 
         # Extract statistics
         stats = {
@@ -146,8 +146,8 @@ for proc_file in os.listdir(description_folder):
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": len(activities_in_generated),
             "shared_activities": shared_activities,
-            "fitness": fitness,
-            "precision": precision,
+            "fitness": "skipped",
+            "precision": "skipped",
             "time (sec)": time_difference
         }
 
@@ -164,12 +164,12 @@ for proc_file in os.listdir(description_folder):
                 stats["visible_transitions_ground_truth"],
                 stats["visible_transitions_generated"],
                 stats["shared_activities"],
-                stats["fitness"]["percFitTraces"] if stats["fitness"] != "None" else "None",
-                stats["fitness"]["averageFitness"] if stats["fitness"] != "None" else "None",
-                stats["fitness"]["percentage_of_fitting_traces"] if stats["fitness"] != "None" else "None",
-                stats["fitness"]["average_trace_fitness"] if stats["fitness"] != "None" else "None",
-                stats["fitness"]["log_fitness"] if stats["fitness"] != "None" else "None",
-                stats["precision"],
+                "skipped",
+                "skipped",
+                "skipped",
+                "skipped",
+                "skipped",
+                "skipped",
                 stats["time (sec)"]
             ])
 

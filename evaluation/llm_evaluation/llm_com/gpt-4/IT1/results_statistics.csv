@@ -19,3 +19,4 @@ log_name,conversation_length,visible_transitions_ground_truth,visible_transition
 18.txt,16,26,32,25,skipped,skipped,skipped,skipped,skipped,skipped,345.7607750892639
 hotel.txt,Error,13,None,None,skipped,skipped,skipped,skipped,skipped,None,373.80653500556946
 order.txt,6,8,10,8,skipped,skipped,skipped,skipped,skipped,skipped,85.20133972167969
+log_name,conversation_length,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,percFitTraces,averageFitness,percentage_of_fitting_traces,average_trace_fitness,log_fitness,precision

@@ -2,7 +2,7 @@ import csv
 import os
 import pm4py
 
-LLM_NAME = 'claude-3-5-sonnet-20240620'
+LLM_NAME = 'Llama-3.2-90B-Vision-Instruct'
 ITERATION = 1
 
 ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
@@ -18,7 +18,7 @@ metrics_data = {
 process_ids = [f"{i:02}" for i in range(1, 19)] + ['order', 'hotel']
 special_mapping = {'order': '19', 'hotel': '20'}
 
-results_csv_file = os.path.join(base_dir, "TOKEN_metrics.csv")
+results_csv_file = os.path.join(base_dir, "metrics.csv")
 file_exists = os.path.exists(results_csv_file)
 with open(results_csv_file, "a", newline='') as csv_file:
     csv_writer = csv.writer(csv_file)

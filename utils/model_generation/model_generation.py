@@ -6,9 +6,10 @@ from utils.model_generation.validation import validate_partial_orders_with_missi
 from pm4py.objects.powl.obj import POWL
 
 
-def extract_model_from_response(response: str, iteration: int) -> tuple[str, POWL]:
-    # if iteration > 1:
-    #     response = response.replace('ModelGenerator()', 'ModelGenerator(True, True)')
+def extract_model_from_response(response: str, auto_duplicate: False) -> tuple[str, POWL]:
+    if auto_duplicate:
+        response = response.replace('ModelGenerator()', 'ModelGenerator(True, True)')
+        print("START DUPLICATING")
     extracted_code = extract_final_python_code(response)
     variable_name = 'final_model'
     result = execute_code_and_get_variable(extracted_code, variable_name)
