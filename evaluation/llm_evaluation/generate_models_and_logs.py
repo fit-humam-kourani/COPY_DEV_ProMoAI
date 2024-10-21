@@ -81,7 +81,8 @@ def recreate_log_from_petri_net(proc_id, ground_truth_net, ground_truth_im, grou
 for proc_desc_file in os.listdir(folder):
     process_id = os.path.splitext(proc_desc_file)[0]
 
-    IDS_TO_CONSIDER = ['hotel']
+    # IDS_TO_CONSIDER = ['hotel']
+    IDS_TO_CONSIDER = None
     CREATE_NEW_PN = False
 
     if IDS_TO_CONSIDER and process_id not in IDS_TO_CONSIDER:

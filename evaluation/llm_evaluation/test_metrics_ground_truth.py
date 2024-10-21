@@ -11,7 +11,7 @@ base_dir = f"llm_com"
 # Results table to collect statistics
 results_table = []
 
-statistics_csv_file = os.path.join(base_dir, "ground_truth_statistics.csv")
+statistics_csv_file = os.path.join(base_dir, "ground_truth_statistics_TOKEN.csv")
 with open(statistics_csv_file, "w", newline='') as csv_file:
     csv_writer = csv.writer(csv_file)
     # Write the header
@@ -51,8 +51,8 @@ for proc_file in os.listdir(long_desc_folder):
 
     # Compare with ground truth
     shared_activities = len([x for x in activities_in_ground_truth if x in activities_in_generated])
-    fitness = pm4py.fitness_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
-    precision = pm4py.precision_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
+    fitness = pm4py.fitness_token_based_replay(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
+    precision = pm4py.precision_token_based_replay(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
 
     # Extract statistics
     stats = {
@@ -75,15 +75,12 @@ for proc_file in os.listdir(long_desc_folder):
             stats["visible_transitions_ground_truth_log"],
             stats["visible_transitions_ground_truth_model"],
             stats["shared_activities"],
-            stats["fitness"]["percFitTraces"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["averageFitness"] if stats["fitness"] != "None" else "None",
             stats["fitness"]["percentage_of_fitting_traces"] if stats["fitness"] != "None" else "None",
             stats["fitness"]["average_trace_fitness"] if stats["fitness"] != "None" else "None",
-            stats["fitness"]["log_fitness"] if stats["fitness"] != "None" else "None",
             stats["precision"] if stats["precision"] != "None" else "None"
         ])
 
     # Save the statistics table
-    statistics_file = os.path.join(base_dir, "ground_truth_statistics.json")
+    statistics_file = os.path.join(base_dir, "ground_truth_statistics_TOKEN.json")
     with open(statistics_file, "w") as stats_file:
         json.dump(results_table, stats_file, indent=4)
