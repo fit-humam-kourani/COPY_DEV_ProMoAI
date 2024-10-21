@@ -2,8 +2,8 @@ import csv
 import os
 import pm4py
 
-LLM_NAME = 'gemini-1.5-pro-002'
-ITERATION = 4
+LLM_NAME = 'claude-3-5-sonnet-20240620'
+ITERATION = 1
 
 ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
 base_dir = f"llm_com/{LLM_NAME}/IT{ITERATION}"
@@ -41,7 +41,7 @@ def f_measure(precision, fitness):
 # Process each file
 for proc_id in process_ids:
     ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{proc_id}_ground_truth_log.xes")
-    generated_pn_path = os.path.join(base_dir, 'pn', f"{proc_id}.txt.pnml")
+    generated_pn_path = os.path.join(base_dir, 'pn', f"{proc_id}.pnml")
 
     if os.path.exists(generated_pn_path):
 

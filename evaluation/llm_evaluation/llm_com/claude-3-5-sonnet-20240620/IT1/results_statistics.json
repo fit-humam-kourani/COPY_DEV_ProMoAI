@@ -1,0 +1,1001 @@
+{
+    "log_name": "01.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1881577968597412",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15839910507202148",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15511584281921387",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "04.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17349576950073242",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "05.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15282988548278809",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "06.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1708698272705078",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "07.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1563873291015625",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "08.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17010712623596191",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "09.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16374802589416504",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "10.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16726112365722656",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "11.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1558833122253418",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "12.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.18119001388549805",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "13.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17836499214172363",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "14.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16724443435668945",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "15.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15342330932617188",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15499043464660645",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1582181453704834",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "18.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16186738014221191",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.14974474906921387",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "order.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15611481666564941",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "01.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16665911674499512",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.2208695411682129",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15968966484069824",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "04.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16722893714904785",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "05.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16268181800842285",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "06.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17177200317382812",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "07.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1632833480834961",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "08.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16763782501220703",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "09.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1551363468170166",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "10.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1656477451324463",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "11.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15710234642028809",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "12.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16467761993408203",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "13.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1611013412475586",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "14.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15789270401000977",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "15.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.169081449508667",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1744709014892578",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16557025909423828",
+    "error": "Connection failed! This is the response: {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'Not Found'}}"
+}{
+    "log_name": "01.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "1.2502777576446533",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16945910453796387",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1828327178955078",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "04.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16520142555236816",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "05.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16891050338745117",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "06.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16470956802368164",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "07.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1857755184173584",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "08.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16526508331298828",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "09.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17822718620300293",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "10.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.4500918388366699",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "11.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.2084352970123291",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "12.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17131900787353516",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "13.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1804976463317871",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "14.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16820311546325684",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "15.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17129015922546387",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1725468635559082",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.19585776329040527",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "01.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.6921954154968262",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17050671577453613",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15732455253601074",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "04.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16883587837219238",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "05.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1755084991455078",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "06.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.18793106079101562",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "07.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1914536952972412",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "08.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.2086641788482666",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "09.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.20693707466125488",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "10.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.16230058670043945",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "11.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.25255799293518066",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "12.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1627800464630127",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "13.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.15386724472045898",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "14.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1770002841949463",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "15.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17482328414916992",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "16.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.19953465461730957",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "17.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17461299896240234",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "18.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.17280864715576172",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.18725848197937012",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "order.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.20895743370056152",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}"
+}{
+    "log_name": "01.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "1.0140256881713867",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'max_tokens: 200000 > 8192, which is the maximum allowed number of output tokens for claude-3-5-sonnet-20240620'}}"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.222900390625",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'max_tokens: 200000 > 8192, which is the maximum allowed number of output tokens for claude-3-5-sonnet-20240620'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.2212052345275879",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'max_tokens: 200000 > 8192, which is the maximum allowed number of output tokens for claude-3-5-sonnet-20240620'}}"
+}{
+    "log_name": "04.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.1891651153564453",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'max_tokens: 200000 > 8192, which is the maximum allowed number of output tokens for claude-3-5-sonnet-20240620'}}"
+}{
+    "log_name": "05.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "0.18999266624450684",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'max_tokens: 200000 > 8192, which is the maximum allowed number of output tokens for claude-3-5-sonnet-20240620'}}"
+}{
+    "log_name": "01.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 8,
+    "shared_activities": 8,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "7.817906141281128"
+}{
+    "log_name": "02.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "10.037273645401001",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}}"
+}{
+    "log_name": "03.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 11,
+    "shared_activities": 11,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "10.900220155715942"
+}{
+    "log_name": "04.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "7.56514048576355"
+}{
+    "log_name": "05.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 11,
+    "shared_activities": 11,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "7.805557012557983"
+}{
+    "log_name": "06.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "7.71668004989624"
+}{
+    "log_name": "07.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "9.0546133518219"
+}{
+    "log_name": "08.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 12,
+    "shared_activities": 12,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "6.856441974639893"
+}{
+    "log_name": "09.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "11.256534576416016"
+}{
+    "log_name": "10.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "17.494329690933228"
+}{
+    "log_name": "11.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 12,
+    "shared_activities": 12,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "10.29703950881958"
+}{
+    "log_name": "12.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "6.8968422412872314"
+}{
+    "log_name": "13.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 9,
+    "shared_activities": 9,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "8.81807541847229"
+}{
+    "log_name": "14.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 11,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "19.636585235595703"
+}{
+    "log_name": "15.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "16.71878433227539"
+}{
+    "log_name": "16.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": 24,
+    "shared_activities": 24,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "13.675749063491821"
+}{
+    "log_name": "17.txt",
+    "conversation_length": 10,
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": 26,
+    "shared_activities": 25,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "108.68497490882874"
+}{
+    "log_name": "18.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "5.877151727676392",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}}"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": "Error",
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": "None",
+    "shared_activities": "None",
+    "fitness": "None",
+    "precision": "None",
+    "time (sec)": "3.4166862964630127",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}}"
+}{
+    "log_name": "order.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 8,
+    "shared_activities": 8,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "36.113322496414185"
+}{
+    "log_name": "18.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 26,
+    "visible_transitions_generated": 26,
+    "shared_activities": 26,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "23.26016855239868"
+}{
+    "log_name": "hotel.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 13,
+    "shared_activities": 13,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "23.45243811607361"
+}{
+    "log_name": "02.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": 16,
+    "shared_activities": 16,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "18.573814392089844"
+}
