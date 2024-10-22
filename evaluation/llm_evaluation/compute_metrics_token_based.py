@@ -2,7 +2,7 @@ import csv
 import os
 import pm4py
 
-LLM_NAME = 'Llama-3.2-90B-Vision-Instruct'
+LLM_NAME = 'Llama-3.1-Nemotron-70B-Instruct'
 ITERATION = 1
 
 ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
