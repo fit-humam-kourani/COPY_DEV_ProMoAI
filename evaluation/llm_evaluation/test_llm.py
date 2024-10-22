@@ -98,7 +98,7 @@ for proc_file in os.listdir(description_folder):
                                                            openai_model=openai_model,
                                                            api_url=api_url)
         end_time = time.time()
-        time_difference = str(end_time - start_time - 5.0)
+        time_difference = str(end_time - start_time)
     except Exception as e:
         end_time = time.time()
         time_difference = str(end_time - start_time)
