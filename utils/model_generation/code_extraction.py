@@ -57,6 +57,7 @@ def execute_code_and_get_variable(code, variable_name):
         if line_number:
             error_details = f"Error occurred at line {line_number}: \"{error_line}\" with message: {error_msg}"
         else:
-            error_details = f"Error occurred with message: {error_msg}"
+            error_details = f"Error occurred with message: {error_msg}. \n The error occurred with trying to execute " \
+                            f"the following extracted code: {code}. "
 
         raise Exception(error_details)
