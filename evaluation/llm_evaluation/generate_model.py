@@ -12,7 +12,8 @@ id = 'hotel'
 
 
 # code = open(f"../testfiles/models_as_code/{id}.txt", "r").read()
-code = open(r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\llm_com\gemini-1.5-pro-002\IT1\code\order.txt.txt", "r").read()
+code = open(r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\llm_com\gpt-4o\IT1\code\03.txt", "r").read()
+# code = 'a = "hello"'
 variable_name = 'final_model'
 result = execute_code_and_get_variable(code, variable_name)
 validate_partial_orders_with_missing_transitive_edges(result)
@@ -21,6 +22,12 @@ from pm4py.visualization.powl import visualizer
 svg = visualizer.apply(result)
 visualizer.view(svg)
 
+ground_truth_log_folder = "../testfiles/ground_truth_xes_one_trace_per_variant"
+ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{'03'}_ground_truth_log.xes")
+log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
+pn, im, fm = pm4py.convert_to_petri_net(result)
+
+print(pm4py.precision_token_based_replay(log, pn, im, fm ))
 
 #
 # ground_truth_net, ground_truth_im, ground_truth_fm = pm4py.convert_to_petri_net(result)

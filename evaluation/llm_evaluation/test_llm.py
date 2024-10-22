@@ -7,7 +7,7 @@ from utils.prompting import create_conversation
 import time
 
 
-IDS_TO_CONSIDER = ['17']
+IDS_TO_CONSIDER = ['hotel']
 # IDS_TO_CONSIDER = None
 CREATE_FILES = True
 ITERATION = 1
@@ -48,16 +48,18 @@ if CREATE_FILES:
         # Write the header
         csv_writer.writerow([
             "log_name",
-            "conversation_length",
+            "num_it",
             "visible_transitions_ground_truth",
             "visible_transitions_generated",
             "shared_activities",
-            "percFitTraces",
-            "averageFitness",
-            "percentage_of_fitting_traces",
-            "average_trace_fitness",
-            "log_fitness",
-            "precision"
+            # "percFitTraces",
+            # "averageFitness",
+            # "percentage_of_fitting_traces",
+            # "average_trace_fitness",
+            # "log_fitness",
+            # "precision",
+            "time",
+            "error message",
         ])
 
 # Loop through each process description file
@@ -102,14 +104,14 @@ for proc_file in os.listdir(description_folder):
         time_difference = str(end_time - start_time)
         stats = {
             "log_name": proc_file,
-            "conversation_length": "Error",
+            "num_it": "Error",
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": "None",
             "shared_activities": "None",
-            "fitness": "None",
-            "precision": "None",
+            # "fitness": "None",
+            # "precision": "None",
             "time (sec)": time_difference,
-            "error": str(e)
+            "error message": str(e)
         }
         print(e)
 
@@ -142,13 +144,14 @@ for proc_file in os.listdir(description_folder):
         # Extract statistics
         stats = {
             "log_name": proc_file,
-            "conversation_length": len(conversation_history),
+            "num_it": len(conversation_history)/2,
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": len(activities_in_generated),
             "shared_activities": shared_activities,
-            "fitness": "skipped",
-            "precision": "skipped",
-            "time (sec)": time_difference
+            # "fitness": "skipped",
+            # "precision": "skipped",
+            "time (sec)": time_difference,
+            "error message": ""
         }
 
     # Save statistics
@@ -160,23 +163,24 @@ for proc_file in os.listdir(description_folder):
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow([
                 stats["log_name"],
-                stats["conversation_length"],
+                stats["num_it"],
                 stats["visible_transitions_ground_truth"],
                 stats["visible_transitions_generated"],
                 stats["shared_activities"],
-                "skipped",
-                "skipped",
-                "skipped",
-                "skipped",
-                "skipped",
-                "skipped",
-                stats["time (sec)"]
+                # "skipped",
+                # "skipped",
+                # "skipped",
+                # "skipped",
+                # "skipped",
+                # "skipped",
+                stats["time (sec)"],
+                stats["error message"]
             ])
 
     print(stats)
-    if CREATE_FILES:
-        # Save the statistics table
-        statistics_file = os.path.join(base_dir, "results_statistics.json")
-        with open(statistics_file, "a") as stats_file:
-            json.dump(stats, stats_file, indent=4)
+    # if CREATE_FILES:
+    #     # Save the statistics table
+    #     statistics_file = os.path.join(base_dir, "results_statistics.json")
+    #     with open(statistics_file, "a") as stats_file:
+    #         json.dump(stats, stats_file, indent=4)
 
