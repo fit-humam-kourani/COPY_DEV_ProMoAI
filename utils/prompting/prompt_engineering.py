@@ -5,6 +5,10 @@ from utils.prompting.shots import SHOTS
 
 import_statement = 'from utils.model_generation import ModelGenerator'
 
+ERROR_MESSAGE_FOR_MODEL_GENERATION = """
+Please update the model to fix the error. Make sure" \
+                          f" to save the updated final model is the variable 'final_model'. """
+
 
 def add_role():
     return "Your role: you are an expert in process modeling," \
@@ -178,3 +182,4 @@ def description_self_improvement_prompt(descr: str):
            "be inferred from the original process description or is unrelated. If the description is already " \
            "comprehensive, feel free to return the same description. Please answer by only returning the improved " \
            "process description without any additional text in your response. The process description: \n\n" + str(descr)
+

@@ -1,8 +1,10 @@
 from typing import Callable, List, TypeVar, Any
-from utils import constants, shared
+from utils import constants
 import requests
 import sys
 import google.generativeai as genai
+
+from utils.prompting.prompt_engineering import ERROR_MESSAGE_FOR_MODEL_GENERATION
 
 T = TypeVar('T')
 
@@ -10,42 +12,39 @@ T = TypeVar('T')
 def generate_result_with_error_handling(conversation: List[dict[str:str]],
                                         extraction_function: Callable[[str, Any], T],
                                         api_key: str,
-                                        openai_model: str,
+                                        llm_name: str,
                                         api_url: str,
-                                        max_iterations=5) \
+                                        max_iterations=5,
+                                        standard_error_message=ERROR_MESSAGE_FOR_MODEL_GENERATION) \
         -> tuple[str, any, list[Any]]:
     error_history = []
 
-    print_conversation(conversation)
-
     for iteration in range(max_iterations + 5):
         if api_url == "GOOGLE":
-            response = generate_response_with_history_google(conversation, api_key, openai_model)
+            response = generate_response_with_history_google(conversation, api_key, llm_name)
         elif api_url == "https://api.anthropic.com/v1/messages":
-            response = generate_response_with_history_anthropic(conversation, api_key, openai_model)
+            response = generate_response_with_history_anthropic(conversation, api_key, llm_name)
         else:
-            response = generate_response_with_history(conversation, api_key, openai_model, api_url)
+            response = generate_response_with_history(conversation, api_key, llm_name, api_url)
 
         try:
             conversation.append({"role": "assistant", "content": response})
             auto_duplicate = iteration >= max_iterations
             code, result = extraction_function(response, auto_duplicate)
             print_conversation(conversation)
-
             return code, result, conversation  # Break loop if execution is successful
         except Exception as e:
             error_description = str(e)
             error_history.append(error_description)
             if constants.ENABLE_PRINTS:
                 print("Error detected in iteration " + str(iteration + 1))
-            new_message = f"Executing your code led to an error! Please update the model to fix the error. Make sure" \
-                          f" to save the updated final model is the variable 'final_model'. This is the error" \
+            new_message = f"Executing your code led to an error! " + standard_error_message + "This is the error" \
                           f" message: {error_description}"
             conversation.append({"role": "user", "content": new_message})
 
         print_conversation(conversation)
 
-    raise Exception(openai_model + " failed to fix the errors after " + str(max_iterations+5) +
+    raise Exception(llm_name + " failed to fix the errors after " + str(max_iterations+5) +
                     " iterations! This is the error history: " + str(error_history))
 
 
@@ -57,13 +56,13 @@ def print_conversation(conversation):
         print("\n\n")
 
 
-def generate_response_with_history(conversation_history, api_key, openai_model, api_url) -> str:
+def generate_response_with_history(conversation_history, api_key, llm_name, api_url) -> str:
     """
     Generates a response from the LLM using the conversation history.
 
     :param conversation_history: The conversation history to be included
     :param api_key: OpenAI API key
-    :param openai_model: OpenAI model to be used
+    :param llm_name: OpenAI model to be used
     :param api_url: API URL to be used
     :return: The content of the LLM response
     """
@@ -80,7 +79,7 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
         })
 
     payload = {
-        "model": openai_model,
+        "model": llm_name,
         "messages": messages_payload
     }
 
@@ -116,14 +115,14 @@ def generate_response_with_history_google(conversation_history, api_key, google_
         raise Exception("Connection failed! This is the response: " + str(response))
 
 
-def generate_response_with_history_anthropic(conversation, api_key, model):
+def generate_response_with_history_anthropic(conversation, api_key, llm_name):
     import anthropic
 
     client = anthropic.Anthropic(
         api_key=api_key,
     )
     message = client.messages.create(
-        model=model,
+        model=llm_name,
         max_tokens=8192,
         messages=conversation
     )
