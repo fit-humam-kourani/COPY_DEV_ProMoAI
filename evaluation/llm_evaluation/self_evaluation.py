@@ -7,9 +7,9 @@ from utils.general_utils.openai_connection import generate_result_with_error_han
 from utils.prompting import create_conversation
 from utils.prompting.self_evaluation import extraction_function_dictionary, generate_self_evaluation_prompt
 
-# IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 21)]  # '01' to '20'
-IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 3)]  # '01' to '20'
-ITERATIONS = 1
+IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 4)]  # '01' to '20'
+# IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 3)]  # '01' to '20'
+ITERATIONS = 4
 
 with open("../api_url.txt", "r") as f:
     api_url = f.read().strip()
@@ -87,7 +87,7 @@ for proc_id in IDS_TO_CONSIDER:
 
     with open(statistics_csv_file, "a", newline='', encoding="utf-8") as csv_file:
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow([proc_id, len(conversation)]
+        csv_writer.writerow(["p"+proc_id, len(conversation)]
                             + [result[f'IT{iteration}'] for iteration in range(1, ITERATIONS + 1)])
 
     print(f"Scores for {proc_id}: {result}")

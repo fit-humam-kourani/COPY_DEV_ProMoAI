@@ -40,9 +40,16 @@ def generate_self_evaluation_prompt(description: str, model_codes: Dict[str, str
     **Evaluation Criteria:**
     - **Behavior Accuracy:** How accurately does the model capture the intended process behavior?
     - **Completeness:** Does the model include all necessary activities as described?
-    - **Correctness:** Are the control flows (e.g., sequence, parallelism, choice, loops) correctly implemented?
-    
-    **Output Requirements:**
+    - **Correctness:** Are the control flows (e.g., partial orders, choices, loops) correctly implemented?"""
+
+    # prompt += f"""
+    # **Evaluation Criteria:**
+    # - **Fitness:** Evaluate how well the process model can reproduce the behaviors of the process according to the
+    #  process description.
+    # - **Precision:** Evaluate the extent to which the process model exclusively represents behaviors that
+    #  are allowed in the process according to the process description. """
+
+    prompt += f"""**Output Requirements:**
     - Provide your evaluation scores as a Python dictionary named `score_dictionary`.
     - Use the same keys for your dictionary as the keys in the provided dictionary, i.e., {list(model_codes.keys())}."""
 
