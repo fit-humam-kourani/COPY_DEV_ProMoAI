@@ -18,14 +18,6 @@ def get_node_type(node):
         return node.__class__
 
 
-def silent_transition():
-    return SilentTransition()
-
-
-def activity(label):
-    return Transition(label)
-
-
 class ModelGenerator:
     def __init__(self, enable_nested_partial_orders=True, copy_duplicates=False):
         self.used_as_submodel = []
@@ -33,12 +25,18 @@ class ModelGenerator:
         self.copy_duplicates = copy_duplicates
         pass
 
-    def create_model(self, node: POWL):
+    def activity(self, label):
+        return Transition(label)
+
+    def silent_transition(self):
+        return SilentTransition()
+
+    def create_model(self, node: POWL, parent_type):
         if node is None:
             res = SilentTransition()
         else:
             if isinstance(node, str):
-                node = activity(node)
+                node = self.activity(node)
             elif not isinstance(node, POWL):
                 raise Exception(
                     f"Only POWL models are accepted as submodels! You provide instead: {type(node)}.")
