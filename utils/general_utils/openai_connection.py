@@ -69,8 +69,8 @@ def generate_response_with_history(conversation_history, api_key, llm_name, api_
     Generates a response from the LLM using the conversation history.
 
     :param conversation_history: The conversation history to be included
-    :param api_key: OpenAI API key
-    :param llm_name: OpenAI model to be used
+    :param api_key: API key
+    :param llm_name: model to be used
     :param api_url: API URL to be used
     :return: The content of the LLM response
     """
