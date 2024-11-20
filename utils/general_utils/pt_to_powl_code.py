@@ -1,4 +1,4 @@
-from pm4py.objects.process_tree.obj import ProcessTree, Operator
+from pm4py.objects.process_tree.obj import Operator
 
 
 def recursively_transform_process_tree(process_tree, stru=None, level=0):

@@ -31,20 +31,20 @@ def m1():
         return gen.xor(model_a(), model_b())
 
     def model_a():
-        a = gen.activity('a')
+        a = activity('a')
         return gen.loop(do=a, redo=None)
 
     def model_b():
-        return gen.activity('b')
+        return activity('b')
 
     def model_c():
-        return gen.activity('c')
+        return activity('c')
 
     def model_d():
-        return gen.activity('d')
+        return activity('d')
 
     def model_second_a():
-        return gen.activity('a')
+        return activity('a')
 
     final_model = model_over_all_activities()
 
@@ -73,17 +73,17 @@ def m1_2():
         return gen.xor(model_a(), model_b())
 
     def model_a():
-        a = gen.activity('a')
+        a = activity('a')
         return gen.loop(do=a, redo=None)
 
     def model_b():
-        return gen.activity('b')
+        return activity('b')
 
     def model_c():
-        return gen.activity('c')
+        return activity('c')
 
     def model_d():
-        return gen.activity('d')
+        return activity('d')
 
     final_model = model_over_all_activities()
     return final_model
@@ -101,14 +101,14 @@ d2 = "inventory management can proceed through restocking items or fulfilling or
 
 def m2():
     gen = ModelGenerator()
-    restock = gen.activity('restock items')
+    restock = activity('restock items')
     loop_1 = gen.loop(do=restock, redo=None)
-    fulfil = gen.activity('fulfill orders')
+    fulfil = activity('fulfill orders')
     choice_1 = gen.xor(loop_1, fulfil)
-    urgent_restock = gen.activity('urgent restock')
+    urgent_restock = activity('urgent restock')
     choice_2 = gen.xor(choice_1, urgent_restock)
-    inventory_audit = gen.activity('inventory audit')
-    data_analysis = gen.activity('data analysis')
+    inventory_audit = activity('inventory audit')
+    data_analysis = activity('data analysis')
     poset_1 = gen.partial_order(dependencies=[(choice_2, inventory_audit, data_analysis)])
     final_skip_loop = gen.loop(do=None, redo=poset_1)
     final_model = final_skip_loop
@@ -125,11 +125,11 @@ d3 = "This enhanced payroll process allows for a high degree of customization an
 
 def m3():
     gen = ModelGenerator()
-    track_time = gen.activity('track time')
+    track_time = activity('track time')
     activity_1_self_loop = gen.loop(do=track_time, redo=None)
-    activity_2 = gen.activity('calculate pay')
-    activity_3 = gen.activity('issue payments')
-    activity_4 = gen.activity('generate reports')
+    activity_2 = activity('calculate pay')
+    activity_3 = activity('issue payments')
+    activity_4 = activity('generate reports')
     poset = gen.partial_order(dependencies=[(activity_1_self_loop, activity_2, activity_3), (activity_2, activity_4)])
     final_model = poset
     return final_model
@@ -149,21 +149,21 @@ def m4():
     gen = ModelGenerator()
 
     # subprocess 1
-    a = gen.activity('a')
-    b = gen.activity('b')
-    choice_c_d = gen.xor(gen.activity('c'), gen.activity('d'))
+    a = activity('a')
+    b = activity('b')
+    choice_c_d = gen.xor(activity('c'), activity('d'))
 
     # subprocess 2
-    unskippable_self_loop_e = gen.loop(do=gen.activity('e'), redo=None)
+    unskippable_self_loop_e = gen.loop(do=activity('e'), redo=None)
 
     # subprocess 3
-    skippable_self_loop_f = gen.loop(do=None, redo=gen.activity('f'))
+    skippable_self_loop_f = gen.loop(do=None, redo=activity('f'))
 
     # subprocess 4
-    g = gen.activity('g')
-    h = gen.activity('h')
-    i = gen.activity('i')
-    j = gen.activity('j')
+    g = activity('g')
+    h = activity('h')
+    i = activity('i')
+    j = activity('j')
 
     # combine all subprocesses
     final_model = gen.partial_order(
@@ -184,16 +184,16 @@ d5 = "A customer brings in a defective computer and the CRS checks the defect an
 
 def m5():
     gen = ModelGenerator()
-    defect_check = gen.activity('Check defect')
-    cost_calculation = gen.activity('Calculate repair costs')
-    cancel = gen.activity('Cancel and give computer unrepaired')
-    repair_hardware = gen.activity('Check and repair the hardware')
-    repair_software = gen.activity('Check and configure the software')
-    test_functionality_after_hardware_repair = gen.activity('Test system functionality')
-    test_functionality_after_software_repair = gen.activity('Test system functionality')
-    additional_hardware_repair = gen.xor(gen.activity('Perform additional hardware repairs'), None)
-    additional_software_repair = gen.xor(gen.activity('Perform additional software repairs'), None)
-    finish_repair = gen.activity('Finish repair')
+    defect_check = activity('Check defect')
+    cost_calculation = activity('Calculate repair costs')
+    cancel = activity('Cancel and give computer unrepaired')
+    repair_hardware = activity('Check and repair the hardware')
+    repair_software = activity('Check and configure the software')
+    test_functionality_after_hardware_repair = activity('Test system functionality')
+    test_functionality_after_software_repair = activity('Test system functionality')
+    additional_hardware_repair = gen.xor(activity('Perform additional hardware repairs'), None)
+    additional_software_repair = gen.xor(activity('Perform additional software repairs'), None)
+    finish_repair = activity('Finish repair')
 
     hardware_repair_order_dependencies = (
         repair_hardware, test_functionality_after_hardware_repair, additional_hardware_repair)
@@ -242,24 +242,24 @@ def m6():
         return gen.partial_order(dependencies=[(child1, child2), (child2, child3)])
 
     def create_process():
-        return gen.activity('Create process instance')
+        return activity('Create process instance')
 
     def choice_accept_reject():
         return gen.xor(accept_case(), reject_case())
 
     def finish_process():
-        return gen.activity('Finish process instance')
+        return activity('Finish process instance')
 
     def reject_case():
-        return gen.activity('Reject order')
+        return activity('Reject order')
 
     def accept_case():
-        accept_order = gen.activity('Accept order')
-        inform = gen.activity('Inform storehouse and engineering department')
-        process_part_list = gen.activity('Process part list')
-        prepare_assembly = gen.activity('Prepare bicycle assembly')
-        assemble_bicycle = gen.activity('Assemble bicycle')
-        ship_bicycle = gen.activity('Ship bicycle')
+        accept_order = activity('Accept order')
+        inform = activity('Inform storehouse and engineering department')
+        process_part_list = activity('Process part list')
+        prepare_assembly = activity('Prepare bicycle assembly')
+        assemble_bicycle = activity('Assemble bicycle')
+        ship_bicycle = activity('Ship bicycle')
         part_loop = create_part_loop()
         return gen.partial_order(dependencies=[(accept_order, inform), (inform, process_part_list),
                                                (inform, prepare_assembly), (process_part_list, part_loop),
@@ -267,14 +267,14 @@ def m6():
                                                (assemble_bicycle, ship_bicycle)])
 
     def create_part_loop():
-        check_part = gen.activity('Check required quantity of the part')
+        check_part = activity('Check required quantity of the part')
         check_reserve = create_check_reserve_choice()
         single_part = gen.partial_order(dependencies=[(check_part, check_reserve)])
         return gen.loop(do=single_part, redo=None)
 
     def create_check_reserve_choice():
-        reserve = gen.activity('Reserve part')
-        back_order = gen.activity('Back-order part')
+        reserve = activity('Reserve part')
+        back_order = activity('Back-order part')
         return gen.xor(reserve, back_order)
 
     final_model = model_over_all_activities()
@@ -307,16 +307,16 @@ def m7():
         return gen.partial_order(dependencies=[(a, c), (a, d), (b, d)])
 
     def model_a():
-        return gen.activity('a')
+        return activity('a')
 
     def model_b():
-        return gen.activity('b')
+        return activity('b')
 
     def model_c():
-        return gen.activity('c')
+        return activity('c')
 
     def model_d():
-        return gen.activity('d')
+        return activity('d')
 
     final_model = model_over_all_activities()
     return final_model

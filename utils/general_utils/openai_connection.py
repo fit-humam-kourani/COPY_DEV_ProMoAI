@@ -1,5 +1,6 @@
+import sys
 from typing import Callable, List, TypeVar, Any
-from utils import constants, shared
+from utils import constants
 import requests
 import google.generativeai as genai
 import anthropic
@@ -98,7 +99,7 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
 
     try:
         return response["choices"][0]["message"]["content"]
-    except Exception as e:
+    except Exception:
         raise Exception("Connection failed! This is the response: " + str(response))
 
 
@@ -119,6 +120,7 @@ def generate_response_with_history_google(conversation_history, api_key, google_
     except Exception as e:
         raise Exception("Connection failed! This is the error: " + str(e))
 
+
 def generate_response_with_history_anthropic(conversation, api_key, llm_name):
     client = anthropic.Anthropic(
         api_key=api_key,
@@ -130,5 +132,5 @@ def generate_response_with_history_anthropic(conversation, api_key, llm_name):
     )
     try:
         return message.content[0].text
-    except Exception as e:
+    except Exception:
         raise Exception("Connection failed! This is the response: " + str(message))
