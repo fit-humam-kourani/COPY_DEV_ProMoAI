@@ -2,25 +2,23 @@ from pm4py.objects.powl.obj import POWL
 
 from utils.prompting import create_conversation, update_conversation
 from utils.model_generation.model_generation import generate_model, extract_model_from_response
-from utils.general_utils import openai_connection
 from pm4py.util import constants
-from copy import copy, deepcopy
+from copy import deepcopy
 from typing import Optional
-import re
 
 
 class LLMProcessModelGenerator(object):
-    def __init__(self, process_description: Optional[str], api_key: str, openai_model: str,
-                 api_url: str = "https://api.openai.com/v1", powl_model_code: str = None, powl_model: POWL = None):
-        self.api_url = api_url
+    def __init__(self, process_description: Optional[str], api_key: str, llm_name: str,
+                 ai_provider: str, powl_model_code: str = None, powl_model: POWL = None):
+        self.ai_provider = ai_provider
         self.api_key = api_key
-        self.openai_model = openai_model
+        self.llm_name = llm_name
         init_conversation = create_conversation(process_description)
         if process_description is not None:
             code, self.process_model, self.conversation = generate_model(init_conversation,
-                                                                   api_key=self.api_key,
-                                                                   openai_model=self.openai_model,
-                                                                   api_url=self.api_url)
+                                                                         api_key=self.api_key,
+                                                                         llm_name=self.llm_name,
+                                                                         ai_provider=self.ai_provider)
         elif powl_model:
             conversation = list(init_conversation)
             conversation.append({"role": "assistant",
@@ -31,11 +29,13 @@ class LLMProcessModelGenerator(object):
         elif powl_model_code:
             code, process_model = extract_model_from_response(powl_model_code, 0)
             conversation = list(init_conversation)
-            conversation.append({"role": "assistant", "content": "The following code is used to generate the process model:\n\n"+powl_model_code})
+            conversation.append({"role": "assistant",
+                                 "content": "The following code is used to generate the process model:\n\n" + powl_model_code})
             self.process_model = process_model
             self.conversation = conversation
         else:
-            raise Exception("insufficient parameters provided to LLMProcessModelGenerator. at least one between 'process_description' and 'powl_model_code' should be provided.")
+            raise Exception(
+                "insufficient parameters provided to LLMProcessModelGenerator. at least one between 'process_description' and 'powl_model_code' should be provided.")
 
     def __to_petri_net(self):
         from pm4py.objects.conversion.powl.converter import apply as powl_to_pn
@@ -53,15 +53,15 @@ class LLMProcessModelGenerator(object):
         bpmn_model = layouter.apply(bpmn_model)
         return bpmn_model
 
-    def update(self, feedback: str, api_key: str, openai_model: str, api_url: str = "https://api.openai.com/v1"):
-        self.api_url = api_url
+    def update(self, feedback: str, api_key: str, llm_name: str, ai_provider: str):
+        self.ai_provider = ai_provider
         self.api_key = api_key
-        self.openai_model = openai_model
+        self.llm_name = llm_name
         self.conversation = update_conversation(self.conversation, feedback)
         code, self.process_model, self.conversation = generate_model(conversation=self.conversation,
-                                                               api_key=self.api_key,
-                                                               openai_model=self.openai_model,
-                                                               api_url=self.api_url)
+                                                                     api_key=self.api_key,
+                                                                     llm_name=self.llm_name,
+                                                                     ai_provider=self.ai_provider)
 
     def view_bpmn(self, image_format: str = "svg"):
         bpmn_model = self.get_bpmn()
@@ -107,38 +107,18 @@ class LLMProcessModelGenerator(object):
                              output_filename=file_path,
                              parameters={"encoding": encoding})
 
-    def grade_process_model(self, api_key: str, openai_model: str, api_url: str = "https://api.openai.com/v1"):
-        self.api_url = api_url
-        self.api_key = api_key
-        self.openai_model = openai_model
-        conversation = copy(self.conversation)
-        conversation.append({"role": "user", "content": "Could you provide a grade from 1.0 (minimum) to 10.0 (maximum) to the provided process model? Please explain briefly your motivations. Please put the overall grade at the beginning of your response."})
-        response = openai_connection.generate_response_with_history(conversation, self.api_key, self.openai_model, self.api_url)
-        pattern = r'\d+'
-        reg_expr = re.compile(pattern)
-        numbers = reg_expr.findall(response)
-        if numbers:
-            return float(numbers[0])
-        return 0.0
 
-
-def initialize(process_description: str | None, api_key: str, openai_model: str, api_url: str = "https://api.openai.com/v1",
+def initialize(process_description: str | None, api_key: str, llm_name: str, ai_provider: str,
                powl_model_code: str = None, powl_model: POWL = None, n_candidates: int = 1, debug: bool = False):
-    best_grade = -1.0
     best_cand = None
     exception = ""
     for i in range(n_candidates):
         try:
             cand = LLMProcessModelGenerator(process_description=process_description, api_key=api_key,
-                                            openai_model=openai_model, api_url=api_url,
+                                            llm_name=llm_name, ai_provider=ai_provider,
                                             powl_model_code=powl_model_code, powl_model=powl_model)
             if n_candidates > 1:
-                grade = cand.grade_process_model(api_key, openai_model, api_url)
-                if grade > best_grade:
-                    best_grade = grade
-                    best_cand = cand
-                if debug:
-                    print("i=%d n_candidates=%d grade=%.2f best_grade=%.2f" % (i, n_candidates, grade, best_grade))
+                raise Exception("Currently, there is no support for multiple candidate generation!")
             else:
                 best_cand = cand
         except Exception as e:
@@ -148,21 +128,16 @@ def initialize(process_description: str | None, api_key: str, openai_model: str,
     return best_cand
 
 
-def update(generator: LLMProcessModelGenerator, feedback: str, api_key: str, openai_model: str, api_url: str = "https://api.openai.com/v1", n_candidates: int = 1, debug: bool = False):
-    best_grade = -1.0
+def update(generator: LLMProcessModelGenerator, feedback: str, api_key: str, llm_name: str,
+           ai_provider: str, n_candidates: int = 1, debug: bool = False):
     best_cand = None
     exception = ""
     for i in range(n_candidates):
         try:
             cand = generator if n_candidates == 1 else deepcopy(generator)
-            cand.update(feedback, api_key, openai_model, api_url)
+            cand.update(feedback, api_key, llm_name, ai_provider)
             if n_candidates > 1:
-                grade = cand.grade_process_model(api_key, openai_model, api_url)
-                if grade > best_grade:
-                    best_grade = grade
-                    best_cand = cand
-                if debug:
-                    print("i=%d n_candidates=%d grade=%.2f best_grade=%.2f" % (i, n_candidates, grade, best_grade))
+                raise Exception("Currently, there is no support for multiple candidate generation!")
             else:
                 best_cand = cand
         except Exception as e:

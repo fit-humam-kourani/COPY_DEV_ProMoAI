@@ -31,7 +31,7 @@ class ModelGenerator:
     def silent_transition(self):
         return SilentTransition()
 
-    def create_model(self, node: POWL, parent_type):
+    def create_model(self, node: POWL):
         if node is None:
             res = SilentTransition()
         else:

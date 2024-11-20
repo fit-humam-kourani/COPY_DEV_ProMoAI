@@ -2,6 +2,8 @@ import sys
 from typing import Callable, List, TypeVar, Any
 from utils import constants
 import requests
+
+from utils.general_utils.ai_providers import AIProviders
 from utils.prompting.prompt_engineering import ERROR_MESSAGE_FOR_MODEL_GENERATION
 
 T = TypeVar('T')
@@ -11,24 +13,26 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
                                         extraction_function: Callable[[str, Any], T],
                                         api_key: str,
                                         llm_name: str,
-                                        api_url: str,
+                                        ai_provider: str,
                                         max_iterations=5,
                                         additional_iterations=5,
                                         standard_error_message=ERROR_MESSAGE_FOR_MODEL_GENERATION) \
         -> tuple[str, any, list[Any]]:
     error_history = []
     for iteration in range(max_iterations + additional_iterations):
-        if api_url == "GOOGLE":
+        if ai_provider == AIProviders.GOOGLE.value:
             response = generate_response_with_history_google(conversation, api_key, llm_name)
-        elif api_url == "https://api.anthropic.com/v1/messages":
+        elif ai_provider == AIProviders.ANTHROPIC.value:
             response = generate_response_with_history_anthropic(conversation, api_key, llm_name)
         else:
-            if api_url == "Deepinfra":
+            if ai_provider == AIProviders.DEEPINFRA.value:
                 api_url = "https://api.deepinfra.com/v1/openai"
-            elif api_url == "OpenAI":
+            elif ai_provider == AIProviders.OPENAI.value:
                 api_url = "https://api.openai.com/v1"
-            elif api_url == "Mistral AI":
+            elif ai_provider == AIProviders.MISTRAL_AI.value:
                 api_url = "https://api.mistral.ai/v1/"
+            else:
+                raise Exception(f"AI provider {ai_provider} is not supported!")
             response = generate_response_with_history(conversation, api_key, llm_name, api_url)
 
         try:
