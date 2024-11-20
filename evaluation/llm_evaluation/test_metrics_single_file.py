@@ -4,29 +4,28 @@ import pm4py
 import json
 from utils import llm_model_generator
 
-ground_truth_pn_folder = "../testfiles/ground_truth_pn"
-ground_truth_log_folder = "../testfiles/ground_truth_xes"
+pn_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\llm_com\gemini-1.5-pro-002\IT3_IMPROVED\pn"
+ground_truth_log_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\ground_truth\FIXED_ground_truth_xes_one_trace_per_variant"
 
+proc_id = '02'
+# model = 'gpt-4o'
 
-proc_id = '18'
+pn_path = os.path.join(pn_folder, f"{proc_id}.pnml")
+ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{proc_id}.xes")
 
-# Define paths for ground truth Petri net and log
-ground_truth_pn_path = os.path.join(ground_truth_pn_folder, f"{proc_id}_ground_truth_petri.pnml")
-ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{proc_id}_ground_truth_log.xes")
-
-# Load ground truth Petri net and log
-ground_truth_net, ground_truth_im, ground_truth_fm = pm4py.read_pnml(ground_truth_pn_path)
+net, im, fm = pm4py.read_pnml(pn_path)
+tree = pm4py.convert_to_process_tree(net, im, fm)
+pm4py.view_process_tree(tree)
 ground_truth_log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
-activities_in_ground_truth = [x for x in pm4py.get_event_attribute_values(ground_truth_log, 'concept:name').keys() if x is not None]
 
-activities_in_generated = [x for x in ground_truth_net.transitions if x.label is not None]
+precision = pm4py.precision_token_based_replay(ground_truth_log, net, im, fm)
+# pm4py.view_petri_net(net, im, fm)
 
-# Compare with ground truth
-shared_activities = len(set(t.label for t in ground_truth_net.transitions if t.label) & set(
-    t.label for t in ground_truth_net.transitions if t.label))
-# fitness = pm4py.fitness_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
-precision = pm4py.precision_alignments(ground_truth_log, ground_truth_net, ground_truth_im, ground_truth_fm)
 print(precision)
+fit = pm4py.fitness_token_based_replay(ground_truth_log, net, im, fm)
+# pm4py.view_petri_net(net, im, fm)
+
+print(fit)
 # # Extract statistics
 # stats = {
 #     "log_name": proc_id,

@@ -7,9 +7,10 @@ from utils.general_utils.openai_connection import generate_result_with_error_han
 from utils.prompting import create_conversation
 from utils.prompting.self_evaluation import extraction_function_dictionary, generate_self_evaluation_prompt
 
-IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 4)]  # '01' to '20'
+IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 21)]  # '01' to '20'
 # IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 3)]  # '01' to '20'
 ITERATIONS = 4
+CONF_EV = True
 
 with open("../api_url.txt", "r") as f:
     api_url = f.read().strip()
@@ -23,7 +24,7 @@ ground_truth_log_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluati
 llm_name_fixed = f"{llm_name.replace('/', '_')}"
 base_dir = f"llm_com/{llm_name_fixed}"
 
-self_ev_folder = os.path.join(r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation", 'self_ev', llm_name_fixed)
+self_ev_folder = os.path.join(r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation", 'self_improvement\self_evaluation', llm_name_fixed)
 responses_folder = os.path.join(self_ev_folder, 'responses')
 
 if not os.path.exists(responses_folder):
@@ -38,7 +39,7 @@ if not os.path.exists(statistics_csv_file):
                                 "log_name",
                                 "len_conv"
                             ]
-                            + [f'IT{iteration}' for iteration in range(1, ITERATIONS + 1)]
+                            + [f'self-ev scores_IT{iteration}' for iteration in range(1, ITERATIONS + 1)]
                             )
 
 # Main Loop
@@ -68,7 +69,7 @@ for proc_id in IDS_TO_CONSIDER:
         return extraction_function_dictionary(response, keys=KEYS)
 
 
-    self_ev_prompt = generate_self_evaluation_prompt(proc_descr, model_codes)
+    self_ev_prompt = generate_self_evaluation_prompt(proc_descr, model_codes, conformance_evaluation=CONF_EV)
 
     init_conversation.append({"role": "user", "content": f'{self_ev_prompt}'})
 

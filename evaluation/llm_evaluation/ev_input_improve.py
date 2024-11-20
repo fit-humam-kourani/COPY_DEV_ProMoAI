@@ -1,24 +1,31 @@
 import csv
 import os
 import pm4py
+
+from utils.general_utils.connection_utils import improve_process_description
 from utils.model_generation.model_generation import generate_model
 from utils.prompting import create_conversation
 import time
 
-# IDS_TO_CONSIDER = ['hotel']
-IDS_TO_CONSIDER = "21"
+from utils.prompting.prompt_engineering import description_self_improvement_prompt
+
+IDS_TO_CONSIDER = [f"{i:02}" for i in range(1, 21)]
+# IDS_TO_CONSIDER = ["01"]
+IDS_TO_CONSIDER = None
 CREATE_FILES = True
-ITERATION = 7
+ITERATION = "INPUT_IMPROVE_LONG"
 
 # Read API configurations
 api_url = open("../api_url.txt", "r").read().strip()
 api_key = open("../api_key.txt", "r").read().strip()
 openai_model = open("../api_model.txt", "r").read().strip()
 
+
 description_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\ground_truth\ground_truth_process_descriptions"
 ground_truth_log_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\ground_truth\ground_truth_xes_one_trace_per_variant"
 
 base_dir = f"llm_com/{openai_model.replace('/', '_')}/IT{ITERATION}"
+
 
 # Ensure base directories exist for saving results
 if not os.path.exists(base_dir):
@@ -27,6 +34,7 @@ if not os.path.exists(base_dir):
 pn_folder = os.path.join(base_dir, 'pn')
 conv_folder = os.path.join(base_dir, 'conv')
 code_folder = os.path.join(base_dir, 'code')
+imp_desc_folder = os.path.join(base_dir, 'improved_description')
 if CREATE_FILES:
     if not os.path.exists(pn_folder):
         os.makedirs(pn_folder)
@@ -34,6 +42,8 @@ if CREATE_FILES:
         os.makedirs(conv_folder)
     if not os.path.exists(code_folder):
         os.makedirs(code_folder)
+    if not os.path.exists(imp_desc_folder):
+        os.makedirs(imp_desc_folder)
 
 # Results table to collect statistics
 results_table = []
@@ -83,6 +93,14 @@ for proc_file in os.listdir(description_folder):
 
     log_activities = set(event["concept:name"] for trace in ground_truth_log for event in trace)
     activities_in_ground_truth = log_activities
+    proc_descr = improve_process_description(proc_descr,
+                                             api_key=api_key,
+                                             llm_name=openai_model,
+                                             api_url=api_url)
+    # time.sleep(5)
+    imp_desc_path = os.path.join(imp_desc_folder, f"{proc_id}.txt")
+    with open(imp_desc_path, "w", encoding="utf-8") as imp_desc_file:
+        imp_desc_file.write(str(proc_descr))
     proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
         log_activities)
     init_conversation = create_conversation(proc_descr)
@@ -91,10 +109,7 @@ for proc_file in os.listdir(description_folder):
         code, process_model, conversation = generate_model(init_conversation,
                                                            api_key=api_key,
                                                            llm_name=openai_model,
-                                                           api_url=api_url,
-                                                           max_iterations=10,
-                                                           additional_iterations=5
-                                                           )
+                                                           api_url=api_url)
         end_time = time.time()
         time_difference = str(end_time - start_time)
     except Exception as e:
@@ -134,6 +149,7 @@ for proc_file in os.listdir(description_folder):
             with open(code_path, "w", encoding="utf-8") as code_file:
                 code_file.write(str(code))
 
+
         # Compare with ground truth
         shared_activities = len(set(t.label for t in net.transitions if t.label) & log_activities)
         # fitness = pm4py.fitness_alignments(ground_truth_log, net, im, fm)
@@ -142,7 +158,7 @@ for proc_file in os.listdir(description_folder):
         # Extract statistics
         stats = {
             "log_name": proc_file,
-            "num_it": len(conversation_history) / 2,
+            "num_it": len(conversation_history)/2,
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": len(activities_in_generated),
             "shared_activities": shared_activities,
@@ -176,8 +192,10 @@ for proc_file in os.listdir(description_folder):
             ])
 
     print(stats)
+    # time.sleep(5)
     # if CREATE_FILES:
     #     # Save the statistics table
     #     statistics_file = os.path.join(base_dir, "results_statistics.json")
     #     with open(statistics_file, "a") as stats_file:
     #         json.dump(stats, stats_file, indent=4)
+

@@ -16,14 +16,16 @@ def extraction_function_dictionary(response: str, keys: List[str]) -> tuple[str,
         raise Exception(f"Wrong keys in the extracted dictionary! Expected: {keys}; found: {score_dict.keys()}!")
 
 
-def generate_self_evaluation_prompt(description: str, model_codes: Dict[str, str]) -> str:
+def generate_self_evaluation_prompt(description: str, model_codes: Dict[str, str],
+                                    conformance_evaluation: bool = False) -> str:
     """
     Generates a prompt for the LLM to evaluate multiple models based on a process description.
 
     Args:
-        proc_descr (str): The process description.
+        description (str): The process description.
         model_codes (Dict[str, str]): A dictionary where keys are model IDs (e.g., 'IT1') and values are
          the corresponding POWL codes.
+        conformance_evaluation
 
     Returns:
         str: The formatted prompt to be sent to the LLM.
@@ -36,18 +38,19 @@ def generate_self_evaluation_prompt(description: str, model_codes: Dict[str, str
     prompt = prompt + f"""This was the process description: {description}\n\n"""
     prompt = prompt + f"""The generated POWL models are saved in the following dictionary:: {model_codes}\n\n"""
 
-    prompt += f"""
-    **Evaluation Criteria:**
-    - **Behavior Accuracy:** How accurately does the model capture the intended process behavior?
-    - **Completeness:** Does the model include all necessary activities as described?
-    - **Correctness:** Are the control flows (e.g., partial orders, choices, loops) correctly implemented?"""
-
-    # prompt += f"""
-    # **Evaluation Criteria:**
-    # - **Fitness:** Evaluate how well the process model can reproduce the behaviors of the process according to the
-    #  process description.
-    # - **Precision:** Evaluate the extent to which the process model exclusively represents behaviors that
-    #  are allowed in the process according to the process description. """
+    if conformance_evaluation:
+        prompt += f"""
+        **Evaluation Criteria:**
+        - **Fitness:** Evaluate how well the process model can reproduce the behaviors of the process according to the
+         process description.
+        - **Precision:** Evaluate the extent to which the process model exclusively represents behaviors that
+         are allowed in the process according to the process description. """
+    else:
+        prompt += f"""
+        **Evaluation Criteria:**
+        - **Behavior Accuracy:** How accurately does the model capture the intended process behavior?
+        - **Completeness:** Does the model include all necessary activities as described?
+        - **Correctness:** Are the control flows (e.g., partial orders, choices, loops) correctly implemented?"""
 
     prompt += f"""**Output Requirements:**
     - Provide your evaluation scores as a Python dictionary named `score_dictionary`.

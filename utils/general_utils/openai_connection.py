@@ -3,6 +3,7 @@ from utils import constants
 import requests
 import sys
 import google.generativeai as genai
+import time
 
 from utils.prompting.prompt_engineering import ERROR_MESSAGE_FOR_MODEL_GENERATION
 
@@ -15,11 +16,12 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
                                         llm_name: str,
                                         api_url: str,
                                         max_iterations=5,
+                                        additional_iterations=5,
                                         standard_error_message=ERROR_MESSAGE_FOR_MODEL_GENERATION) \
         -> tuple[str, any, list[Any]]:
     error_history = []
 
-    for iteration in range(max_iterations + 5):
+    for iteration in range(max_iterations + additional_iterations):
         if api_url == "GOOGLE":
             response = generate_response_with_history_google(conversation, api_key, llm_name)
         elif api_url == "https://api.anthropic.com/v1/messages":
@@ -43,6 +45,7 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
             conversation.append({"role": "user", "content": new_message})
 
         print_conversation(conversation)
+        # time.sleep(5)
 
     raise Exception(llm_name + " failed to fix the errors after " + str(max_iterations+5) +
                     " iterations! This is the error history: " + str(error_history))

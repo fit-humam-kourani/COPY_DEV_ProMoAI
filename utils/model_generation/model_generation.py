@@ -18,11 +18,13 @@ def extract_model_from_response(response: str, auto_duplicate: False) -> tuple[s
     return extracted_code, result
 
 
-def generate_model(conversation: List[dict[str:str]], api_key: str, openai_model: str, api_url: str) \
+def generate_model(conversation: List[dict[str:str]], api_key: str, llm_name: str, api_url: str,
+                   max_iterations=10, additional_iterations=5) \
         -> tuple[str, POWL, list[Any]]:
     return generate_result_with_error_handling(conversation=conversation,
                                                extraction_function=extract_model_from_response,
                                                api_key=api_key,
-                                               openai_model=openai_model,
+                                               llm_name=llm_name,
                                                api_url=api_url,
-                                               max_iterations=10)
+                                               max_iterations=max_iterations,
+                                               additional_iterations=additional_iterations)

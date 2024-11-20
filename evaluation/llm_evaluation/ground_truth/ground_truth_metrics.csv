@@ -1,29 +1,75 @@
-,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20
-percentage_of_perfectly_fitting_traces,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
-average_trace_fitness,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-precision,1,0.933333333,0.967741935,1,0.927884615,0.96,0.934782609,1,0.966480447,0.990566038,0.914641375,0.881690141,1,0.956521739,1,0.985893417,1,0.971280057,1,1
-f-mesure,1,0.965517241,0.983606557,1,0.962593516,0.979591837,0.966292135,1,0.982954545,0.995260664,0.955417957,0.937125749,1,0.977777778,1,0.992896606,1,0.985430815,1,1
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-no_xor,,,,,,,,,,,,,,,,,,,,
-xor_simple ,d,,,,,,,,,,,,,,,,,,,
-xor_complex,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-no_loop,,,,,,,,,,,,,,,,,,,,
-loop_simple,,,,,,,,,,,,,,,,,,,,
-loop_complex,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-high sequential,,,,,,,,,,,,,,,,,,,,
-high concurrency,,,,,,,,,,,,,,,,,,,,
-complex partial orders,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-very clear process description,,,,,,,,,,,,,,,,,,,,
-vagueness ,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-number of activities in groud truth,8,16,11,10,11,10,13,12,13,9,12,10,9,10,10,24,25,26,8,13
-number of words in process description,88,97,94,98,90,92,85,92,97,80,87,93,99,126,79,219,196,230,109,162
-number of chars in process description,578,629,601,659,573,578,565,589,644,525,605,652,637,837,556,1457,1327,1567,653,955
+,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,,,,,,,
+percentage_of_perfectly_fitting_traces,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,,,,,,,
+average_trace_fitness,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,
+precision,1,0.933333333,0.967741935,1,0.927884615,0.96,0.934782609,1,0.966480447,0.990566038,0.914641375,0.881690141,1,0.956521739,1,0.985893417,1,0.971280057,1,1,,,,,,,
+f-mesure,1,0.965517241,0.983606557,1,0.962593516,0.979591837,0.966292135,1,0.982954545,0.995260664,0.955417957,0.937125749,1,0.977777778,1,0.992896606,1,0.985430815,1,1,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+no_complex_xor ,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,10,,,,,,
+complex_xor,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,10,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+no_loop,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,7,,,,,,small
+loop_simple,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,6,,,,,,large
+loop_complex,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,7,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+partial order,,,,,,,,,,,,,,,,,,,,,,,,,,,
+full sequential,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,3,,,,,,
+with simple concurrency: some signle(skippable/repeatable) activities can happen in any order,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,9,,,,,,
+complex,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,8,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,small
+level of detail,,,,,,,,,,,,,,,,,,,,,,,,,,,small
+very high,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,5,,,,,,medium
+high,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,7,,,,,,small
+low,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,8,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,medium
+,"choices need to be inferred, but the info is there",self-loops not very explicit; but it's enough for self loops,"loop not clear; order within partial order is not complete and needs to be inferred from the context, not text","order within partial order is not complete and needs to be inferred from the context, not text",self-loop not very explicit; but it's enough for self loops,self-loop not very explicit; but it's enough for self loops,"order within partial order is not complete and needs to be inferred from the context, not text","whether some activites are sequential or cocurrent needs to be inferred from context, not text",,"loop not explicit, choice can be infeered from text but also not explicit, ","the process is complex with many phases; the description is short, and some parts need to be inferred from both the text and the context",self-loops not very explicit and could be interprated as sinlge activites,,,"choice needs to be inferred, but the info is there",,some orders need to be inffered from context,some order details need to be inferred from context,,the orders in the text are confusing since we have paths in parllel,,,,,,,large
+,,,,,,,,,,,,,,,,,,,,,,,,,,,large
+,,,,,,,,,,,,,,,,,,,,,,,,,,,large
+,,,,,,,,,,,,,,,,,,,,,,,,,,,small
+,,,,,,,,,,,,,,,,,,,,,,,,,,,medium
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+number of activities in groud truth,8,16,11,10,11,10,13,12,13,9,12,10,9,10,10,24,25,26,8,13,,,,,,,
+number of words in process description,88,97,94,98,90,92,85,92,97,80,87,93,99,126,79,219,196,230,109,162,,,,,,,
+number of chars in process description,578,629,601,659,573,578,565,589,644,525,605,652,637,837,556,1457,1327,1567,653,955,,,,,,,
+size,small,large,medium,medium,medium,medium,medium,medium,medium,small,medium,medium,small,medium,medium,large,large,large,small,medium,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+details on concurrency,2 act,3 act,2 paths,non-hierarchical,0,2 act,"2 paths, 3*(2 act)",2 act,"2 act, 3 act","2 comp act, 2 act","2 path, 2 act, 3 act","2 comp act, 2 act",0,0,3 act,"3 comp act, 2*(3 act)","3 paths, 2 act","2 paths, 2*(2 act)",non-hierarchical,"3 paths, 2 act",,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+simple conc over activities,TRUE,TRUE,,,,TRUE,,TRUE,TRUE,,,,,,TRUE,,,,,,6,,,,,,
+simple conc over (skippable/repeatable) activities,,,,,,,,,,TRUE,,TRUE,,,,TRUE,,,,,3,,,,,,
+conc path,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,6,,,,,,
+non-hierarchical,,,,TRUE,,,,,,,,,,,,,,,TRUE,,2,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+no_xor or only skippable activities,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,1,,,,,,
+xor_simple ,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,9,,,,,,
+xor_complex,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,10,,,,,,

@@ -9,16 +9,25 @@ ERROR_MESSAGE_FOR_MODEL_GENERATION = """
 Please update the model to fix the error. Make sure" \
                           f" to save the updated final model is the variable 'final_model'. """
 
+STRICT_PROMPT = False
+
 
 def add_role():
-    return "Your role: you are an expert in process modeling," \
-           " familiar with common" \
-           " process constructs such as exclusive choice, do-redo loops, and partial orders." \
-           " Your task is to analyze the textual description of a process and transform it into a process model in" \
-           " the POWL language. When generating a model, be as precise" \
-           " as possible and capture all details of the process in the model. Also act as the process owner and use" \
-           " your expertise and familiarity with the" \
-           " process context to fill in any missing knowledge. \n\n"
+    res = "Your role: you are an expert in process modeling," \
+          " familiar with common" \
+          " process constructs such as exclusive choice, do-redo loops, and partial orders." \
+          " Your task is to analyze the textual description of a process and transform it into a process model in" \
+          " the POWL language. When generating a model, be as precise" \
+          " as possible and capture all details of the process in the model. "
+    if STRICT_PROMPT:
+        res = res + "Please create the process model strictly depending on the provided description, without using " \
+                    "any domain knowledge you might have. You are not supposed to correct any information in the " \
+                    "process, rather fully reply on the provided textual description.\n\n"
+    else:
+        res = res + "Also act as the process owner and use" \
+                    " your expertise and familiarity with the" \
+                    " process context to fill in any missing knowledge. \n\n"
+    return res
 
 
 def add_knowledge():
@@ -165,6 +174,7 @@ def update_conversation(conversation: List[dict[str:str]], feedback: str) -> Lis
 
 def model_self_improvement_prompt():
     return (
+        "Thank you! The model was generated successfully! Could you further improve the model? "
         "Please critically evaluate the process model and improve it accordingly **only where genuinely beneficial**. "
         "Potential improvement steps might for instance include adding missing activities, managing additional "
         "exceptions, increasing concurrency in execution, or elevating choices to higher levels. If you find the "
@@ -174,12 +184,35 @@ def model_self_improvement_prompt():
     )
 
 
-def description_self_improvement_prompt(descr: str):
-    return "Can you make the following process description richer and more detailed, while ensuring that all " \
-           "additions are relevant, accurate, and directly related to the original process? The goal is to " \
-           "make the description more comprehensive and suitable for process modeling purposes. Please do not add " \
-           "any information that cannot " \
-           "be inferred from the original process description or is unrelated. If the description is already " \
-           "comprehensive, feel free to return the same description. Please answer by only returning the improved " \
-           "process description without any additional text in your response. The process description: \n\n" + str(descr)
+def model_self_improvement_prompt_short():
+    return (
+        "Thank you! The model was generated successfully! Could you further improve the model? "
+        "Please critically evaluate the process model against the initial process description and improve it"
+        " accordingly **only where genuinely beneficial**. If you see no significant areas for enhancement, it is "
+        "perfectly acceptable to return the same model without any changes. Regardless of whether you improve the"
+        " model or not, make sure to include a Python snippet that contains the model in your response."
+    )
 
+
+def description_self_improvement_prompt(descr: str):
+    res = f"""
+    You are provided with a process description. Your task is to optimize this description to make it richer and more
+     detailed, while ensuring that all additions are relevant, accurate, and directly related to the original process.
+     The goal is to make the description more comprehensive and suitable for process modeling purposes. """
+
+    res = res + f"""Possible areas for enhancement include:\n
+    - **Detail Enhancement:** Add specific details that are missing but crucial for understanding the process flow. \n
+    - **Clarity Improvement:** Clarify any ambiguous or vague statements to ensure that the description is clear and understandable.\n
+    - **Explicit Process Constructs:** Rephrase parts of the description to explicitly incorporate constructs. 
+    For example, change 'X happens in most cases' to 'there is an exclusive choice between performing X or
+     skipping it'.\n
+     
+    Please answer by only returning the improved process description without any additional text in your response. Do
+     not define concrete activity labels yourself!"\n
+
+    The process description:\n
+
+    {descr}
+    """
+
+    return res
