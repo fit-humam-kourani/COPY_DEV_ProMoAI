@@ -2,19 +2,6 @@ import pm4py
 from pm4py.objects.powl.obj import Transition, SilentTransition, StrictPartialOrder, OperatorPOWL, Operator, POWL
 
 
-# def check_frequency(model, optional, repeatable):
-#     if repeatable:
-#         if optional:
-#             return OperatorPOWL(Operator.LOOP, [SilentTransition(), model])
-#         else:
-#             return OperatorPOWL(Operator.LOOP, [model, SilentTransition()])
-#     else:
-#         if optional:
-#             return OperatorPOWL(Operator.XOR, [SilentTransition(), model])
-#         else:
-#             return model
-
-
 def get_node_type(node):
     if node.__class__ is pm4py.objects.powl.obj.Transition:
         return f"Activity ({node.label})"
