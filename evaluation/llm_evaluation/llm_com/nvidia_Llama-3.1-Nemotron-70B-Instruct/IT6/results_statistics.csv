@@ -1,0 +1,2 @@
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+21.txt,3.0,10,10,10,91.07541060447693,

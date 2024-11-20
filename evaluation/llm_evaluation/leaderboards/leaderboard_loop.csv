@@ -1,0 +1,20 @@
+LOOP,,,,,,,,,
+none,,,,simple,,,,complex,
+Model,Average Score,,,Model,Average Score,,,Model,Average Score
+ground truth,1,,,ground truth,0.97697949,,,ground truth,0.974655494
+claude-3-5-sonnet-20240620,0.940173078,,,o1-preview,0.935551365,,,claude-3-5-sonnet-20240620,0.926250181
+o1-mini,0.927576953,,,o1-mini,0.928805904,,,o1-preview,0.899371604
+o1-preview,0.922390017,,,claude-3-5-sonnet-20240620,0.927000499,,,o1-mini,0.872711187
+Llama-3.1-405B-Instruct,0.881266142,,,gemini-1.5-pro-002-IT3,0.923512688,,,gemini-1.5-pro-002-IT3,0.850028394
+gpt-4o,0.880004679,,,Llama-3.1-Nemotron-70B-Instruct,0.884087417,,,Llama-3.1-405B-Instruct,0.81699547
+Llama-3.1-Nemotron-70B-Instruct,0.84634729,,,Llama-3.1-405B-Instruct,0.875109767,,,Llama-3.2-90B-Vision-Instruct,0.800469585
+gemini-1.5-pro-002-IT3,0.830762068,,,open-mixtral-8x22b,0.839745045,,,Llama-3.1-Nemotron-70B-Instruct,0.777415845
+Llama-3.2-90B-Vision-Instruct,0.828570994,,,mistral-large-2407,0.829550157,,,gpt-4o-mini,0.763604246
+Qwen2.5-72B-Instruct,0.828180364,,,Qwen2.5-72B-Instruct,0.826744685,,,gpt-4,0.758349027
+mistral-large-2407,0.806583669,,,codestral-2405,0.821103943,,,Qwen2.5-72B-Instruct,0.756411288
+WizardLM-2-8x22B,0.798725118,,,gpt-4,0.815060227,,,gemini-1.5-flash-002,0.709101708
+codestral-2405,0.789440321,,,gpt-4o-mini,0.797928523,,,mistral-large-2407,0.698963911
+gemini-1.5-flash-002,0.737633816,,,Llama-3.2-90B-Vision-Instruct,0.778873909,,,gpt-4o,0.67125956
+gpt-4,0.702120053,,,WizardLM-2-8x22B,0.748032883,,,WizardLM-2-8x22B,0.654035784
+open-mixtral-8x22b,0.7006595,,,gemini-1.5-flash-002,0.734860221,,,open-mixtral-8x22b,0.637415523
+gpt-4o-mini,0.656378208,,,gpt-4o,0.70710692,,,codestral-2405,0.597926068

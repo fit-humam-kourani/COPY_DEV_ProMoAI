@@ -1,0 +1,34 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+identify_need = gen.activity('Identify need for new supplier or vendor')
+issue_rfp = gen.activity('Issue request for proposals (RFP)')
+receive_proposals = gen.activity('Receive supplier proposals')
+evaluate_proposal = gen.activity('Evaluate proposal')
+conduct_interview = gen.activity('Conduct interview')
+optional_interview = gen.xor(conduct_interview, None)
+conduct_site_visit = gen.activity('Conduct site visit')
+optional_site_visit = gen.xor(conduct_site_visit, None)
+select_supplier = gen.activity('Select supplier')
+begin_contract_negotiations = gen.activity('Begin contract negotiations')
+sign_contract = gen.activity('Sign contract')
+onboard_supplier = gen.activity('Onboard supplier')
+execute_contract = gen.activity('Execute contract')
+
+parallel_visits_interviews = gen.partial_order(dependencies=[(optional_interview,), (optional_site_visit,)])
+
+negotiation_process = gen.partial_order(dependencies=[(begin_contract_negotiations, sign_contract)])
+
+final_model = gen.partial_order(
+    dependencies=[
+        (identify_need, issue_rfp),
+        (issue_rfp, receive_proposals),
+        (receive_proposals, evaluate_proposal),
+        (evaluate_proposal, parallel_visits_interviews),
+        (parallel_visits_interviews, select_supplier),
+        (select_supplier, negotiation_process),
+        (negotiation_process, onboard_supplier),
+        (onboard_supplier, execute_contract)
+    ]
+)

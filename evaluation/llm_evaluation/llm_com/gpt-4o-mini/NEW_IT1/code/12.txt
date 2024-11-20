@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Activities
+identify_needs = gen.activity('Identify development needs or career aspirations')
+create_plan = gen.activity('Create personal development plan')
+work_on_skills = gen.activity('Work on skill enhancement')
+receive_feedback = gen.activity('Receive feedback and evaluation from supervisors')
+consider_promotion = gen.activity('Consider employee for promotion or new role')
+conduct_review = gen.activity('Conducts formal performance review')
+
+# Unique instances of "Approve promotion"
+approve_promotion_1 = gen.activity('Approve promotion')  # Instance for the xor
+approve_promotion_2 = gen.activity('Approve promotion')  # Unique instance for sequential flow
+set_responsibilities = gen.activity('Set new responsibilities')
+adjust_compensation = gen.activity('Adjust compensation')
+transition_role = gen.activity('Transition into new role')
+
+# Feedback loop: allows the employee to receive feedback while working on skills
+skill_feedback_loop = gen.loop(do=work_on_skills, redo=receive_feedback)
+
+# Sequential flow after consideration for promotion
+poset_promotion_process = gen.partial_order(dependencies=[
+    (consider_promotion, conduct_review),
+    (conduct_review, gen.xor(approve_promotion_1, None)),  # Using a unique instance
+    (approve_promotion_2, set_responsibilities),  # Different unique instance
+    (set_responsibilities, adjust_compensation),
+    (adjust_compensation, transition_role)
+])
+
+# Full process
+final_model = gen.partial_order(dependencies=[
+    (identify_needs, create_plan),
+    (create_plan, skill_feedback_loop),  # Now includes the feedback loop
+    (skill_feedback_loop, poset_promotion_process)
+])

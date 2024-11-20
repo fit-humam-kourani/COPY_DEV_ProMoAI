@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1730981488.5996597" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1730981488.5996597</text>
+    </name>
+    <page id="n0">
+      <place id="p_8">
+        <name>
+          <text>p_8</text>
+        </name>
+      </place>
+      <place id="p_21">
+        <name>
+          <text>p_21</text>
+        </name>
+      </place>
+      <place id="p_25">
+        <name>
+          <text>p_25</text>
+        </name>
+      </place>
+      <place id="p_19">
+        <name>
+          <text>p_19</text>
+        </name>
+      </place>
+      <place id="p_24">
+        <name>
+          <text>p_24</text>
+        </name>
+      </place>
+      <place id="p_37">
+        <name>
+          <text>p_37</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p_9">
+        <name>
+          <text>p_9</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_40">
+        <name>
+          <text>p_40</text>
+        </name>
+      </place>
+      <place id="p_22">
+        <name>
+          <text>p_22</text>
+        </name>
+      </place>
+      <place id="p_17">
+        <name>
+          <text>p_17</text>
+        </name>
+      </place>
+      <place id="p_15">
+        <name>
+          <text>p_15</text>
+        </name>
+      </place>
+      <transition id="16da7254-9bcd-4842-b949-49fa25d6e6c8">
+        <name>
+          <text>Send an automated alert</text>
+        </name>
+      </transition>
+      <transition id="f0945adc-5e71-4ed0-a6df-b43ccb95e82b">
+        <name>
+          <text>Record stock in system</text>
+        </name>
+      </transition>
+      <transition id="3ff870b1-f290-4350-8f59-818cd1ec5c36">
+        <name>
+          <text>Place stock on shelves</text>
+        </name>
+      </transition>
+      <transition id="6b113575-65ed-4dd7-8c59-3b5f0a06efb0">
+        <name>
+          <text>Receive stock</text>
+        </name>
+      </transition>
+      <transition id="74fedea2-2de4-4977-a151-c09c587b8307">
+        <name>
+          <text>Send a manual alert</text>
+        </name>
+      </transition>
+      <transition id="95198b71-4ccc-40f8-91cf-c08368dbb40a">
+        <name>
+          <text>Place order with suppliers</text>
+        </name>
+      </transition>
+      <transition id="336675c8-fa32-4f78-a6a9-59d8afdd6432">
+        <name>
+          <text>Inspect stock for quality</text>
+        </name>
+      </transition>
+      <transition id="38803827-5500-4a7e-bc43-e60f4156fb1d">
+        <name>
+          <text>Receive stock</text>
+        </name>
+      </transition>
+      <transition id="3888ecf2-9a72-47e4-8612-f4baf11f1a70">
+        <name>
+          <text>Update inventory levels</text>
+        </name>
+      </transition>
+      <transition id="3c1aac87-bf8e-4222-908b-0423a96dde1c">
+        <name>
+          <text>Check current inventory level</text>
+        </name>
+      </transition>
+      <transition id="47a3640c-5c6d-46ec-b810-75d7f2d9ed00">
+        <name>
+          <text>Place stock in storage</text>
+        </name>
+      </transition>
+      <transition id="b7934cbc-f1de-4193-ba80-2817f0a5e62e">
+        <name>
+          <text>Update inventory levels</text>
+        </name>
+      </transition>
+      <arc id="2219659866656" source="3888ecf2-9a72-47e4-8612-f4baf11f1a70" target="sink"/>
+      <arc id="2219661015600" source="74fedea2-2de4-4977-a151-c09c587b8307" target="p_9"/>
+      <arc id="2219661006384" source="p_22" target="3ff870b1-f290-4350-8f59-818cd1ec5c36"/>
+      <arc id="2219659854944" source="f0945adc-5e71-4ed0-a6df-b43ccb95e82b" target="p_25"/>
+      <arc id="2219661014640" source="p_8" target="74fedea2-2de4-4977-a151-c09c587b8307"/>
+      <arc id="2219659866752" source="p_21" target="38803827-5500-4a7e-bc43-e60f4156fb1d"/>
+      <arc id="2219661014160" source="16da7254-9bcd-4842-b949-49fa25d6e6c8" target="p_9"/>
+      <arc id="2219659859120" source="6b113575-65ed-4dd7-8c59-3b5f0a06efb0" target="p_17"/>
+      <arc id="2219659856576" source="p_37" target="b7934cbc-f1de-4193-ba80-2817f0a5e62e"/>
+      <arc id="2219661014736" source="p_8" target="16da7254-9bcd-4842-b949-49fa25d6e6c8"/>
+      <arc id="2219659864784" source="95198b71-4ccc-40f8-91cf-c08368dbb40a" target="p_15"/>
+      <arc id="2219659866848" source="p_24" target="38803827-5500-4a7e-bc43-e60f4156fb1d"/>
+      <arc id="2219659860704" source="3c1aac87-bf8e-4222-908b-0423a96dde1c" target="p_8"/>
+      <arc id="2219659474736" source="p_15" target="6b113575-65ed-4dd7-8c59-3b5f0a06efb0"/>
+      <arc id="2219659866944" source="p_9" target="95198b71-4ccc-40f8-91cf-c08368dbb40a"/>
+      <arc id="2219659854176" source="336675c8-fa32-4f78-a6a9-59d8afdd6432" target="p_19"/>
+      <arc id="2219659855712" source="f0945adc-5e71-4ed0-a6df-b43ccb95e82b" target="p_22"/>
+      <arc id="2219659866464" source="47a3640c-5c6d-46ec-b810-75d7f2d9ed00" target="p_24"/>
+      <arc id="2219659475312" source="p_17" target="336675c8-fa32-4f78-a6a9-59d8afdd6432"/>
+      <arc id="2219659475840" source="p_19" target="f0945adc-5e71-4ed0-a6df-b43ccb95e82b"/>
+      <arc id="2219659864976" source="b7934cbc-f1de-4193-ba80-2817f0a5e62e" target="p_40"/>
+      <arc id="2219659867040" source="source" target="3c1aac87-bf8e-4222-908b-0423a96dde1c"/>
+      <arc id="2219659856816" source="p_40" target="3888ecf2-9a72-47e4-8612-f4baf11f1a70"/>
+      <arc id="2219661005760" source="p_25" target="47a3640c-5c6d-46ec-b810-75d7f2d9ed00"/>
+      <arc id="2219659857872" source="3ff870b1-f290-4350-8f59-818cd1ec5c36" target="p_21"/>
+      <arc id="2219659858928" source="38803827-5500-4a7e-bc43-e60f4156fb1d" target="p_37"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

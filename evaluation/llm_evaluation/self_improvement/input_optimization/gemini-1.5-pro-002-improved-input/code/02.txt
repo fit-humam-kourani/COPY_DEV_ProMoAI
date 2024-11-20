@@ -1,0 +1,65 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+identify_need = gen.activity('Identify need for new hire')
+create_job_description = gen.activity('Create job description')
+post_job_description = gen.activity('Post job description')
+collect_resumes = gen.activity('Collect resumes')
+screen_resumes = gen.activity('Screen resumes')
+conduct_phone_interviews = gen.activity('Conduct initial phone interviews')
+
+# Candidate selection and interviews
+choose_candidate = gen.activity('Choose candidate')
+in_person_interview = gen.activity('Conduct an in-person interview')
+virtual_interview = gen.activity('Conduct a virtual interview')
+interview_choice = gen.xor(in_person_interview, virtual_interview)
+
+
+# Offer and negotiation loop
+extend_offer = gen.activity('Extend offer')
+negotiate_salary = gen.activity('Negotiate salary')
+skip_negotiation = gen.xor(negotiate_salary, None)  # Negotiation is optional
+negotiation_outcome = gen.xor(gen.activity('Agreement reached'), gen.activity('Agreement not reached'))
+
+
+# Offer acceptance/rejection loop
+offer_accepted = gen.activity('Offer accepted')
+offer_rejected = gen.activity('Offer rejected')
+offer_response = gen.xor(offer_accepted, offer_rejected)
+
+# Onboarding process
+begin_onboarding = gen.activity('Begin onboarding process')
+complete_paperwork = gen.activity('Complete paperwork')
+attend_orientation = gen.activity('Complete orientation')
+undertake_training = gen.activity('Complete training')
+
+onboarding_poset = gen.partial_order(dependencies=[(complete_paperwork,), (attend_orientation,), (undertake_training,)])
+
+
+
+# Combine offer, negotiation, and acceptance/rejection
+
+negotiation_process = gen.partial_order(dependencies=[(skip_negotiation,negotiation_outcome)])
+offer_process = gen.partial_order(dependencies=[(extend_offer, negotiation_process), (negotiation_process, offer_response)])
+
+
+
+offer_loop = gen.loop(do=offer_process, redo=None)  # loop back if offer rejected or negotiation fails
+
+
+# Main process flow
+final_model = gen.partial_order(
+    dependencies=[
+        (identify_need, create_job_description),
+        (create_job_description, post_job_description),
+        (post_job_description, collect_resumes),
+        (collect_resumes, screen_resumes),
+        (screen_resumes, conduct_phone_interviews),
+        (conduct_phone_interviews, choose_candidate),
+        (choose_candidate, offer_loop),
+        (offer_loop, begin_onboarding), #changed this
+        (begin_onboarding, onboarding_poset)
+    ]
+)

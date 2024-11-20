@@ -1,0 +1,30 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+create_pdp = gen.activity('Create personal development plan')
+identify_needs = gen.activity('Identify development needs or career aspirations')
+work_on_skill_enhancement = gen.activity('Work on skill enhancement')
+meet_milestones = gen.activity('Meet milestones') # Implicit activity, inferred from the description
+consider_employee = gen.activity('Consider employee for promotion or new role')
+conducts_review = gen.activity('Conducts formal performance review')
+approve_promotion = gen.activity('Approve promotion')
+adjust_compensation = gen.activity('Adjust compensation')
+transition_new_role = gen.activity('Transition into new role')
+set_new_responsibilities = gen.activity('Set new responsibilities')
+receive_feedback = gen.activity('Receive feedback and evaluation from supervisors')
+
+
+# Partial Order for initial phase
+poset_initial = gen.partial_order(dependencies=[(create_pdp, identify_needs), (identify_needs, work_on_skill_enhancement)])
+
+# Create a copy of meet_milestones for use in the second partial order
+meet_milestones_copy = meet_milestones.copy()
+
+# Partial Order for promotion phase
+poset_promotion = gen.partial_order(dependencies=[(meet_milestones_copy, consider_employee), (consider_employee, conducts_review), (conducts_review, approve_promotion), (approve_promotion, adjust_compensation), (approve_promotion, set_new_responsibilities), (approve_promotion, transition_new_role), (conducts_review, receive_feedback)])
+
+
+# Combine initial and promotion phases using a partial order
+final_model = gen.partial_order(dependencies=[(poset_initial, meet_milestones), (meet_milestones, poset_promotion)])

@@ -1,0 +1,51 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define activities
+search_ticket = gen.activity('Customer searches for ticket')
+select_route = gen.activity('Select route')
+select_date_time = gen.activity('Select date and time')
+provide_info = gen.activity('Provide personal information')
+provide_payment = gen.activity('Provide payment details')
+generate_ticket = gen.activity('Generate ticket')
+generate_ticket_copy = generate_ticket.copy()  # Create a copy to avoid reuse issues
+send_ticket_email = gen.activity('Send ticket via email')
+send_ticket_sms = gen.activity('Send ticket via SMS')
+update_inventory = gen.activity('Update seat inventory')
+send_reminder = gen.activity('Send reminder')
+send_instructions = gen.activity('Send instructions')
+complete_journey = gen.activity('Customer completes journey')
+post_travel_services = gen.activity('Post-travel feedback or services')
+
+# Define the main flow with dependencies
+select_and_provide_details = gen.partial_order(
+    dependencies=[(select_route, select_date_time), (select_date_time, provide_info), (provide_info, provide_payment)]
+)
+
+# Define ticket generation and sending choice (email or SMS)
+send_ticket_choice = gen.xor(send_ticket_email, send_ticket_sms)
+generate_and_send_ticket = gen.partial_order(
+    dependencies=[(generate_ticket_copy, send_ticket_choice)]
+)
+
+# Define reminder and instructions (optional steps before the journey)
+optional_reminder = gen.xor(send_reminder, None)
+optional_instructions = gen.xor(send_instructions, None)
+
+# Define the main process flow with optional post-travel services
+journey_and_post_travel = gen.partial_order(
+    dependencies=[(complete_journey, gen.xor(post_travel_services, None))]
+)
+
+# Combine everything into the final model
+final_model = gen.partial_order(
+    dependencies=[
+        (search_ticket, select_and_provide_details),
+        (select_and_provide_details, generate_ticket),
+        (generate_and_send_ticket, update_inventory),
+        (update_inventory, optional_reminder),
+        (optional_reminder, optional_instructions),
+        (optional_instructions, journey_and_post_travel)
+    ]
+)

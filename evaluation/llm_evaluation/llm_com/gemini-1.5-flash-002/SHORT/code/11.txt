@@ -1,0 +1,38 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_signs_up = gen.activity('Customer signs up')
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+set_automatic_triggers = gen.activity('Set automatic triggers for billing cycles')
+send_regular_updates = gen.activity('Send regular updates')
+send_product_enhancements = gen.activity('Send product enhancements')
+apply_charges = gen.activity('apply charges')
+customer_submits_cancellation_request = gen.activity('Customer submits cancellation request')
+deactivate_subscription = gen.activity('Deactivate subscription')
+settle_final_account_balance = gen.activity('Settle final account balance')
+send_renewal_notifications = gen.activity('Send renewal notifications')
+apply_refund = gen.activity('apply refund')
+
+
+# Subprocesses
+initial_setup = gen.partial_order(dependencies=[(customer_signs_up, generate_account), (generate_account, assign_access), (assign_access, set_automatic_triggers)])
+
+# Create copies to avoid reuse
+set_automatic_triggers_copy1 = set_automatic_triggers.copy()
+send_renewal_notifications_copy = send_renewal_notifications.copy()
+apply_charges_copy = apply_charges.copy()
+updates_and_billing = gen.partial_order(dependencies=[(set_automatic_triggers_copy1, send_regular_updates), (set_automatic_triggers_copy1, apply_charges_copy), (set_automatic_triggers_copy1, send_renewal_notifications_copy), (send_renewal_notifications_copy, apply_charges_copy)])
+
+cancellation_process = gen.partial_order(dependencies=[(customer_submits_cancellation_request, deactivate_subscription), (deactivate_subscription, settle_final_account_balance), (settle_final_account_balance, apply_refund)])
+
+# Main process
+main_process = gen.partial_order(dependencies=[(initial_setup, updates_and_billing), (updates_and_billing, cancellation_process)])
+
+#Optional enhancement updates
+updates_and_billing_copy = updates_and_billing.copy()
+optional_enhancements = gen.xor(gen.partial_order(dependencies=[(updates_and_billing_copy, send_product_enhancements)]), None)
+
+final_model = gen.partial_order(dependencies=[(main_process, optional_enhancements)])

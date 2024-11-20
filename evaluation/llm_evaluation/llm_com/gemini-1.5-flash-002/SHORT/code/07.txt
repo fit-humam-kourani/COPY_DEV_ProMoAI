@@ -1,0 +1,46 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_searches = gen.activity('Customer searches for ticket')
+provide_info = gen.activity('Provide personal information')
+select_route = gen.activity('Select route')
+select_date_time = gen.activity('Select date and time')
+provide_payment = gen.activity('Provide payment details')
+generate_ticket = gen.activity('Generate ticket')
+update_inventory = gen.activity('Update seat inventory')
+send_email = gen.activity('Send ticket via email')
+send_sms = gen.activity('Send ticket via SMS')
+send_instructions = gen.activity('Send instructions')
+customer_completes = gen.activity('Customer completes journey')
+post_travel_feedback = gen.activity('Post-travel feedback or services')
+send_reminder = gen.activity("Send reminder")
+
+
+# Subprocesses
+booking_process = gen.partial_order(dependencies=[
+    (customer_searches, provide_info),
+    (provide_info, select_route),
+    (select_route, select_date_time),
+    (select_date_time, provide_payment),
+    (provide_payment, generate_ticket),
+    (generate_ticket, update_inventory)
+])
+
+ticket_delivery = gen.xor(send_email, send_sms)
+
+post_journey_activities = gen.xor(post_travel_feedback, None)
+
+
+#Combining Subprocesses
+main_process = gen.partial_order(dependencies=[
+    (booking_process, ticket_delivery),
+    (ticket_delivery, send_instructions),
+    (send_instructions, customer_completes),
+    (customer_completes, post_journey_activities)
+])
+
+optional_reminder = gen.xor(send_reminder, None)
+
+final_model = gen.partial_order(dependencies=[(optional_reminder, main_process)])

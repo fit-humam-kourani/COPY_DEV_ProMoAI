@@ -1,0 +1,34 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define activities
+submit_request = gen.activity('Submit IT solution request')
+evaluate_needs = gen.activity('Evaluate cost and resource needs')
+assess_compatibility = gen.activity('Assess compatibility')
+procure_tools = gen.activity('Procure necessary tools or licenses')
+install_solution = gen.activity('Install the solution')
+test_solution = gen.activity('Test solution')
+rollout_solution = gen.activity('Roll out solution to requesting department')
+rollout_solution_copy = rollout_solution.copy()  # Create a copy to avoid reuse error
+provide_training = gen.activity('Provide training')
+support_troubleshooting = gen.activity('Provide support for troubleshooting')
+
+# Initial assessment phase
+assessment_phase = gen.partial_order(dependencies=[(submit_request, evaluate_needs), (evaluate_needs, assess_compatibility)])
+
+# Procurement, installation, and testing phase
+procure_install_test = gen.partial_order(dependencies=[(procure_tools, install_solution), (install_solution, test_solution)])
+
+# Rollout and optional training
+optional_training = gen.xor(provide_training, None)
+rollout_training = gen.partial_order(dependencies=[(rollout_solution_copy, optional_training)])
+
+# Final process model
+final_model = gen.partial_order(
+    dependencies=[
+        (assessment_phase, procure_install_test),
+        (procure_install_test, rollout_solution),
+        (rollout_training, support_troubleshooting)
+    ]
+)

@@ -1,0 +1,40 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+guest_calls = gen.activity('Guest calls room service')
+manager_takes_order = gen.activity('Manager takes down the order')
+manager_submits_kitchen_order = gen.activity('Manager submits order ticket to kitchen')
+manager_gives_sommelier_order = gen.activity('Manager gives order to sommelier')
+sommelier_fetches_wine = gen.activity('Sommelier fetches wine and prepare alcoholic beverages')
+waiter_readies_cart = gen.activity('Waiter readies cart')
+waiter_prepares_nonalcoholic_drinks = gen.activity('Waiter prepares nonalcoholic drinks')
+kitchen_prepares_food = gen.activity('Kitchen prepares food')
+waiter_places_items_on_cart = gen.activity('Waiter places food, alcoholic beverages (if any), and non-alcoholic beverages on the cart')
+waiter_delivers_order = gen.activity('Waiter delivers order to guest\'s room')
+waiter_returns = gen.activity('Waiter returns to room-service station')
+waiter_debits_account = gen.activity('Waiter debits guest\'s account')
+waiter_waits = gen.activity('Waiter waits/delays debiting')
+
+
+# Sommelier task (optional)
+optional_sommelier_task = gen.xor(sommelier_fetches_wine, None)
+
+# Complete process - single partial_order to avoid reuse of submodels
+final_model = gen.partial_order(dependencies=[
+    (guest_calls, manager_takes_order),
+    (manager_takes_order, manager_submits_kitchen_order),
+    (manager_takes_order, manager_gives_sommelier_order),
+    (manager_takes_order, waiter_readies_cart),
+    (manager_takes_order, waiter_prepares_nonalcoholic_drinks),
+    (manager_submits_kitchen_order, kitchen_prepares_food),
+    (manager_gives_sommelier_order, optional_sommelier_task),
+    (kitchen_prepares_food, waiter_places_items_on_cart),
+    (optional_sommelier_task, waiter_places_items_on_cart),
+    (waiter_readies_cart, waiter_places_items_on_cart),
+    (waiter_prepares_nonalcoholic_drinks, waiter_places_items_on_cart),
+    (waiter_places_items_on_cart, waiter_delivers_order),
+    (waiter_delivers_order, waiter_returns),
+    (waiter_returns, gen.xor(waiter_debits_account, waiter_waits))
+])

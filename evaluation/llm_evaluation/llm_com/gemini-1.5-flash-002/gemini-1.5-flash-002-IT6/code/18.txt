@@ -1,0 +1,74 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Application and Admission
+submit_application = gen.activity('Submit application online')
+review_application = gen.activity('Review application and documents')
+notify_missing = gen.activity('Notify applicant of missing documents')
+provide_missing = gen.activity('Provide missing documents')
+evaluate_application = gen.activity('Evaluate application by admissions committee')
+process_fees = gen.activity('Process fees or waivers')
+send_acceptance = gen.activity('Send acceptance letter')
+send_rejection = gen.activity('Send rejection letter')
+
+#Exclusive Choice 1: Missing Documents
+choice_missing_docs = gen.xor(gen.partial_order(dependencies=[(notify_missing, provide_missing)]), evaluate_application.copy())
+
+
+#Partial Order for Application and Admission
+poset_application = gen.partial_order(dependencies=[(submit_application, review_application), (review_application, choice_missing_docs), (choice_missing_docs, process_fees)])
+
+#Exclusive Choice 2: Application Decision
+choice_application = gen.xor(send_acceptance, send_rejection)
+
+# Combining Application and Admission stages
+application_admission = gen.partial_order(dependencies=[(poset_application, choice_application)])
+
+
+# Enrollment Confirmation
+confirm_enrollment = gen.activity('Confirm enrollment')
+cancel_application = gen.activity('Cancel application')
+
+# Exclusive Choice 3: Enrollment Confirmation
+choice_enrollment = gen.xor(confirm_enrollment, cancel_application)
+
+#Onboarding
+send_orientation = gen.activity('Send orientation materials')
+setup_it_accounts = gen.activity('Set up IT accounts')
+assist_visa = gen.activity('Assist with visa processing')
+obtain_id = gen.activity('Obtain student ID card')
+meet_advisor = gen.activity('Meet with academic advisor')
+select_courses = gen.activity('Select courses')
+resolve_conflicts = gen.activity('Resolve schedule conflicts')
+begin_classes = gen.activity('Begin attending classes')
+
+#Conditional Activity: International Student Assistance
+conditional_visa = gen.xor(assist_visa, None)
+
+#Partial Order for Onboarding
+poset_onboarding = gen.partial_order(dependencies=[(send_orientation,), (setup_it_accounts,), (conditional_visa,), (obtain_id,), (meet_advisor, select_courses), (select_courses, resolve_conflicts), (resolve_conflicts, begin_classes)])
+
+#Combining Enrollment Confirmation and Onboarding
+enrollment_onboarding = gen.partial_order(dependencies=[(choice_enrollment, poset_onboarding)])
+
+
+# Semester Activities and Graduation
+add_drop_courses = gen.activity('Add/drop courses')
+review_grades = gen.activity('Review grades online')
+submit_appeal = gen.activity('Submit appeal form')
+meet_appeals = gen.activity('Meet with appeals committee')
+await_decision = gen.activity('Await decision')
+graduate = gen.activity('Graduate')
+withdraw = gen.activity('Withdraw')
+post_grades = gen.activity('Post grades')
+
+
+#Exclusive Choice 4: Grievances
+choice_grievances = gen.xor(gen.partial_order(dependencies=[(submit_appeal, meet_appeals), (meet_appeals, await_decision)]), None)
+
+#Loop for Semester Activities and Graduation
+semester_loop = gen.loop(do=gen.partial_order(dependencies=[(add_drop_courses, review_grades), (review_grades, choice_grievances)]), redo=gen.partial_order(dependencies=[(post_grades,)]) )
+
+#Combine all stages
+final_model = gen.partial_order(dependencies=[(application_admission, enrollment_onboarding), (enrollment_onboarding, semester_loop), (semester_loop, graduate), (semester_loop, withdraw)])

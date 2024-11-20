@@ -1,0 +1,37 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator(True, True)
+
+# Activities
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+guide_selection = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+place_order = gen.activity('Place order')
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+
+# Create distinct activities for the customer's decision paths
+customer_interested_activity = gen.activity('Customer is interested')
+customer_not_interested_activity = gen.activity('Customer is not interested')
+
+# Decision point regarding customer interest
+interest_decision = gen.xor(customer_interested_activity, customer_not_interested_activity)
+
+# Order placement process if the customer is interested
+order_process = gen.partial_order(dependencies=[
+    (guide_selection, provide_quote),
+    (provide_quote, place_order),
+    (place_order, record_order),
+    (record_order, send_confirmation)
+])
+
+# Complete process containing all steps of the customer inquiry
+final_model = gen.partial_order(dependencies=[
+    (receive_inquiry, collect_info),
+    (collect_info, address_concerns),
+    (address_concerns, interest_decision),
+    (interest_decision, customer_interested_activity),   # Path for customer interest
+    (customer_interested_activity, order_process),       # Flow to the order process
+    (interest_decision, customer_not_interested_activity) # Path for customer non-interest
+])

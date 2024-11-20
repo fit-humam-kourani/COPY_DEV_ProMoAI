@@ -1,0 +1,41 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_idea = gen.activity('Identify idea for new product or improvement')
+conduct_initial_research = gen.activity('Conduct initial research')
+conduct_feasibility_studies = gen.activity('Conduct feasibility studies')
+draft_design_concepts = gen.activity('Draft design concepts')
+select_promising_design = gen.activity('Select promising design')
+build_prototype_1 = gen.activity('Build prototype') #First build
+build_prototype_2 = gen.activity('Build prototype') #Second build (for the loop)
+test_functionality = gen.activity('Test functionality')
+test_safety = gen.activity('Test safety')
+test_market_potential = gen.activity('Test market potential')
+collect_feedback_1 = gen.activity('Collect feedback from testing phase') #Initial feedback
+collect_feedback_2 = gen.activity('Collect feedback from testing phase') #Feedback for loop
+refine_prototype = gen.activity('Refine prototype')
+approve_prototype = gen.activity('Approve prototype for further development')
+discard_prototype = gen.activity('Discard prototype')
+
+
+# Initial Research Phase (Partial Order)
+initial_research_phase = gen.partial_order(dependencies=[(conduct_initial_research, conduct_feasibility_studies), (conduct_feasibility_studies, draft_design_concepts)])
+
+# Testing Phase (Partial Order)
+testing_phase = gen.partial_order(dependencies=[(test_functionality, collect_feedback_1), (test_safety, collect_feedback_1), (test_market_potential, collect_feedback_1)])
+
+#Prototype Development and Testing Loop (separate do and redo to avoid reuse)
+prototype_development = gen.partial_order(dependencies=[(build_prototype_1, testing_phase)])
+prototype_redo = gen.partial_order(dependencies=[(collect_feedback_2, refine_prototype), (refine_prototype, build_prototype_2)]) 
+prototype_loop = gen.loop(do=prototype_development, redo=prototype_redo)
+
+
+# Final Decision (XOR)
+final_decision = gen.xor(approve_prototype, discard_prototype)
+
+# Main Process (Partial Order)
+main_process = gen.partial_order(dependencies=[(identify_idea, initial_research_phase), (initial_research_phase, select_promising_design), (select_promising_design, prototype_loop), (prototype_loop, final_decision)])
+
+final_model = main_process

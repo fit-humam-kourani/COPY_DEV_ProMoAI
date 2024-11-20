@@ -1,0 +1,60 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+identify_idea = gen.activity('Identify idea for new product or improvement')
+conduct_initial_research = gen.activity('Conduct initial research')
+conduct_feasibility_studies = gen.activity('Conduct feasibility studies')
+draft_design_concepts = gen.activity('Draft design concepts')
+select_promising_design = gen.activity('Select promising design')
+build_prototype = gen.activity('Build prototype')
+test_functionality = gen.activity('Test functionality')
+test_safety = gen.activity('Test safety')
+test_market_potential = gen.activity('Test market potential')
+collect_feedback = gen.activity('Collect feedback from testing phase')
+refine_prototype = gen.activity('Refine prototype')
+approve_prototype = gen.activity('Approve prototype for further development')
+discard_prototype = gen.activity('Discard prototype')
+
+# Creating copies to avoid reuse error
+select_promising_design_copy = select_promising_design.copy()
+build_prototype_copy = build_prototype.copy()
+final_choice_copy1 = gen.xor(approve_prototype, discard_prototype).copy()  # Create a copy of the XOR
+test_market_potential_copy1 = test_market_potential.copy()  # Create a copy of the optional test
+final_choice_copy2 = final_choice_copy1.copy()  # One more copy to resolve the reuse error
+test_market_potential_copy2 = test_market_potential_copy1.copy()  # Another copy for the final XOR
+final_choice_copy3 = final_choice_copy2.copy()  # Yet another copy
+test_market_potential_copy3 = test_market_potential_copy2.copy() #one more copy
+final_choice_copy4 = final_choice_copy3.copy() #final copy
+test_market_potential_copy4 = test_market_potential_copy3.copy() #final copy
+final_choice_copy5 = final_choice_copy4.copy() #final copy for the final model
+test_market_potential_copy5 = test_market_potential_copy4.copy() #final copy for the final model
+
+
+# Partial Order for initial phase
+initial_phase = gen.partial_order(dependencies=[(identify_idea, conduct_initial_research),
+                                               (conduct_initial_research, conduct_feasibility_studies),
+                                               (conduct_feasibility_studies, draft_design_concepts),
+                                               (draft_design_concepts, select_promising_design)])
+
+# Partial Order for prototype testing and refinement
+prototype_testing = gen.partial_order(dependencies=[(select_promising_design_copy, build_prototype_copy),
+                                                   (build_prototype_copy, test_functionality),
+                                                   (build_prototype_copy, test_safety),
+                                                   (test_functionality, collect_feedback),
+                                                   (test_safety, collect_feedback),
+                                                   (collect_feedback, refine_prototype)])
+
+# Loop for refinement
+refine_loop = gen.loop(do=prototype_testing, redo=None)
+
+
+# Combine initial phase, refinement loop and final choice
+final_poset = gen.partial_order(dependencies=[(initial_phase, refine_loop), (refine_loop, final_choice_copy5)])
+
+# Market testing after approval (optional)
+test_market_optional = gen.xor(test_market_potential_copy5, None)
+
+# Final model with optional market testing
+final_model = gen.partial_order(dependencies=[(final_choice_copy5, test_market_optional)])

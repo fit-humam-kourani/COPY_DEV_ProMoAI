@@ -1,0 +1,40 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+outline_objectives = gen.activity("Outline objectives")
+draft_plan = gen.activity("Draft plan")
+conduct_strategic_meeting = gen.activity("Conduct strategic alignment meeting")
+review_budget_feasibility = gen.activity("Review budget feasibility")
+adjust_plan = gen.activity("Adjust Plan")
+documented_approve_adjustment = gen.activity("Documented and approve adjustment")
+approve_final_budget = gen.activity("Approve final budget")
+distribute_budget = gen.activity("Distribute budget")
+implement_plan = gen.activity("Implement plan")
+
+# Create copies of all activities used in more than one place
+review_budget_feasibility_copy = review_budget_feasibility.copy()
+documented_approve_adjustment_copy = documented_approve_adjustment.copy()
+approve_final_budget_copy = approve_final_budget.copy()
+distribute_budget_copy = distribute_budget.copy()
+adjust_plan_copy = adjust_plan.copy()
+conduct_strategic_meeting_copy = conduct_strategic_meeting.copy()
+draft_plan_copy = draft_plan.copy()
+outline_objectives_copy = outline_objectives.copy()
+implement_plan_copy = implement_plan.copy()
+
+
+# Partial Order for Plan Adjustment
+adjust_po = gen.partial_order(dependencies=[(review_budget_feasibility_copy, adjust_plan_copy), (adjust_plan_copy, documented_approve_adjustment_copy)])
+
+# Main process
+final_model = gen.partial_order(dependencies=[
+    (outline_objectives_copy, draft_plan_copy),
+    (draft_plan_copy, conduct_strategic_meeting_copy),
+    (conduct_strategic_meeting_copy, review_budget_feasibility),
+    (adjust_po,),  # Adjust Plan subprocess is concurrent with other parts of the process if no adjustments are needed.
+    (documented_approve_adjustment_copy, approve_final_budget_copy),
+    (approve_final_budget_copy, distribute_budget_copy),
+    (distribute_budget_copy, implement_plan_copy)
+])

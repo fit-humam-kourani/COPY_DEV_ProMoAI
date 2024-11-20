@@ -1,0 +1,47 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Order Placement
+order_online = gen.activity('Customer places order online')
+order_phone = gen.activity('Customer places order over the phone')
+order_placement = gen.xor(order_online, order_phone)
+
+# Order Confirmation
+order_confirmation = gen.activity('Generate and send order confirmation')
+
+# Warehouse Operations
+pick_pack = gen.activity('Pick and pack items')
+generate_label = gen.activity('Generate shipping label')
+
+# Handover to Logistics
+handover = gen.activity('Hand over order to logistics provider')
+
+# Customer Notification
+send_tracking = gen.activity('Send tracking information to customer')
+
+# Shipment Monitoring
+monitor = gen.activity('Monitor shipment')
+successful_delivery = gen.activity('Successful delivery')
+
+# Post-Delivery Processes
+feedback_return = gen.activity('Process customer feedback or returns')
+optional_feedback_return = gen.xor(feedback_return, None)
+
+
+# Main Order Fulfillment Process
+main_process = gen.partial_order(dependencies=[
+    (order_placement, order_confirmation),
+    (order_confirmation, pick_pack),
+    (pick_pack, generate_label),
+    (generate_label, handover),
+    (handover, send_tracking),
+    (send_tracking, monitor),
+    (monitor, successful_delivery)
+])
+
+
+# Combine Main Process with Post-Delivery Processes
+final_model = gen.partial_order(dependencies=[
+    (main_process, optional_feedback_return)
+])

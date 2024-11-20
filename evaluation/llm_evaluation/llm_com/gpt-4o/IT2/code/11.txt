@@ -1,0 +1,44 @@
+from utils.model_generation import ModelGenerator
+
+# Initialize Model Generator
+gen = ModelGenerator()
+
+# Step 1: Customer signs up and enters personal and payment information
+sign_up = gen.activity('Customer signs up')
+
+# Step 2: Generate account and assign access
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+setup_process = gen.partial_order(dependencies=[(generate_account, assign_access)])
+
+# Step 3: Set up automated billing cycle trigger
+billing_cycle = gen.activity('Set automatic triggers for billing cycles')
+
+# Step 4: Send regular updates, product enhancements, and renewal notifications
+send_updates = gen.activity('Send regular updates')
+send_enhancements = gen.activity('Send product enhancements')
+send_notifications = gen.activity('Send renewal notifications')
+notifications_process = gen.partial_order(
+    dependencies=[(send_updates,), (send_enhancements,), (send_notifications,)]
+)
+
+# Step 5: Model the entire active subscription period with notifications
+active_subscription = gen.partial_order(dependencies=[(setup_process, billing_cycle), (billing_cycle, notifications_process)])
+
+# Step 6: Cancellation and account deactivation
+submit_cancellation = gen.activity('Customer submits cancellation request')
+process_cancellation = gen.partial_order(dependencies=[(submit_cancellation,)])
+apply_refund = gen.activity('apply refund')
+apply_charges = gen.activity('apply charges')
+refund_or_charge = gen.xor(apply_refund, apply_charges)
+deactivate_subscription = gen.activity('Deactivate subscription')
+settle_balance = gen.activity('Settle final account balance')
+
+# Step 7: Combine refund/charge and account deactivation to complete the cancellation process
+cancellation_process = gen.partial_order(dependencies=[(process_cancellation, refund_or_charge), (refund_or_charge, deactivate_subscription), (deactivate_subscription, settle_balance)])
+
+# Step 8: Overall process, combining the initial signup, active subscription, and optional cancellation
+full_process = gen.partial_order(dependencies=[(sign_up, active_subscription), (active_subscription, cancellation_process)])
+
+# Final model
+final_model = full_process

@@ -1,0 +1,38 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+login = gen.activity('Login')
+select_items = gen.activity('Select items')
+set_payment_method = gen.activity('Set payment method')
+pay = gen.activity('Pay')
+complete_installment_agreement = gen.activity('Complete installment agreement')
+select_free_reward = gen.activity('Select free reward')
+deliver_items_1 = gen.activity('Deliver items')  # First delivery
+deliver_items_2 = gen.activity('Deliver items').copy()  # Second delivery after return, a copy to avoid reuse
+return_items = gen.activity('Return items')
+
+# Payment choice
+payment_choice = gen.xor(pay, complete_installment_agreement)
+
+# Parallel execution of item selection and payment method setting
+parallel_selection_payment = gen.partial_order(dependencies=[(select_items,), (set_payment_method,)])
+
+# Reward selection (independent of payment)
+reward_selection = gen.activity('Select free reward')
+
+# Combine parallel tasks and payment choice
+poset_1 = gen.partial_order(dependencies=[(parallel_selection_payment, payment_choice), (parallel_selection_payment, reward_selection)])
+
+
+# Combine the initial login and the subsequent process
+poset_2 = gen.partial_order(dependencies=[(login, poset_1), (poset_1, deliver_items_1)])
+
+# Return loop - Corrected to avoid reusing deliver_items.  The issue was that deliver_items_1 was already used in poset_2.  This solution uses a new partial order for the return process.
+return_process = gen.partial_order(dependencies=[(return_items,), (return_items, deliver_items_2)]) #return items is independent and then leads to deliver_items_2
+return_loop = gen.loop(do=deliver_items_1.copy(), redo=return_process) #copy deliver_items_1 to avoid reuse
+
+
+#Final Model. Note that we are not nesting partial orders.  Combined into a single partial order.  The problem is that poset_2 already uses deliver_items_1, so we need to create a copy of it.
+final_model = gen.partial_order(dependencies=[(poset_2, return_loop)])

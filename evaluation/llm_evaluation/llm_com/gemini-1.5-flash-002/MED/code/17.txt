@@ -1,0 +1,78 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+place_order = gen.activity('Place order')
+record_order_details = gen.activity('Record order details')
+process_payment = gen.activity('Process payment')
+notify_failed_payment = gen.activity('Notify about failed payment')
+check_stock_availability = gen.activity('Check stock availability')
+initiate_back_order = gen.activity('Initiate back-order')
+inform_customer_delay = gen.activity('Inform customer about delay')
+pick_items_warehouse = gen.activity('Pick items from warehouse')
+perform_quality_control_checks = gen.activity('Perform quality control checks')
+gift_wrap_items = gen.activity('Gift wrap items')
+package_items = gen.activity('Package items')
+prepare_shipping_documents_labels = gen.activity('Prepare shipping documents and labels')
+prepare_documentation_international_orders = gen.activity('Prepare documentation for international orders')
+dispatch_order = gen.activity('Dispatch order')
+update_inventory_levels = gen.activity('Update inventory levels')
+send_shipping_confirmation_customer = gen.activity('Send shipping confirmation to customer')
+confirm_delivery = gen.activity('Confirm delivery')
+confirm_delivery_copy = confirm_delivery.copy() #Added copy to resolve reuse error
+send_follow_up_email = gen.activity('Send follow-up email')
+customer_reports_issue = gen.activity('Customer reports issue')
+send_return_shipping_label = gen.activity('Send return shipping label')
+receive_returned_items = gen.activity('Receive returned items')
+inspect_returned_items = gen.activity('Inspect returned items')
+process_refund = gen.activity('Process refund')
+process_replacement = gen.activity('Process replacement')
+receive_back_order = gen.activity('Receive back-order')
+
+
+#Payment Process
+payment_successful = gen.partial_order(dependencies=[(process_payment, check_stock_availability)])
+payment_failed = gen.activity('Notify about failed payment')
+payment_process = gen.xor(payment_successful, payment_failed)
+
+
+#Order Fulfillment Process (Items Available)
+fulfillment_items_available = gen.partial_order(dependencies=[(pick_items_warehouse, perform_quality_control_checks),
+                                                            (perform_quality_control_checks, package_items),
+                                                            (package_items, prepare_shipping_documents_labels),
+                                                            (prepare_shipping_documents_labels, dispatch_order),
+                                                            (dispatch_order, update_inventory_levels),
+                                                            (update_inventory_levels, send_shipping_confirmation_customer)])
+
+#Order Fulfillment Process (Backorder)
+fulfillment_backorder = gen.partial_order(dependencies=[(initiate_back_order, inform_customer_delay)])
+
+#Gift Wrapping (Optional)
+gift_wrapping = gen.xor(gift_wrap_items, None)
+
+#International Shipping (Optional)
+international_shipping = gen.xor(prepare_documentation_international_orders, None)
+
+
+#Combine Order Fulfillment Paths
+order_fulfillment = gen.xor(fulfillment_items_available, fulfillment_backorder)
+
+
+#Post Delivery Process
+post_delivery = gen.partial_order(dependencies=[(confirm_delivery_copy, send_follow_up_email), #Using copy here
+                                                (customer_reports_issue, send_return_shipping_label),
+                                                (send_return_shipping_label, receive_returned_items),
+                                                (receive_returned_items, inspect_returned_items),
+                                                (inspect_returned_items, gen.xor(process_refund, process_replacement))])
+
+#Main Process
+main_process = gen.partial_order(dependencies=[(place_order, record_order_details),
+                                                (record_order_details, payment_process),
+                                                (payment_process, order_fulfillment),
+                                                (order_fulfillment, confirm_delivery), #Using original confirm_delivery
+                                                (confirm_delivery, post_delivery)])
+
+
+#Combine main process and backorder
+final_model = gen.partial_order(dependencies=[(place_order, main_process), (receive_back_order,fulfillment_backorder)])

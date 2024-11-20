@@ -1,0 +1,42 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_needs = gen.activity("Identify development needs or career aspirations")
+create_pdp = gen.activity("Create personal development plan")
+skill_enhancement = gen.activity("Work on skill enhancement")
+receive_feedback = gen.activity("Receive feedback and evaluation from supervisors")
+consider_promotion = gen.activity("Consider employee for promotion or new role")
+conduct_review = gen.activity("Conducts formal performance review")
+approve_promotion = gen.activity("Approve promotion")
+set_responsibilities = gen.activity("Set new responsibilities")
+adjust_compensation = gen.activity("Adjust compensation")
+transition_role = gen.activity("Transition into new role")
+
+
+# Partial Order for concurrent activities
+poset_concurrent = gen.partial_order(dependencies=[(skill_enhancement,), (receive_feedback,)])
+
+# Partial Order for sequential activities after concurrent phase.
+poset_sequential = gen.partial_order(dependencies=[(poset_concurrent, consider_promotion), (consider_promotion, conduct_review)])
+
+# XOR for promotion decision
+approve_promotion_copy1 = approve_promotion.copy()  # Create a copy for XOR
+approve_promotion_copy2 = approve_promotion.copy() #Create a second copy for the subsequent partial order
+
+promotion_decision = gen.xor(approve_promotion_copy1, None)  # Reject is implicit in None
+
+# Partial order for promotion finalization
+poset_promotion_finalization = gen.partial_order(dependencies=[(approve_promotion_copy2, set_responsibilities),
+                                                             (approve_promotion_copy2, adjust_compensation),
+                                                             (set_responsibilities, transition_role),
+                                                             (adjust_compensation, transition_role)])
+
+# Combining all parts of the process
+final_poset = gen.partial_order(dependencies=[(identify_needs, create_pdp),
+                                             (create_pdp, poset_sequential),
+                                             (poset_sequential, promotion_decision),
+                                             (promotion_decision, poset_promotion_finalization)])
+
+final_model = final_poset

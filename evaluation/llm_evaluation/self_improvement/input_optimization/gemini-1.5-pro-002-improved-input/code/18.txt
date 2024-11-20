@@ -1,0 +1,111 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# 1. Submit application online
+submit_application = gen.activity('Submit application online')
+
+# 2. Review application and documents
+review_application = gen.activity('Review application and documents')
+
+# 3. Loop for missing documents
+check_missing_docs = gen.activity('Check for missing documents')
+notify_missing_docs = gen.activity('Notify applicant of missing documents')
+provide_missing_docs = gen.activity('Provide missing documents')
+missing_docs_loop = gen.loop(do=check_missing_docs, redo=notify_missing_docs)
+missing_docs_full = gen.partial_order(dependencies=[(missing_docs_loop, provide_missing_docs)])
+
+
+# 4. Evaluate application
+evaluate_application = gen.activity('Evaluate application by admissions committee')
+
+# 5. Process fees/waivers (concurrent with evaluation)
+process_fees = gen.activity('Process fees or waivers')
+
+# Combine 4 and 5
+eval_and_fees = gen.partial_order(dependencies=[(evaluate_application,), (process_fees,)])
+
+
+# 6. Acceptance/Rejection
+send_acceptance = gen.activity('Send acceptance letter')
+send_rejection = gen.activity('Send rejection letter')
+accept_reject = gen.xor(send_acceptance, send_rejection)
+
+# 7. Confirm enrollment
+confirm_enrollment = gen.activity('Confirm enrollment')
+cancel_application = gen.activity('Cancel application')
+enrollment_choice = gen.xor(confirm_enrollment, cancel_application)
+
+# 8. Orientation and IT account setup (concurrent)
+send_orientation = gen.activity('Send orientation materials')
+setup_it = gen.activity('Set up IT accounts')
+
+
+# 9. Visa processing (concurrent with 8 if international)
+assist_visa = gen.activity('Assist with visa processing')
+
+# Create copies for concurrent execution with visa processing
+send_orientation_copy = send_orientation.copy()
+setup_it_copy = setup_it.copy()
+
+orientation_it_visa = gen.partial_order(dependencies=[(send_orientation_copy,), (setup_it_copy,), (assist_visa,)])
+
+
+
+# 10. Obtain ID card
+obtain_id = gen.activity('Obtain student ID card')
+
+# 11. Create study plan (ordered steps)
+meet_advisor = gen.activity('Meet with academic advisor')
+select_courses = gen.activity('Select courses')
+resolve_conflicts = gen.activity('Resolve schedule conflicts')
+study_plan = gen.partial_order(dependencies=[(meet_advisor, select_courses), (select_courses, resolve_conflicts)])
+
+# 12. Begin attending classes
+begin_classes = gen.activity('Begin attending classes')
+
+# 13. Semester loop
+attend_classes = gen.activity('Attend classes')
+add_drop = gen.activity('Add/drop courses')
+post_grades = gen.activity('Post grades')
+review_grades = gen.activity('Review grades online')
+
+semester_do = gen.partial_order(dependencies=[(attend_classes,), (add_drop,), (post_grades, review_grades)])
+
+withdraw = gen.activity('Withdraw')
+continue_studying = gen.activity("Continue studying") # Placeholder - not an actual activity
+semester_redo = gen.xor(continue_studying, withdraw)  # Continue or withdraw
+semester_loop = gen.loop(do=semester_do, redo=semester_redo)
+
+
+
+
+# 14. Grievance/Appeal process (concurrent with semester activities)
+submit_appeal = gen.activity('Submit appeal form')
+meet_appeals = gen.activity('Meet with appeals committee')
+await_decision = gen.activity('Await decision')
+appeal_process = gen.partial_order(dependencies=[(submit_appeal, meet_appeals), (meet_appeals, await_decision)])
+no_grievance = gen.activity("No grievance") # Placeholder
+grievance_choice = gen.xor(appeal_process, no_grievance)
+
+semester_with_grievance = gen.partial_order(dependencies=[(semester_loop,), (grievance_choice,)])
+
+# Put it all together. The main change is creating copies for confirm_enrollment and send_acceptance
+send_acceptance_copy = send_acceptance.copy()
+confirm_enrollment_copy = confirm_enrollment.copy()
+
+final_model = gen.partial_order(
+    dependencies=[
+        (submit_application, review_application),
+        (review_application, missing_docs_full),
+        (missing_docs_full, eval_and_fees),
+        (eval_and_fees, accept_reject),
+        (accept_reject, enrollment_choice),
+        (send_acceptance_copy, enrollment_choice), # Use the copy here
+        (confirm_enrollment_copy, orientation_it_visa), # and here
+        (orientation_it_visa, obtain_id),
+        (obtain_id, study_plan),
+        (study_plan, begin_classes),
+        (begin_classes, semester_with_grievance)
+    ]
+)

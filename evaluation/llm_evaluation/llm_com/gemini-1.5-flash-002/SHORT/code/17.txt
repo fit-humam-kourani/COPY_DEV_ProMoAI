@@ -1,0 +1,72 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+record_order = gen.activity('Record order details')
+process_payment = gen.activity('Process payment')
+notify_failed_payment = gen.activity('Notify about failed payment')
+check_stock = gen.activity('Check stock availability')
+initiate_backorder = gen.activity('Initiate back-order')
+receive_backorder = gen.activity('Receive back-order')
+pick_items = gen.activity('Pick items from warehouse')
+perform_qc = gen.activity('Perform quality control checks')
+gift_wrap = gen.activity('Gift wrap items')
+package_items = gen.activity('Package items')
+prepare_shipping = gen.activity('Prepare shipping documents and labels')
+prepare_intl_docs = gen.activity('Prepare documentation for international orders')
+dispatch_order = gen.activity('Dispatch order')
+update_inventory = gen.activity('Update inventory levels')
+customer_reports_issue = gen.activity('Customer reports issue')
+receive_returned_items = gen.activity('Receive returned items')
+inspect_returned_items = gen.activity('Inspect returned items')
+process_replacement = gen.activity('Process replacement')
+process_refund = gen.activity('Process refund')
+send_return_label = gen.activity('Send return shipping label')
+send_shipping_confirmation = gen.activity('Send shipping confirmation to customer')
+send_followup_email = gen.activity('Send follow-up email')
+confirm_delivery = gen.activity('Confirm delivery')
+inform_customer_delay = gen.activity('Inform customer about delay')
+place_order = gen.activity('Place order')
+
+
+# Partial Orders and Choices
+
+# Payment processing path
+payment_path = gen.partial_order(dependencies=[(process_payment,), (notify_failed_payment,)]) #notify_failed_payment is optional
+
+# Backorder handling
+backorder_path = gen.partial_order(dependencies=[(initiate_backorder, receive_backorder)])
+
+# Order fulfillment path (main flow)
+fulfillment_path = gen.partial_order(dependencies=[(pick_items, perform_qc), (perform_qc, gift_wrap), (gift_wrap, package_items), (package_items, prepare_shipping), (prepare_shipping, dispatch_order), (dispatch_order, send_shipping_confirmation)])
+
+# Handling international orders (optional)
+intl_order_handling = gen.xor(prepare_intl_docs, None)
+
+#Combining paths
+#The error was caused by reusing 'check_stock'.  We create a copy for the backorder path.
+check_stock_copy = check_stock.copy()
+main_process = gen.partial_order(dependencies=[(record_order, payment_path), (payment_path, fulfillment_path), (check_stock, fulfillment_path), (check_stock_copy, backorder_path), (backorder_path, fulfillment_path), (fulfillment_path, update_inventory)])
+
+
+#Add international order handling as optional
+main_process_intl = gen.partial_order(dependencies=[(main_process, intl_order_handling)])
+
+# Return/Refund Handling
+#The error was caused by reusing 'process_replacement' and 'process_refund'. We create copies.
+process_replacement_copy = process_replacement.copy()
+process_refund_copy = process_refund.copy() 
+update_inventory_copy1 = update_inventory.copy() #Also creating a copy to avoid reuse
+update_inventory_copy2 = update_inventory.copy() #Another copy for process_refund
+receive_returned_items_copy = receive_returned_items.copy() #Copy to avoid reuse
+inspect_returned_items_copy = inspect_returned_items.copy() #Copy to avoid reuse
+customer_reports_issue_copy = customer_reports_issue.copy() #Copy to avoid reuse
+
+return_path = gen.partial_order(dependencies=[(customer_reports_issue_copy, receive_returned_items_copy), (receive_returned_items_copy, inspect_returned_items_copy), (inspect_returned_items_copy, gen.xor(process_replacement_copy, process_refund_copy)), (process_replacement_copy, update_inventory_copy1), (process_refund_copy, update_inventory_copy2)])
+
+#Post Delivery
+post_delivery = gen.xor(return_path, confirm_delivery)
+
+#Combine main process with post-delivery and optional followup email
+final_model = gen.partial_order(dependencies=[(main_process_intl, post_delivery), (post_delivery, gen.xor(send_followup_email, None)), (post_delivery, gen.xor(inform_customer_delay, None))])

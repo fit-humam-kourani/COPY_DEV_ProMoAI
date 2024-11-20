@@ -1,0 +1,55 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+signup = gen.activity('Customer signs up')
+enter_info = gen.activity('Customer enters their personal and payment information')
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+set_billing = gen.activity('Set automatic triggers for billing cycles')
+
+initial_steps = gen.partial_order(dependencies=[(signup, enter_info), (enter_info, generate_account),
+                                             (generate_account, assign_access),
+                                             (generate_account, set_billing)])
+
+
+# Regular updates
+send_updates = gen.activity('Send regular updates')
+send_enhancements = gen.activity('Send product enhancements')
+send_renewal = gen.activity('Send renewal notifications')
+
+updates_choices = gen.xor(send_enhancements, send_renewal, None)  # Enhancements or renewal or nothing
+
+updates = gen.partial_order(dependencies=[(send_updates, updates_choices)])
+updates_loop = gen.loop(do=updates, redo=None)  # Regular updates
+
+
+# Cancellation process
+submit_cancellation = gen.activity('Customer submits cancellation request')
+process_request = gen.activity('Process cancellation request')
+apply_refund = gen.activity('apply refund')
+apply_charges = gen.activity('apply charges')
+deactivate_subscription = gen.activity('Deactivate subscription')
+settle_balance = gen.activity('Settle final account balance')
+
+refund_charges = gen.xor(apply_refund, apply_charges, None)  # One, the other, or neither
+
+cancellation_process = gen.partial_order(dependencies=[(submit_cancellation, process_request),
+                                                      (process_request, refund_charges),
+                                                      (refund_charges, deactivate_subscription),
+                                                      (deactivate_subscription, settle_balance)])
+
+
+# Main process flow (This part remains unchanged)
+main_process = gen.partial_order(dependencies=[(initial_steps, updates_loop)])
+
+
+# The crucial fix: Creating a copy of updates_loop for the XOR
+updates_loop_copy = updates_loop.copy()  # Create an independent copy
+
+# Choice between continuation and cancellation (Now uses the copy)
+final_choice = gen.xor(updates_loop_copy, cancellation_process)  
+
+# Combining the main process and the choice
+final_model = gen.partial_order(dependencies=[(main_process, final_choice)])

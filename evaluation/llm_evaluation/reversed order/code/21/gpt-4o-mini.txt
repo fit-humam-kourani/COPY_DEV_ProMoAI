@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define activities
+enjoy_carbonara = gen.activity('Enjoy Spaghetti Carbonara')
+mix_egg_pancetta = gen.activity('Mix with egg mixture and pancetta')
+boil_salted_water = gen.activity('Boil salted water')
+gather_ingredients = gen.activity('Gather ingredients')
+saute_pancetta = gen.activity('Saute pancetta until crispy')
+boil_spaghetti = gen.activity('Boil spaghetti')
+plan_cook = gen.activity('Plan how to cook')
+plate_garnish = gen.activity('Plate and garnish dish')
+pour_egg_yolk_cheese = gen.activity('Pour egg yolk and cheese mixture')
+whisk_egg_yolk_cheese = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+
+# Define partial order and loops
+gather_ingredients_loop = gen.loop(do=gather_ingredients, redo=None)
+saute_pancetta_order = gen.partial_order(dependencies=[(saute_pancetta, whisk_egg_yolk_cheese)])
+
+# Sequential steps for cooking process
+plan_plate_garnish = gen.partial_order(dependencies=[(plan_cook, plate_garnish)])
+
+# Combining sequential steps for carbonara preparation
+prep_carbonara = gen.partial_order(dependencies=[
+    (enjoy_carbonara, mix_egg_pancetta), 
+    (mix_egg_pancetta, boil_salted_water), 
+    (boil_salted_water, gather_ingredients_loop), 
+    (gather_ingredients_loop, saute_pancetta_order), 
+    (saute_pancetta_order, boil_spaghetti), 
+    (boil_spaghetti, pour_egg_yolk_cheese), 
+    (pour_egg_yolk_cheese, plate_garnish)
+])
+
+# Final model with optional process
+final_model = gen.xor(prep_carbonara, None)

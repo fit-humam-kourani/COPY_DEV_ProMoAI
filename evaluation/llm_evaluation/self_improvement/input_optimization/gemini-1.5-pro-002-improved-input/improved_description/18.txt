@@ -1,0 +1,31 @@
+A university enrollment system involves the following steps:
+
+1.  A prospective student submits an application online.
+2.  The admissions office reviews the application and supporting documents.
+3.  LOOP:
+    *   DO: Check for missing documents.
+    *   REDO: If documents are missing, the applicant is notified to provide the missing items.  This loop continues until all documents are received.
+4.  Upon receiving all documents, the application is evaluated by the admissions committee.
+5.  Concurrently with the evaluation by the admissions committee, the finance department processes any application fees or waivers.
+6.  XOR: The application is either accepted or rejected.
+    *   If the application is accepted, an acceptance letter is sent.
+    *   If the application is rejected, a rejection letter is sent, and the process ends.
+7.  If accepted, the student must confirm enrollment by a specified deadline. If the student does not confirm by the deadline, the application is canceled and the process ends.
+8.  If the student confirms enrollment, the student receives orientation materials. Concurrently, the IT department sets up student accounts for email, online portals, and library access.
+9.  If the student is international, the international student office assists with visa processing. This occurs concurrently with receiving orientation materials and IT account setup if the student confirms their enrollment.
+10. The student obtains a student ID card.
+11. The student creates their study plan, which consists of the following ordered steps:
+    *   Meeting with an academic advisor.
+    *   Selecting courses.
+    *   Resolving any schedule conflicts.
+12. The student begins attending classes.
+13. LOOP: For each semester until the student graduates or withdraws, the following steps are repeated:
+    *   DO: The student attends classes.  Within the add/drop period of each semester, the student may add or drop courses. At the end of each semester, grades are posted, and the student can review them online.
+    *   REDO: XOR: The student decides to continue studying or to withdraw.  If the student chooses to withdraw, the process ends.
+14. XOR: At any point during the semester, the student may or may not have grievances.
+    *   If the student has grievances, they can file an appeal. The appeal process consists of the following ordered steps:
+        *   Submitting an appeal form.
+        *   Meeting with the appeals committee.
+        *   Awaiting a decision.
+        *   This entire appeal process can occur during a semester, concurrently with other semester activities.
+    *    If the student has no grievances, they simply continue with the semester.

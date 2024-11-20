@@ -1,0 +1,57 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+report_incident = gen.activity('Report incident')
+log_report = gen.activity('Log report into tracking system')
+assign_report = gen.activity('Assign report to appropriate team')
+gather_info = gen.activity('Gather necessary information')
+interview_witnesses = gen.activity('Interview witnesses')
+review_documentation = gen.activity('Review documentation')
+analyze_system_logs = gen.activity('Analyze system logs')
+identify_cause = gen.activity('Identify cause of incident')
+propose_corrective_actions = gen.activity('Propose corrective actions')
+implement_fix = gen.activity('Implement fix')
+conduct_training = gen.activity('Conduct training')
+change_policy = gen.activity('Change policy')
+conduct_follow_up = gen.activity('Conduct follow-up')
+close_report = gen.activity('Close incident report')
+notify_stakeholders = gen.activity('Notify all stakeholders')
+
+# Parallel Information Gathering
+parallel_info_gathering = gen.partial_order(dependencies=[(interview_witnesses,), (review_documentation,), (analyze_system_logs,)])
+
+# Exclusive Choice for Corrective Actions
+corrective_actions_choice = gen.xor(implement_fix, conduct_training, change_policy)
+
+# Sequential Dependencies - Corrected to avoid reuse of all activities
+
+poset1 = gen.partial_order(dependencies=[(report_incident, log_report)])
+
+#Creating copies to avoid reuse
+log_report_copy = gen.activity('Log report into tracking system')
+assign_report_copy = gen.activity('Assign report to appropriate team')
+gather_info_copy = gen.activity('Gather necessary information')
+identify_cause_copy = gen.activity('Identify cause of incident')
+propose_corrective_actions_copy = gen.activity('Propose corrective actions')
+conduct_follow_up_copy = gen.activity('Conduct follow-up')
+close_report_copy = gen.activity('Close incident report')
+notify_stakeholders_copy = gen.activity('Notify all stakeholders')
+
+
+poset2 = gen.partial_order(dependencies=[(log_report_copy, assign_report_copy), (assign_report_copy, gather_info_copy), (gather_info_copy, parallel_info_gathering), (parallel_info_gathering, identify_cause_copy), (identify_cause_copy, propose_corrective_actions_copy)])
+
+propose_corrective_actions_copy2 = gen.activity('Propose corrective actions') #Another copy for poset3
+
+poset3 = gen.partial_order(dependencies=[(propose_corrective_actions_copy2, corrective_actions_choice), (corrective_actions_choice, conduct_follow_up_copy), (conduct_follow_up_copy, close_report_copy), (close_report_copy, notify_stakeholders_copy)])
+
+
+# Loop for Follow-up and Re-investigation
+# The redo part implies re-investigation, restarting from information gathering. This is a simplification; a more detailed model might break down the re-investigation steps.
+
+investigation_loop = gen.loop(do=poset3, redo=gen.xor(poset2.copy(),None)) #Redo is optional, if issue is resolved, then it is skipped
+
+
+# Combine into final model.  Note the use of a single large partial order to avoid nesting.
+final_model = gen.partial_order(dependencies=[(poset1, investigation_loop)])

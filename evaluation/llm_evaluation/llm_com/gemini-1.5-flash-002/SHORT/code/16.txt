@@ -1,0 +1,66 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+submit_docs = gen.activity('Submit documents')
+gather_docs = gen.activity('Gather necessary documents')
+prepare_fs = gen.activity('Prepare financial statements')
+check_reg_updates = gen.activity('Check regulatory updates')
+eval_fin_risks = gen.activity('Evaluate financial risks')
+eval_op_risks = gen.activity('Evaluate operational risks')
+eval_comp_risks = gen.activity('Evaluate compliance risks')
+conduct_interviews = gen.activity('Conduct interviews')
+perform_site_visits = gen.activity('Perform site visits')
+conduct_data_analysis = gen.activity('Conduct data analysis')
+complete_risk_assessment = gen.activity('Complete risk assessment/mitigation')
+launch_detailed_investigation = gen.activity('Launch detailed investigation')
+compile_audit_report = gen.activity('Compile audit report')
+request_clarifications = gen.activity('Request clarifications of discrepancies')
+receive_clarifications = gen.activity('Receive clarifications')
+review_submission = gen.activity('Review submission')
+send_report_for_revision = gen.activity('Send report for revision')
+update_and_resubmit_report = gen.activity('Update and resubmit report')
+review_report_by_audit_director = gen.activity('Review report by audit director')
+approve_report = gen.activity('Approve report')
+distribute_final_report = gen.activity('Distribute final report')
+archive_report = gen.activity('Archive report')
+send_notification = gen.activity('Send notification')
+close_audit_process = gen.activity('Close audit process')
+
+
+# Partial Order 1: Document Preparation and Risk Assessment
+poset1 = gen.partial_order(dependencies=[
+    (submit_docs, gather_docs),
+    (gather_docs, prepare_fs),
+    (gather_docs, check_reg_updates),
+    (prepare_fs, eval_fin_risks),
+    (check_reg_updates, eval_comp_risks),
+    (eval_fin_risks, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (eval_op_risks, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (eval_comp_risks, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (conduct_interviews, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (perform_site_visits, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (conduct_data_analysis, complete_risk_assessment.copy()), # Create a copy to avoid reuse
+    (launch_detailed_investigation, complete_risk_assessment.copy()) #Added this based on context. Investigation might be part of risk assessment
+
+])
+
+
+# Partial Order 2: Report Compilation and Review
+poset2 = gen.partial_order(dependencies=[
+    (complete_risk_assessment.copy(), compile_audit_report), # Create a copy to avoid reuse
+    (compile_audit_report, review_submission),
+    (review_submission, send_report_for_revision),
+    (send_report_for_revision, receive_clarifications),
+    (receive_clarifications, update_and_resubmit_report),
+    (update_and_resubmit_report, review_report_by_audit_director),
+    (review_report_by_audit_director, approve_report),
+    (approve_report, distribute_final_report),
+    (distribute_final_report, archive_report),
+    (distribute_final_report, send_notification),
+    (approve_report, close_audit_process)
+])
+
+# Combine Partial Orders with a larger partial order (this avoids nested partial orders)
+final_model = gen.partial_order(dependencies=[(poset1, poset2)])

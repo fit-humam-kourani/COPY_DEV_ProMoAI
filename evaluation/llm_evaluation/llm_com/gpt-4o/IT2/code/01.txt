@@ -1,0 +1,34 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define each activity as per the provided labels
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+guide_selection = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+provide_quote_copy = provide_quote.copy()  # Create a copy for reuse
+place_order = gen.activity('Place order')
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+
+# Define optional path for customer interest after inquiry
+info_path = gen.partial_order(dependencies=[(collect_info, address_concerns), (address_concerns, guide_selection)])
+optional_info_path = gen.xor(info_path, None)
+
+# Define sequence for quote, approval, and order placement using copied 'Provide quote'
+quote_to_order_path = gen.partial_order(dependencies=[(provide_quote_copy, place_order)])
+
+# Full process path from inquiry to final confirmation
+main_process = gen.partial_order(
+    dependencies=[
+        (receive_inquiry, optional_info_path),
+        (optional_info_path, provide_quote),
+        (quote_to_order_path, record_order),
+        (record_order, send_confirmation)
+    ]
+)
+
+# Define the final process model
+final_model = main_process

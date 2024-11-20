@@ -1,0 +1,74 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+submit_application_online = gen.activity('Submit application online')
+review_application_and_documents = gen.activity('Review application and documents')
+notify_applicant_of_missing_documents = gen.activity('Notify applicant of missing documents')
+provide_missing_documents = gen.activity('Provide missing documents')
+evaluate_application_by_admissions_committee = gen.activity('Evaluate application by admissions committee')
+await_decision = gen.activity('Await decision')
+send_acceptance_letter = gen.activity('Send acceptance letter')
+send_rejection_letter = gen.activity('Send rejection letter')
+cancel_application = gen.activity('Cancel application')
+assist_with_visa_processing = gen.activity('Assist with visa processing')
+obtain_student_id_card = gen.activity('Obtain student ID card')
+process_fees_or_waivers = gen.activity('Process fees or waivers')
+confirm_enrollment = gen.activity('Confirm enrollment')
+send_orientation_materials = gen.activity('Send orientation materials')
+set_up_it_accounts = gen.activity('Set up IT accounts')
+meet_with_academic_advisor = gen.activity('Meet with academic advisor')
+select_courses = gen.activity('Select courses')
+resolve_schedule_conflicts = gen.activity('Resolve schedule conflicts')
+begin_attending_classes = gen.activity('Begin attending classes')
+add_drop_courses = gen.activity('Add/drop courses')
+post_grades = gen.activity('Post grades')
+review_grades_online = gen.activity('Review grades online')
+submit_appeal_form = gen.activity('Submit appeal form')
+meet_with_appeals_committee = gen.activity('Meet with appeals committee')
+graduate = gen.activity('Graduate')
+withdraw = gen.activity('Withdraw')
+
+
+# Subprocesses
+application_review_loop = gen.loop(do=review_application_and_documents, redo=gen.xor(notify_applicant_of_missing_documents, None))
+application_process = gen.partial_order(dependencies=[
+    (submit_application_online, application_review_loop),
+    (application_review_loop, evaluate_application_by_admissions_committee),
+    (evaluate_application_by_admissions_committee, await_decision),
+    (await_decision, send_acceptance_letter),
+    (await_decision, send_rejection_letter),
+    (await_decision, cancel_application)
+])
+
+post_acceptance_process = gen.partial_order(dependencies=[
+    (send_acceptance_letter.copy(), assist_with_visa_processing),
+    (assist_with_visa_processing, obtain_student_id_card),
+    (obtain_student_id_card, process_fees_or_waivers),
+    (process_fees_or_waivers, confirm_enrollment),
+    (confirm_enrollment, send_orientation_materials),
+    (send_orientation_materials, set_up_it_accounts),
+    (set_up_it_accounts, meet_with_academic_advisor),
+    (meet_with_academic_advisor, select_courses),
+    (select_courses, resolve_schedule_conflicts),
+    (resolve_schedule_conflicts, begin_attending_classes.copy())
+])
+
+semester_process = gen.partial_order(dependencies=[
+    (begin_attending_classes.copy(), add_drop_courses),
+    (add_drop_courses, post_grades),
+    (post_grades, review_grades_online),
+    (review_grades_online, submit_appeal_form),
+    (submit_appeal_form, meet_with_appeals_committee)
+])
+
+# Main process
+term_process = gen.partial_order(dependencies=[
+    (application_process, post_acceptance_process),
+    (post_acceptance_process, semester_process)
+])
+
+term_loop = gen.loop(do=term_process, redo=None)
+
+final_model = gen.xor(term_loop, graduate, withdraw)

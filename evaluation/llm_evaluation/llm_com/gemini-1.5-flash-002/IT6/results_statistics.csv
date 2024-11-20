@@ -1,0 +1,5 @@
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+21.txt,1.0,10,10,9,3.5791268348693848,
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+21.txt,2.0,10,12,9,6.86452054977417,

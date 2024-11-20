@@ -1,0 +1,28 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+assess_compatibility = gen.activity('Assess compatibility')
+evaluate_cost = gen.activity('Evaluate cost and resource needs')
+procure_tools = gen.activity('Procure necessary tools or licenses')
+test_solution = gen.activity('Test solution')
+install_solution = gen.activity('Install the solution')
+rollout_solution = gen.activity('Roll out solution to requesting department')
+provide_support = gen.activity('Provide support for troubleshooting')
+provide_training = gen.activity('Provide training')
+submit_request = gen.activity('Submit IT solution request')
+
+
+# Partial Order for initial assessment and procurement
+poset_initial = gen.partial_order(dependencies=[(submit_request, assess_compatibility), (submit_request, evaluate_cost), (evaluate_cost, procure_tools.copy())])
+
+# Partial Order for testing and rollout
+poset_testing_rollout = gen.partial_order(dependencies=[(procure_tools.copy(), test_solution), (test_solution, install_solution), (install_solution, rollout_solution.copy())])
+
+
+# Combining initial and testing/rollout phases. Support and training are concurrent with rollout.
+poset_main = gen.partial_order(dependencies=[(poset_initial, poset_testing_rollout), (rollout_solution.copy(), provide_support), (rollout_solution.copy(), provide_training)])
+
+# Final model
+final_model = poset_main

@@ -1,0 +1,39 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+define_objectives = gen.activity("Define campaign objectives")
+create_content = gen.activity("Create content")
+design_visuals = gen.activity("Design visuals")
+select_channels = gen.activity("Select promotion channels")  # This will be part of an XOR
+launch_campaign = gen.activity("Launch campaign")
+track_performance = gen.activity("Track performance in real-time")
+analyze_performance_1 = gen.activity("Analyze performance and adjust parameters")  # Corrected to avoid reuse
+collect_leads = gen.activity("Collect leads in CRM system")
+sales_followup = gen.activity("Sales teams follows up on leads")
+campaign_ends = gen.activity("Campaign period ends")
+analyze_performance_2 = gen.activity("Analyze performance for future optimization")  # Corrected to avoid reuse
+
+# Channel Selection (XOR - assuming at least two channels)
+channel_strategy_1 = gen.activity("Digital Ads Campaign")
+channel_strategy_2 = gen.activity("Email Marketing Campaign")
+channel_choice = gen.xor(channel_strategy_1, channel_strategy_2)  # Example of at least two channels
+
+# Performance Monitoring Loop (This will be integrated into the partial order)
+
+# Single, large Partial Order.  Corrected dependencies to avoid irreflexivity.
+final_model = gen.partial_order(dependencies=[
+    (define_objectives, create_content),
+    (define_objectives, design_visuals),
+    (define_objectives, select_channels),
+    (create_content, launch_campaign),
+    (design_visuals, launch_campaign),
+    (select_channels, launch_campaign),
+    (launch_campaign, track_performance),  # Launch triggers tracking
+    (launch_campaign, collect_leads),
+    (collect_leads, sales_followup),
+    (track_performance, analyze_performance_1),  # Tracking leads to analysis
+    (analyze_performance_1, campaign_ends), #Analysis ends the loop, no cycle back to track_performance
+    (campaign_ends, analyze_performance_2),
+])

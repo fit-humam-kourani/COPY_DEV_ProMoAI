@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1730820353.994493" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1730820353.994493</text>
+    </name>
+    <page id="n0">
+      <place id="p_6">
+        <name>
+          <text>p_6</text>
+        </name>
+      </place>
+      <place id="p_7">
+        <name>
+          <text>p_7</text>
+        </name>
+      </place>
+      <place id="p_10">
+        <name>
+          <text>p_10</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_9">
+        <name>
+          <text>p_9</text>
+        </name>
+      </place>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="b35173bf-4dfa-423e-95ab-9580d887f668"/>
+      </transition>
+      <transition id="final_par_6">
+        <name>
+          <text>final_par_6</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="d81aeb45-1db2-402f-8821-f3c5a5d5d0e6"/>
+      </transition>
+      <transition id="aed2e3ba-2099-4d3d-a08f-88b4757084af">
+        <name>
+          <text>Approve prototype for further development</text>
+        </name>
+      </transition>
+      <transition id="e37493fd-6de8-4d56-b406-f2680b5cda15">
+        <name>
+          <text>Test market potential</text>
+        </name>
+      </transition>
+      <transition id="skip_9">
+        <name>
+          <text>skip_9</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="ede739c9-6e38-4225-8028-4184f1d70b95"/>
+      </transition>
+      <transition id="7863c3ad-c1ca-49cd-946e-155a1c134f10">
+        <name>
+          <text>Discard prototype</text>
+        </name>
+      </transition>
+      <transition id="final_par_8">
+        <name>
+          <text>final_par_8</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="4cdc7ede-5ca0-4c80-9fe9-ea603fce90dc"/>
+      </transition>
+      <arc id="1460260298112" source="p_6" target="aed2e3ba-2099-4d3d-a08f-88b4757084af"/>
+      <arc id="1460260302336" source="aed2e3ba-2099-4d3d-a08f-88b4757084af" target="p_7"/>
+      <arc id="1460260300032" source="e37493fd-6de8-4d56-b406-f2680b5cda15" target="p_10"/>
+      <arc id="1460260304640" source="skip_9" target="p_10"/>
+      <arc id="1460260297872" source="p_6" target="7863c3ad-c1ca-49cd-946e-155a1c134f10"/>
+      <arc id="1460260298400" source="tau_1" target="p_6"/>
+      <arc id="1460260295712" source="7863c3ad-c1ca-49cd-946e-155a1c134f10" target="p_7"/>
+      <arc id="1460260306608" source="final_par_6" target="p_9"/>
+      <arc id="1460260292160" source="p_10" target="final_par_8"/>
+      <arc id="1460260306368" source="final_par_8" target="sink"/>
+      <arc id="1460260304352" source="p_7" target="final_par_6"/>
+      <arc id="1460260295664" source="source" target="tau_1"/>
+      <arc id="1460260299888" source="p_9" target="e37493fd-6de8-4d56-b406-f2680b5cda15"/>
+      <arc id="1460260304880" source="p_9" target="skip_9"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

@@ -1,0 +1,41 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+guide_selection = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+review_quote = gen.activity('Review quote (negotiation & clarification)')
+approve_quote = gen.activity('Approve quote')  # Explicit approval
+place_order = gen.activity('Place order')
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+acknowledge_confirmation = gen.activity('Acknowledge order confirmation') # Implicitly mentioned: customer acknowledges
+
+
+# Subprocesses
+
+#  Guide customer only if they express further interest (make it optional)
+optional_guide_selection = gen.xor(guide_selection, None)
+
+# Quote review and approval sequence
+quote_process = gen.partial_order(dependencies=[(provide_quote, review_quote), (review_quote, approve_quote)])
+
+# Order placement and confirmation sequence
+order_process = gen.partial_order(dependencies=[(place_order, record_order), (place_order, send_confirmation), (send_confirmation, acknowledge_confirmation)])
+
+
+
+# Main process flow
+final_model = gen.partial_order(
+    dependencies=[
+        (receive_inquiry, collect_info),
+        (collect_info, address_concerns),
+        (address_concerns, optional_guide_selection),
+        (optional_guide_selection, quote_process),
+        (quote_process, order_process) # Use quote_process, not approve_quote
+    ]
+)

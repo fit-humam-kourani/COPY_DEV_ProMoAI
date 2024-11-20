@@ -1,0 +1,37 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+define_objectives = gen.activity('Define campaign objectives')
+create_content = gen.activity('Create content')
+design_visuals = gen.activity('Design visuals')
+select_channels = gen.activity('Select promotion channels')
+digital_advertising = gen.activity('Digital advertising')
+email_marketing = gen.activity('Email marketing')
+social_media_posting = gen.activity('Social media posting')
+launch_campaign = gen.activity('Launch campaign')
+track_performance = gen.activity('Track performance in real-time')
+collect_leads = gen.activity('Collect leads in CRM system')
+sales_followup = gen.activity('Sales teams follows up on leads')
+analyze_performance = gen.activity('Analyze performance for future optimization')
+campaign_ends = gen.activity('Campaign period ends')
+
+
+# Channel Selection (XOR)
+channel_selection = gen.xor(digital_advertising, email_marketing, social_media_posting)
+
+# Material Creation (Partial Order)
+material_creation = gen.partial_order(dependencies=[(create_content,), (design_visuals,), (select_channels,)])
+
+
+# Main Process (Partial Order)
+final_model = gen.partial_order(dependencies=[
+    (define_objectives, material_creation),
+    (material_creation, launch_campaign),
+    (launch_campaign, track_performance),
+    (track_performance, collect_leads),
+    (collect_leads, sales_followup),
+    (launch_campaign, campaign_ends),
+    (campaign_ends, analyze_performance)
+])

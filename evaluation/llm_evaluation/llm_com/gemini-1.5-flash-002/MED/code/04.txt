@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+define_objectives = gen.activity('Define campaign objectives')
+target_audience = gen.activity('Targeting the audience')
+define_goals = gen.activity('Define goals like lead generation or brand awareness')
+create_content = gen.activity('Create content')
+design_visuals = gen.activity('Design visuals')
+select_channels = gen.activity('Select promotion channels')
+launch_campaign_copy1 = gen.activity('Launch campaign') # Copy for pre-launch
+launch_campaign_copy2 = launch_campaign_copy1.copy() # Copy for post-launch
+
+track_performance = gen.activity('Track performance in real-time')
+collect_leads = gen.activity('Collect leads in CRM system')
+sales_followup = gen.activity('Sales teams follows up on leads')
+campaign_ends = gen.activity('Campaign period ends')
+analyze_performance = gen.activity('Analyze performance for future optimization')
+
+
+# Partial Order for initial phase
+initial_phase = gen.partial_order(dependencies=[(define_objectives,), (target_audience,), (define_goals,)])
+
+# Partial Order for content creation and channel selection
+content_creation = gen.partial_order(dependencies=[(create_content,), (design_visuals,), (select_channels,)])
+
+# Partial Order combining initial phase, content creation, and launch
+pre_launch = gen.partial_order(dependencies=[(initial_phase, content_creation), (content_creation, launch_campaign_copy1)])
+
+
+# Partial Order for post-launch activities
+post_launch = gen.partial_order(dependencies=[(launch_campaign_copy2, track_performance), (track_performance, collect_leads), (collect_leads, sales_followup), (track_performance, campaign_ends), (campaign_ends, analyze_performance)])
+
+# Combine pre and post launch phases
+final_model = gen.partial_order(dependencies=[(pre_launch, post_launch)])

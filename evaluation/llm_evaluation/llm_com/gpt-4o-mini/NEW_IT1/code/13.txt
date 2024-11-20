@@ -1,0 +1,56 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+file_complaint = gen.activity('File complaint')
+log_complaint_1 = gen.activity('Log complaint - Unique 1')  # Unique instance for the first logging
+log_complaint_2 = gen.activity('Log complaint - Unique 2')  # Unique instance for a potential second logging scenario
+assign_complaint_1 = gen.activity('Assign complaint to relevant department - Unique 1')  # Unique instance for the first assignment
+assign_complaint_2 = gen.activity('Assign complaint to relevant department - Unique 2')  # Unique instance for a second assignment if needed
+review_complaint_details_1 = gen.activity('Review complaint details - Unique 1')  # Unique instance for the first review
+approve_notify_customer_1 = gen.activity('Approve and notify customer - Unique 1')  # Unique instance for approval
+reject_notify_customer_1 = gen.activity('Reject and notify customer - Unique 1')  # Unique instance for rejection
+process_reimbursement_1 = gen.activity('Process reimbursement - Unique 1')  # Unique instance for processing reimbursement
+resolve_complaint_1 = gen.activity('Resolve complaint - Unique 1')  # Unique instance for resolving
+notify_customer_1 = gen.activity('Notify customer of decision - Unique 1')  # Notify customer decision
+provide_feedback_1 = gen.activity('Provide feedback - Unique 1')  # Unique instance for feedback
+
+# Decision points and flows
+decision = gen.xor(approve_notify_customer_1, reject_notify_customer_1)
+
+# Resolving the complaint after notification
+poset_resolve = gen.partial_order(
+    dependencies=[
+        (decision, process_reimbursement_1),  # Process reimbursement if approved
+        (decision, resolve_complaint_1)  # Resolve complaint after decision
+    ]
+)
+
+# Log and assign complaint to relevant department using unique instances
+poset_logging = gen.partial_order(dependencies=[
+    (log_complaint_1, assign_complaint_1),
+    (assign_complaint_1, review_complaint_details_1),
+    (review_complaint_details_1, poset_resolve),
+    (poset_resolve, notify_customer_1)  # Notify customer after resolving
+])
+
+# Complete flow (final model without reuse)
+final_model = gen.partial_order(
+    dependencies=[
+        (file_complaint, log_complaint_1),  # Connect to the unique log complaint
+        (log_complaint_1, assign_complaint_1)  # Continue with unique assignment
+    ]
+)
+
+# Adding feedback process after notifying customer
+final_with_feedback = gen.partial_order(
+    dependencies=[
+        (final_model, notify_customer_1),
+        (notify_customer_1, provide_feedback_1),
+        (resolve_complaint_1, provide_feedback_1)
+    ]
+)
+
+# Final model
+final_model = final_with_feedback

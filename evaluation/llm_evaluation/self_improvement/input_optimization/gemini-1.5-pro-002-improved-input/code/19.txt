@@ -1,0 +1,32 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+login = gen.activity('Login')
+select_items = gen.activity('Select items')
+set_payment_method = gen.activity('Set payment method')
+pay = gen.activity('Pay')
+complete_installment_agreement = gen.activity('Complete installment agreement')
+select_free_reward = gen.activity('Select free reward')
+deliver_items = gen.activity('Deliver items')
+return_items = gen.activity('Return items')
+
+# Concurrent selection of items and setting payment method
+select_and_payment = gen.partial_order(dependencies=[(select_items,), (set_payment_method,)])
+
+# Exclusive choice between payment and installment agreement
+payment_choice = gen.xor(pay, complete_installment_agreement)
+
+# Concurrency between payment activities and reward selection (after item selection)
+# FIX: create a copy of select_items to avoid reusing the same node
+select_items_copy = select_items.copy()
+payment_and_reward = gen.partial_order(dependencies=[(select_items_copy, select_free_reward), (select_free_reward,), (payment_choice,)])
+
+
+# Delivery after payment and reward selection
+before_delivery = gen.partial_order(dependencies=[(select_and_payment, payment_and_reward)])
+
+# Loop for delivery and return
+delivery_return_loop = gen.loop(do=deliver_items, redo=return_items)
+
+final_model = gen.partial_order(dependencies=[(login, before_delivery), (before_delivery, delivery_return_loop)])

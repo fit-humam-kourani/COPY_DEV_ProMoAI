@@ -1,0 +1,33 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+prepare_documentation = gen.activity('Prepare documentation')
+gather_evidence = gen.activity('Gather evidence')
+issue_official_documents = gen.activity('Issue official documents')
+conduct_external_audit = gen.activity('Conduct external audit')
+identify_gaps_or_issues = gen.activity('Identify gaps or issues')
+make_necessary_corrections = gen.activity('Make necessary corrections or improvements')
+conduct_final_audit = gen.activity('Conduct final audit')
+schedule_compliance_audit = gen.activity('Schedule compliance audit')
+award_certification = gen.activity('Award certification')
+conduct_self_assessment = gen.activity('Conduct self-assessment')
+
+
+# Internal Preparation Phase
+internal_preparation = gen.partial_order(dependencies=[(prepare_documentation, gather_evidence), (gather_evidence, conduct_self_assessment)])
+
+# External Review Phase
+external_review = gen.partial_order(dependencies=[(conduct_external_audit, identify_gaps_or_issues), (identify_gaps_or_issues, make_necessary_corrections)])
+
+#Optional Corrective Actions Loop
+corrective_actions_loop = gen.loop(do=external_review, redo=None) #This allows for multiple iterations of corrections
+
+#Final Certification Phase
+final_certification = gen.partial_order(dependencies=[(corrective_actions_loop, conduct_final_audit), (conduct_final_audit, award_certification)])
+
+#Overall process
+overall_process = gen.partial_order(dependencies=[(schedule_compliance_audit, internal_preparation), (internal_preparation, final_certification), (final_certification, issue_official_documents)])
+
+final_model = overall_process

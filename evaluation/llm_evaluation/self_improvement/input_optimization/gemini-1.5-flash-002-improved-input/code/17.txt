@@ -1,0 +1,56 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+place_order = gen.activity('Place order')
+record_order_details = gen.activity('Record order details')
+process_payment = gen.activity('Process payment')
+notify_failed_payment = gen.activity('Notify about failed payment')
+check_stock_availability_1 = gen.activity('Check stock availability')  # Initial check
+check_stock_availability_2 = gen.activity('Check stock availability')  # Inside the loop
+initiate_back_order = gen.activity('Initiate back-order')
+inform_customer_about_delay = gen.activity('Inform customer about delay')
+receive_back_order = gen.activity('Receive back-order')
+pick_items_from_warehouse = gen.activity('Pick items from warehouse')
+perform_quality_control_checks = gen.activity('Perform quality control checks')
+package_items = gen.activity('Package items')
+gift_wrap_items = gen.activity('Gift wrap items')
+prepare_shipping_documents_and_labels = gen.activity('Prepare shipping documents and labels')
+prepare_documentation_for_international_orders = gen.activity('Prepare documentation for international orders')
+dispatch_order = gen.activity('Dispatch order')
+send_shipping_confirmation_to_customer = gen.activity('Send shipping confirmation to customer')
+update_inventory_levels = gen.activity('Update inventory levels')
+send_follow_up_email = gen.activity('Send follow-up email')
+customer_reports_issue = gen.activity('Customer reports issue')
+send_return_shipping_label = gen.activity('Send return shipping label')
+receive_returned_items = gen.activity('Receive returned items')
+inspect_returned_items = gen.activity('Inspect returned items')
+process_refund = gen.activity('Process refund')
+process_replacement = gen.activity('Process replacement')
+
+# Subprocesses
+payment_success = gen.partial_order(dependencies=[(process_payment, check_stock_availability_1)])
+payment_xor = gen.xor(payment_success, notify_failed_payment)
+
+#Corrected Backorder Loop to avoid reuse of check_stock_availability_2
+backorder_loop_redo = gen.partial_order(dependencies=[(receive_back_order, gen.activity('Check stock availability'))]) # Created a new 'Check stock availability' activity
+backorder_loop = gen.loop(do=check_stock_availability_2, redo=backorder_loop_redo)
+
+
+instock_partial_order = gen.partial_order(dependencies=[(pick_items_from_warehouse, perform_quality_control_checks), (perform_quality_control_checks, package_items), (package_items, gen.xor(gift_wrap_items, None))])
+
+shipping_partial_order = gen.partial_order(dependencies=[(prepare_shipping_documents_and_labels, gen.xor(prepare_documentation_for_international_orders, None))])
+
+post_dispatch_partial_order = gen.partial_order(dependencies=[(dispatch_order, send_shipping_confirmation_to_customer), (send_shipping_confirmation_to_customer, update_inventory_levels), (update_inventory_levels, send_follow_up_email)])
+
+returns_process = gen.partial_order(dependencies=[(send_return_shipping_label, receive_returned_items),(receive_returned_items, inspect_returned_items), (inspect_returned_items, gen.xor(process_refund, process_replacement))])
+
+backorder_path = gen.partial_order(dependencies=[(initiate_back_order, inform_customer_about_delay), (inform_customer_about_delay, backorder_loop)])
+stock_xor = gen.xor(instock_partial_order, backorder_path)
+
+final_xor = gen.xor(post_dispatch_partial_order, gen.partial_order(dependencies=[(customer_reports_issue, returns_process)]))
+
+main_poset = gen.partial_order(dependencies=[(place_order, record_order_details),(record_order_details, payment_xor), (payment_xor, stock_xor), (stock_xor, shipping_partial_order), (shipping_partial_order, final_xor)])
+
+final_model = main_poset

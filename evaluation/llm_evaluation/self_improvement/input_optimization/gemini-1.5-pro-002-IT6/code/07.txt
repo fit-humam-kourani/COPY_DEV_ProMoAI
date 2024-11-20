@@ -1,0 +1,52 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+customer_searches_for_ticket = gen.activity('Customer searches for ticket')
+select_route = gen.activity('Select route')
+select_date_and_time = gen.activity('Select date and time')
+
+# Booking process
+provide_personal_information = gen.activity('Provide personal information')
+provide_payment_details = gen.activity('Provide payment details')
+generate_ticket = gen.activity('Generate ticket')
+
+# Ticket delivery and inventory update
+send_ticket_via_email = gen.activity('Send ticket via email')
+send_ticket_via_sms = gen.activity('Send ticket via SMS')
+ticket_delivery = gen.xor(send_ticket_via_email, send_ticket_via_sms)
+
+update_seat_inventory = gen.activity('Update seat inventory')
+
+# Pre-travel communication
+send_reminder = gen.activity('Send reminder')
+send_instructions = gen.activity('Send instructions')
+pre_travel_communication = gen.partial_order(dependencies=[(send_reminder,), (send_instructions,)])  # These can occur independently
+optional_pre_travel_communication = gen.xor(pre_travel_communication, None)  # Reminders/instructions might not be sent
+
+# Journey completion and post-travel activities
+customer_completes_journey = gen.activity('Customer completes journey')
+post_travel_feedback_or_services = gen.activity('Post-travel feedback or services')
+optional_post_travel = gen.xor(post_travel_feedback_or_services, None)  # Feedback/services are optional
+
+
+
+# Combine submodels using partial_order to reflect concurrency and dependencies
+
+booking_process = gen.partial_order(dependencies=[
+    (customer_searches_for_ticket, select_route),
+    (select_route, select_date_and_time),
+    (select_date_and_time, provide_personal_information),
+    (provide_personal_information, provide_payment_details),
+    (provide_payment_details, generate_ticket),
+    (generate_ticket, ticket_delivery),
+    (generate_ticket, update_seat_inventory), # Ticket generation triggers both delivery and inventory update
+    (ticket_delivery, optional_pre_travel_communication), # Ticket delivery must come before reminders or instructions
+    (update_seat_inventory,optional_pre_travel_communication),
+    (optional_pre_travel_communication, customer_completes_journey),
+    (customer_completes_journey, optional_post_travel)
+
+])
+
+final_model = booking_process

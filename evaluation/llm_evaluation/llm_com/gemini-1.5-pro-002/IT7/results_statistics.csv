@@ -1,0 +1,4 @@
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+21.txt,1.0,10,10,10,10.876740455627441,
+log_name,num_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time,error message
+21.txt,Error,10,None,None,5.368963241577148,429 Resource has been exhausted (e.g. check quota).

@@ -1,0 +1,28 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_need = gen.activity('Identify need for new supplier or vendor')
+issue_rfp = gen.activity('Issue request for proposals (RFP)')
+receive_proposals = gen.activity('Receive supplier proposals')
+evaluate_proposal = gen.activity('Evaluate proposal')
+select_supplier_1 = gen.activity('Select supplier')
+select_supplier_2 = gen.activity('Select supplier') #Second copy of Select Supplier
+conduct_interview = gen.activity('Conduct interview')
+conduct_site_visit = gen.activity('Conduct site visit')
+begin_negotiations = gen.activity('Begin contract negotiations')
+sign_contract = gen.activity('Sign contract')
+onboard_supplier_1 = gen.activity('Onboard supplier')
+onboard_supplier_2 = gen.activity('Onboard supplier') #Second copy of Onboard Supplier
+execute_contract = gen.activity('Execute contract')
+
+
+# Partial order for proposal evaluation 
+poset_evaluation = gen.partial_order(dependencies=[(receive_proposals, evaluate_proposal), (evaluate_proposal, select_supplier_1), (select_supplier_1, conduct_interview), (select_supplier_1, conduct_site_visit)])
+
+# Partial order for contract finalization
+poset_contract = gen.partial_order(dependencies=[(select_supplier_2, begin_negotiations), (begin_negotiations, sign_contract), (sign_contract, onboard_supplier_1)])
+
+# Combining the subprocesses
+final_model = gen.partial_order(dependencies=[(identify_need, issue_rfp), (issue_rfp, poset_evaluation), (poset_evaluation, poset_contract), (onboard_supplier_2, execute_contract)])

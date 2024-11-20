@@ -1,0 +1,43 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_signs_up = gen.activity('Customer signs up')
+enter_details = gen.activity('Entry of personal and payment details')
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+set_auto_billing = gen.activity('Set automatic triggers for billing cycles')
+send_regular_updates = gen.activity('Send regular updates')
+send_product_enhancements = gen.activity('Send product enhancements')
+send_renewal_notifications = gen.activity('Send renewal notifications')
+customer_submits_cancellation = gen.activity('Customer submits cancellation request')
+apply_refund = gen.activity('apply refund')
+apply_charges = gen.activity('apply charges')
+deactivate_subscription = gen.activity('Deactivate subscription')
+settle_final_balance = gen.activity('Settle final account balance')
+
+
+# Partial Order 1: Account setup
+poset_account_setup = gen.partial_order(dependencies=[(generate_account,), (assign_access,), (set_auto_billing,)])
+
+# Partial Order 2: Ongoing updates
+poset_updates = gen.partial_order(dependencies=[(send_regular_updates,), (send_product_enhancements,), (send_renewal_notifications,)])
+
+# XOR for refund/charges
+refund_charges_xor = gen.xor(apply_refund, apply_charges)
+
+# Support process -  Using copies to avoid reuse
+deactivate_subscription_copy1 = deactivate_subscription.copy()
+support_process = gen.partial_order(dependencies=[(customer_submits_cancellation, refund_charges_xor), (refund_charges_xor, deactivate_subscription_copy1)])
+
+#Combine support process with final balance settlement. Using a copy to avoid reuse.
+deactivate_subscription_copy2 = deactivate_subscription.copy()
+settle_final_balance_copy = settle_final_balance.copy() #Added copy here as well
+support_final_poset = gen.partial_order(dependencies = [(deactivate_subscription_copy2, settle_final_balance_copy), (support_process,)])
+
+
+#Main process partial order
+final_poset = gen.partial_order(dependencies=[(customer_signs_up, enter_details), (enter_details, poset_account_setup), (enter_details, poset_updates), (poset_updates, support_final_poset), (poset_account_setup, support_final_poset)])
+
+final_model = final_poset

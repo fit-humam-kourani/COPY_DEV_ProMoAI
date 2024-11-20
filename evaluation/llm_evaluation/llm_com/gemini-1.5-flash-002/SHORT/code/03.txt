@@ -1,0 +1,23 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+check_inventory = gen.activity('Check current inventory level')
+send_auto_alert = gen.activity('Send an automated alert')
+send_manual_alert = gen.activity('Send a manual alert')
+low_inventory_alert = gen.xor(send_auto_alert, send_manual_alert)
+place_order = gen.activity('Place order with suppliers')
+update_expected_delivery = gen.activity('Update inventory system with expected delivery dates')
+receive_stock = gen.activity('Receive stock')
+record_stock = gen.activity('Record stock in system')
+inspect_stock = gen.activity('Inspect stock for quality')
+place_stock_shelves = gen.activity('Place stock on shelves')
+place_stock_storage = gen.activity('Place stock in storage')
+update_inventory_levels = gen.activity('Update inventory levels')
+
+
+#Partial order for stock arrival and handling
+poset_stock_handling = gen.partial_order(dependencies=[(receive_stock, record_stock), (record_stock, inspect_stock), (inspect_stock, place_stock_shelves), (inspect_stock, place_stock_storage), (place_stock_shelves, update_inventory_levels), (place_stock_storage, update_inventory_levels)])
+
+#Main process flow
+final_model = gen.partial_order(dependencies=[(check_inventory, low_inventory_alert), (low_inventory_alert, place_order), (place_order, update_expected_delivery), (update_expected_delivery, poset_stock_handling)])

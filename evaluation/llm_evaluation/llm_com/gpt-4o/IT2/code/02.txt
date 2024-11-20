@@ -1,0 +1,47 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Define individual activities
+identify_need = gen.activity('Identify need for new hire')
+create_job_description = gen.activity('Create job description')
+post_job_description = gen.activity('Post job description')
+collect_resumes = gen.activity('Collect resumes')
+screen_resumes = gen.activity('Screen resumes')
+initial_phone_interviews = gen.activity('Conduct initial phone interviews')
+in_person_interview = gen.activity('Conduct an in-person interview')
+virtual_interview = gen.activity('Conduct a virtual interview')
+choose_candidate = gen.activity('Choose candidate')
+extend_offer = gen.activity('Extend offer')
+negotiate_salary = gen.activity('Negotiate salary')
+begin_onboarding = gen.activity('Begin onboarding process')
+complete_paperwork = gen.activity('Complete paperwork')
+complete_orientation = gen.activity('Complete orientation')
+complete_training = gen.activity('Complete training')
+
+# Modeling the resume screening and interviews
+resume_screening_process = gen.partial_order(dependencies=[(collect_resumes, screen_resumes), 
+                                                          (screen_resumes, initial_phone_interviews)])
+
+# Choice for interview type (either in-person or virtual)
+interview_choice = gen.xor(in_person_interview, virtual_interview)
+
+# Process after interviews (candidate selection, offer, and salary negotiation)
+offer_process = gen.partial_order(dependencies=[(choose_candidate, extend_offer), 
+                                                (extend_offer, gen.xor(negotiate_salary, None))])
+
+# Onboarding process (concurrent steps in any order)
+onboarding_steps = gen.partial_order(dependencies=[
+    (begin_onboarding, complete_paperwork),
+    (begin_onboarding, complete_orientation),
+    (begin_onboarding, complete_training)
+])
+
+# Combining all subprocesses
+final_model = gen.partial_order(dependencies=[
+    (identify_need, create_job_description), 
+    (create_job_description, post_job_description), 
+    (post_job_description, resume_screening_process), 
+    (resume_screening_process, interview_choice),
+    (interview_choice, offer_process), 
+    (offer_process, onboarding_steps)
+])

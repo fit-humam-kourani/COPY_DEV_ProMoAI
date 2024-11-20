@@ -1,0 +1,41 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+check_current_inventory_level = gen.activity("Check current inventory level")
+send_automated_alert = gen.activity("Send an automated alert")
+send_manual_alert = gen.activity("Send a manual alert")
+place_order_with_suppliers = gen.activity("Place order with suppliers")
+update_inventory_system_with_expected_delivery_dates = gen.activity("Update inventory system with expected delivery dates")
+receive_stock = gen.activity("Receive stock")
+inspect_stock_for_quality = gen.activity("Inspect stock for quality")
+place_stock_on_shelves = gen.activity("Place stock on shelves")
+place_stock_in_storage = gen.activity("Place stock in storage") # Added based on process understanding
+record_stock_in_system = gen.activity("Record stock in system")
+update_inventory_levels = gen.activity("Update inventory levels")
+
+
+# Alerting mechanism (automated or manual, modeled as an XOR)
+alert_mechanism = gen.xor(send_automated_alert, send_manual_alert)
+
+
+# Receiving and processing stock (partial order to show concurrency)
+receiving_and_processing = gen.partial_order(dependencies=[
+    (receive_stock, inspect_stock_for_quality),
+    (receive_stock, place_stock_on_shelves),
+    (receive_stock, place_stock_in_storage), # Added for realistic representation. Stock might be placed in storage first before shelving.
+    (inspect_stock_for_quality, record_stock_in_system),
+    (place_stock_on_shelves, record_stock_in_system), # Added for realistic representation, assuming stock is placed on shelves before being recorded.
+    (place_stock_in_storage, record_stock_in_system) # Added for realistic representation.
+])
+
+
+# Combining sub-processes
+final_model = gen.partial_order(dependencies=[
+    (check_current_inventory_level, alert_mechanism),
+    (alert_mechanism, place_order_with_suppliers),
+    (place_order_with_suppliers, update_inventory_system_with_expected_delivery_dates),
+    (update_inventory_system_with_expected_delivery_dates, receiving_and_processing),
+    (receiving_and_processing, update_inventory_levels)
+])

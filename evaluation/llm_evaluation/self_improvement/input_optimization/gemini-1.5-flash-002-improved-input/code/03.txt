@@ -1,0 +1,40 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+check_inventory = gen.activity('Check current inventory level')
+automated_alert = gen.activity('Send an automated alert')
+manual_alert = gen.activity('Send a manual alert')
+place_order = gen.activity('Place order with suppliers')
+update_system = gen.activity('Update inventory system with expected delivery dates')
+receive_stock = gen.activity('Receive stock')
+inspect_stock = gen.activity('Inspect stock for quality')
+inspect_stock_loop = inspect_stock.copy()  # Copy for loop
+inspect_stock_po = inspect_stock.copy()  # Copy for partial order
+record_stock = gen.activity('Record stock in system')
+record_stock_copy = record_stock.copy()  # Copy for partial order
+place_stock_shelves = gen.activity('Place stock on shelves')
+place_stock_shelves_copy = place_stock_shelves.copy()  # Copy for partial order
+place_stock_storage = gen.activity('Place stock in storage')
+place_stock_storage_copy = place_stock_storage.copy()  # Copy for partial order
+final_update = gen.activity('Update inventory levels')
+
+# Alert mechanism (XOR)
+alert = gen.xor(automated_alert, manual_alert)
+
+# Supplier selection (XOR - simplified for brevity)
+supplier_selection = gen.xor(place_order, None)
+
+# Quality inspection loop
+quality_inspection_loop = gen.loop(do=inspect_stock_loop, redo=inspect_stock_loop.copy())
+
+# Post-inspection actions (Partial Order) - using copies to avoid reuse
+post_inspection = gen.partial_order(dependencies=[(inspect_stock_po, record_stock_copy), (inspect_stock_po, place_stock_storage_copy), (record_stock_copy, place_stock_shelves_copy)])
+
+
+# Procurement process (Partial Order) - showing concurrency
+procurement_process = gen.partial_order(dependencies=[(alert.copy(), supplier_selection), (supplier_selection, update_system), (update_system, receive_stock), (receive_stock, quality_inspection_loop), (quality_inspection_loop, post_inspection), (post_inspection, final_update)])
+
+# Overall process (Partial Order) - starting with inventory check
+final_model = gen.partial_order(dependencies=[(check_inventory, alert.copy()), (alert, procurement_process)])

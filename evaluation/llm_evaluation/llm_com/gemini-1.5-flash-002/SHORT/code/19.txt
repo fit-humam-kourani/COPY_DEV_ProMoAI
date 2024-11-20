@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+login = gen.activity('Login')
+select_items = gen.activity('Select items')
+set_payment_method = gen.activity('Set payment method')
+pay = gen.activity('Pay')
+complete_installment_agreement = gen.activity('Complete installment agreement')
+select_free_reward = gen.activity('Select free reward')
+deliver_items = gen.activity('Deliver items')
+return_items = gen.activity('Return items')
+deliver_items_copy = deliver_items.copy() # Create a copy to avoid reuse
+
+
+# Payment method choice
+payment_choice = gen.xor(pay, complete_installment_agreement)
+
+# Optional reward choice
+optional_reward = gen.xor(select_free_reward, None)
+
+# Main process sequence
+main_sequence = gen.partial_order(dependencies=[
+    (login, select_items),
+    (select_items, set_payment_method),
+    (set_payment_method, optional_reward),
+    (optional_reward, payment_choice),
+    (payment_choice, deliver_items)
+])
+
+# Return items loop.  Using a copy of deliver_items here.
+return_loop = gen.loop(do=gen.partial_order(dependencies=[(return_items, deliver_items_copy)]), redo=None)
+
+# Combine main sequence and return loop
+final_model = gen.partial_order(dependencies=[(main_sequence,), (return_loop,)])

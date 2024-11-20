@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+express_interest = gen.activity('Express interest')  # This is a placeholder for the XOR decision
+select_product = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+approve_quote = gen.activity('Approve quote') # Placeholder for XOR decision
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+place_order = gen.activity('Place order')
+terminate = gen.activity('Terminate')
+terminate2 = gen.activity('Terminate') # Added a second terminate activity
+
+
+# Subprocesses
+initial_interaction = gen.partial_order(dependencies=[(receive_inquiry, collect_info), (collect_info, address_concerns)])
+
+product_selection = gen.partial_order(dependencies=[(express_interest, select_product), (select_product, provide_quote)])
+
+order_placement = gen.partial_order(dependencies=[(approve_quote, record_order), (record_order, send_confirmation), (send_confirmation, place_order)])
+
+
+# XOR choices
+interest_choice = gen.xor(product_selection, terminate)
+approval_choice = gen.xor(order_placement, terminate2) #Using a separate terminate instance
+
+
+#Combining subprocesses
+main_process = gen.partial_order(dependencies=[(initial_interaction, interest_choice), (interest_choice, approval_choice)])
+
+final_model = main_process

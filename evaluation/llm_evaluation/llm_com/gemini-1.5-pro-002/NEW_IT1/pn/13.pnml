@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1730974813.6881797" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1730974813.6881797</text>
+    </name>
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_19">
+        <name>
+          <text>p_19</text>
+        </name>
+      </place>
+      <place id="p_10">
+        <name>
+          <text>p_10</text>
+        </name>
+      </place>
+      <place id="p_12">
+        <name>
+          <text>p_12</text>
+        </name>
+      </place>
+      <place id="p_14">
+        <name>
+          <text>p_14</text>
+        </name>
+      </place>
+      <place id="p_15">
+        <name>
+          <text>p_15</text>
+        </name>
+      </place>
+      <place id="p_8">
+        <name>
+          <text>p_8</text>
+        </name>
+      </place>
+      <transition id="46ce7a47-1c0b-498d-8af2-543936bf60d4">
+        <name>
+          <text>File complaint</text>
+        </name>
+      </transition>
+      <transition id="714e98e5-be5d-415f-84d5-406b97058d74">
+        <name>
+          <text>Assign complaint to relevant department</text>
+        </name>
+      </transition>
+      <transition id="1773ecdf-e8b4-4534-8811-06d386db1d0f">
+        <name>
+          <text>Approve and notify customer</text>
+        </name>
+      </transition>
+      <transition id="4831552e-23ff-4aa4-a5fc-8fce68078d26">
+        <name>
+          <text>Reject and notify customer</text>
+        </name>
+      </transition>
+      <transition id="a192c82d-3737-4610-8316-1e37ca2e5871">
+        <name>
+          <text>Log complaint</text>
+        </name>
+      </transition>
+      <transition id="f20ffab3-ead3-45db-8f16-1806f5add632">
+        <name>
+          <text>Review complaint details</text>
+        </name>
+      </transition>
+      <transition id="439fb6fa-95dd-4288-8f05-72bcc17ae8a7">
+        <name>
+          <text>Resolve complaint</text>
+        </name>
+      </transition>
+      <transition id="a78b3681-80e0-4183-95d1-e57c3614f1d5">
+        <name>
+          <text>Provide feedback</text>
+        </name>
+      </transition>
+      <arc id="2119557008640" source="p_12" target="f20ffab3-ead3-45db-8f16-1806f5add632"/>
+      <arc id="2119557006096" source="1773ecdf-e8b4-4534-8811-06d386db1d0f" target="p_15"/>
+      <arc id="2119555562896" source="f20ffab3-ead3-45db-8f16-1806f5add632" target="p_14"/>
+      <arc id="2119555562512" source="a78b3681-80e0-4183-95d1-e57c3614f1d5" target="sink"/>
+      <arc id="2119557016608" source="p_19" target="a78b3681-80e0-4183-95d1-e57c3614f1d5"/>
+      <arc id="2119557014832" source="p_10" target="714e98e5-be5d-415f-84d5-406b97058d74"/>
+      <arc id="2119557006768" source="p_14" target="1773ecdf-e8b4-4534-8811-06d386db1d0f"/>
+      <arc id="2119555562800" source="source" target="46ce7a47-1c0b-498d-8af2-543936bf60d4"/>
+      <arc id="2119555561024" source="p_15" target="439fb6fa-95dd-4288-8f05-72bcc17ae8a7"/>
+      <arc id="2119557007680" source="4831552e-23ff-4aa4-a5fc-8fce68078d26" target="p_15"/>
+      <arc id="2119555562560" source="46ce7a47-1c0b-498d-8af2-543936bf60d4" target="p_8"/>
+      <arc id="2119557006672" source="p_8" target="a192c82d-3737-4610-8316-1e37ca2e5871"/>
+      <arc id="2119557007968" source="p_14" target="4831552e-23ff-4aa4-a5fc-8fce68078d26"/>
+      <arc id="2119555560544" source="a192c82d-3737-4610-8316-1e37ca2e5871" target="p_10"/>
+      <arc id="2119555560928" source="439fb6fa-95dd-4288-8f05-72bcc17ae8a7" target="p_19"/>
+      <arc id="2119555556080" source="714e98e5-be5d-415f-84d5-406b97058d74" target="p_12"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

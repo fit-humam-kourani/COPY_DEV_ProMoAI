@@ -1,0 +1,44 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+report_incident = gen.activity("Report incident")
+log_report = gen.activity("Log report into tracking system")
+gather_info = gen.activity("Gather necessary information")
+assign_report = gen.activity("Assign report to appropriate team")
+identify_cause = gen.activity("Identify cause of incident")
+propose_corrective_actions = gen.activity("Propose corrective actions")
+implement_fix = gen.activity("Implement fix")
+conduct_follow_up = gen.activity("Conduct follow-up")
+conduct_training = gen.activity("Conduct training")
+change_policy = gen.activity("Change policy")
+notify_stakeholders = gen.activity("Notify all stakeholders")
+close_report = gen.activity("Close incident report")
+
+
+# Partial Order for Corrective Actions
+poset_corrective_actions = gen.partial_order(dependencies=[
+    (identify_cause, propose_corrective_actions),
+    (propose_corrective_actions, implement_fix)
+])
+
+#Partial Order for Follow-up.  Creating a copy of conduct_follow_up to avoid reuse.
+conduct_follow_up_copy = conduct_follow_up.copy()
+poset_follow_up = gen.partial_order(dependencies=[
+    (conduct_follow_up_copy, conduct_training),
+    (conduct_follow_up_copy, change_policy)
+])
+
+
+# Main Process Partial Order
+final_model = gen.partial_order(dependencies=[
+    (report_incident, log_report),
+    (log_report, gather_info),
+    (gather_info, assign_report),
+    (assign_report, poset_corrective_actions),
+    (poset_corrective_actions, conduct_follow_up), #Using original conduct_follow_up here
+    (conduct_follow_up, poset_follow_up), #Using original conduct_follow_up here
+    (poset_follow_up, notify_stakeholders),
+    (notify_stakeholders, close_report)
+])

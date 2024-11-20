@@ -1,0 +1,48 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator(True, True)
+
+# Initial activities
+identify_need = gen.activity('Identify need for new supplier or vendor')
+issue_rfp = gen.activity('Issue request for proposals (RFP)')
+receive_proposals = gen.activity('Receive supplier proposals')
+
+# Unique activities for evaluation
+evaluate_proposal_1 = gen.activity('Evaluate proposal step 1')  # Unique for the initial evaluation
+conduct_site_visit = gen.activity('Conduct site visit')            # Unique site visit activity
+conduct_interview = gen.activity('Conduct interview')              # Unique interview activity
+
+# Unique activities for supplier selection and contract processes
+select_supplier = gen.activity('Select supplier')                               # Unique selection activity
+begin_contract_negotiations = gen.activity('Begin contract negotiations')       # Unique negotiation activity
+sign_contract = gen.activity('Sign contract')                                   # Unique signing activity
+onboard_supplier = gen.activity('Onboard supplier')                             # Unique onboarding activity
+execute_contract = gen.activity('Execute contract')                             # Unique execution activity
+
+# Evaluation process: decision choice between conducting a site visit or interview
+evaluation_choice = gen.xor(conduct_site_visit, conduct_interview)  # Decision on site visit or interview
+evaluation_poset = gen.partial_order(
+    dependencies=[
+        (evaluate_proposal_1, evaluation_choice)                     # Linking initial evaluation to the XOR decision
+    ]
+)
+
+# Selection and contract execution process
+selection_contract_poset = gen.partial_order(
+    dependencies=[
+        (select_supplier, begin_contract_negotiations), 
+        (begin_contract_negotiations, sign_contract), 
+        (sign_contract, onboard_supplier), 
+        (onboard_supplier, execute_contract)
+    ]
+)
+
+# Complete process reflecting the workflow
+final_model = gen.partial_order(
+    dependencies=[
+        (identify_need, issue_rfp),                        # Transition from identifying need to issuing RFP
+        (issue_rfp, receive_proposals),                     # RFP leads to receiving proposals
+        (receive_proposals, evaluate_proposal_1),          # Proposals go to the unique evaluation
+        (evaluate_proposal_1, evaluation_poset),           # Evaluation feeds into the decision point
+        (evaluation_choice, selection_contract_poset)       # Choice directs to supplier selection
+    ]
+)

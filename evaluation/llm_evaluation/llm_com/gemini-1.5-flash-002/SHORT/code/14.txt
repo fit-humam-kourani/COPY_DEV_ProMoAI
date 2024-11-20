@@ -1,0 +1,43 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator(True, True)
+
+# Activities
+draft_plan = gen.activity('Draft plan')
+conduct_meeting = gen.activity('Conduct strategic alignment meeting')
+outline_objectives = gen.activity('Outline objectives')
+review_budget_feasibility = gen.activity('Review budget feasibility')
+adjust_plan = gen.activity('Adjust Plan')
+documented_approve_adjustment = gen.activity('Documented and approve adjustment')
+provide_feedback = gen.activity('Provide feedback')
+approve_final_budget = gen.activity('Approve final budget')
+distribute_budget = gen.activity('Distribute budget')
+implement_plan = gen.activity('Implement plan')
+
+
+# Partial Order for initial plan creation
+poset_initial_plan = gen.partial_order(dependencies=[(draft_plan, conduct_meeting), (conduct_meeting, outline_objectives), (outline_objectives, review_budget_feasibility)])
+
+# Create copies to avoid reuse errors.  Everything inside the loop needs a copy.
+review_budget_feasibility_copy1 = review_budget_feasibility.copy()
+adjust_plan_copy1 = adjust_plan.copy()
+documented_approve_adjustment_copy1 = documented_approve_adjustment.copy()
+provide_feedback_copy1 = provide_feedback.copy()
+approve_final_budget_copy = approve_final_budget.copy()
+distribute_budget_copy = distribute_budget.copy()
+implement_plan_copy = implement_plan.copy()
+
+# Loop for review and adjustment.  Create a completely independent copy of the loop.
+inner_review_loop = gen.partial_order(dependencies=[(review_budget_feasibility_copy1, adjust_plan_copy1), (adjust_plan_copy1, documented_approve_adjustment_copy1), (documented_approve_adjustment_copy1, provide_feedback_copy1)])
+review_adjustment_loop = gen.loop(do=inner_review_loop, redo=None)
+review_adjustment_loop_copy1 = review_adjustment_loop.copy()
+
+
+#Combine initial plan creation and review/adjustment loop
+poset_review_process = gen.partial_order(dependencies=[(poset_initial_plan, review_adjustment_loop_copy1)])
+
+# Final approval and implementation.  All activities here are copies to prevent reuse errors.
+final_approval_implementation = gen.partial_order(dependencies=[(review_adjustment_loop_copy1, approve_final_budget_copy), (approve_final_budget_copy, distribute_budget_copy), (distribute_budget_copy, implement_plan_copy)])
+
+# Final Model
+final_model = final_approval_implementation

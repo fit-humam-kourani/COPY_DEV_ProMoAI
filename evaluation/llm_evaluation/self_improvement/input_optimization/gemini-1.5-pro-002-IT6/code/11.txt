@@ -1,0 +1,38 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+customer_signs_up = gen.activity('Customer signs up')
+generate_account = gen.activity('Generate account')
+assign_access = gen.activity('Assign access')
+set_automatic_triggers_for_billing_cycles = gen.activity('Set automatic triggers for billing cycles')
+send_regular_updates = gen.activity('Send regular updates')
+send_product_enhancements = gen.activity('Send product enhancements')
+send_renewal_notifications = gen.activity('Send renewal notifications')
+
+updates_choice = gen.xor(send_product_enhancements, send_renewal_notifications, None)
+regular_updates_with_options = gen.partial_order(dependencies=[(send_regular_updates, updates_choice)])
+updates_loop = gen.loop(do=regular_updates_with_options, redo=None)
+
+
+customer_submits_cancellation_request = gen.activity('Customer submits cancellation request')
+apply_charges = gen.activity('apply charges')
+apply_refund = gen.activity('apply refund')
+charges_refunds_choice = gen.xor(apply_charges, apply_refund, None)  # Either charge, refund, or neither
+
+deactivate_subscription = gen.activity('Deactivate subscription')
+settle_final_account_balance = gen.activity('Settle final account balance')
+
+cancellation_process = gen.partial_order(dependencies=[(customer_submits_cancellation_request, charges_refunds_choice),
+                                                      (charges_refunds_choice, deactivate_subscription),
+                                                      (deactivate_subscription, settle_final_account_balance)])
+
+main_process_flow = gen.partial_order(dependencies=[(customer_signs_up, generate_account),
+                                                    (generate_account, assign_access),
+                                                    (assign_access, set_automatic_triggers_for_billing_cycles),
+                                                    (set_automatic_triggers_for_billing_cycles, updates_loop)])
+
+
+
+
+final_model = gen.xor(main_process_flow, cancellation_process)

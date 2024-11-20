@@ -1,0 +1,61 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+identify_need = gen.activity('Identify need for new hire')
+create_job_description = gen.activity('Create job description')
+post_job_description = gen.activity('Post job description')
+collect_resumes = gen.activity('Collect resumes')
+screen_resumes = gen.activity('Screen resumes')
+conduct_phone_interviews = gen.activity('Conduct initial phone interviews')
+
+# Interview process
+choose_candidate = gen.activity('Choose candidate')  # Decision point after phone interview
+in_person_interview = gen.activity('Conduct an in-person interview')
+virtual_interview = gen.activity('Conduct a virtual interview')
+secondary_interview = gen.xor(in_person_interview, virtual_interview)
+invite_candidates = gen.activity('Invite candidates for interviews') # encapsulate invitation before choice
+
+# Offer and negotiation
+extend_offer = gen.activity('Extend offer')
+negotiate_salary = gen.activity('Negotiate salary') # Optional negotiation
+
+# Onboarding
+begin_onboarding = gen.activity('Begin onboarding process')
+complete_paperwork = gen.activity('Complete paperwork')
+complete_orientation = gen.activity('Complete orientation')
+complete_training = gen.activity('Complete training')
+
+
+# Combine activities into sub-processes
+
+# encapsulate invite and interview process
+invite_interview = gen.partial_order(dependencies=[(invite_candidates, secondary_interview)])
+
+
+# Onboarding process (parallel activities)
+onboarding_process = gen.partial_order(dependencies=[(complete_paperwork,), (complete_orientation,), (complete_training,)])
+
+# optional negatiation
+optional_negotiation = gen.xor(negotiate_salary, None)
+
+# Link onboarding to beginning
+full_onboarding = gen.partial_order(dependencies=[(begin_onboarding, onboarding_process)])
+
+
+# Main process flow
+final_model = gen.partial_order(
+    dependencies=[
+        (identify_need, create_job_description),
+        (create_job_description, post_job_description),
+        (post_job_description, collect_resumes),
+        (collect_resumes, screen_resumes),
+        (screen_resumes, conduct_phone_interviews),
+        (conduct_phone_interviews, choose_candidate),
+        (choose_candidate, invite_interview),
+        (invite_interview, extend_offer),
+        (extend_offer, optional_negotiation),
+        (optional_negotiation, full_onboarding)
+    ]
+)

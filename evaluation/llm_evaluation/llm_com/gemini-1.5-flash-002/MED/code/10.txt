@@ -1,0 +1,33 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+submit_request = gen.activity('Submit IT solution request')
+assess_compatibility = gen.activity('Assess compatibility')
+evaluate_cost = gen.activity('Evaluate cost and resource needs')
+procure = gen.activity('Procure necessary tools or licenses')
+install = gen.activity('Install the solution')
+test_solution = gen.activity('Test solution')
+rollout = gen.activity('Roll out solution to requesting department')
+provide_training = gen.activity('Provide training')
+provide_support = gen.activity('Provide support for troubleshooting')
+
+# Assessment Phase (Partial Order)
+assessment_poset = gen.partial_order(dependencies=[(assess_compatibility,), (evaluate_cost,)])
+
+# Procurement and Installation Phase (Sequential)
+procurement_installation = gen.partial_order(dependencies=[(procure, install)])
+
+# Testing and Rollout Phase (Sequential)
+testing_rollout = gen.partial_order(dependencies=[(test_solution, rollout)])
+
+# Post-Rollout Support (Optional)
+optional_support_training = gen.partial_order(dependencies=[(provide_training,), (provide_support,)])
+optional_support_training_xor = gen.xor(optional_support_training, None)
+
+# Combining Phases
+approval_path = gen.partial_order(dependencies=[(assessment_poset, procurement_installation), (procurement_installation, testing_rollout), (testing_rollout, optional_support_training_xor)])
+
+# Main Process (Sequential)
+final_model = gen.partial_order(dependencies=[(submit_request, approval_path)])

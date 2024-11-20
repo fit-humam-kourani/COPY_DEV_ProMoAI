@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<trace>
+		<event>
+			<string key="concept:name" value="Enjoy Spaghetti Carbonara" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plate and garnish dish" />
+		</event>
+		<event>
+			<string key="concept:name" value="Mix with egg mixture and pancetta" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pour egg yolk and cheese mixture" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil spaghetti" />
+		</event>
+		<event>
+			<string key="concept:name" value="Saute pancetta until crispy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Whisk egg yolks, Parmesan, and black pepper" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil salted water" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather ingredients" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plan how to cook" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Enjoy Spaghetti Carbonara" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plate and garnish dish" />
+		</event>
+		<event>
+			<string key="concept:name" value="Mix with egg mixture and pancetta" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pour egg yolk and cheese mixture" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil spaghetti" />
+		</event>
+		<event>
+			<string key="concept:name" value="Whisk egg yolks, Parmesan, and black pepper" />
+		</event>
+		<event>
+			<string key="concept:name" value="Saute pancetta until crispy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather ingredients" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil salted water" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plan how to cook" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Enjoy Spaghetti Carbonara" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plate and garnish dish" />
+		</event>
+		<event>
+			<string key="concept:name" value="Mix with egg mixture and pancetta" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pour egg yolk and cheese mixture" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil spaghetti" />
+		</event>
+		<event>
+			<string key="concept:name" value="Whisk egg yolks, Parmesan, and black pepper" />
+		</event>
+		<event>
+			<string key="concept:name" value="Saute pancetta until crispy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil salted water" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather ingredients" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plan how to cook" />
+		</event>
+	</trace>
+	<trace>
+		<event>
+			<string key="concept:name" value="Enjoy Spaghetti Carbonara" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plate and garnish dish" />
+		</event>
+		<event>
+			<string key="concept:name" value="Mix with egg mixture and pancetta" />
+		</event>
+		<event>
+			<string key="concept:name" value="Pour egg yolk and cheese mixture" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil spaghetti" />
+		</event>
+		<event>
+			<string key="concept:name" value="Saute pancetta until crispy" />
+		</event>
+		<event>
+			<string key="concept:name" value="Whisk egg yolks, Parmesan, and black pepper" />
+		</event>
+		<event>
+			<string key="concept:name" value="Gather ingredients" />
+		</event>
+		<event>
+			<string key="concept:name" value="Boil salted water" />
+		</event>
+		<event>
+			<string key="concept:name" value="Plan how to cook" />
+		</event>
+	</trace>
+</log>

@@ -1,0 +1,19 @@
+log_name,added_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time (sec),error message
+01.xes,1.0,8,9,8,10.462408781051636,
+02.xes,1.0,16,16,16,11.916271686553955,
+03.xes,1.0,11,11,11,14.925052642822266,
+04.xes,1.0,10,10,10,9.36180067062378,
+05.xes,1.0,11,11,11,12.574281215667725,
+06.xes,1.0,10,10,10,13.565400838851929,
+07.xes,Error,13,None,None,0.3390200138092041,429 Resource has been exhausted (e.g. check quota).
+08.xes,Error,12,None,None,0.8384013175964355,429 Resource has been exhausted (e.g. check quota).
+09.xes,Error,13,None,None,0.8464059829711914,429 Resource has been exhausted (e.g. check quota).
+10.xes,Error,9,None,None,0.8435170650482178,429 Resource has been exhausted (e.g. check quota).
+11.xes,Error,12,None,None,0.85689377784729,429 Resource has been exhausted (e.g. check quota).
+12.xes,1.0,10,10,10,9.110247135162354,
+13.xes,1.0,9,8,8,10.442256450653076,
+14.xes,1.0,10,10,10,8.883389234542847,
+15.xes,1.0,10,12,10,13.297165393829346,
+16.xes,1.0,24,24,24,21.664055824279785,
+17.xes,Error,25,None,None,0.8588509559631348,429 Resource has been exhausted (e.g. check quota).
+log_name,added_it,visible_transitions_ground_truth,visible_transitions_generated,shared_activities,time (sec),error message

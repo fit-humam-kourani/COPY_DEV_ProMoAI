@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1731929983.5615208" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1731929983.5615208</text>
+    </name>
+    <page id="n0">
+      <place id="p_11">
+        <name>
+          <text>p_11</text>
+        </name>
+      </place>
+      <place id="p_24">
+        <name>
+          <text>p_24</text>
+        </name>
+      </place>
+      <place id="p_27">
+        <name>
+          <text>p_27</text>
+        </name>
+      </place>
+      <place id="p_32">
+        <name>
+          <text>p_32</text>
+        </name>
+      </place>
+      <place id="p_12">
+        <name>
+          <text>p_12</text>
+        </name>
+      </place>
+      <place id="p_15">
+        <name>
+          <text>p_15</text>
+        </name>
+      </place>
+      <place id="p_28">
+        <name>
+          <text>p_28</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_16">
+        <name>
+          <text>p_16</text>
+        </name>
+      </place>
+      <place id="p_37">
+        <name>
+          <text>p_37</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p_23">
+        <name>
+          <text>p_23</text>
+        </name>
+      </place>
+      <place id="p_34">
+        <name>
+          <text>p_34</text>
+        </name>
+      </place>
+      <transition id="ad131f91-b44b-4bc6-8bf0-59d37d020433">
+        <name>
+          <text>Boil salted water</text>
+        </name>
+      </transition>
+      <transition id="0abc4415-19bc-4876-9582-f537f5fc52b1">
+        <name>
+          <text>Saute pancetta until crispy</text>
+        </name>
+      </transition>
+      <transition id="1d6c97ea-27b8-4fcf-82fc-a49475e36484">
+        <name>
+          <text>Pour egg yolk and cheese mixture</text>
+        </name>
+      </transition>
+      <transition id="6582056b-b83b-4e17-be6a-c46a587a8de6">
+        <name>
+          <text>Gather ingredients</text>
+        </name>
+      </transition>
+      <transition id="ec923d27-69fb-4691-86bc-939eeff2f174">
+        <name>
+          <text>Boil spaghetti</text>
+        </name>
+      </transition>
+      <transition id="1324be4d-0904-4e85-8fd5-a1fa19c6861c">
+        <name>
+          <text>Plan how to cook</text>
+        </name>
+      </transition>
+      <transition id="7ba1542c-d7a7-438a-b506-960382a02f81">
+        <name>
+          <text>Plate and garnish dish</text>
+        </name>
+      </transition>
+      <transition id="a2130212-8d0e-4176-a30f-725208dbac27">
+        <name>
+          <text>Enjoy Spaghetti Carbonara</text>
+        </name>
+      </transition>
+      <transition id="91decbf4-e82d-4ad7-8867-56ae4a0906be">
+        <name>
+          <text>Whisk egg yolks, Parmesan, and black pepper</text>
+        </name>
+      </transition>
+      <transition id="35c1df33-1877-4e8e-bfa5-938351323cef">
+        <name>
+          <text>Mix with egg mixture and pancetta</text>
+        </name>
+      </transition>
+      <arc id="1444505122848" source="p_37" target="a2130212-8d0e-4176-a30f-725208dbac27"/>
+      <arc id="1444505243168" source="p_11" target="ec923d27-69fb-4691-86bc-939eeff2f174"/>
+      <arc id="1444505241632" source="6582056b-b83b-4e17-be6a-c46a587a8de6" target="p_15"/>
+      <arc id="1444505117760" source="p_24" target="91decbf4-e82d-4ad7-8867-56ae4a0906be"/>
+      <arc id="1444505120832" source="p_32" target="35c1df33-1877-4e8e-bfa5-938351323cef"/>
+      <arc id="1444505242688" source="ec923d27-69fb-4691-86bc-939eeff2f174" target="p_28"/>
+      <arc id="1444505240672" source="91decbf4-e82d-4ad7-8867-56ae4a0906be" target="p_23"/>
+      <arc id="1444505243264" source="p_15" target="ec923d27-69fb-4691-86bc-939eeff2f174"/>
+      <arc id="1444505242784" source="7ba1542c-d7a7-438a-b506-960382a02f81" target="p_37"/>
+      <arc id="1444505241248" source="0abc4415-19bc-4876-9582-f537f5fc52b1" target="p_27"/>
+      <arc id="1444505243360" source="source" target="1324be4d-0904-4e85-8fd5-a1fa19c6861c"/>
+      <arc id="1444505242880" source="a2130212-8d0e-4176-a30f-725208dbac27" target="sink"/>
+      <arc id="1444505241920" source="1d6c97ea-27b8-4fcf-82fc-a49475e36484" target="p_32"/>
+      <arc id="1444505241440" source="35c1df33-1877-4e8e-bfa5-938351323cef" target="p_34"/>
+      <arc id="1444505242976" source="p_23" target="1d6c97ea-27b8-4fcf-82fc-a49475e36484"/>
+      <arc id="1444505114496" source="p_16" target="6582056b-b83b-4e17-be6a-c46a587a8de6"/>
+      <arc id="1444505240960" source="1324be4d-0904-4e85-8fd5-a1fa19c6861c" target="p_12"/>
+      <arc id="1444505121696" source="p_34" target="7ba1542c-d7a7-438a-b506-960382a02f81"/>
+      <arc id="1444505243072" source="p_27" target="1d6c97ea-27b8-4fcf-82fc-a49475e36484"/>
+      <arc id="1444505241536" source="1324be4d-0904-4e85-8fd5-a1fa19c6861c" target="p_16"/>
+      <arc id="1444505241056" source="ad131f91-b44b-4bc6-8bf0-59d37d020433" target="p_11"/>
+      <arc id="1444505113056" source="p_12" target="ad131f91-b44b-4bc6-8bf0-59d37d020433"/>
+      <arc id="1444505119200" source="p_28" target="0abc4415-19bc-4876-9582-f537f5fc52b1"/>
+      <arc id="1444505242592" source="ec923d27-69fb-4691-86bc-939eeff2f174" target="p_24"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1730981891.4199588" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1730981891.4199588</text>
+    </name>
+    <page id="n0">
+      <place id="p_24">
+        <name>
+          <text>p_24</text>
+        </name>
+      </place>
+      <place id="p_27">
+        <name>
+          <text>p_27</text>
+        </name>
+      </place>
+      <place id="p_11">
+        <name>
+          <text>p_11</text>
+        </name>
+      </place>
+      <place id="p_28">
+        <name>
+          <text>p_28</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p_14">
+        <name>
+          <text>p_14</text>
+        </name>
+      </place>
+      <place id="p_18">
+        <name>
+          <text>p_18</text>
+        </name>
+      </place>
+      <place id="p_9">
+        <name>
+          <text>p_9</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="ed73292d-b7f7-4708-b16f-4ce95c5b7c44">
+        <name>
+          <text>Resolve complaint - Unique 1</text>
+        </name>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="2c25151e-ac21-468a-874f-b138a53de359"/>
+      </transition>
+      <transition id="52cbb15c-e434-4392-9fa4-0c150b78710e">
+        <name>
+          <text>File complaint</text>
+        </name>
+      </transition>
+      <transition id="09d05f62-bcf5-4562-9393-9f91142ee224">
+        <name>
+          <text>Notify customer of decision - Unique 1</text>
+        </name>
+      </transition>
+      <transition id="34b17331-4f82-4637-b248-2f5efeb3d0a5">
+        <name>
+          <text>Provide feedback - Unique 1</text>
+        </name>
+      </transition>
+      <transition id="4abc2825-feaf-46b4-aff4-0bca8065a8be">
+        <name>
+          <text>Log complaint - Unique 1</text>
+        </name>
+      </transition>
+      <transition id="b0c463f0-c02b-4c48-9e51-8e2e6197419e">
+        <name>
+          <text>Assign complaint to relevant department - Unique 1</text>
+        </name>
+      </transition>
+      <arc id="2219661011712" source="34b17331-4f82-4637-b248-2f5efeb3d0a5" target="sink"/>
+      <arc id="2219661012480" source="tau_1" target="p_24"/>
+      <arc id="2219661008928" source="p_27" target="34b17331-4f82-4637-b248-2f5efeb3d0a5"/>
+      <arc id="2219661010080" source="tau_1" target="p_9"/>
+      <arc id="2219661243968" source="p_11" target="4abc2825-feaf-46b4-aff4-0bca8065a8be"/>
+      <arc id="2219661235904" source="p_14" target="b0c463f0-c02b-4c48-9e51-8e2e6197419e"/>
+      <arc id="2219661233600" source="p_18" target="09d05f62-bcf5-4562-9393-9f91142ee224"/>
+      <arc id="2219661006912" source="4abc2825-feaf-46b4-aff4-0bca8065a8be" target="p_14"/>
+      <arc id="2219661009600" source="p_28" target="34b17331-4f82-4637-b248-2f5efeb3d0a5"/>
+      <arc id="2219661083216" source="source" target="tau_1"/>
+      <arc id="2219661014352" source="ed73292d-b7f7-4708-b16f-4ce95c5b7c44" target="p_28"/>
+      <arc id="2219661009360" source="09d05f62-bcf5-4562-9393-9f91142ee224" target="p_27"/>
+      <arc id="2219661012960" source="52cbb15c-e434-4392-9fa4-0c150b78710e" target="p_11"/>
+      <arc id="2219661238640" source="p_9" target="52cbb15c-e434-4392-9fa4-0c150b78710e"/>
+      <arc id="2219661232880" source="p_24" target="ed73292d-b7f7-4708-b16f-4ce95c5b7c44"/>
+      <arc id="2219661009648" source="b0c463f0-c02b-4c48-9e51-8e2e6197419e" target="p_18"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

@@ -1,0 +1,56 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_need = gen.activity('Identify need for new hire')
+create_job_description = gen.activity('Create job description')
+post_job_description = gen.activity('Post job description')
+collect_resumes = gen.activity('Collect resumes')
+screen_resumes = gen.activity('Screen resumes')
+invite_candidates = gen.activity('Invite candidates for interviews')
+conduct_initial_phone = gen.activity('Conduct initial phone interviews')
+conduct_virtual = gen.activity('Conduct a virtual interview')
+conduct_in_person = gen.activity('Conduct an in-person interview')
+choose_candidate = gen.activity('Choose candidate')
+negotiate_salary = gen.activity('Negotiate salary')
+extend_offer = gen.activity('Extend offer')
+begin_onboarding = gen.activity('Begin onboarding process')
+complete_paperwork = gen.activity('Complete paperwork')
+complete_orientation = gen.activity('Complete orientation')
+complete_training = gen.activity('Complete training')
+
+
+# Partial Order for Interview Process (Optional Interview Types)
+interview_process = gen.partial_order(dependencies=[
+    (invite_candidates, conduct_initial_phone),
+    (invite_candidates, conduct_virtual),
+    (invite_candidates, conduct_in_person)
+])
+
+# Partial Order for Onboarding Process
+onboarding_process = gen.partial_order(dependencies=[
+    (begin_onboarding, complete_paperwork),
+    (begin_onboarding, complete_orientation),
+    (begin_onboarding, complete_training)
+])
+
+
+# Main Process -  The crucial change is creating copies of  `begin_onboarding` to avoid reuse.
+begin_onboarding_copy1 = begin_onboarding.copy() # copy for onboarding
+begin_onboarding_copy2 = begin_onboarding.copy() # copy for main sequence
+
+
+final_model = gen.partial_order(dependencies=[
+    (identify_need, create_job_description),
+    (create_job_description, post_job_description),
+    (post_job_description, collect_resumes),
+    (collect_resumes, screen_resumes),
+    (screen_resumes, interview_process),
+    (interview_process, choose_candidate),
+    (choose_candidate, negotiate_salary),
+    (negotiate_salary, extend_offer),
+    (extend_offer, begin_onboarding_copy2), #Using the copy here in the main sequence.
+    (begin_onboarding_copy2, onboarding_process) #Linking the copy to the onboarding sub-process
+
+])

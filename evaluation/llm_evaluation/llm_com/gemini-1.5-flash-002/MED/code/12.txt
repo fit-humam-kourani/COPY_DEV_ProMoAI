@@ -1,0 +1,26 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_needs = gen.activity("Identify development needs or career aspirations")
+create_plan = gen.activity("Create personal development plan")
+work_on_skills = gen.activity("Work on skill enhancement")
+receive_feedback = gen.activity("Receive feedback and evaluation from supervisors")
+consider_promotion = gen.activity("Consider employee for promotion or new role")
+review_performance = gen.activity("Conducts formal performance review")
+approve_promotion = gen.activity("Approve promotion")
+set_new_responsibilities = gen.activity("Set new responsibilities")
+adjust_compensation = gen.activity("Adjust compensation")
+transition_role = gen.activity("Transition into new role")
+
+
+# Partial Orders to model concurrency where appropriate.  No concurrency needed here based on description.
+
+#Sequential Dependencies using partial order.  Using copies to avoid reuse error.
+poset_plan_creation = gen.partial_order(dependencies=[(identify_needs, create_plan)])
+poset_skill_growth = gen.partial_order(dependencies=[(work_on_skills, receive_feedback)])
+approve_promotion_copy = approve_promotion.copy() # Create a copy to avoid reuse
+poset_promotion_finalization = gen.partial_order(dependencies=[(approve_promotion_copy, set_new_responsibilities), (approve_promotion_copy, adjust_compensation)])
+
+final_model = gen.partial_order(dependencies=[(poset_plan_creation, poset_skill_growth), (poset_skill_growth, consider_promotion), (consider_promotion, review_performance), (review_performance, approve_promotion), (approve_promotion, poset_promotion_finalization), (poset_promotion_finalization, transition_role)])

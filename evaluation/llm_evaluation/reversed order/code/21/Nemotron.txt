@@ -1,0 +1,28 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Define activities
+plan_cook = gen.activity('Plan how to cook')
+whisk_egg_yolks = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+boil_spaghetti = gen.activity('Boil spaghetti')
+saute_pancetta = gen.activity('Saute pancetta until crispy')
+pour_egg_yolk = gen.activity('Pour egg yolk and cheese mixture')
+plate_garnish = gen.activity('Plate and garnish dish')
+boil_salted_water = gen.activity('Boil salted water')
+gather_ingredients = gen.activity('Gather ingredients')
+enjoy_carbonara = gen.activity('Enjoy Spaghetti Carbonara')
+mix_egg_pancetta = gen.activity('Mix with egg mixture and pancetta')
+
+# Define dependencies
+initial_prep = gen.partial_order(dependencies=[(boil_salted_water,), (gather_ingredients,)])
+egg_yolk_prep = gen.partial_order(dependencies=[(whisk_egg_yolks,), (saute_pancetta,)])
+spaghetti_prep = gen.partial_order(dependencies=[(boil_spaghetti, mix_egg_pancetta), (mix_egg_pancetta, pour_egg_yolk)])
+final_steps = gen.partial_order(dependencies=[(plate_garnish, enjoy_carbonara)])
+
+# Combine all subprocesses in the correct order
+final_model = gen.partial_order(
+    dependencies=[(plan_cook, initial_prep), 
+                  (initial_prep, egg_yolk_prep), 
+                  (initial_prep, spaghetti_prep), 
+                  (egg_yolk_prep, spaghetti_prep), 
+                  (spaghetti_prep, final_steps)])  # Direct sequencing maintained

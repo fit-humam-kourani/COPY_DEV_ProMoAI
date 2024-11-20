@@ -1,0 +1,50 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_searches = gen.activity('Customer searches for ticket')
+select_route = gen.activity('Select route')
+select_date_time = gen.activity('Select date and time')
+provide_personal_info = gen.activity('Provide personal information')
+provide_payment_details = gen.activity('Provide payment details')
+generate_ticket_1 = gen.activity('Generate ticket')
+generate_ticket_2 = generate_ticket_1.copy()  # Copy for concurrent use
+send_ticket_email = gen.activity('Send ticket via email')
+send_ticket_sms = gen.activity('Send ticket via SMS')
+update_seat_inventory = gen.activity('Update seat inventory')
+send_reminder = gen.activity('Send reminder')
+send_instructions = gen.activity('Send instructions')
+customer_completes_journey = gen.activity('Customer completes journey')
+post_travel_feedback = gen.activity('Post-travel feedback or services')
+
+# Route Selection Sub-process
+route_selection = gen.partial_order(dependencies=[(customer_searches, select_route), (select_route, select_date_time)])
+
+# Payment and Personal Info
+personal_and_payment = gen.partial_order(dependencies=[(route_selection, provide_personal_info), (provide_personal_info, provide_payment_details)])
+
+
+# Ticket Generation and Delivery
+ticket_generation = gen.partial_order(dependencies=[(provide_payment_details.copy(), generate_ticket_1)]) #Using a copy to avoid reuse
+ticket_delivery = gen.xor(send_ticket_email, send_ticket_sms)
+ticket_process = gen.partial_order(dependencies=[(ticket_generation, ticket_delivery)])
+
+
+# Concurrent Process
+concurrent_process = gen.partial_order(dependencies=[(ticket_process,), (generate_ticket_2, update_seat_inventory)])
+
+# Post-Travel Interaction (Optional)
+post_travel_interaction = gen.xor(post_travel_feedback, None)
+
+# Main Process
+main_process = gen.partial_order(dependencies=[
+    (personal_and_payment, concurrent_process),
+    (concurrent_process, send_reminder),
+    (concurrent_process, send_instructions),
+    (send_reminder, customer_completes_journey),
+    (send_instructions, customer_completes_journey),
+    (customer_completes_journey, post_travel_interaction)
+])
+
+final_model = main_process

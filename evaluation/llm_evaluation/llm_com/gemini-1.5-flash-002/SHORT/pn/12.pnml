@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1730820378.9626515" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1730820378.9626515</text>
+    </name>
+    <page id="n0">
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_36">
+        <name>
+          <text>p_36</text>
+        </name>
+      </place>
+      <place id="p_11">
+        <name>
+          <text>p_11</text>
+        </name>
+      </place>
+      <place id="p_18">
+        <name>
+          <text>p_18</text>
+        </name>
+      </place>
+      <place id="p_35">
+        <name>
+          <text>p_35</text>
+        </name>
+      </place>
+      <place id="p_32">
+        <name>
+          <text>p_32</text>
+        </name>
+      </place>
+      <place id="p_24">
+        <name>
+          <text>p_24</text>
+        </name>
+      </place>
+      <place id="p_26">
+        <name>
+          <text>p_26</text>
+        </name>
+      </place>
+      <place id="p_30">
+        <name>
+          <text>p_30</text>
+        </name>
+      </place>
+      <place id="p_38">
+        <name>
+          <text>p_38</text>
+        </name>
+      </place>
+      <place id="p_41">
+        <name>
+          <text>p_41</text>
+        </name>
+      </place>
+      <place id="p_14">
+        <name>
+          <text>p_14</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p_28">
+        <name>
+          <text>p_28</text>
+        </name>
+      </place>
+      <place id="p_39">
+        <name>
+          <text>p_39</text>
+        </name>
+      </place>
+      <place id="p_42">
+        <name>
+          <text>p_42</text>
+        </name>
+      </place>
+      <place id="p_33">
+        <name>
+          <text>p_33</text>
+        </name>
+      </place>
+      <transition id="7e2163f2-e80f-476e-89b5-c4f978465c9d">
+        <name>
+          <text>Work on skill enhancement</text>
+        </name>
+      </transition>
+      <transition id="fe66f95a-9fe3-44f2-a241-dda1949769fe">
+        <name>
+          <text>Set new responsibilities</text>
+        </name>
+      </transition>
+      <transition id="59fab20e-0211-4318-922e-786dffef89d9">
+        <name>
+          <text>Identify development needs or career aspirations</text>
+        </name>
+      </transition>
+      <transition id="a3617705-7f53-4c20-bdb9-9cb8584cd10c">
+        <name>
+          <text>Meet milestones</text>
+        </name>
+      </transition>
+      <transition id="8d2021ad-42d9-428d-9517-87ea17ddaada">
+        <name>
+          <text>Adjust compensation</text>
+        </name>
+      </transition>
+      <transition id="3ac6325c-1650-44ed-bd2d-47f30ee8a57f">
+        <name>
+          <text>Approve promotion</text>
+        </name>
+      </transition>
+      <transition id="b934fc2a-2f20-4fe5-b163-9bf56c54c359">
+        <name>
+          <text>Create personal development plan</text>
+        </name>
+      </transition>
+      <transition id="9ab8e35a-63b1-456f-8fcc-a039e5b42552">
+        <name>
+          <text>Transition into new role</text>
+        </name>
+      </transition>
+      <transition id="1237f019-cb29-4179-b216-ef40d1eb88c4">
+        <name>
+          <text>Receive feedback and evaluation from supervisors</text>
+        </name>
+      </transition>
+      <transition id="tauJoin_20">
+        <name>
+          <text>tauJoin_20</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="9367d442-93f3-4380-bc7b-43dce3446ee9"/>
+      </transition>
+      <transition id="ca00bee6-931a-4fac-bea0-ed66281d86ab">
+        <name>
+          <text>Meet milestones</text>
+        </name>
+      </transition>
+      <transition id="c574e797-63a8-48f2-b046-bdaef3ac1eee">
+        <name>
+          <text>Conducts formal performance review</text>
+        </name>
+      </transition>
+      <transition id="d0594e5a-756b-4299-98a1-4c276334340b">
+        <name>
+          <text>Consider employee for promotion or new role</text>
+        </name>
+      </transition>
+      <arc id="1460263333376" source="p_28" target="c574e797-63a8-48f2-b046-bdaef3ac1eee"/>
+      <arc id="1460263324160" source="p_41" target="tauJoin_20"/>
+      <arc id="1460258575872" source="59fab20e-0211-4318-922e-786dffef89d9" target="p_14"/>
+      <arc id="1460263329296" source="ca00bee6-931a-4fac-bea0-ed66281d86ab" target="p_26"/>
+      <arc id="1460263324688" source="p_42" target="1237f019-cb29-4179-b216-ef40d1eb88c4"/>
+      <arc id="1460263334432" source="p_26" target="d0594e5a-756b-4299-98a1-4c276334340b"/>
+      <arc id="1460258575392" source="1237f019-cb29-4179-b216-ef40d1eb88c4" target="p_41"/>
+      <arc id="1460263322192" source="p_14" target="7e2163f2-e80f-476e-89b5-c4f978465c9d"/>
+      <arc id="1460258575968" source="7e2163f2-e80f-476e-89b5-c4f978465c9d" target="p_18"/>
+      <arc id="1460263329920" source="p_18" target="a3617705-7f53-4c20-bdb9-9cb8584cd10c"/>
+      <arc id="1460263332992" source="p_24" target="ca00bee6-931a-4fac-bea0-ed66281d86ab"/>
+      <arc id="1460263328912" source="c574e797-63a8-48f2-b046-bdaef3ac1eee" target="p_30"/>
+      <arc id="1460258576064" source="3ac6325c-1650-44ed-bd2d-47f30ee8a57f" target="p_39"/>
+      <arc id="1460258577600" source="b934fc2a-2f20-4fe5-b163-9bf56c54c359" target="p_11"/>
+      <arc id="1460258575056" source="d0594e5a-756b-4299-98a1-4c276334340b" target="p_28"/>
+      <arc id="1460263327952" source="8d2021ad-42d9-428d-9517-87ea17ddaada" target="p_32"/>
+      <arc id="1460263336160" source="p_30" target="3ac6325c-1650-44ed-bd2d-47f30ee8a57f"/>
+      <arc id="1460258577648" source="source" target="b934fc2a-2f20-4fe5-b163-9bf56c54c359"/>
+      <arc id="1460263328048" source="9ab8e35a-63b1-456f-8fcc-a039e5b42552" target="p_38"/>
+      <arc id="1460263337264" source="p_32" target="tauJoin_20"/>
+      <arc id="1460263330640" source="p_36" target="fe66f95a-9fe3-44f2-a241-dda1949769fe"/>
+      <arc id="1460258572128" source="tauJoin_20" target="sink"/>
+      <arc id="1460263328624" source="fe66f95a-9fe3-44f2-a241-dda1949769fe" target="p_35"/>
+      <arc id="1460263323008" source="p_38" target="tauJoin_20"/>
+      <arc id="1460258727312" source="p_33" target="8d2021ad-42d9-428d-9517-87ea17ddaada"/>
+      <arc id="1460263323536" source="p_39" target="9ab8e35a-63b1-456f-8fcc-a039e5b42552"/>
+      <arc id="1460258585520" source="3ac6325c-1650-44ed-bd2d-47f30ee8a57f" target="p_33"/>
+      <arc id="1460258580432" source="c574e797-63a8-48f2-b046-bdaef3ac1eee" target="p_42"/>
+      <arc id="1460258574288" source="3ac6325c-1650-44ed-bd2d-47f30ee8a57f" target="p_36"/>
+      <arc id="1460258719200" source="p_11" target="59fab20e-0211-4318-922e-786dffef89d9"/>
+      <arc id="1460258571744" source="a3617705-7f53-4c20-bdb9-9cb8584cd10c" target="p_24"/>
+      <arc id="1460258726880" source="p_35" target="tauJoin_20"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

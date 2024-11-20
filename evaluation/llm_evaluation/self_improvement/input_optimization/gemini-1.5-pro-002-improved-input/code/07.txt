@@ -1,0 +1,55 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+customer_searches_for_ticket = gen.activity('Customer searches for ticket')
+select_route = gen.activity('Select route')
+select_date_and_time = gen.activity('Select date and time')
+
+# Information and payment
+provide_personal_information = gen.activity('Provide personal information')
+provide_payment_details = gen.activity('Provide payment details')
+
+# Booking and ticketing
+verify_payment = gen.activity('Verify payment')  # Implicit activity, added for clarity
+generate_ticket = gen.activity('Generate ticket')
+send_ticket_via_email = gen.activity('Send ticket via email')
+send_ticket_via_sms = gen.activity('Send ticket via SMS')
+send_ticket = gen.xor(send_ticket_via_email, send_ticket_via_sms)
+
+# Concurrent inventory update
+update_seat_inventory = gen.activity('Update seat inventory')
+
+# Pre-travel reminders and instructions
+send_reminder = gen.activity('Send reminder')
+send_instructions = gen.activity('Send instructions')
+pre_travel_communications = gen.partial_order(dependencies=[(send_reminder,), (send_instructions,)]) # Concurrent reminders and instructions
+optional_pre_travel_communications = gen.xor(pre_travel_communications, None) # Optional
+
+
+# Core process completion
+customer_completes_journey = gen.activity('Customer completes journey')
+
+# Post-travel process (optional)
+post_travel_feedback_or_services = gen.activity('Post-travel feedback or services')
+optional_post_travel_process = gen.xor(post_travel_feedback_or_services, None)
+
+# Constructing the core process model
+core_process = gen.partial_order(
+    dependencies=[
+        (customer_searches_for_ticket, select_route),
+        (select_route, select_date_and_time),
+        (select_date_and_time, provide_personal_information),
+        (provide_personal_information, provide_payment_details),
+        (provide_payment_details, verify_payment),
+        (verify_payment, generate_ticket),
+        (generate_ticket, send_ticket),
+        (generate_ticket, update_seat_inventory),  # Concurrent with ticket sending
+        (send_ticket, optional_pre_travel_communications),
+        (optional_pre_travel_communications, customer_completes_journey)
+    ]
+)
+
+
+final_model = gen.partial_order(dependencies=[(core_process, optional_post_travel_process)])

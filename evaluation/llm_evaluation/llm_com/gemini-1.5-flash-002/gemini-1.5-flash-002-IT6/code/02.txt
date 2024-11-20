@@ -1,0 +1,79 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_need = gen.activity('Identify need for new hire')
+create_jd = gen.activity('Create job description')
+post_jd = gen.activity('Post job description')
+collect_resumes = gen.activity('Collect resumes')
+screen_resumes = gen.activity('Screen resumes')
+phone_interviews = gen.activity('Conduct initial phone interviews')
+invite_interviews = gen.activity('Invite candidates for interviews')
+in_person_interview = gen.activity('Conduct an in-person interview')
+virtual_interview = gen.activity('Conduct a virtual interview')
+choose_candidate = gen.activity('Choose candidate')
+extend_offer = gen.activity('Extend offer')
+negotiate_salary = gen.activity('Negotiate salary')
+begin_onboarding = gen.activity('Begin onboarding process')
+complete_paperwork = gen.activity('Complete paperwork')
+complete_orientation = gen.activity('Complete orientation')
+complete_training = gen.activity('Complete training')
+
+
+# Interview Mode Choice
+interview_mode_choice = gen.xor(in_person_interview, virtual_interview)
+
+# Optional Salary Negotiation
+optional_negotiation = gen.xor(negotiate_salary, None)
+
+# Onboarding Process
+# Create copies to avoid reuse.  Crucially, we copy EVERYTHING related to onboarding.
+begin_onboarding_copy = begin_onboarding.copy()
+complete_paperwork_copy = complete_paperwork.copy()
+complete_orientation_copy = complete_orientation.copy()
+complete_training_copy = complete_training.copy()
+
+onboarding_poset = gen.partial_order(dependencies=[
+    (begin_onboarding_copy, complete_paperwork_copy),
+    (begin_onboarding_copy, complete_orientation_copy),
+    (begin_onboarding_copy, complete_training_copy)
+])
+
+# Create copies to avoid reuse of interview_mode_choice and optional_negotiation
+interview_mode_choice_copy = interview_mode_choice.copy()
+optional_negotiation_copy = optional_negotiation.copy()
+
+#Main Process
+# The core issue was reusing activities within the main partial order.  
+# This version creates copies of ALL potentially reused elements.
+
+identify_need_copy = identify_need.copy()
+create_jd_copy = create_jd.copy()
+post_jd_copy = post_jd.copy()
+collect_resumes_copy = collect_resumes.copy()
+screen_resumes_copy = screen_resumes.copy()
+phone_interviews_copy = phone_interviews.copy()
+invite_interviews_copy = invite_interviews.copy()
+choose_candidate_copy = choose_candidate.copy()
+extend_offer_copy = extend_offer.copy()
+optional_negotiation_copy_2 = optional_negotiation_copy.copy() # Added another copy here
+begin_onboarding_copy_2 = begin_onboarding_copy.copy() # Added another copy here
+
+
+main_process_poset = gen.partial_order(dependencies=[
+    (identify_need_copy, create_jd_copy),
+    (create_jd_copy, post_jd_copy),
+    (post_jd_copy, collect_resumes_copy),
+    (collect_resumes_copy, screen_resumes_copy),
+    (screen_resumes_copy, phone_interviews_copy),
+    (phone_interviews_copy, invite_interviews_copy),
+    (invite_interviews_copy, interview_mode_choice_copy),
+    (interview_mode_choice_copy, choose_candidate_copy),
+    (choose_candidate_copy, extend_offer_copy),
+    (extend_offer_copy, optional_negotiation_copy_2),
+    (optional_negotiation_copy_2, begin_onboarding_copy_2),
+    (onboarding_poset.copy(),)  #Crucially, copy onboarding_poset here as well
+])
+
+final_model = main_process_poset

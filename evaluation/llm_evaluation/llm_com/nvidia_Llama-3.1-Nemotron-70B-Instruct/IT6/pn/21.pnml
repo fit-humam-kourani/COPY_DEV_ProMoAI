@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="imdf_net_1731942189.8347583" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>imdf_net_1731942189.8347583</text>
+    </name>
+    <page id="n0">
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p_44">
+        <name>
+          <text>p_44</text>
+        </name>
+      </place>
+      <place id="p_47">
+        <name>
+          <text>p_47</text>
+        </name>
+      </place>
+      <place id="p_15">
+        <name>
+          <text>p_15</text>
+        </name>
+      </place>
+      <place id="p_22">
+        <name>
+          <text>p_22</text>
+        </name>
+      </place>
+      <place id="p_25">
+        <name>
+          <text>p_25</text>
+        </name>
+      </place>
+      <place id="p_36">
+        <name>
+          <text>p_36</text>
+        </name>
+      </place>
+      <place id="p_12">
+        <name>
+          <text>p_12</text>
+        </name>
+      </place>
+      <place id="p_16">
+        <name>
+          <text>p_16</text>
+        </name>
+      </place>
+      <place id="p_21">
+        <name>
+          <text>p_21</text>
+        </name>
+      </place>
+      <place id="p_26">
+        <name>
+          <text>p_26</text>
+        </name>
+      </place>
+      <place id="p_33">
+        <name>
+          <text>p_33</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p_11">
+        <name>
+          <text>p_11</text>
+        </name>
+      </place>
+      <transition id="f3c2f205-888a-4569-8f89-5c3103b83e41">
+        <name>
+          <text>Mix with egg mixture and pancetta</text>
+        </name>
+      </transition>
+      <transition id="572c887b-3f87-43b5-b0a2-33974eab0ba5">
+        <name>
+          <text>Pour egg yolk and cheese mixture</text>
+        </name>
+      </transition>
+      <transition id="0e0f0f14-5e61-49bb-bbc3-75ccbdb6e763">
+        <name>
+          <text>Plan how to cook</text>
+        </name>
+      </transition>
+      <transition id="d70f14ae-8b60-41e4-943c-dbc395a06f88">
+        <name>
+          <text>Plate and garnish dish</text>
+        </name>
+      </transition>
+      <transition id="3a98ada1-5f6b-45cd-823c-930352b00ea0">
+        <name>
+          <text>Enjoy Spaghetti Carbonara</text>
+        </name>
+      </transition>
+      <transition id="abdc5802-74b8-4ca3-aa5d-878261ee435e">
+        <name>
+          <text>Boil salted water</text>
+        </name>
+      </transition>
+      <transition id="11ccce58-b01a-4b4a-a7a8-488b2368f386">
+        <name>
+          <text>Whisk egg yolks, Parmesan, and black pepper</text>
+        </name>
+      </transition>
+      <transition id="35c0b91a-8205-44e7-8300-0c5e4e6d02ce">
+        <name>
+          <text>Boil spaghetti</text>
+        </name>
+      </transition>
+      <transition id="27fb7f87-4dd3-4ac9-b3c8-fbdd28c3533d">
+        <name>
+          <text>Gather ingredients</text>
+        </name>
+      </transition>
+      <transition id="a19fc9db-6b7c-4e1d-901f-234917e1f065">
+        <name>
+          <text>Saute pancetta until crispy</text>
+        </name>
+      </transition>
+      <transition id="tauJoin_10">
+        <name>
+          <text>tauJoin_10</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="bdceb317-6eb2-45bc-b1ab-3367ba1e6adb"/>
+      </transition>
+      <arc id="2199579021312" source="p_44" target="d70f14ae-8b60-41e4-943c-dbc395a06f88"/>
+      <arc id="2199579027984" source="p_21" target="35c0b91a-8205-44e7-8300-0c5e4e6d02ce"/>
+      <arc id="2199579026448" source="abdc5802-74b8-4ca3-aa5d-878261ee435e" target="p_11"/>
+      <arc id="2199578603056" source="p_11" target="tauJoin_10"/>
+      <arc id="2199579025488" source="a19fc9db-6b7c-4e1d-901f-234917e1f065" target="p_25"/>
+      <arc id="2199579027024" source="f3c2f205-888a-4569-8f89-5c3103b83e41" target="p_36"/>
+      <arc id="2199579018336" source="p_36" target="572c887b-3f87-43b5-b0a2-33974eab0ba5"/>
+      <arc id="2199579028080" source="p_25" target="35c0b91a-8205-44e7-8300-0c5e4e6d02ce"/>
+      <arc id="2199579022464" source="p_47" target="3a98ada1-5f6b-45cd-823c-930352b00ea0"/>
+      <arc id="2199579026064" source="tauJoin_10" target="p_22"/>
+      <arc id="2199578596528" source="p_16" target="27fb7f87-4dd3-4ac9-b3c8-fbdd28c3533d"/>
+      <arc id="2199579027120" source="3a98ada1-5f6b-45cd-823c-930352b00ea0" target="sink"/>
+      <arc id="2199579028176" source="source" target="0e0f0f14-5e61-49bb-bbc3-75ccbdb6e763"/>
+      <arc id="2199578593504" source="p_22" target="11ccce58-b01a-4b4a-a7a8-488b2368f386"/>
+      <arc id="2199579026160" source="tauJoin_10" target="p_26"/>
+      <arc id="2199579027696" source="572c887b-3f87-43b5-b0a2-33974eab0ba5" target="p_44"/>
+      <arc id="2199578602768" source="p_12" target="abdc5802-74b8-4ca3-aa5d-878261ee435e"/>
+      <arc id="2199578597152" source="p_26" target="a19fc9db-6b7c-4e1d-901f-234917e1f065"/>
+      <arc id="2199579025200" source="27fb7f87-4dd3-4ac9-b3c8-fbdd28c3533d" target="p_15"/>
+      <arc id="2199579027312" source="0e0f0f14-5e61-49bb-bbc3-75ccbdb6e763" target="p_12"/>
+      <arc id="2199579024240" source="11ccce58-b01a-4b4a-a7a8-488b2368f386" target="p_21"/>
+      <arc id="2199578601904" source="p_15" target="tauJoin_10"/>
+      <arc id="2199579027888" source="d70f14ae-8b60-41e4-943c-dbc395a06f88" target="p_47"/>
+      <arc id="2199578034624" source="p_33" target="f3c2f205-888a-4569-8f89-5c3103b83e41"/>
+      <arc id="2199579027408" source="0e0f0f14-5e61-49bb-bbc3-75ccbdb6e763" target="p_16"/>
+      <arc id="2199579026928" source="35c0b91a-8205-44e7-8300-0c5e4e6d02ce" target="p_33"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

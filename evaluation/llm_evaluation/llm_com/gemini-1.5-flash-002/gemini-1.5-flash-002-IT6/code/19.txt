@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+login = gen.activity('Login')
+select_items = gen.activity('Select items')
+set_payment_method = gen.activity('Set payment method')
+pay = gen.activity('Pay')
+complete_installment_agreement = gen.activity('Complete installment agreement')
+select_free_reward = gen.activity('Select free reward')
+deliver_items = gen.activity('Deliver items')
+return_items = gen.activity('Return items')
+
+
+# Payment Choice
+payment_choice = gen.xor(pay, complete_installment_agreement)
+
+# Partial Order for Concurrent Actions after Login
+concurrent_actions = gen.partial_order(dependencies=[(select_items,), (set_payment_method,)])
+
+# Reward Selection (dependent on purchase value - simplified here)
+select_items_copy = select_items.copy()
+reward_selection = gen.partial_order(dependencies=[(select_items_copy, select_free_reward)])
+
+# Main Process
+main_process = gen.partial_order(dependencies=[(login, concurrent_actions), (concurrent_actions, payment_choice), (concurrent_actions, reward_selection), (payment_choice, deliver_items)])
+
+# Item Return Loop (simplified - each return initiates a new delivery)
+deliver_items_copy = deliver_items.copy()
+return_items_process = gen.partial_order(dependencies=[(return_items, deliver_items_copy)])
+item_return_loop = gen.loop(do=return_items_process, redo=None)
+
+
+#Final model incorporating item return
+final_model = gen.partial_order(dependencies=[(main_process,), (main_process,item_return_loop)])

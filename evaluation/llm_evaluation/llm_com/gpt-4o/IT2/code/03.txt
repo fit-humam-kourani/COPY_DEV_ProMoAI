@@ -1,0 +1,43 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+check_inventory = gen.activity('Check current inventory level')
+send_auto_alert = gen.activity('Send an automated alert')
+send_manual_alert = gen.activity('Send a manual alert')
+place_order = gen.activity('Place order with suppliers')
+update_delivery_dates = gen.activity('Update inventory system with expected delivery dates')
+receive_stock = gen.activity('Receive stock')
+inspect_stock = gen.activity('Inspect stock for quality')
+record_stock = gen.activity('Record stock in system')
+record_stock_copy = record_stock.copy()  # Copy of 'Record stock in system' for reuse
+place_in_storage = gen.activity('Place stock in storage')
+place_on_shelves = gen.activity('Place stock on shelves')
+update_inventory_levels = gen.activity('Update inventory levels')
+
+# Alert choice (automated or manual)
+alert_choice = gen.xor(send_auto_alert, send_manual_alert)
+
+# Inventory check and alert dependency
+inventory_alert_poset = gen.partial_order(dependencies=[(check_inventory, alert_choice)])
+
+# Placing order and updating expected delivery dates
+place_order_poset = gen.partial_order(dependencies=[(place_order, update_delivery_dates)])
+
+# Receiving and inspecting stock
+receive_inspect_poset = gen.partial_order(dependencies=[(receive_stock, inspect_stock), (inspect_stock, record_stock)])
+
+# Storage choice (shelves or storage)
+storage_choice = gen.xor(place_on_shelves, place_in_storage)
+
+# Complete receiving and storage process with the copied activity
+receive_storage_poset = gen.partial_order(dependencies=[(record_stock_copy, storage_choice), (storage_choice, update_inventory_levels)])
+
+# Final process model
+final_model = gen.partial_order(
+    dependencies=[
+        (inventory_alert_poset, place_order_poset),
+        (place_order_poset, receive_inspect_poset),
+        (receive_inspect_poset, receive_storage_poset)
+    ])

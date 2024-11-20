@@ -1,0 +1,34 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+schedule_audit = gen.activity("Schedule compliance audit")
+prepare_documentation = gen.activity("Prepare documentation")
+gather_evidence = gen.activity("Gather evidence")
+conduct_self_assessment = gen.activity("Conduct self-assessment")
+conduct_external_audit = gen.activity("Conduct external audit")
+identify_gaps = gen.activity("Identify gaps or issues")
+make_corrections = gen.activity("Make necessary corrections or improvements")
+conduct_final_audit = gen.activity("Conduct final audit")
+award_certification = gen.activity("Award certification")
+issue_documents = gen.activity("Issue official documents")
+
+
+# Partial Order for Preparation Phase
+preparation_phase = gen.partial_order(dependencies=[(prepare_documentation,), (gather_evidence,), (conduct_self_assessment,)])
+
+# Audit Phase (Iteration handled differently to avoid reuse of `identify_gaps`)
+external_audit_and_gap_identification = gen.partial_order(dependencies=[(conduct_external_audit, identify_gaps)])
+correction_loop = gen.loop(do=external_audit_and_gap_identification, redo=gen.xor(make_corrections, None)) #make_corrections is optional
+
+
+#Combine the preparation and audit phase
+combined_phases = gen.partial_order(dependencies=[(preparation_phase, correction_loop)])
+
+
+# Final Sequence
+final_sequence = gen.partial_order(dependencies=[(combined_phases, conduct_final_audit), (conduct_final_audit, award_certification), (award_certification, issue_documents)])
+
+#The whole process is optional (can be skipped)
+final_model = gen.xor(final_sequence, None)

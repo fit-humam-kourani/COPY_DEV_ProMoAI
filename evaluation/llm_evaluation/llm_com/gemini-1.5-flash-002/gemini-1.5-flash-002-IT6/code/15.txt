@@ -1,0 +1,40 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+schedule_audit = gen.activity("Schedule compliance audit")
+prepare_documentation = gen.activity("Prepare documentation")
+gather_evidence = gen.activity("Gather evidence")
+conduct_self_assessment = gen.activity("Conduct self-assessment")
+conduct_external_audit = gen.activity("Conduct external audit")
+identify_gaps = gen.activity("Identify gaps or issues")
+remediate = gen.activity("Make necessary corrections or improvements")
+conduct_final_audit = gen.activity("Conduct final audit")
+award_certification = gen.activity("Award certification")
+issue_documents = gen.activity("Issue official documents")
+
+
+# Internal Preparation (Partial Order)
+internal_prep = gen.partial_order(dependencies=[
+    (prepare_documentation,),
+    (gather_evidence,),
+    (conduct_self_assessment,)
+])
+
+# Remediation (Optional)
+identify_gaps_copy = gen.activity("Identify gaps or issues") # Create a copy to avoid reuse
+remediation_po = gen.partial_order(dependencies=[(identify_gaps_copy, remediate)])
+optional_remediation = gen.xor(remediation_po, None)
+
+
+# Main Process (Partial Order)
+final_model = gen.partial_order(dependencies=[
+    (schedule_audit, internal_prep),
+    (internal_prep, conduct_external_audit),
+    (conduct_external_audit, identify_gaps),
+    (identify_gaps, optional_remediation),
+    (optional_remediation, conduct_final_audit),
+    (conduct_final_audit, award_certification),
+    (award_certification, issue_documents)
+])

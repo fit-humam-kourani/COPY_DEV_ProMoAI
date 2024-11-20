@@ -1,0 +1,31 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_need_1 = gen.activity('Identify need for new supplier or vendor')
+issue_rfp = gen.activity('Issue request for proposals (RFP)')
+receive_proposals = gen.activity('Receive supplier proposals')
+evaluate_proposal = gen.activity('Evaluate proposal')
+conduct_site_visit = gen.activity('Conduct site visit')
+conduct_interview = gen.activity('Conduct interview')
+select_supplier = gen.activity('Select supplier')
+begin_negotiations = gen.activity('Begin contract negotiations')
+sign_contract = gen.activity('Sign contract')
+onboard_supplier = gen.activity('Onboard supplier')
+execute_contract = gen.activity('Execute contract')
+identify_need_2 = identify_need_1.copy() # Create a copy to avoid reuse
+
+
+# Partial Order within the loop
+proposal_evaluation_po = gen.partial_order(dependencies=[(evaluate_proposal,), (conduct_site_visit,),(conduct_interview,)])
+
+# Loop for proposal processing
+proposal_loop = gen.loop(do=proposal_evaluation_po, redo=None)
+
+# XOR for supplier selection or returning to initial step
+supplier_selection_xor = gen.xor(gen.partial_order(dependencies=[(select_supplier, begin_negotiations), (begin_negotiations, sign_contract), (sign_contract, onboard_supplier), (onboard_supplier, execute_contract)]), identify_need_2)
+
+
+# Main process
+final_model = gen.partial_order(dependencies=[(identify_need_1, issue_rfp), (issue_rfp, receive_proposals), (receive_proposals, proposal_loop), (proposal_loop, supplier_selection_xor)])

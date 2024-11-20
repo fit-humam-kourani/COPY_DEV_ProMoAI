@@ -1,0 +1,83 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Stage 1: Application Submission and Review
+submit_application = gen.activity('Submit application online')
+review_application = gen.activity('Review application and documents')
+check_completeness = gen.activity('Check for completeness')  #Implicit in review, but made explicit
+
+# XOR: Missing Documents
+missing_docs = gen.activity('Notify applicant of missing documents')
+provide_docs = gen.activity('Provide missing documents')
+missing_docs_path = gen.partial_order(dependencies=[(missing_docs, provide_docs)])
+
+# XOR: Application Outcome (after completeness check)
+missing_documents_xor = gen.xor(missing_docs_path, None) #Optional missing documents path
+application_review_path = gen.partial_order(dependencies=[(submit_application,review_application),(review_application,check_completeness),(check_completeness,missing_documents_xor)])
+
+# Create copies to avoid reuse errors
+review_application_2 = review_application.copy()
+check_completeness_2 = check_completeness.copy()
+missing_documents_xor_2 = missing_documents_xor.copy()
+evaluate_application_copy_1 = gen.activity('Evaluate application by admissions committee')
+evaluate_application_copy_2 = gen.activity('Evaluate application by admissions committee')
+process_fees_copy_1 = gen.activity('Process fees or waivers')
+process_fees_copy_2 = gen.activity('Process fees or waivers')
+decision_xor_copy_1 = gen.xor(gen.activity('Send acceptance letter'), gen.activity('Send rejection letter'))
+decision_xor_copy_2 = gen.xor(gen.activity('Send acceptance letter'), gen.activity('Send rejection letter'))
+
+
+complete_application_path = gen.partial_order(dependencies=[(missing_documents_xor_2, review_application_2), (review_application_2, check_completeness_2)])
+
+
+#Combine Application Review Paths:
+application_outcome_path = gen.partial_order(dependencies=[(application_review_path, evaluate_application_copy_1), (evaluate_application_copy_1, process_fees_copy_1), (process_fees_copy_1,decision_xor_copy_1)])
+post_application_review_path = gen.partial_order(dependencies = [(complete_application_path,evaluate_application_copy_2),(evaluate_application_copy_2,process_fees_copy_2),(process_fees_copy_2, decision_xor_copy_2)])
+
+final_application_path = gen.xor(application_outcome_path, post_application_review_path) #combining paths if docs were missing
+
+
+# Stage 2: Semester Loop (if accepted)
+confirm_enrollment = gen.activity('Confirm enrollment')
+cancel_application = gen.activity('Cancel application')
+send_orientation = gen.activity('Send orientation materials')
+setup_it_accounts = gen.activity('Set up IT accounts')
+assist_visa = gen.activity('Assist with visa processing')
+
+#Concurrent Processes within the semester loop
+semester_do_part = gen.partial_order(dependencies=[(confirm_enrollment, send_orientation), (send_orientation, setup_it_accounts), (confirm_enrollment, assist_visa), (setup_it_accounts, assist_visa)]) # assuming visa processing happens concurrently if needed
+semester_do_redo = gen.loop(do = semester_do_part, redo=None)
+#Stage 3: Post-Enrollment
+obtain_id = gen.activity('Obtain student ID card')
+meet_advisor = gen.activity('Meet with academic advisor')
+select_courses = gen.activity('Select courses')
+resolve_conflicts = gen.activity('Resolve schedule conflicts')
+attend_classes = gen.activity('Begin attending classes')
+
+
+#Combine post-enrollment process
+post_enrollment = gen.partial_order(dependencies=[(semester_do_redo, obtain_id), (obtain_id, meet_advisor), (meet_advisor, select_courses), (select_courses, resolve_conflicts),(resolve_conflicts, attend_classes)])
+
+# Stage 4: Add/Drop and Grievances (redo part of loop)
+add_drop = gen.activity('Add/drop courses')
+post_grades = gen.activity('Post grades')
+review_grades = gen.activity('Review grades online')
+submit_appeal = gen.activity('Submit appeal form')
+meet_committee = gen.activity('Meet with appeals committee')
+await_decision = gen.activity('Await decision')
+
+#XOR for grievances
+grievances_xor = gen.xor(gen.partial_order(dependencies=[(submit_appeal, meet_committee), (meet_committee, await_decision)]), None)
+
+# Combine Add/Drop and Grievances
+semester_redo_part = gen.partial_order(dependencies=[(post_grades, review_grades), (review_grades, grievances_xor)])
+
+
+#Combine the whole process (including graduation and withdrawal)
+graduate = gen.activity('Graduate')
+withdraw = gen.activity('Withdraw')
+final_loop_structure = gen.loop(do = post_enrollment, redo=semester_redo_part)
+overall_process = gen.partial_order(dependencies=[(final_application_path, final_loop_structure),(final_loop_structure, graduate), (final_loop_structure, withdraw)])
+
+final_model = overall_process

@@ -1,0 +1,34 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+plan_how_to_cook = gen.activity('Plan how to cook')
+gather_ingredients = gen.activity('Gather ingredients')
+boil_salted_water = gen.activity('Boil salted water')
+boil_spaghetti = gen.activity('Boil spaghetti')
+whisk_egg_yolks = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+saute_pancetta = gen.activity('Saute pancetta until crispy')
+pour_egg_yolk = gen.activity('Pour egg yolk and cheese mixture')
+mix_with_egg_mixture = gen.activity('Mix with egg mixture and pancetta')
+plate_and_garnish = gen.activity('Plate and garnish dish')
+enjoy_spaghetti = gen.activity('Enjoy Spaghetti Carbonara')
+
+
+
+# Partial order to model the concurrent boiling of water and gathering ingredients
+boil_water_gather_ingredients = gen.partial_order(dependencies=[(boil_salted_water,), (gather_ingredients,)])
+
+# Partial order to model the concurrent whisking of egg yolks and sautéing pancetta
+whisk_saute = gen.partial_order(dependencies=[(whisk_egg_yolks,), (saute_pancetta,)])
+
+# Main process flow
+final_model = gen.partial_order(dependencies=[
+    (plan_how_to_cook, boil_water_gather_ingredients),
+    (boil_water_gather_ingredients, boil_spaghetti),
+    (boil_spaghetti, whisk_saute),
+    (whisk_saute, pour_egg_yolk),
+    (pour_egg_yolk, mix_with_egg_mixture),
+    (mix_with_egg_mixture, plate_and_garnish),
+    (plate_and_garnish, enjoy_spaghetti)
+])

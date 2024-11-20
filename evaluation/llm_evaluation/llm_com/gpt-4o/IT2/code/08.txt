@@ -1,0 +1,45 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Define activities
+report_incident = gen.activity('Report incident')
+log_report = gen.activity('Log report into tracking system')
+assign_team = gen.activity('Assign report to appropriate team')
+gather_info = gen.activity('Gather necessary information')
+identify_cause = gen.activity('Identify cause of incident')
+propose_actions = gen.activity('Propose corrective actions')
+implement_fix = gen.activity('Implement fix')
+conduct_training = gen.activity('Conduct training')
+change_policy = gen.activity('Change policy')
+conduct_follow_up = gen.activity('Conduct follow-up')
+notify_stakeholders = gen.activity('Notify all stakeholders')
+close_report = gen.activity('Close incident report')
+
+# Solution options with copies to avoid reuse issues
+implement_fix_copy = implement_fix.copy()
+conduct_training_copy = conduct_training.copy()
+change_policy_copy = change_policy.copy()
+
+# Solution can involve either implementing a fix, conducting training, or changing policy
+solution_choice = gen.xor(implement_fix, conduct_training, change_policy)
+
+# Partial order of investigation and solution implementation
+investigation_to_solution = gen.partial_order(
+    dependencies=[(gather_info, identify_cause), (identify_cause, propose_actions), (propose_actions, solution_choice)]
+)
+
+# Complete process flow with unique copies of solution submodels
+process_flow = gen.partial_order(
+    dependencies=[
+        (report_incident, log_report),
+        (log_report, assign_team),
+        (assign_team, investigation_to_solution),
+        (implement_fix_copy, conduct_follow_up),
+        (conduct_training_copy, conduct_follow_up),
+        (change_policy_copy, conduct_follow_up),
+        (conduct_follow_up, close_report),
+        (close_report, notify_stakeholders)
+    ]
+)
+
+final_model = process_flow

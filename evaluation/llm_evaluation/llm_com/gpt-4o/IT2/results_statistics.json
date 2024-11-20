@@ -1,0 +1,172 @@
+{
+    "log_name": "01.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 9,
+    "shared_activities": 8,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "24.922317504882812"
+}{
+    "log_name": "02.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": 16,
+    "shared_activities": 16,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "18.6185884475708"
+}{
+    "log_name": "01.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 8,
+    "visible_transitions_generated": 9,
+    "shared_activities": 8,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "25.18426537513733"
+}{
+    "log_name": "02.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 16,
+    "visible_transitions_generated": 15,
+    "shared_activities": 15,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "12.581978559494019"
+}{
+    "log_name": "03.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 12,
+    "shared_activities": 11,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "27.123438835144043"
+}{
+    "log_name": "04.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "8.526149272918701"
+}{
+    "log_name": "05.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 11,
+    "visible_transitions_generated": 11,
+    "shared_activities": 11,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "10.427776098251343"
+}{
+    "log_name": "06.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "9.39345383644104"
+}{
+    "log_name": "07.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 14,
+    "shared_activities": 13,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "30.083141565322876"
+}{
+    "log_name": "08.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 15,
+    "shared_activities": 12,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "25.994635105133057"
+}{
+    "log_name": "09.txt",
+    "conversation_length": 6,
+    "visible_transitions_ground_truth": 13,
+    "visible_transitions_generated": 15,
+    "shared_activities": 13,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "43.80558466911316"
+}{
+    "log_name": "10.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 10,
+    "shared_activities": 9,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "24.129813194274902"
+}{
+    "log_name": "11.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 12,
+    "visible_transitions_generated": 12,
+    "shared_activities": 12,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "15.53068733215332"
+}{
+    "log_name": "12.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 10,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "8.392714023590088"
+}{
+    "log_name": "13.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 9,
+    "visible_transitions_generated": 10,
+    "shared_activities": 9,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "18.710326671600342"
+}{
+    "log_name": "14.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 11,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "30.106274604797363"
+}{
+    "log_name": "15.txt",
+    "conversation_length": 4,
+    "visible_transitions_ground_truth": 10,
+    "visible_transitions_generated": 11,
+    "shared_activities": 10,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "21.89209270477295"
+}{
+    "log_name": "16.txt",
+    "conversation_length": 2,
+    "visible_transitions_ground_truth": 24,
+    "visible_transitions_generated": 21,
+    "shared_activities": 21,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "15.551396369934082"
+}{
+    "log_name": "17.txt",
+    "conversation_length": 8,
+    "visible_transitions_ground_truth": 25,
+    "visible_transitions_generated": 29,
+    "shared_activities": 25,
+    "fitness": "skipped",
+    "precision": "skipped",
+    "time (sec)": "127.34965324401855"
+}

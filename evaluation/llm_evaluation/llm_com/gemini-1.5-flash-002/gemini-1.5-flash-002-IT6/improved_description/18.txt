@@ -1,0 +1,34 @@
+A university enrollment system involves the following steps:
+
+**Application and Admission:**
+
+1. Prospective students submit an application online.  This includes providing all required application materials.
+2. The admissions office reviews the application and supporting documents for completeness.
+3. **Exclusive Choice:** If documents are missing, the applicant is notified to provide the missing items; otherwise, proceed to step 4.
+4. Upon receiving all required documents, the application is evaluated by the admissions committee.
+5. Concurrently, the finance department processes any application fees or waivers.
+6. **Exclusive Choice:** If the application is accepted, an acceptance letter is sent and the process proceeds to the Enrollment Confirmation stage; otherwise, a rejection letter is sent, and the process ends.
+
+**Enrollment Confirmation:**
+
+7. After being accepted, the student must confirm enrollment by a specified deadline.
+8. **Exclusive Choice:** If the student confirms enrollment, the process proceeds to step 9; otherwise, the application is canceled.
+
+**Onboarding:**
+
+9. The student receives orientation materials.
+10. The IT department sets up student accounts for email, online portals, and library access.
+11. **Conditional Activity:** If the student is international, the international student office assists with visa processing.
+12. The student obtains a student ID card.
+13. The student creates their study plan, which includes:
+    a. Meeting with an academic advisor.
+    b. Selecting courses.
+    c. Resolving any schedule conflicts.
+14. The student begins attending classes.
+
+**Semester Activities and Graduation:**
+
+15. Throughout each semester, the student may add or drop courses within the add/drop period.
+16. At the end of the semester, grades are posted online for student review.
+17. **Exclusive Choice:** If the student has any grievances, they can file an appeal, which includes submitting an appeal form, meeting with the appeals committee, and awaiting a decision; otherwise, proceed to the next semester.
+18. The process repeats for each subsequent semester until the student graduates or withdraws.

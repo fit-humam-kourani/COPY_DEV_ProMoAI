@@ -1,0 +1,44 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define all activities
+enjoy_spaghetti = gen.activity("Enjoy Spaghetti Carbonara")
+plate_and_garnish = gen.activity("Plate and garnish dish")
+mix_ingredients = gen.activity("Mix with egg mixture and pancetta")
+pour_egg_yolk = gen.activity("Pour egg yolk and cheese mixture")
+boil_spaghetti = gen.activity("Boil spaghetti")
+whisk_sauce = gen.activity("Whisk egg yolks, Parmesan, and black pepper")
+saute_pancetta = gen.activity("Saute pancetta until crispy")
+boil_water = gen.activity("Boil salted water")
+gather_ingredients = gen.activity("Gather ingredients")
+plan_cooking = gen.activity("Plan how to cook")
+
+# Define process steps and dependencies
+# Initial planning and gathering of ingredients
+planning_and_gathering = gen.partial_order(
+    dependencies=[(plan_cooking, gather_ingredients), (gather_ingredients, boil_water)]
+)
+
+# Preparing components
+prepare_pasta = gen.partial_order(
+    dependencies=[(boil_water, boil_spaghetti), (boil_spaghetti, whisk_sauce), (whisk_sauce, saute_pancetta)]
+)
+
+# Mixing and finalizing the dish
+mixing_and_finalizing = gen.partial_order(
+    dependencies=[
+        (saute_pancetta, pour_egg_yolk),
+        (pour_egg_yolk, mix_ingredients),
+        (mix_ingredients, plate_and_garnish),
+        (plate_and_garnish, enjoy_spaghetti),
+    ]
+)
+
+# Combine all parts into the final process
+final_model = gen.partial_order(
+    dependencies=[
+        (planning_and_gathering, prepare_pasta),
+        (prepare_pasta, mixing_and_finalizing),
+    ]
+)

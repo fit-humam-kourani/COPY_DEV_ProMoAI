@@ -1,0 +1,30 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+define_objectives = gen.activity("Define campaign objectives")
+select_channels = gen.activity("Select promotion channels")
+design_visuals = gen.activity("Design visuals")
+create_content = gen.activity("Create content")
+launch_campaign = gen.activity("Launch campaign")
+track_performance = gen.activity("Track performance in real-time")
+sales_followup = gen.activity("Sales teams follows up on leads")
+collect_leads = gen.activity("Collect leads in CRM system")
+campaign_ends = gen.activity("Campaign period ends")
+analyze_performance = gen.activity("Analyze performance for future optimization")
+
+
+# Partial Order for Content Creation and Channel Selection (concurrent)
+poset_content_channel = gen.partial_order(dependencies=[(define_objectives, select_channels), (define_objectives, design_visuals), (define_objectives, create_content)])
+
+
+# Partial Order for Campaign Launch and Tracking (sequential)
+poset_launch_track = gen.partial_order(dependencies=[(poset_content_channel, launch_campaign), (launch_campaign, track_performance)])
+
+# Partial Order combining launch and sales follow-up (concurrent)
+poset_launch_sales = gen.partial_order(dependencies=[(poset_launch_track, sales_followup), (poset_launch_track, collect_leads)])
+
+
+# Final Partial Order incorporating campaign end and analysis
+final_model = gen.partial_order(dependencies=[(poset_launch_sales, campaign_ends), (campaign_ends, analyze_performance)])

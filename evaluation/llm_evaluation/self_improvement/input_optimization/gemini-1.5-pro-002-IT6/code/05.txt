@@ -1,0 +1,44 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+identify_need = gen.activity('Identify need for new supplier or vendor')
+issue_rfp = gen.activity('Issue request for proposals (RFP)')
+receive_proposals = gen.activity('Receive supplier proposals')
+evaluate_proposal = gen.activity('Evaluate proposal')
+conduct_site_visit = gen.activity('Conduct site visit')
+conduct_interview = gen.activity('Conduct interview')
+select_supplier = gen.activity('Select supplier')
+begin_contract_negotiations = gen.activity('Begin contract negotiations')
+sign_contract = gen.activity('Sign contract')
+onboard_supplier = gen.activity('Onboard supplier')
+
+
+# Evaluation Process (optional sub-activities)
+optional_site_visit = gen.xor(conduct_site_visit, None)
+optional_interview = gen.xor(conduct_interview, None)
+
+# Combine optional evaluation steps concurrently
+evaluation_process = gen.partial_order(dependencies=[(evaluate_proposal,), (optional_site_visit,), (optional_interview,)])
+
+# Proposal evaluation loop (for each proposal)
+evaluate_all_proposals = gen.loop(do=evaluation_process, redo=None)
+
+
+# Contract negotiation loop (allows for revisions)
+negotiate_contract = gen.loop(do=begin_contract_negotiations, redo=None)
+
+
+# Main process flow
+final_model = gen.partial_order(
+    dependencies=[
+        (identify_need, issue_rfp),
+        (issue_rfp, receive_proposals),
+        (receive_proposals, evaluate_all_proposals),
+        (evaluate_all_proposals, select_supplier),
+        (select_supplier, negotiate_contract),
+        (negotiate_contract, sign_contract),
+        (sign_contract, onboard_supplier)
+    ]
+)

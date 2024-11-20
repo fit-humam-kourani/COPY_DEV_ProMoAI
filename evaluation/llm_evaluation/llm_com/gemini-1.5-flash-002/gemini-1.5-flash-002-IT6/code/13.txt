@@ -1,0 +1,35 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+file_complaint = gen.activity('File complaint')
+log_complaint = gen.activity('Log complaint')
+assign_complaint = gen.activity('Assign complaint to relevant department')
+review_complaint = gen.activity('Review complaint details')
+approve_notify = gen.activity('Approve and notify customer')
+reject_notify = gen.activity('Reject and notify customer')
+process_reimbursement = gen.activity('Process reimbursement')
+resolve_complaint = gen.activity('Resolve complaint')
+provide_feedback = gen.activity('Provide feedback')
+
+
+# Subprocesses
+valid_complaint_path = gen.partial_order(dependencies=[(review_complaint.copy(), gen.xor(gen.activity('Refund justified'), gen.activity('Refund not justified')))])
+refund_approved_path = gen.partial_order(dependencies=[(valid_complaint_path.copy(), approve_notify), (approve_notify, process_reimbursement), (process_reimbursement, resolve_complaint.copy())])
+refund_denied_path = gen.partial_order(dependencies=[(valid_complaint_path.copy(), reject_notify), (reject_notify, resolve_complaint.copy())])
+validity_choice = gen.xor(refund_approved_path, refund_denied_path)
+complaint_handling = gen.partial_order(dependencies=[(assign_complaint.copy(), review_complaint.copy()), (review_complaint.copy(), validity_choice)])
+
+#Optional feedback
+optional_feedback = gen.xor(provide_feedback, None)
+
+#Combine complaint handling and optional feedback
+final_poset = gen.partial_order(dependencies=[(complaint_handling, optional_feedback), (complaint_handling, resolve_complaint.copy()),(resolve_complaint.copy(), optional_feedback)])
+
+
+#Initial steps and final resolution
+initial_steps = gen.partial_order(dependencies=[(file_complaint, log_complaint), (log_complaint, assign_complaint.copy())])
+
+#Final model
+final_model = gen.partial_order(dependencies=[(initial_steps, final_poset)])

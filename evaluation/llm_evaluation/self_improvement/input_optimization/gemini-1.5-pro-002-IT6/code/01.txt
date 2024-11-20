@@ -1,0 +1,29 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+guide_customer = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+place_order = gen.activity('Place order')
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+
+# Handle the optional guiding and quoting process
+guide_quote_process = gen.partial_order(dependencies=[(guide_customer, provide_quote)])
+optional_guide_quote = gen.xor(guide_quote_process, None)
+
+
+# Main process flow
+final_model = gen.partial_order(
+    dependencies=[
+        (receive_inquiry, collect_info),
+        (collect_info, address_concerns),
+        (address_concerns, optional_guide_quote),
+        (optional_guide_quote, place_order),
+        (place_order, record_order),
+        (record_order, send_confirmation)
+    ]
+)

@@ -1,0 +1,35 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Activities
+outline_objectives = gen.activity('Outline objectives')
+draft_plan = gen.activity('Draft plan')
+strategic_alignment = gen.activity('Conduct strategic alignment meeting')
+feasibility_review = gen.activity('Review budget feasibility')
+provide_feedback = gen.activity('Provide feedback')
+adjust_plan = gen.activity('Adjust Plan')
+document_approve_adjustment = gen.activity('Documented and approve adjustment')
+approve_final_budget = gen.activity('Approve final budget')
+distribute_budget = gen.activity('Distribute budget')
+implement_plan = gen.activity('Implement plan')
+
+# Adjustment loop for iterative feedback and adjustments
+feedback_adjustment = gen.partial_order(
+    dependencies=[(provide_feedback, adjust_plan), (adjust_plan, document_approve_adjustment)])
+review_adjustment_loop = gen.loop(do=feedback_adjustment, redo=None)
+
+# Sequential steps for the budget approval process
+initial_review_process = gen.partial_order(
+    dependencies=[(outline_objectives, draft_plan), (draft_plan, strategic_alignment), 
+                  (strategic_alignment, feasibility_review), (feasibility_review, review_adjustment_loop), 
+                  (review_adjustment_loop, approve_final_budget)])
+
+# Create a copy of approve_final_budget for use in final steps
+approve_final_budget_copy = approve_final_budget.copy()
+
+# Final steps of the process
+final_steps = gen.partial_order(
+    dependencies=[(approve_final_budget_copy, distribute_budget), (distribute_budget, implement_plan)])
+
+# Combine all steps
+final_model = gen.partial_order(dependencies=[(initial_review_process, final_steps)])

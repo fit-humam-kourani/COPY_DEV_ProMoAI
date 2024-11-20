@@ -1,0 +1,56 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define each activity in the process
+identify_idea = gen.activity("Identify idea for new product or improvement")
+initial_research = gen.activity("Conduct initial research")
+feasibility_studies = gen.activity("Conduct feasibility studies")
+design_concepts = gen.activity("Draft design concepts")
+select_design = gen.activity("Select promising design")
+build_prototype = gen.activity("Build prototype")
+build_prototype_copy = build_prototype.copy()  # Create a copy for reuse
+test_functionality = gen.activity("Test functionality")
+test_safety = gen.activity("Test safety")
+test_market = gen.activity("Test market potential")
+collect_feedback = gen.activity("Collect feedback from testing phase")
+refine_prototype = gen.activity("Refine prototype")
+refine_prototype_copy = refine_prototype.copy()  # Create a copy for reuse in the loop
+approve_prototype = gen.activity("Approve prototype for further development")
+discard_prototype = gen.activity("Discard prototype")
+
+# Initial phase leading up to the prototype build
+initial_phase = gen.partial_order(
+    dependencies=[
+        (identify_idea, initial_research),
+        (initial_research, feasibility_studies),
+        (feasibility_studies, design_concepts),
+        (design_concepts, select_design),
+        (select_design, build_prototype)
+    ]
+)
+
+# Testing phase with repeatable refinements
+testing_phase = gen.partial_order(
+    dependencies=[
+        (build_prototype_copy, test_functionality),
+        (test_functionality, test_safety),
+        (test_safety, test_market),
+        (test_market, collect_feedback),
+        (collect_feedback, refine_prototype)
+    ]
+)
+
+# Loop for refinements and re-testing
+testing_with_refinement = gen.loop(do=testing_phase, redo=refine_prototype_copy)
+
+# Final decision phase
+final_decision = gen.xor(approve_prototype, discard_prototype)
+
+# Combine the entire process
+final_model = gen.partial_order(
+    dependencies=[
+        (initial_phase, testing_with_refinement),
+        (testing_with_refinement, final_decision)
+    ]
+)

@@ -1,0 +1,27 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+plan_how_to_cook = gen.activity('Plan how to cook')
+gather_ingredients = gen.activity('Gather ingredients')
+boil_salted_water = gen.activity('Boil salted water')
+boil_spaghetti = gen.activity('Boil spaghetti')
+whisk_egg_yolks = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+saute_pancetta_until_crispy = gen.activity('Saute pancetta until crispy')
+mix_with_egg_mixture_and_pancetta = gen.activity('Mix with egg mixture and pancetta')
+pour_egg_yolk_and_cheese_mixture = gen.activity('Pour egg yolk and cheese mixture')
+plate_and_garnish_dish = gen.activity('Plate and garnish dish')
+enjoy_spaghetti_carbonara = gen.activity('Enjoy Spaghetti Carbonara')
+
+poset = gen.partial_order(dependencies=[
+    (plan_how_to_cook, gather_ingredients),
+    (gather_ingredients, boil_salted_water),
+    (boil_salted_water, boil_spaghetti),
+    (boil_spaghetti, whisk_egg_yolks),
+    (boil_spaghetti, saute_pancetta_until_crispy),
+    (whisk_egg_yolks, mix_with_egg_mixture_and_pancetta),
+    (saute_pancetta_until_crispy, mix_with_egg_mixture_and_pancetta),
+    (mix_with_egg_mixture_and_pancetta, pour_egg_yolk_and_cheese_mixture),
+    (pour_egg_yolk_and_cheese_mixture, plate_and_garnish_dish),
+    (plate_and_garnish_dish, enjoy_spaghetti_carbonara)])
+
+final_model = poset

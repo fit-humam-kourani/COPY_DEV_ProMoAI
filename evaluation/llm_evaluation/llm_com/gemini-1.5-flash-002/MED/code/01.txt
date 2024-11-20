@@ -1,0 +1,31 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+receive_inquiry = gen.activity('Receive customer inquiry')
+collect_info = gen.activity('Collect customer information')
+address_concerns = gen.activity('Address customer concerns or questions')
+guide_customer = gen.activity('Guide customer in selecting product/service')
+provide_quote = gen.activity('Provide quote')
+place_order = gen.activity('Place order')
+record_order = gen.activity('Record order in system')
+send_confirmation = gen.activity('Send order confirmation to customer')
+
+# Correcting the error: Create copies of activities to avoid reuse
+address_concerns_copy = address_concerns.copy()
+provide_quote_copy_1 = provide_quote.copy()
+provide_quote_copy_2 = provide_quote.copy() #NEW COPY
+place_order_copy_1 = place_order.copy()
+place_order_copy_2 = place_order.copy() #NEW COPY
+record_order_copy_1 = record_order.copy()
+record_order_copy_2 = record_order.copy() #NEW COPY
+
+
+#Sequential dependencies
+poset_1 = gen.partial_order(dependencies=[(receive_inquiry, collect_info), (collect_info, address_concerns)])
+poset_2 = gen.partial_order(dependencies=[(address_concerns_copy, guide_customer), (guide_customer, provide_quote_copy_1)])
+poset_3 = gen.partial_order(dependencies=[(provide_quote_copy_2, place_order_copy_2), (place_order_copy_2, record_order_copy_2), (record_order_copy_2, send_confirmation)])
+
+
+#Combine posets into final model.  No XOR or loop needed based on description.
+final_model = gen.partial_order(dependencies=[(poset_1, poset_2), (poset_2, poset_3)])

@@ -1,0 +1,35 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+outline_objectives = gen.activity('Outline objectives')
+draft_plan = gen.activity('Draft plan')
+conduct_strategic_alignment_meeting = gen.activity('Conduct strategic alignment meeting')
+adjust_plan = gen.activity('Adjust Plan')
+review_budget_feasibility_1 = gen.activity('Review budget feasibility') # Created a copy for unique use
+review_budget_feasibility_2 = gen.activity('Review budget feasibility') # Created a copy for unique use in the loop
+provide_feedback = gen.activity('Provide feedback')
+documented_and_approve_adjustment_1 = gen.activity('Documented and approve adjustment') # Created a copy for unique use
+documented_and_approve_adjustment_2 = gen.activity('Documented and approve adjustment') # Created a copy for unique use in the loop
+approve_final_budget = gen.activity('Approve final budget')
+distribute_budget = gen.activity('Distribute budget')
+implement_plan = gen.activity('Implement plan')
+
+# Subprocesses
+# Revision loop
+revision_do = gen.partial_order(dependencies=[(adjust_plan, provide_feedback), (provide_feedback, documented_and_approve_adjustment_2)])
+revision_redo = gen.partial_order(dependencies=[(documented_and_approve_adjustment_1, review_budget_feasibility_2)])
+revision_loop = gen.loop(do=revision_do, redo=revision_redo)
+
+# Feasibility review and plan approval
+feasibility_review = gen.partial_order(dependencies=[(review_budget_feasibility_1, revision_loop), (revision_loop, approve_final_budget)])
+
+
+# Main process
+initial_steps = gen.partial_order(dependencies=[(outline_objectives, draft_plan), (draft_plan, conduct_strategic_alignment_meeting)])
+plan_revision_and_approval = gen.xor(feasibility_review, None) #Optional feasibility review after strategic meeting.
+
+main_poset = gen.partial_order(dependencies=[(initial_steps, plan_revision_and_approval), (plan_revision_and_approval, distribute_budget), (distribute_budget, implement_plan)])
+
+final_model = main_poset

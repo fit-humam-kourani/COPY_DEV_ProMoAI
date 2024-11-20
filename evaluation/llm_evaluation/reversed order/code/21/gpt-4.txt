@@ -1,0 +1,39 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Define the activities
+enjoy_spaghetti = gen.activity('Enjoy Spaghetti Carbonara')
+mix_with_egg_pancetta = gen.activity('Mix with egg mixture and pancetta')
+boil_salted_water = gen.activity('Boil salted water')
+gather_ingredients = gen.activity('Gather ingredients')
+saute_pancetta = gen.activity('Saute pancetta until crispy')
+boil_spaghetti = gen.activity('Boil spaghetti')
+plan_cook = gen.activity('Plan how to cook')
+plate_garnish_dish = gen.activity('Plate and garnish dish')
+pour_egg_yolk_mixture = gen.activity('Pour egg yolk and cheese mixture')
+whisk_egg_mixture = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+
+# Define the partial orders and dependencies
+initial_preparation = gen.partial_order(dependencies=[
+    (plan_cook, gather_ingredients),
+    (gather_ingredients, boil_salted_water),
+    (boil_salted_water, saute_pancetta),
+    (saute_pancetta, boil_spaghetti)
+])
+
+whisk_and_mix = gen.partial_order(dependencies=[
+    (whisk_egg_mixture, pour_egg_yolk_mixture),
+    (pour_egg_yolk_mixture, mix_with_egg_pancetta),
+    (mix_with_egg_pancetta, enjoy_spaghetti)
+])
+
+final_preparation = gen.partial_order(dependencies=[
+    (boil_spaghetti, plate_garnish_dish),
+    (plate_garnish_dish, whisk_and_mix)
+])
+
+# Combine all parts into the final model
+final_model = gen.partial_order(dependencies=[
+    (initial_preparation, final_preparation)
+])

@@ -1,0 +1,88 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial steps
+place_order = gen.activity('Place order')
+record_order_details = gen.activity('Record order details')
+process_payment = gen.activity('Process payment')
+
+# Payment success/failure path
+notify_about_failed_payment = gen.activity('Notify about failed payment')
+payment_failure = notify_about_failed_payment
+payment_success = gen.activity('Check stock availability')
+
+payment_choice = gen.xor(payment_success, payment_failure)
+
+
+# Stock availability check and back-order process
+initiate_back_order = gen.activity('Initiate back-order')
+inform_customer_about_delay = gen.activity('Inform customer about delay')
+receive_back_order = gen.activity('Receive back-order')
+back_order_process = gen.partial_order(dependencies=[(initiate_back_order, inform_customer_about_delay), (inform_customer_about_delay, receive_back_order)])
+
+all_items_in_stock = gen.activity('Pick items from warehouse')
+items_out_of_stock = back_order_process
+
+stock_choice = gen.xor(all_items_in_stock, items_out_of_stock)
+
+
+
+prepare_shipping = gen.activity('Prepare shipping documents and labels')
+prepare_customs = gen.activity('Prepare documentation for international orders')
+skippable_customs = gen.xor(prepare_customs, None)
+shipping_process = gen.partial_order(dependencies=[(prepare_shipping, skippable_customs)])
+
+
+perform_qc = gen.activity('Perform quality control checks')
+gift_wrap = gen.activity('Gift wrap items')
+no_gift_wrap = None
+gift_wrap_choice = gen.xor(gift_wrap, no_gift_wrap)
+package_items = gen.activity('Package items')
+packaging_process = gen.partial_order(dependencies=[(perform_qc, package_items), (package_items, gift_wrap_choice)])
+
+
+dispatch_order = gen.activity('Dispatch order')
+send_shipping_confirmation = gen.activity('Send shipping confirmation to customer')
+update_inventory = gen.activity('Update inventory levels')
+confirm_delivery = gen.activity('Confirm delivery')
+send_follow_up = gen.activity('Send follow-up email')
+
+
+customer_reports_issue = gen.activity('Customer reports issue')
+send_return_label = gen.activity('Send return shipping label')
+receive_returned = gen.activity('Receive returned items')
+inspect_returned = gen.activity('Inspect returned items')
+process_refund = gen.activity('Process refund')
+process_replacement = gen.activity('Process replacement')
+
+refund_replacement_choice = gen.xor(process_refund, process_replacement)
+returns_process = gen.partial_order(dependencies=[(send_return_label, receive_returned), (receive_returned, inspect_returned), (inspect_returned, refund_replacement_choice)])
+
+no_issue = None
+
+issue_choice = gen.xor(returns_process, no_issue)
+
+# Create a copy of all_items_in_stock for use in final partial order
+all_items_in_stock_copy = all_items_in_stock.copy()
+
+
+final_model = gen.partial_order(
+    dependencies=[
+        (place_order, record_order_details),
+        (record_order_details, process_payment),
+        (process_payment, payment_choice),
+        (payment_choice, stock_choice),
+        (stock_choice, all_items_in_stock_copy),  # Use the copy here
+        (all_items_in_stock_copy, packaging_process), # Use the copy here
+        (packaging_process, dispatch_order),
+        (shipping_process, dispatch_order),
+        (dispatch_order, send_shipping_confirmation),
+        (send_shipping_confirmation, update_inventory),
+        (update_inventory, confirm_delivery),
+        (confirm_delivery, send_follow_up),
+        (send_follow_up, issue_choice),
+        (all_items_in_stock_copy, shipping_process) # Use the copy here
+
+    ]
+)

@@ -1,0 +1,58 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial monitoring and alert generation
+check_current_inventory_level = gen.activity('Check current inventory level')
+send_an_automated_alert = gen.activity('Send an automated alert')
+send_a_manual_alert = gen.activity('Send a manual alert')
+reorder_signal = gen.xor(send_an_automated_alert, send_a_manual_alert)
+
+# Procurement process
+evaluate_suppliers = gen.activity('Evaluate potential suppliers')
+select_supplier_and_place_order = gen.activity('Place order with suppliers')
+
+# Inventory update after placing order
+update_inventory_system_with_expected_delivery_dates = gen.activity(
+    'Update inventory system with expected delivery dates')
+
+# Receiving and inspecting stock
+receive_stock = gen.activity('Receive stock')
+inspect_stock_for_quality = gen.activity('Inspect stock for quality')
+
+# Stocking and final inventory update
+record_stock_in_system = gen.activity('Record stock in system')
+place_stock_on_shelves = gen.activity('Place stock on shelves')
+place_stock_in_storage = gen.activity('Place stock in storage')
+stocking_locations = gen.xor(place_stock_on_shelves, place_stock_in_storage)
+update_inventory_levels = gen.activity('Update inventory levels')
+
+# Combine sub-processes using partial order to enforce dependencies
+procurement_process = gen.partial_order(
+    dependencies=[
+        (evaluate_suppliers, select_supplier_and_place_order),
+        (select_supplier_and_place_order, update_inventory_system_with_expected_delivery_dates)
+    ]
+)
+
+
+receiving_and_stocking = gen.partial_order(
+    dependencies=[
+        (receive_stock, inspect_stock_for_quality),
+        (inspect_stock_for_quality, record_stock_in_system),
+        (record_stock_in_system, stocking_locations),
+        (stocking_locations, update_inventory_levels),
+
+    ]
+)
+
+final_model = gen.partial_order(
+    dependencies=[
+        (check_current_inventory_level, reorder_signal),
+        (reorder_signal, procurement_process),
+        (procurement_process, receiving_and_stocking),
+    ]
+)
+
+# The loop for continuous monitoring is added at the outermost level
+final_model = gen.loop(do=final_model, redo=None)

@@ -1,0 +1,39 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Define activities
+file_complaint = gen.activity("File complaint")
+log_complaint = gen.activity("Log complaint")
+assign_department = gen.activity("Assign complaint to relevant department")
+review_complaint = gen.activity("Review complaint details")
+approve_notify = gen.activity("Approve and notify customer")
+reject_notify = gen.activity("Reject and notify customer")
+process_reimbursement = gen.activity("Process reimbursement")
+resolve_complaint = gen.activity("Resolve complaint")
+provide_feedback = gen.activity("Provide feedback")
+
+# Create unique instances for activities that need to be reused
+approve_notify_copy = approve_notify.copy()
+resolve_complaint_copy = resolve_complaint.copy()
+
+# Sequence to handle approved refund
+approved_process = gen.partial_order(
+    dependencies=[(approve_notify, process_reimbursement), (process_reimbursement, resolve_complaint)]
+)
+
+# Sequence to handle rejected refund
+rejected_process = gen.partial_order(
+    dependencies=[(reject_notify, resolve_complaint_copy)]
+)
+
+# Exclusive choice between handling approved or rejected refunds
+refund_process = gen.xor(approved_process, rejected_process)
+
+# Main process sequence
+main_process = gen.partial_order(
+    dependencies=[(file_complaint, log_complaint), (log_complaint, assign_department), 
+                  (assign_department, review_complaint), (review_complaint, refund_process), 
+                  (refund_process, provide_feedback)]
+)
+
+final_model = main_process

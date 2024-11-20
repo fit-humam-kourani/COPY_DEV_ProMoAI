@@ -1,0 +1,49 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Define activities with unique instances for each use
+define_campaign_objectives = gen.activity('Define campaign objectives')
+create_content = gen.activity('Create content')
+design_visuals = gen.activity('Design visuals')
+select_promotion_channels = gen.activity('Select promotion channels')
+
+# Create unique instances for the launch campaign
+launch_campaign_first = gen.activity('Launch campaign')
+launch_campaign_second = gen.activity('Launch campaign')
+
+# Create unique instances for track performance
+track_performance_first = gen.activity('Track performance in real-time')
+track_performance_second = gen.activity('Track performance in real-time')
+
+collect_leads = gen.activity('Collect leads in CRM system')
+sales_follow_up = gen.activity('Sales teams follows up on leads')
+analyze_performance = gen.activity('Analyze performance for future optimization')
+campaign_period_ends = gen.activity('Campaign period ends')
+
+# Model the process flow
+poset_content_visuals_channel = gen.partial_order(dependencies=[
+    (create_content, design_visuals),
+    (create_content, select_promotion_channels),
+    (design_visuals, select_promotion_channels)
+])
+
+poset_campaign = gen.partial_order(dependencies=[
+    (define_campaign_objectives, poset_content_visuals_channel),
+    (poset_content_visuals_channel, launch_campaign_first),
+])
+
+# Add partial order for tracking performance and collecting leads as concurrent activities
+poset_tracking_leads = gen.partial_order(dependencies=[
+    (track_performance_first, collect_leads),
+    (collect_leads, sales_follow_up),
+])
+
+# Create a copy of 'Campaign period ends' to ensure it is unique
+campaign_period_ends_copy = campaign_period_ends.copy()
+
+final_model = gen.partial_order(dependencies=[
+    (poset_campaign, launch_campaign_second),
+    (launch_campaign_second, track_performance_second),
+    (poset_tracking_leads, campaign_period_ends_copy),
+    (campaign_period_ends_copy, analyze_performance),
+])

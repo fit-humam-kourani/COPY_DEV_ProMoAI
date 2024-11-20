@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial activities
+customer_online_order = gen.activity('Customer places order online')
+customer_phone_order = gen.activity('Customer places order over the phone')
+order_confirmation = gen.activity('Generate and send order confirmation')
+
+# Partial order for picking and packing vs. label generation
+pick_pack = gen.activity('Pick and pack items')
+shipping_label = gen.activity('Generate shipping label')
+partial_order_1 = gen.partial_order(dependencies=[(pick_pack,), (shipping_label,)])
+
+# Handoff to logistics and tracking
+handoff_logistics = gen.activity('Hand over order to logistics provider')
+send_tracking = gen.activity('Send tracking information to customer')
+
+# Delivery monitoring loop
+monitor_shipment = gen.activity('Monitor shipment')
+redelivery = gen.activity('Attempt redelivery')
+delivery_loop = gen.loop(do=monitor_shipment, redo=redelivery)
+successful_delivery = gen.activity('Successful delivery')
+
+#Post-delivery XOR
+customer_feedback = gen.activity('Process customer feedback or returns')
+return_process = gen.activity('Process customer feedback or returns') #using same label as feedback for simplicity, consider revising this naming in a real-world application.
+post_delivery_choice = gen.xor(customer_feedback, return_process)
+
+
+
+# Combining the elements
+initial_choice = gen.xor(customer_online_order, customer_phone_order)
+poset_1 = gen.partial_order(dependencies=[(initial_choice, order_confirmation), (order_confirmation, partial_order_1), (partial_order_1, handoff_logistics), (handoff_logistics, send_tracking), (send_tracking, delivery_loop),(delivery_loop, successful_delivery),(successful_delivery, post_delivery_choice)])
+
+final_model = poset_1

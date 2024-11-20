@@ -1,0 +1,63 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial monitoring and alert/check
+monitor_inventory = gen.activity('Check current inventory level')
+automated_alert = gen.activity('Send an automated alert')
+manual_check = gen.loop(do=None, redo=gen.activity('Send a manual alert')) # Manual check can be repeated
+reorder_trigger = gen.xor(automated_alert, manual_check)
+
+# Review and supplier selection
+review_stock = gen.activity('Check current inventory level')  # Reusing the same activity for checking stock levels.
+select_preferred_supplier = gen.activity('Place order with suppliers')
+select_new_supplier = gen.activity('Place order with suppliers') # Assuming placing an order is the same regardless of supplier type
+supplier_selection = gen.xor(select_preferred_supplier, select_new_supplier)
+
+# Placing and recording the order
+place_order = gen.activity('Place order with suppliers')
+record_order = gen.activity('Update inventory system with expected delivery dates') # Update system with expected dates
+order_process = gen.partial_order(dependencies=[(supplier_selection, place_order), (place_order, record_order)])
+
+# Receiving and inspecting stock
+receive_stock = gen.activity('Receive stock')
+inspect_stock = gen.activity('Inspect stock for quality')
+inspection = gen.partial_order(dependencies=[(receive_stock, inspect_stock)])
+
+# Accepting stock
+accept_stock = gen.activity('Record stock in system')
+place_on_shelves = gen.activity('Place stock on shelves')
+place_in_storage = gen.activity('Place stock in storage')
+shelving_storage = gen.partial_order(dependencies=[(place_on_shelves,), (place_in_storage,)]) # Concurrent shelving or storage
+update_inventory_accept = gen.activity('Update inventory levels')
+accept_process = gen.partial_order(dependencies=[(accept_stock, shelving_storage), (shelving_storage, update_inventory_accept)])
+
+# Rejecting stock
+reject_stock = gen.activity('Record stock in system')  # Reusing "Record stock in system" for rejected stock as well.
+contact_supplier = gen.activity('Record stock in system') # Assuming recording rejection involves contacting the supplier.
+reorder_rejected = gen.activity('Place order with suppliers') # Reusing supplier selection and placing order
+
+
+cancel_order = gen.activity('Update inventory levels')  # Checking inventory levels upon cancellation
+reject_choice = gen.xor(reorder_rejected, cancel_order)
+
+reject_process = gen.partial_order(dependencies=[(reject_stock, contact_supplier), (contact_supplier, reject_choice)])
+
+
+stock_handling = gen.xor(accept_process, reject_process)
+
+
+
+# Combining all parts
+main_process = gen.partial_order(dependencies=[\
+    (monitor_inventory, reorder_trigger),\
+    (reorder_trigger, review_stock),\
+    (review_stock, order_process),\
+    (order_process, inspection),\
+    (inspection, stock_handling)\
+])
+
+
+# The error was caused by reusing `cancel_order` which is already part of `main_process`
+# Create a copy to resolve the issue.
+final_model = gen.loop(do=main_process, redo=cancel_order.copy())

@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+guest_calls = gen.activity("Guest calls room service")
+manager_takes_order = gen.activity("Manager takes down the order")
+manager_submits_ticket_copy1 = gen.activity("Manager submits order ticket to kitchen")
+manager_gives_order_sommelier_copy1 = gen.activity("Manager gives order to sommelier")
+manager_assigns_waiter_copy1 = gen.activity("Manager assigns order to waiter")
+kitchen_prepares_food = gen.activity("Kitchen prepares food")
+sommelier_prepares_drinks = gen.activity("Sommelier fetches wine and prepare alcoholic beverages")
+waiter_readies_cart = gen.activity("Waiter readies cart")
+waiter_prepares_drinks = gen.activity("Waiter prepares nonalcoholic drinks")
+waiter_delivers_order = gen.activity("Waiter delivers order to guest's room")
+waiter_debits_account = gen.activity("Waiter debits guest's account")
+waiter_waits = gen.xor(gen.activity("Waiter waits/delays debiting"), None)
+
+
+# Partial Orders 
+
+#Manager's actions
+poset_manager = gen.partial_order(dependencies=[(manager_takes_order, manager_submits_ticket_copy1), (manager_takes_order, manager_gives_order_sommelier_copy1), (manager_takes_order, manager_assigns_waiter_copy1)])
+
+#Waiter's actions
+manager_assigns_waiter_copy2 = gen.activity("Manager assigns order to waiter") 
+poset_waiter = gen.partial_order(dependencies=[(manager_assigns_waiter_copy2, waiter_readies_cart), (manager_assigns_waiter_copy2, waiter_prepares_drinks), (waiter_readies_cart, waiter_delivers_order), (waiter_prepares_drinks, waiter_delivers_order), (waiter_delivers_order, waiter_debits_account), (waiter_debits_account, waiter_waits)])
+
+
+#Combining kitchen and sommelier as concurrent sub-processes
+manager_submits_ticket_copy2 = gen.activity("Manager submits order ticket to kitchen")
+manager_gives_order_sommelier_copy2 = gen.activity("Manager gives order to sommelier")
+poset_kitchen_sommelier = gen.partial_order(dependencies=[(manager_submits_ticket_copy2, kitchen_prepares_food), (manager_gives_order_sommelier_copy2, sommelier_prepares_drinks)])
+
+# Combining all into a single partial order.  No explicit dependencies needed for concurrency
+final_model = gen.partial_order(dependencies=[(guest_calls, poset_manager), (poset_manager, poset_kitchen_sommelier), (poset_manager, poset_waiter)])

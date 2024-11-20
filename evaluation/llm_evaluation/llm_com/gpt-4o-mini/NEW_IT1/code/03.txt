@@ -1,0 +1,44 @@
+from utils.model_generation import ModelGenerator
+gen = ModelGenerator()
+
+# Activities
+check_inventory = gen.activity('Check current inventory level')
+manual_alert = gen.activity('Send a manual alert')
+automated_alert = gen.activity('Send an automated alert')
+place_order = gen.activity('Place order with suppliers')
+
+# Create unique activities for receiving and processing stock
+receive_stock = gen.activity('Receive stock')
+inspect_stock = gen.activity('Inspect stock for quality')
+record_stock = gen.activity('Record stock in system')
+place_on_shelves = gen.activity('Place stock on shelves')
+place_in_storage = gen.activity('Place stock in storage')
+
+# Create a unique activity for updating inventory levels
+update_inventory_levels = gen.activity('Update inventory levels')
+update_inventory_system = update_inventory_levels.copy()  # Create a copy for reuse
+
+# Alert choice
+alert_choice = gen.xor(automated_alert, manual_alert)
+
+# Define the receiving and processing stock steps in a unique partial order
+receiving_process = gen.partial_order(dependencies=[
+    (receive_stock, inspect_stock),
+    (inspect_stock, record_stock),
+    (record_stock, place_on_shelves),
+    (record_stock, place_in_storage)
+])
+
+# Define a unique instance of the inventory update partial order
+inventory_update = gen.partial_order(dependencies=[
+    (gen.activity('Receive stock'), update_inventory_levels),  # Ensure this activity is unique
+    (update_inventory_levels, update_inventory_system)
+])
+
+# Full process model with unique instances to avoid reusing nodes
+final_model = gen.partial_order(dependencies=[
+    (check_inventory, alert_choice),
+    (alert_choice, place_order),
+    (place_order, receiving_process),  # Use the unique receiving process
+    (receiving_process, inventory_update)  # Ensure inventory update is unique
+])

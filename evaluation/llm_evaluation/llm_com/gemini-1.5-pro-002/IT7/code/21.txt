@@ -1,0 +1,28 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+plan_how_to_cook = gen.activity('Plan how to cook')
+gather_ingredients = gen.activity('Gather ingredients')
+boil_salted_water = gen.activity('Boil salted water')
+whisk_egg_yolks = gen.activity('Whisk egg yolks, Parmesan, and black pepper')
+saute_pancetta = gen.activity('Saute pancetta until crispy')
+boil_spaghetti = gen.activity('Boil spaghetti')
+pour_egg_yolk = gen.activity('Pour egg yolk and cheese mixture')
+mix_with_egg_mixture = gen.activity('Mix with egg mixture and pancetta')
+plate_and_garnish = gen.activity('Plate and garnish dish')
+enjoy_spaghetti = gen.activity('Enjoy Spaghetti Carbonara')
+
+
+final_model = gen.partial_order(dependencies=[
+    (plan_how_to_cook, gather_ingredients),
+    (gather_ingredients, boil_salted_water),
+    (boil_salted_water, boil_spaghetti),
+    (boil_spaghetti, pour_egg_yolk),
+    (gather_ingredients, whisk_egg_yolks),
+    (whisk_egg_yolks, pour_egg_yolk),
+    (gather_ingredients, saute_pancetta),
+    (saute_pancetta, mix_with_egg_mixture),
+    (pour_egg_yolk, mix_with_egg_mixture),
+    (mix_with_egg_mixture, plate_and_garnish),
+    (plate_and_garnish, enjoy_spaghetti)])

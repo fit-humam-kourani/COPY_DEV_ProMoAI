@@ -1,0 +1,37 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_online_order = gen.activity('Customer places order online')
+customer_phone_order = gen.activity('Customer places order over the phone')
+generate_confirmation = gen.activity('Generate and send order confirmation')
+pick_pack = gen.activity('Pick and pack items')
+generate_label = gen.activity('Generate shipping label')
+hand_over = gen.activity('Hand over order to logistics provider')
+send_tracking = gen.activity('Send tracking information to customer')
+monitor_shipment = gen.activity('Monitor shipment')
+successful_delivery = gen.activity('Successful delivery')
+process_feedback = gen.activity('Process customer feedback or returns')
+
+# Order Placement (Choice)
+order_placement = gen.xor(customer_online_order, customer_phone_order)
+
+# Main Order Fulfillment Process
+order_fulfillment = gen.partial_order(dependencies=[
+    (order_placement, generate_confirmation),
+    (generate_confirmation, pick_pack),
+    (pick_pack, generate_label),
+    (generate_label, hand_over),
+    (hand_over, send_tracking),
+    (send_tracking, monitor_shipment),
+    (monitor_shipment, successful_delivery)
+])
+
+successful_delivery_copy = successful_delivery.copy() # Create a copy to avoid reuse
+
+# Overall Process with Feedback/Return Handling
+final_model = gen.partial_order(dependencies=[
+    (order_fulfillment, successful_delivery_copy),
+    (successful_delivery_copy, process_feedback)
+])

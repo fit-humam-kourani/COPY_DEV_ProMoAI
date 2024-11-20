@@ -1,0 +1,37 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+login = gen.activity('Login')
+select_items = gen.activity('Select items')
+set_payment_method = gen.activity('Set payment method')
+pay = gen.activity('Pay')
+complete_installment_agreement = gen.activity('Complete installment agreement')
+select_free_reward = gen.activity('Select free reward')
+deliver_items = gen.activity('Deliver items')
+return_items = gen.activity('Return items')
+
+# Payment method choice
+payment_choice = gen.xor(pay, complete_installment_agreement)
+
+# Concurrent selection of items and payment method
+concurrent_selection = gen.partial_order(dependencies=[(login, select_items), (login, set_payment_method)])
+
+# Create copies to avoid reuse
+select_items_copy1 = select_items.copy()
+select_items_copy2 = select_items.copy()
+deliver_items_copy1 = deliver_items.copy()
+deliver_items_copy2 = deliver_items.copy()
+
+
+# Partial order after item selection
+poset_after_selection = gen.partial_order(dependencies=[(select_items_copy1, payment_choice), (select_items_copy2, select_free_reward)])
+
+# Delivery and potential returns
+initial_delivery = gen.partial_order(dependencies=[(poset_after_selection, deliver_items_copy1)])
+return_delivery = gen.partial_order(dependencies=[(deliver_items_copy2, return_items)])
+deliver_return_loop = gen.loop(do=initial_delivery, redo=return_delivery)
+
+
+final_model = deliver_return_loop

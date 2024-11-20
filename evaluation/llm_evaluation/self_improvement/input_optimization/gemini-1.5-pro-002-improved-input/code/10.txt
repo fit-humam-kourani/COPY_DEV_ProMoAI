@@ -1,0 +1,36 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Initial activities
+submit_request = gen.activity('Submit IT solution request')
+assess_compatibility = gen.activity('Assess compatibility')
+evaluate_resources = gen.activity('Evaluate cost and resource needs')
+
+# Parallel assessment activities
+parallel_assessment = gen.partial_order(dependencies=[(assess_compatibility,), (evaluate_resources,)])
+
+# Decision and procurement
+approve_request = gen.activity('Procure necessary tools or licenses')
+reject_request = gen.activity('Reject request')  # Implicitly mentioned, added for completeness
+decision = gen.xor(approve_request, reject_request)
+
+# Installation and testing
+install_solution = gen.activity('Install the solution')
+test_solution = gen.activity('Test solution')
+
+# Rollout and training
+roll_out_solution = gen.activity('Roll out solution to requesting department')
+provide_training = gen.activity('Provide training')
+skip_training = None  # Explicitly modeling the "not providing training" option
+training_choice = gen.xor(provide_training, skip_training)
+
+# Support
+provide_support = gen.activity('Provide support for troubleshooting')
+
+# Combining the submodels
+post_approval = gen.partial_order(dependencies=[(install_solution, test_solution), (test_solution, roll_out_solution), (roll_out_solution, training_choice), (training_choice, provide_support)])
+
+
+
+final_model = gen.partial_order(dependencies=[(submit_request, parallel_assessment), (parallel_assessment, decision), (decision, post_approval) ])

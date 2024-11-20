@@ -1,0 +1,46 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+guest_calls = gen.activity("Guest calls room service")
+manager_takes_order = gen.activity("Manager takes down the order")
+manager_submits_kitchen = gen.activity("Manager submits order ticket to kitchen")
+manager_assigns_waiter = gen.activity("Manager assigns order to waiter")
+manager_gives_sommelier = gen.activity("Manager gives order to sommelier")
+kitchen_prepares = gen.activity("Kitchen prepares food")
+sommelier_prepares = gen.activity("Sommelier fetches wine and prepare alcoholic beverages")
+waiter_readies_cart = gen.activity("Waiter readies cart")
+waiter_prepares_drinks = gen.activity("Waiter prepares nonalcoholic drinks")
+waiter_delivers = gen.activity("Waiter delivers order to guest's room")
+waiter_debits = gen.activity("Waiter debits guest's account")
+waiter_returns = gen.activity("Waiter returns to room-service station")
+
+
+# Sub-processes
+sommelier_process_1 = gen.xor(sommelier_prepares, None)  # 20% chance of no alcoholic beverages
+sommelier_process_2 = sommelier_process_1.copy()  # Create a copy to avoid reuse
+
+# Partial order 1: Kitchen, Sommelier, Waiter prep
+kitchen_copy_1 = kitchen_prepares.copy()  # Create a copy to avoid reuse error
+kitchen_copy_2 = kitchen_prepares.copy()  # Create a second copy to avoid reuse error in partial_order_2
+waiter_readies_cart_copy_1 = waiter_readies_cart.copy() #Copy to avoid reuse
+waiter_readies_cart_copy_2 = waiter_readies_cart.copy() #Copy to avoid reuse
+
+partial_order_1 = gen.partial_order(dependencies=[(manager_submits_kitchen, kitchen_copy_1),
+                                                  (manager_gives_sommelier, sommelier_process_1),
+                                                  (manager_assigns_waiter, waiter_readies_cart_copy_1),
+                                                  (manager_assigns_waiter, waiter_prepares_drinks)])
+
+
+# Partial order 2: Delivery and debiting
+partial_order_2 = gen.partial_order(dependencies=[(kitchen_copy_2, waiter_delivers),  # Use the copy here
+                                                  (sommelier_process_2, waiter_delivers),  # Use the copy here
+                                                  (waiter_readies_cart_copy_2, waiter_delivers),
+                                                  (waiter_delivers, waiter_debits)])
+
+# Loop for multiple orders
+waiter_loop = gen.loop(do=gen.partial_order(dependencies=[(partial_order_1, partial_order_2)]), redo=waiter_returns)
+
+# Main process
+final_model = gen.partial_order(dependencies=[(guest_calls, manager_takes_order), (manager_takes_order, waiter_loop)])

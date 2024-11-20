@@ -1,0 +1,31 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+customer_searches_ticket = gen.activity('Customer searches for ticket')
+select_route = gen.activity('Select route')
+select_date_time = gen.activity('Select date and time')
+provide_personal_info = gen.activity('Provide personal information')
+provide_payment_details = gen.activity('Provide payment details')
+generate_ticket = gen.activity('Generate ticket')
+send_ticket_email = gen.activity('Send ticket via email')
+send_ticket_sms = gen.activity('Send ticket via SMS')
+update_seat_inventory = gen.activity('Update seat inventory')
+send_reminder = gen.activity('Send reminder')
+send_instructions = gen.activity('Send instructions')
+customer_completes_journey = gen.activity('Customer completes journey')
+post_travel_feedback = gen.activity('Post-travel feedback or services')
+
+# Combining activities into sub-processes
+ticket_issuance = gen.partial_order(dependencies=[(generate_ticket, send_ticket_email), (generate_ticket, send_ticket_sms)])
+pre_trip_communication = gen.xor(send_reminder, send_instructions) #reminder or instructions, or both can be skipped.
+post_journey_activities = gen.xor(post_travel_feedback, None) # Post-travel feedback is optional
+
+# Main process flow
+initial_selection = gen.partial_order(dependencies=[(customer_searches_ticket, select_route), (customer_searches_ticket, select_date_time)])
+payment_and_booking = gen.partial_order(dependencies=[(initial_selection, provide_personal_info), (provide_personal_info, provide_payment_details), (provide_payment_details, ticket_issuance), (ticket_issuance, update_seat_inventory)])
+main_process = gen.partial_order(dependencies=[(payment_and_booking, pre_trip_communication), (pre_trip_communication, customer_completes_journey), (customer_completes_journey, post_journey_activities)])
+
+
+final_model = main_process

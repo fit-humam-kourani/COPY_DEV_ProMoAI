@@ -1,0 +1,43 @@
+from utils.model_generation import ModelGenerator
+
+gen = ModelGenerator()
+
+# Activities
+submit_request = gen.activity('Submit IT solution request')
+assess_compatibility = gen.activity('Assess compatibility')
+evaluate_cost = gen.activity('Evaluate cost and resource needs')
+procure_tools = gen.activity('Procure necessary tools or licenses')
+install_solution = gen.activity('Install the solution')
+test_solution = gen.activity('Test solution')
+rollout_solution = gen.activity('Roll out solution to requesting department')
+provide_training = gen.activity('Provide training')
+provide_support = gen.activity('Provide support for troubleshooting')
+reject_request = gen.activity('Reject request')
+
+# Assessment phase (partial order)
+assessment_poset = gen.partial_order(dependencies=[(assess_compatibility, evaluate_cost)])
+
+# Approval path
+procure_tools_copy = procure_tools.copy()
+install_solution_copy = install_solution.copy()
+test_solution_copy = test_solution.copy()
+rollout_solution_copy = rollout_solution.copy()
+provide_support_copy = provide_support.copy()
+provide_training_copy = provide_training.copy()
+
+approval_path = gen.partial_order(dependencies=[(procure_tools_copy, install_solution_copy), (install_solution_copy, test_solution_copy), (test_solution_copy, rollout_solution_copy)])
+
+# Optional training
+optional_training = gen.xor(provide_training_copy, None)
+
+# Post-deployment (using copies to avoid reuse)
+#The error was happening because rollout_solution_copy was already used in approval_path.  We need to create another copy for post_deployment.
+rollout_solution_post_copy = rollout_solution.copy()
+post_deployment_poset = gen.partial_order(dependencies=[(rollout_solution_post_copy, provide_support_copy), (rollout_solution_post_copy, optional_training)])
+
+
+# Choice after assessment
+choice_approval_rejection = gen.xor(post_deployment_poset, reject_request)
+
+# Combine all into final model
+final_model = gen.partial_order(dependencies=[(submit_request, assessment_poset), (assessment_poset, choice_approval_rejection)])
