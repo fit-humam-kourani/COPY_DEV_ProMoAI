@@ -264,6 +264,7 @@ def run_app():
             image_format = str("svg").lower()
             if view_option == ViewType.POWL.value:
                 from pm4py.visualization.powl import visualizer
+                powl = powl.simplify()
                 vis_str = visualizer.apply(powl,
                                            parameters={'format': image_format})
 
