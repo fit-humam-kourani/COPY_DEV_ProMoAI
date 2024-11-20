@@ -55,27 +55,30 @@ def run_app():
             st.session_state.pop('model_gen')
         st.session_state['model_name'] = model_defaults[st.session_state['provider']]
 
-    provider = st.radio(
-        "Choose AI Provider:",
-        options=model_defaults.keys(),
-        index=0,
-        horizontal=True,
-        help="Select the AI provider you'd like to use. Google offers the Gemini models, which you can **try for free**,"
-             " while OpenAI provides GPT models and Anthropic provides Claude models. DeepInfra supports popular open-source large language models like"
-             " Meta's LLaMa and also enables custom model deployment.",
-        on_change=update_model_name,
-        key='provider',
-    )
-
-    if 'model_name' not in st.session_state or st.session_state['provider'] != provider:
-        st.session_state['model_name'] = model_defaults[provider]
 
     with st.expander("🔧 Configuration", expanded=True):
-        ai_model_name = st.text_input("Enter the AI model name:",
-                                      key='model_name',
-                                      help=model_help[st.session_state['provider']])
+        provider = st.selectbox(
+            "Choose AI Provider:",
+            options=model_defaults.keys(),
+            index=0,
+            # horizontal=True,
+            help="Select the AI provider you'd like to use. Google offers the Gemini models, which you can **try for free**,"
+                 " while OpenAI provides GPT models and Anthropic provides Claude models. DeepInfra supports popular open-source large language models like"
+                 " Meta's LLaMa and also enables custom model deployment.",
+            on_change=update_model_name,
+            key='provider',
+        )
 
-        api_key = st.text_input("API key:", type="password")
+        if 'model_name' not in st.session_state or st.session_state['provider'] != provider:
+            st.session_state['model_name'] = model_defaults[provider]
+
+        col1, col2 = st.columns(2)
+        with col1:
+            ai_model_name = st.text_input("Enter the AI model name:",
+                                          key='model_name',
+                                          help=model_help[st.session_state['provider']])
+        with col2:
+           api_key = st.text_input("API key:", type="password")
 
     if 'selected_mode' not in st.session_state:
         st.session_state['selected_mode'] = "Model Generation"
