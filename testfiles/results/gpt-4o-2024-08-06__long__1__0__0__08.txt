@@ -1,1 +1,0 @@
-{"visible_transitions": 6, "n_iterations": 1, "self_grading": 9.0}

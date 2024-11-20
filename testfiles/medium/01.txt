@@ -1,1 +1,0 @@
-This process starts when a customer requests to return a product and ends with issuing a refund. Steps include verifying the returned product, updating inventory, processing the refund, and notifying the customer of the status.

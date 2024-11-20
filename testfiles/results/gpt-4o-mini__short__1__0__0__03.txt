@@ -1,1 +1,0 @@
-{"visible_transitions": 7, "states_reachability_graph": 9, "n_iterations": 3, "self_grading": 8.0}

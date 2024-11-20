@@ -1,1 +1,0 @@
-The process starts when an employee submits a request, such as for leave or equipment purchase. Approval chains involve the department manager, HR, and sometimes finance. After approvals, notifications are sent back.
