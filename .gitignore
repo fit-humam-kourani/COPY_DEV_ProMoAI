@@ -129,3 +129,14 @@ dmypy.json
 # the following files are ignored
 *.txt
 */*.txt
+
+temp.bpmn
+
+!testfiles/*.py
+!testfiles/*.txt
+!testfiles/*/*.py
+!testfiles/*/*.txt
+!testfiles/*/*.bpmn
+
+testfiles/api*.txt
+!testfiles/results/*

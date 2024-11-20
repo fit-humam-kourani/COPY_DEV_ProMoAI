@@ -1,4 +1,5 @@
 from typing import Callable, List, TypeVar, Any
+from utils import constants, shared
 import requests
 import google.generativeai as genai
 import anthropic
@@ -30,21 +31,31 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
 
         try:
             conversation.append({"role": "system", "content": response})
-            print(response)
             result = extraction_function(response, iteration)
+
             return result, conversation  # Break loop if execution is successful
         except Exception as e:
             error_description = str(e)
             error_history.append(error_description)
-            print("Error detected in iteration " + str(iteration + 1))
+            if constants.ENABLE_PRINTS:
+                print("Error detected in iteration " + str(iteration + 1))
             new_message = f"Executing your code led to an error! Please update the model to fix the error. Make sure" \
                           f" to save the updated final model is the variable 'final_model'. This is the error" \
                           f" message: {error_description}"
-            print(new_message)
             conversation.append({"role": "user", "content": new_message})
+
+        print_conversation(conversation)
 
     raise Exception(openai_model + " failed to fix the errors after " + str(max_iterations) +
                     " iterations! This is the error history: " + str(error_history))
+
+
+def print_conversation(conversation):
+    if constants.ENABLE_PRINTS:
+        print("\n\n")
+        for index, msg in enumerate(conversation):
+            print("\t%d: %s" % (index, str(msg).replace("\n", " ").replace("\r", " ")))
+        print("\n\n")
 
 
 def generate_response_with_history(conversation_history, api_key, openai_model, api_url) -> str:
@@ -54,6 +65,7 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
     :param conversation_history: The conversation history to be included
     :param api_key: OpenAI API key
     :param openai_model: OpenAI model to be used
+    :param api_url: API URL to be used
     :return: The content of the LLM response
     """
     headers = {
@@ -72,6 +84,9 @@ def generate_response_with_history(conversation_history, api_key, openai_model, 
         "model": openai_model,
         "messages": messages_payload
     }
+
+    if constants.MAX_TOKENS < sys.maxsize:
+        payload["max_tokens"] = constants.MAX_TOKENS
 
     if api_url.endswith("/"):
         api_url = api_url[:-1]

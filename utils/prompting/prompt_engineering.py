@@ -141,7 +141,9 @@ def create_model_generation_prompt(process_description: str) -> str:
     prompt = prompt + self_evaluation()
     prompt = prompt + add_few_shots()
     prompt = prompt + code_generation()
-    prompt = prompt + add_process_description(process_description)
+
+    if process_description is not None:
+        prompt = prompt + add_process_description(process_description)
 
     return prompt
 
@@ -149,7 +151,6 @@ def create_model_generation_prompt(process_description: str) -> str:
 def create_conversation(process_description: str) -> List[dict[str:str]]:
     prompt = create_model_generation_prompt(process_description)
     conversation = [{"role": "user", "content": f'{prompt}'}]
-    print(prompt)
     return conversation
 
 
@@ -159,5 +160,25 @@ def update_conversation(conversation: List[dict[str:str]], feedback: str) -> Lis
                     "feedback comment as well. Make sure to save the updated final model is the variable" \
                     " 'final_model'. This is the new feedback comment:" + feedback
     conversation.append({"role": "user", "content": f'{update_prompt}'})
-    print(update_prompt)
     return conversation
+
+
+def model_self_improvement_prompt():
+    return (
+        "Please critically evaluate the process model and improve it accordingly **only where genuinely beneficial**. "
+        "Potential improvement steps might for instance include adding missing activities, managing additional "
+        "exceptions, increasing concurrency in execution, or elevating choices to higher levels. If you find the "
+        "model already optimized or see no significant areas for enhancement, it is "
+        "perfectly acceptable to make minimal adjustments (e.g., relabeling some activities) or to return the "
+        "same model without any changes."
+    )
+
+
+def description_self_improvement_prompt(descr: str):
+    return "Can you make the following process description richer and more detailed, while ensuring that all " \
+           "additions are relevant, accurate, and directly related to the original process? The goal is to " \
+           "make the description more comprehensive and suitable for process modeling purposes. Please do not add " \
+           "any information that cannot " \
+           "be inferred from the original process description or is unrelated. If the description is already " \
+           "comprehensive, feel free to return the same description. Please answer by only returning the improved " \
+           "process description without any additional text in your response. The process description: \n\n" + str(descr)

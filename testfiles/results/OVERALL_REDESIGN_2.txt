@@ -1,0 +1,20 @@
+hiring_log_high.bpmn
+
+fitness1 1.0 	precision1 0.7923768769679558 	grade1 8.0 	num_visible1 12
+fitness2 0.5418072790198993 	precision2 0.5746157289956724 	grade2 8.0 	num_visible2 31
+
+
+hospital_log_high.bpmn
+
+fitness1 1.0 	precision1 0.9984338017881348 	grade1 6.0 	num_visible1 10
+fitness2 0.6043680508282279 	precision2 0.907467023261189 	grade2 7.0 	num_visible2 12
+
+lending_log_high.bpmn
+
+fitness1 1.0 	precision1 0.8945986468076685 	grade1 7.0 	num_visible1 12
+fitness2 0.5520653463265215 	precision2 0.5 	grade2 7.0 	num_visible2 16
+
+renting_log_high.bpmn
+
+fitness1 1.0 	precision1 0.7517814781974923 	grade1 7.0 	num_visible1 16
+fitness2 0.8571439353343849 	precision2 0.8177606265510098 	grade2 8.0 	num_visible2 16
