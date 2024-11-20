@@ -1,5 +1,5 @@
 from utils.general_utils.ai_providers import AIProviders
-from utils.general_utils.openai_connection import generate_response_with_history_google, \
+from utils.general_utils.llm_connection import generate_response_with_history_google, \
     generate_response_with_history_anthropic, generate_response_with_history
 from utils.prompting.prompt_engineering import description_self_improvement_prompt
 
