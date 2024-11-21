@@ -9,200 +9,39 @@ from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.powl.obj import OperatorPOWL, StrictPartialOrder, Transition as POWLTransition, SilentTransition
 from pm4py.objects.process_tree.obj import Operator
 from pm4py.util import exec_utils
-
-TRANSITION_PREFIX = str(uuid.uuid4())
-
-
-class Parameters(Enum):
-    DEBUG = "debug"
+from to_powl_utils import *
 
 
-def generate_label_for_transition(t):
-    return 'tau' if t.label is None else '\'' + t.label + '\'' if not t.name.startswith(
-        TRANSITION_PREFIX) else t.label
-
-
-def loop_requirement(t1, t2):
-    if t1 == t2:
-        return False
-    for p in pn_util.pre_set(t2):
-        if len(pn_util.pre_set(p)) != 1:
-            return False
-        if t1 not in pn_util.pre_set(p):
-            return False
-    for p in pn_util.post_set(t2):
-        if len(pn_util.post_set(p)) != 1:
-            return False
-        if t1 not in pn_util.post_set(p):
-            return False
-    for p in pn_util.pre_set(t1):
-        if len(pn_util.post_set(p)) != 1:
-            return False
-        if t1 not in pn_util.post_set(p):
-            return False
-        if t2 not in pn_util.pre_set(p):
-            return False
-    for p in pn_util.post_set(t1):
-        if len(pn_util.pre_set(p)) != 1:
-            return False
-        if t1 not in pn_util.pre_set(p):
-            return False
-        if t2 not in pn_util.post_set(p):
-            return False
-    return True
-
-
-def binary_loop_detection(net, t2powl_node):
-    c1 = None
-    c2 = None
-    for t1, t2 in itertools.product(net.transitions, net.transitions):
-        if loop_requirement(t1, t2):
-            c1 = t1
-            c2 = t2
-            break
-    if c1 is not None and c2 is not None:
-        # Create new POWL node representing the loop operator over t2powl_node[c1] and t2powl_node[c2]
-        new_powl_node = OperatorPOWL(operator=Operator.LOOP, children=[t2powl_node[c1], t2powl_node[c2]])
-        # Create new transition t_new to replace c1 and c2 in the net
-        t_new = PetriNet.Transition(TRANSITION_PREFIX + str(datetime.datetime.now()))
-        t_new.label = None  # No label, as it's a structural node
-        # Map t_new to the new POWL node
-        new_powl_node = new_powl_node.simplify()
-        t2powl_node[t_new] = new_powl_node
-        net.transitions.add(t_new)
-        # Connect t_new in the net where c1 was
-        for a in c1.in_arcs:
-            pn_util.add_arc_from_to(a.source, t_new, net)
-        for a in c1.out_arcs:
-            pn_util.add_arc_from_to(t_new, a.target, net)
-        # Remove the old transitions c1 and c2
-        pn_util.remove_transition(net, c1)
-        pn_util.remove_transition(net, c2)
-        return net
-    return None
-
-
-def concurrent_requirement(t1, t2):
-    if t1 == t2:
-        return False
-    if len(pn_util.pre_set(t1)) == 0 or len(pn_util.post_set(t1)) == 0 or len(pn_util.pre_set(t2)) == 0 or len(
-            pn_util.post_set(t2)) == 0:
-        return False
-    pre_pre = set()
-    post_post = set()
-    for p in pn_util.pre_set(t1):
-        pre_pre = set.union(pre_pre, pn_util.pre_set(p))
-        if len(pn_util.post_set(p)) > 1 or t1 not in pn_util.post_set(p):
-            return False
-    for p in pn_util.post_set(t1):
-        post_post = set.union(post_post, pn_util.post_set(p))
-        if len(pn_util.pre_set(p)) > 1 or t1 not in pn_util.pre_set(p):
-            return False
-    for p in pn_util.pre_set(t2):
-        pre_pre = set.union(pre_pre, pn_util.pre_set(p))
-        if len(pn_util.post_set(p)) > 1 or t2 not in pn_util.post_set(p):
-            return False
-    for p in pn_util.post_set(t2):
-        post_post = set.union(post_post, pn_util.post_set(p))
-        if len(pn_util.pre_set(p)) > 1 or t2 not in pn_util.pre_set(p):
-            return False
-    for p in set.union(pn_util.pre_set(t1), pn_util.pre_set(t2)):
-        for t in pre_pre:
-            if t not in pn_util.pre_set(p):
-                return False
-    for p in set.union(pn_util.post_set(t1), pn_util.post_set(t2)):
-        for t in post_post:
-            if t not in pn_util.post_set(p):
-                return False
-    return True
-
-
-def binary_concurrency_detection(net, t2powl_node):
-    c1 = None
-    c2 = None
-    for t1, t2 in itertools.product(net.transitions, net.transitions):
-        if concurrent_requirement(t1, t2):
-            c1 = t1
-            c2 = t2
-            break
-    if c1 is not None and c2 is not None:
-        # Create a StrictPartialOrder POWL node with c1 and c2 as nodes
-        new_powl_node = StrictPartialOrder(nodes=[t2powl_node[c1], t2powl_node[c2]])
-        # No order between c1 and c2 means they can occur concurrently
-        t_new = PetriNet.Transition(TRANSITION_PREFIX + str(datetime.datetime.now()))
-        t_new.label = None
-        # Map t_new to the new POWL node
-        t2powl_node[t_new] = new_powl_node
-        net.transitions.add(t_new)
-        # Merge the pre-sets and post-sets of c1 and c2 for t_new
-        pres = set(a.source for a in c1.in_arcs).union(set(a.source for a in c2.in_arcs))
-        posts = set(a.target for a in c1.out_arcs).union(set(a.target for a in c2.out_arcs))
-        for p in pres:
-            pn_util.add_arc_from_to(p, t_new, net)
-        for p in posts:
-            pn_util.add_arc_from_to(t_new, p, net)
-        # Remove the old transitions c1 and c2
-        pn_util.remove_transition(net, c1)
-        pn_util.remove_transition(net, c2)
-        return net
-    return None
-
-
-def choice_requirement(t1, t2):
-    return t1 != t2 and pn_util.pre_set(t1) == pn_util.pre_set(t2) and pn_util.post_set(t1) == pn_util.post_set(
-        t2) and len(pn_util.pre_set(t1)) > 0 and len(
-        pn_util.post_set(t1)) > 0
-
-
-def binary_choice_detection(net, t2powl_node):
-    c1 = None
-    c2 = None
-    for t1, t2 in itertools.product(net.transitions, net.transitions):
-        if choice_requirement(t1, t2):
-            c1 = t1
-            c2 = t2
-            break
-    if c1 is not None and c2 is not None:
-        # Create an OperatorPOWL node with XOR operator for choice between c1 and c2
-        new_powl_node = OperatorPOWL(operator=Operator.XOR, children=[t2powl_node[c1], t2powl_node[c2]])
-        t_new = PetriNet.Transition(TRANSITION_PREFIX + str(datetime.datetime.now()))
-        t_new.label = None
-        # Map t_new to the new POWL node
-        new_powl_node = new_powl_node.simplify()
-        t2powl_node[t_new] = new_powl_node
-        net.transitions.add(t_new)
-        # Connect t_new in the net where c1 and c2 were
-        for a in c1.in_arcs:
-            pn_util.add_arc_from_to(a.source, t_new, net)
-        for a in c1.out_arcs:
-            pn_util.add_arc_from_to(t_new, a.target, net)
-        # Remove the old transitions c1 and c2
-        pn_util.remove_transition(net, c1)
-        pn_util.remove_transition(net, c2)
-        return net
-    return None
-
-
+# def sequence_requirement(t1, t2):
+#     if t1 == t2:
+#         return False
+#     if len(pn_util.pre_set(t2)) == 0:
+#         return False
+#     for p in pn_util.post_set(t1):
+#         if len(pn_util.pre_set(p)) != 1 or len(pn_util.post_set(p)) != 1:
+#             return False
+#         if t1 not in pn_util.pre_set(p):
+#             return False
+#         if t2 not in pn_util.post_set(p):
+#             return False
+#     for p in pn_util.pre_set(t2):
+#         if len(pn_util.pre_set(p)) != 1 or len(pn_util.post_set(p)) != 1:
+#             return False
+#         if t1 not in pn_util.pre_set(p):
+#             return False
+#         if t2 not in pn_util.post_set(p):  # redundant check, just to be sure...
+#             return False
+#     return True
 def sequence_requirement(t1, t2):
     if t1 == t2:
         return False
     if len(pn_util.pre_set(t2)) == 0:
         return False
     for p in pn_util.post_set(t1):
-        if len(pn_util.pre_set(p)) != 1 or len(pn_util.post_set(p)) != 1:
-            return False
-        if t1 not in pn_util.pre_set(p):
-            return False
-        if t2 not in pn_util.post_set(p):
-            return False
-    for p in pn_util.pre_set(t2):
-        if len(pn_util.pre_set(p)) != 1 or len(pn_util.post_set(p)) != 1:
-            return False
-        if t1 not in pn_util.pre_set(p):
-            return False
-        if t2 not in pn_util.post_set(p):
-            return False
-    return True
+        if len(pn_util.pre_set(p)) == 1 and len(pn_util.post_set(p)) == 1:
+            if t2 in pn_util.post_set(p):
+                return True
+    return False
 
 
 def binary_sequence_detection(net, t2powl_node):
@@ -224,6 +63,7 @@ def binary_sequence_detection(net, t2powl_node):
         else:
             new_powl_node = StrictPartialOrder(nodes=[n1, n2])
             new_powl_node.order.add_edge(n1, n2)
+            print("Seq: ", n1, ", ", n2)
         t_new = PetriNet.Transition(TRANSITION_PREFIX + str(datetime.datetime.now()))
         t_new.label = None
         # Map t_new to the new POWL node
@@ -236,6 +76,8 @@ def binary_sequence_detection(net, t2powl_node):
             pn_util.add_arc_from_to(t_new, a.target, net)
         # Remove the intermediate place between c1 and c2
         for p in pn_util.post_set(c1):
+            pn_util.remove_place(net, p)
+        for p in pn_util.pre_set(c2):
             pn_util.remove_place(net, p)
         # Remove the old transitions c1 and c2
         pn_util.remove_transition(net, c1)
@@ -254,9 +96,9 @@ def __group_blocks_internal(net, t2powl_node, parameters=None):
         return True
     elif binary_sequence_detection(net, t2powl_node) is not None:
         return True
-    elif binary_concurrency_detection(net, t2powl_node) is not None:
-        return True
     elif binary_loop_detection(net, t2powl_node) is not None:
+        return True
+    elif binary_concurrency_detection(net, t2powl_node) is not None:
         return True
     else:
         return False
@@ -292,6 +134,7 @@ def __insert_dummy_invisibles(net, t2powl_node, im, fm, ini_places, parameters=N
 
                 # Add the new silent transition to t2powl_node
                 t2powl_node[skip] = SilentTransition()
+
 
 def group_blocks_in_net(net, t2powl_node, parameters=None):
     """
@@ -338,113 +181,6 @@ def group_blocks_in_net(net, t2powl_node, parameters=None):
                 break
 
     return net
-
-
-def extract_partial_order_from_net(net, t2powl_node):
-    '''
-    Extracts the partial order from the Petri net structure for the remaining transitions.
-    Removes silent transitions by linking their predecessors to their successors until no silent transitions remain.
-    Returns a StrictPartialOrder POWL model with nodes and order.
-
-    Parameters:
-    - net: The Petri net containing the remaining transitions
-    - t2powl_node: Mapping from Petri net transitions to POWL model nodes
-
-    Returns:
-    - powl_model: A StrictPartialOrder POWL model representing the partial order over the transitions
-    '''
-    # Initialize the set of nodes (POWL nodes corresponding to transitions)
-    nodes = set()
-    # Initialize the set of order relations (edges) between nodes
-    order_relations = set()
-
-    # Map transitions to POWL nodes
-    for t in net.transitions:
-        # Collect the POWL nodes corresponding to the transitions
-        nodes.add(t2powl_node[t])
-
-    # For each place in the net, extract immediate causality relations
-    for p in net.places:
-        # Get the transitions in the pre-set (transitions leading to this place)
-        pre_transitions = set()
-        for a in p.in_arcs:
-            t = a.source
-            if isinstance(t, PetriNet.Transition):
-                pre_transitions.add(t)
-        # Get the transitions in the post-set (transitions that this place leads to)
-        post_transitions = set()
-        for a in p.out_arcs:
-            t = a.target
-            if isinstance(t, PetriNet.Transition):
-                post_transitions.add(t)
-        # For each pair of transitions (t1, t2) such that t1 in pre-set(p) and t2 in post-set(p)
-        for t1 in pre_transitions:
-            for t2 in post_transitions:
-                # Add an order relation from t1 to t2
-                source = t2powl_node[t1]
-                target = t2powl_node[t2]
-                order_relations.add((source, target))
-
-    # Now, build the directed graph
-    import networkx as nx
-    G = nx.DiGraph()
-    G.add_nodes_from(nodes)
-    G.add_edges_from(order_relations)
-
-    # Remove silent transitions and connect their predecessors to their successors
-    silent_transitions_exist = True
-    while silent_transitions_exist:
-        silent_transitions_exist = False
-        # Find all SilentTransition nodes
-        silent_nodes = [n for n in G.nodes if isinstance(n, SilentTransition)]
-        if silent_nodes:
-            silent_transitions_exist = True
-            for n in silent_nodes:
-                # Get predecessors and successors of the silent node
-                preds = list(G.predecessors(n))
-                succs = list(G.successors(n))
-                # For each predecessor and successor, add an edge from pred to succ
-                for p in preds:
-                    for s in succs:
-                        if p != s:
-                            G.add_edge(p, s)
-                # Remove the silent node from the graph
-                G.remove_node(n)
-        else:
-            silent_transitions_exist = False
-
-    # After removing silent transitions, update the nodes set
-    nodes = set(G.nodes())
-
-    # Now, check for cycles in the relations to ensure it's a partial order
-    if not nx.is_directed_acyclic_graph(G):
-        # If there are cycles, we need to remove edges to break cycles
-        # For simplicity, we can remove one edge from each cycle
-        try:
-            # Find cycles in the graph
-            cycles = list(nx.simple_cycles(G))
-            for cycle in cycles:
-                if len(cycle) > 1:
-                    # Remove an edge to break the cycle
-                    G.remove_edge(cycle[0], cycle[1])
-                else:
-                    # Self-loop, remove it
-                    G.remove_edge(cycle[0], cycle[0])
-        except Exception as e:
-            # In case of any error, we can raise an exception or proceed
-            pass
-
-    # Now G should be acyclic
-    # Reconstruct order_relations from G
-    order_relations = set(G.edges())
-
-    # Create the StrictPartialOrder POWL model
-    powl_model = StrictPartialOrder(nodes=nodes)
-    # Add the order relations
-    for source, target in order_relations:
-        powl_model.order.add_edge(source, target)
-
-    return powl_model
 
 
 def apply(net, im, fm, parameters=None):
@@ -494,13 +230,58 @@ def apply(net, im, fm, parameters=None):
             # If the net has been fully reduced to a single transition, return the corresponding POWL model
             t_final = list(grouped_net.transitions)[0]
             powl_model = t2powl_node[t_final]
-            powl_model = powl_model.simplify()
+            # powl_model = powl_model.simplify()
             return powl_model
         else:
-            # Extend the approach to incorporate partial orders between transitions
-            # that could not have been handled by process trees.
-
-            # Extract the partial order from the remaining net
-            powl_model = extract_partial_order_from_net(grouped_net, t2powl_node)
-
+            # raise Exception('Converting the WF-net into POWL failed!')
+            # powl_model = extract_partial_order_from_net(grouped_net, t2powl_node)
+            #
+            nodes = [t2powl_node[node] for node in list(grouped_net.transitions)]
+            powl_model = StrictPartialOrder(nodes)
+            # powl_model = powl_model.simplify()
             return powl_model
+
+
+import pm4py
+
+from pm4py.objects.powl.obj import (
+    OperatorPOWL,
+    StrictPartialOrder,
+    Transition as POWLTransition,
+    SilentTransition,
+)
+from pm4py.objects.process_tree.obj import Operator
+from pm4py.visualization.powl import visualizer as powl_viz
+
+# Step 1: Define POWL Transitions
+transition_A = POWLTransition(label='A')
+transition_B = POWLTransition(label='B')
+transition_C = POWLTransition(label='C')
+transition_D = POWLTransition(label='D')
+transition_D1 = POWLTransition(label='D1')
+transition_D2 = POWLTransition(label='D2')
+transition_E = POWLTransition(label='E')
+transition_F = POWLTransition(label='F')
+
+# Step 2: Create Nested Partial Orders
+PO2 = StrictPartialOrder(nodes=[transition_A, transition_B])
+PO3 = StrictPartialOrder(nodes=[transition_C, transition_D, transition_D1, transition_D2])
+PO3.order.add_edge(transition_D, transition_D1)
+# PO3.order.add_edge(transition_D, transition_D2)
+PO3.order.add_edge(transition_C, transition_D2)
+PO4 = StrictPartialOrder(nodes=[transition_E, transition_F])
+
+# Step 3: Create Exclusive Choice (XOR1) and Loop (LOOP1)
+XOR1 = OperatorPOWL(operator=Operator.XOR, children=[PO2, SilentTransition()])
+LOOP1 = OperatorPOWL(operator=Operator.LOOP, children=[PO3, SilentTransition()])
+
+# Step 4: Create Top-Level Partial Order (PO1)
+PO1 = StrictPartialOrder(nodes=[XOR1, LOOP1, PO4])
+
+# Step 5: Visualize the POWL Model
+pm4py.view_powl(PO1, format="svg")
+
+pn, im, fm = pm4py.convert_to_petri_net(PO1)
+
+P02 = apply(pn, im, fm)
+pm4py.view_powl(P02, format="svg")
