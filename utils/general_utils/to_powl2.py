@@ -1,4 +1,4 @@
-from collections import deque
+from collections import deque, defaultdict
 
 import pm4py
 from pm4py.objects.petri_net.obj import PetriNet, Marking
@@ -7,7 +7,7 @@ from pm4py.objects.petri_net.utils import petri_utils as pn_util
 from pm4py.objects.powl.obj import POWL, Transition, OperatorPOWL, Operator, StrictPartialOrder, SilentTransition, \
     Sequence
 
-from utils.general_utils.to_powl_tests import test_loop, test_choice, test_choice2
+from utils.general_utils.to_powl_tests import test_loop, test_choice, test_choice2, test_po
 
 
 def id_generator():
@@ -19,6 +19,169 @@ def id_generator():
 
 # Example usage
 id_gen = id_generator()
+
+
+def get_reachable_up_to(start, candidate_xor_end):
+    reachable = set()
+    queue = deque()
+    queue.append(start)
+    while queue:
+        node = queue.popleft()
+        if node not in reachable:
+            reachable.add(node)
+            if node in candidate_xor_end:
+                continue
+            successors = pn_util.post_set(node)
+            queue.extend(successors)
+    return reachable
+
+
+def get_reachable_till_end(start):
+    reachable = set()
+    queue = deque()
+    queue.append(start)
+    while queue:
+        node = queue.popleft()
+        if node not in reachable:
+            reachable.add(node)
+            successors = pn_util.post_set(node)
+            queue.extend(successors)
+    return reachable
+
+
+def combine_partitions(input_set, partitions):
+    """
+    Combines groups of partitions if they share elements in the given input set.
+
+    Args:
+    - input_set (set): The set of elements to check for intersection.
+    - partitions (list of lists): The current list of partitions to combine.
+
+    Returns:
+    - list of lists: Updated partitions after combining groups that share elements.
+    """
+    combined_partitions = []
+    new_combined_group = set()
+
+    for partition in partitions:
+        partition_set = set(partition)
+        # Check if there is an intersection with the input_set
+        if partition_set & input_set:
+            new_combined_group.update(partition_set)
+        else:
+            combined_partitions.append(partition)
+
+    # Combine all visited sets into one partition
+    if new_combined_group:
+        combined_partitions.append(list(new_combined_group))
+
+    return combined_partitions
+
+
+def detect_and_translate_partial_order(net, start_place, end_place, reachability_graph):
+    # if not (len(start_place.in_arcs) == 0):
+    #     raise Exception(f"This should not happen for start place! {start_place}")
+    # if not (len(end_place.out_arcs) == 0):
+    #     raise Exception(f"This should not happen for end place! {end_place}")
+    # print("reachability_graph: ", reachability_graph)
+    # all nodes sharing the same reachability graph must be within a loop
+    partition_map = defaultdict(list)
+    for key, value_set in reachability_graph.items():
+        partition_map[frozenset(value_set)].append(key)
+    partitions = list(partition_map.values())
+    # print("reachability_graph: ", reachability_graph)
+    # print("partitions")
+    # print(partitions)
+    nodes_not_grouped = [group[0] for group in partitions if len(group) == 1]
+    places_not_grouped = [node for node in nodes_not_grouped if isinstance(node, PetriNet.Place)]
+
+    candidate_xor_start = set()
+    # candidate_xor_end = set()
+
+    for place in places_not_grouped:
+        in_size = len(place.in_arcs)
+        out_size = len(place.out_arcs)
+        if in_size == 0 and not start_place:
+            raise Exception(f"A place with no incoming arcs! {place}")
+        if out_size == 0 and not end_place:
+            raise Exception(f"A place with no outgoing arcs! {place}")
+        # if in_size > 1 and out_size == 1:
+        #     candidate_xor_end.add(place)
+        if out_size > 1 and in_size == 1:
+            candidate_xor_start.add(place)
+
+    for place_xor_split in candidate_xor_start:
+        xor_branches = []
+        for start_transition in pn_util.post_set(place_xor_split):
+            new_branch = set()
+            add_reachable(start_transition, new_branch)
+            print("reachable: ", new_branch)
+            print("end_place: ", end_place)
+
+            if end_place not in new_branch:
+                raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
+            xor_branches.append(new_branch)
+
+        # extract the set of nodes that are not present in EVERY branch
+        union_of_branches = set().union(*xor_branches)
+        intersection_of_branches = set.intersection(*xor_branches)
+        not_in_every_branch = union_of_branches - intersection_of_branches
+        if len(not_in_every_branch) == 1:
+            raise Exception("This is not possible")
+        elif len(not_in_every_branch) > 1:
+            partitions = combine_partitions(not_in_every_branch, partitions)
+
+    # print("partitions")
+    # print(partitions)
+    groups = [group for group in partitions if len(group) > 1]
+    nodes_not_grouped = [group[0] for group in partitions if len(group) == 1]
+    transitions_not_grouped = [node for node in nodes_not_grouped if isinstance(node, PetriNet.Transition)]
+    # places_not_grouped = [node for node in nodes_not_grouped if isinstance(node, PetriNet.Place)]
+    children = []
+    node_to_powl_map = {}
+    for group in groups:
+        # print(group)
+        subnet = create_subnet_over_nodes(net, set(group), start_place, end_place)
+        child = translate_petri_to_powl(
+            subnet['net'],
+            subnet['initial_marking'],
+            subnet['final_marking']
+        )
+        for node in group:
+            node_to_powl_map[node] = child
+        children.append(child)
+    for transition in transitions_not_grouped:
+        powl = translate_single_transition_to_powl(transition)
+        children.append(powl)
+        node_to_powl_map[transition] = powl
+    po = StrictPartialOrder(children)
+    for place in net.places:
+        sources = set([node_to_powl_map[arc.source] for arc in place.in_arcs])
+        targets = set([node_to_powl_map[arc.target] for arc in place.out_arcs])
+        for new_source in sources:
+            for new_target in targets:
+                if new_source != new_target:
+                    po.order.add_edge(new_source, new_target)
+
+        # else:
+        #     raise Exception("This should not happen!")
+    return po
+
+
+def get_reachability_graph(net: PetriNet):
+    graph = {node: set() for node in set(net.places).union(net.transitions)}  # Initialize with all nodes as keys
+    for start_node in graph.keys():
+        reachable = set()
+        queue = deque()
+        queue.append(start_node)
+        while queue:
+            node = queue.popleft()
+            if node not in reachable:
+                reachable.add(node)
+                successors = pn_util.post_set(node)
+                queue.extend(successors)
+        graph[start_node].update(reachable)
+    return graph
 
 
 def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:
@@ -37,15 +200,12 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     print("Places: ", net.places)
     print("Arcs: ", net.arcs)
     validate_petri_net(net, initial_marking, final_marking)
-    preprocess_net(net, initial_marking, final_marking)
 
-    # Identify start and end places
+    preprocess_net(net, initial_marking, final_marking)
     start_places = [p for p in net.places if p in initial_marking]
     end_places = [p for p in net.places if p in final_marking]
-
     if len(start_places) != 1 or len(end_places) != 1:
         raise NotImplementedError("Only Petri nets with a single start and end place are supported.")
-
     start_place = start_places[0]
     end_place = end_places[0]
 
@@ -54,12 +214,16 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         print("Base case detected")
         return translate_single_transition(net, start_place, end_place)
 
+    reachability_map = get_reachable_nodes_mapping(net)
+    full_reachability_map = get_reachability_graph(net)
+
     # Check for Sequence split
-    seq_points, sorted_places, reachability_map = is_sequence(net, start_place, end_place)
+    seq_points, sorted_places = is_sequence(net, start_place, end_place, full_reachability_map)
     # we need at least three connection poits for a sequence: start_place, cut_point, end_place
     if len(seq_points) > 2:
         print("Seq detected")
         return translate_seq(net, seq_points, sorted_places, reachability_map)
+
 
     # Check for XOR split
     choice_branches = is_xor(net, start_place, end_place)
@@ -71,8 +235,11 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         print("Loop detected")
         return translate_loop(net, start_place, end_place)
 
-    # Placeholder for other cases (e.g., AND splits, loops)
-    raise NotImplementedError("This type of Petri net structure is not yet implemented.")
+    full_reachability_map = get_reachability_graph(net)
+
+    return detect_and_translate_partial_order(net, start_place, end_place, full_reachability_map)
+
+    # raise NotImplementedError("This type of Petri net structure is not yet implemented.")
 
 
 def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: Marking):
@@ -85,6 +252,7 @@ def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: M
     from pm4py.algo.analysis.workflow_net import algorithm as wf_eval
 
     if not wf_eval.apply(net):
+        print(net)
         raise ValueError('The Petri net provided is not a WF-net')
 
     # 1. Initial and final markings must each contain exactly one place
@@ -150,8 +318,7 @@ def preprocess_net(net: PetriNet, initial_marking: Marking, final_marking: Marki
                     # Update final_marking to p3
                     final_marking.clear()
                     final_marking[p3] = 1
-                    end_preprocessed = True
-                    print(f"Preprocessed end: Removed {p3} and {transition}, set {p3} as final marking.")
+                    print(f"Preprocessed end: Removed {end_place} and {transition}, set {p3} as final marking.")
 
 
 def is_silent(transition) -> bool:
@@ -190,6 +357,20 @@ def translate_single_transition(net: PetriNet, start_place: PetriNet.Place, end_
         return SilentTransition()
 
 
+def translate_single_transition_to_powl(transition: PetriNet.Transition) -> Transition:
+    """
+    Translate a Petri net transition to a POWL transition.
+
+    Returns:
+    - POWL Transition object
+    """
+    label = transition.label
+    if label:
+        return Transition(label=label)
+    else:
+        return SilentTransition()
+
+
 def translate_seq(net, connection_points, ordered_places, reachability_map):
     powl_sub_models = []
     index = 0
@@ -201,9 +382,7 @@ def translate_seq(net, connection_points, ordered_places, reachability_map):
 
             index = index + 1
             sub_net = PetriNet(f"Subnet_{index}")
-            sub_start_place = PetriNet.Place(name=f"{p.name}_subnet{index}",
-                                             in_arcs=set(),
-                                             out_arcs=p.out_arcs)
+            sub_start_place = PetriNet.Place(name=f"{p.name}_subnet{index}")
             node_map[p] = sub_start_place
             sub_net.places.add(sub_start_place)
             subnet_initial_marking = Marking()
@@ -213,20 +392,12 @@ def translate_seq(net, connection_points, ordered_places, reachability_map):
             # add all next places until reaching a connection point
             for j in range(i + 1, len(ordered_places)):
                 p_next = ordered_places[j]
+                cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}")
+                sub_net.places.add(cloned_place)
+                node_map[p_next] = cloned_place
                 if p_next in connection_points:
-                    cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}",
-                                                  in_arcs=p_next.in_arcs,
-                                                  out_arcs=set())
-                    sub_net.places.add(cloned_place)
                     subnet_final_marking[cloned_place] = 1
-                    node_map[p_next] = cloned_place
                     break
-                else:
-                    cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}",
-                                                  in_arcs=p_next.in_arcs,
-                                                  out_arcs=p_next.out_arcs)
-                    sub_net.places.add(cloned_place)
-                    node_map[p_next] = cloned_place
 
             # add transitions
             for t in net.transitions:
@@ -248,7 +419,7 @@ def translate_seq(net, connection_points, ordered_places, reachability_map):
     return Sequence(nodes=powl_sub_models)
 
 
-def is_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
+def is_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place, reachability_graph):
     """
     Determine if the Petri net represents a sequence by identifying connection points.
 
@@ -262,18 +433,18 @@ def is_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.
       - is_sequence_detected: True if a sequence is detected, False otherwise.
       - connection_points: List of connection places if a sequence is detected; otherwise, [start_place, end_place].
     """
-    reachability_map = get_reachable_nodes_mapping(net)
+    # reachability_map_places = {key: value for key, value in reachability_graph.items() if isinstance(key, PetriNet.Place)}
 
-    reachable_places_map = {key: value for key, value in reachability_map.items() if isinstance(key, PetriNet.Place)}
-
-    sorted_places = sorted(reachable_places_map.keys(), key=lambda k: len(reachability_map[k]), reverse=True)
+    sorted_nodes = sorted(reachability_graph.keys(), key=lambda k: len(reachability_graph[k]), reverse=True)
     connection_points = []
 
-    for i in range(len(sorted_places)):
-        p = sorted_places[i]
-        if set(node for node in reachability_map[p] if isinstance(node, PetriNet.Place)) == set(sorted_places[i + 1:]):
-            if all(p in reachability_map[q] for q in sorted_places[:i]):
-                connection_points.append(p)
+    for i in range(len(sorted_nodes)):
+        p = sorted_nodes[i]
+        if isinstance(p, PetriNet.Place):
+            if set(reachability_graph[p]) == set(sorted_nodes[i:]):
+                if all(p in reachability_graph[q] for q in sorted_nodes[:i]):
+                    if not any(p in reachability_graph[q] for q in sorted_nodes[i + 1:]):
+                        connection_points.append(p)
 
     if len(connection_points) >= 2:
         if start_place not in connection_points:
@@ -281,7 +452,10 @@ def is_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.
         if end_place not in connection_points:
             raise Exception("End place not detected as a connection_point!")
 
-    return connection_points, sorted_places, reachability_map
+    # print(sorted_places)
+    # print(connection_points)
+
+    return connection_points, [p for p in sorted_nodes if isinstance(p, PetriNet.Place)]
 
 
 def get_reachable_nodes_mapping(net: PetriNet):
@@ -335,11 +509,14 @@ def is_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place
     choice_branches = []
     # Connectivity between split and join
     for start_transition in pn_util.post_set(start_place):
+        # print(f"start_place: {start_place}")
+        # print(pn_util.post_set(start_place))
         new_branch = set()
-        new_branch.update([start_transition])
         add_reachable(start_transition, new_branch)
+        # print(net)
+        # print(f"reachable from {start_transition}: {new_branch}")
         if end_place not in new_branch:
-            raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
+            raise Exception(f"Not a WF-net! End place {end_place} not reachable from {start_transition}!")
         new_branch.remove(end_place)
         choice_branches.append(new_branch)
 
@@ -360,12 +537,20 @@ def is_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place
 
 
 def add_reachable(out_trans, res):
-    post = pn_util.post_set(out_trans)
-    new_nodes = post.difference(res)
-    if len(new_nodes) > 0:
-        res.update(new_nodes)
-        for node in new_nodes:
-            add_reachable(node, res)
+    # post = pn_util.post_set(out_trans)
+    # new_nodes = post.difference(res)
+    # if len(new_nodes) > 0:
+    #     res.update(new_nodes)
+    #     for node in new_nodes:
+    #         add_reachable(node, res)
+    queue = deque()
+    queue.append(out_trans)
+    while queue:
+        node = queue.popleft()
+        if node not in res:
+            res.add(node)
+            successors = pn_util.post_set(node)
+            queue.extend(successors)
 
 
 def create_sub_powl_model(net, branch, start_place, end_place):
@@ -500,6 +685,84 @@ def create_subnet(net: PetriNet, subnet_nodes: Set[Union[PetriNet.Place, PetriNe
     }
 
 
+def create_subnet_over_nodes(net: PetriNet, subnet_nodes: Set[Union[PetriNet.Place, PetriNet.Transition]], old_start_place, old_end_place):
+    """
+    Create a subnet Petri net from the given nodes.
+    """
+
+    subnet_net = PetriNet(f"Subnet_{next(id_gen)}")
+
+    node_map = {}
+    for node in subnet_nodes:
+        if isinstance(node, PetriNet.Place):
+            cloned_place = PetriNet.Place(f"{node.name}_cloned")
+            subnet_net.places.add(cloned_place)
+            node_map[node] = cloned_place
+        elif isinstance(node, PetriNet.Transition):
+            cloned_trans = PetriNet.Transition(f"{node.name}_cloned", node.label)
+            subnet_net.transitions.add(cloned_trans)
+            node_map[node] = cloned_trans
+
+    # Add arcs within the subnet
+    for arc in net.arcs:
+        if arc.source in subnet_nodes and arc.target in subnet_nodes:
+            cloned_source = node_map[arc.source]
+            cloned_target = node_map[arc.target]
+            add_arc_from_to(cloned_source, cloned_target, subnet_net)
+
+    init_p = PetriNet.Place(f"fresh_start_{next(id_gen)}")
+    subnet_net.places.add(init_p)
+    final_p = PetriNet.Place(f"fresh_end_{next(id_gen)}")
+    subnet_net.places.add(final_p)
+
+    if old_start_place in subnet_nodes:
+        init_places = [old_start_place]
+    else:
+        init_places = [node for node in subnet_nodes if isinstance(node, PetriNet.Place) and len(node_map[node].in_arcs) < len(node.in_arcs)]
+    if old_end_place in subnet_nodes:
+        final_places = [old_end_place]
+    else:
+        final_places = [node for node in subnet_nodes if isinstance(node, PetriNet.Place) and len(node_map[node].out_arcs) < len(node.out_arcs)]
+
+    if len(init_places) == len(final_places) == 1:
+        second_p = node_map[init_places[0]]
+        second_last_p = node_map[final_places[0]]
+        t_silent = PetriNet.Transition(f"silent{id_generator()}", None)
+        subnet_net.transitions.add(t_silent)
+        add_arc_from_to(init_p, t_silent, subnet_net)
+        add_arc_from_to(t_silent, second_p, subnet_net)
+        t_silent2 = PetriNet.Transition(f"silent{id_generator()}", None)
+        subnet_net.transitions.add(t_silent2)
+        add_arc_from_to(second_last_p, t_silent2, subnet_net)
+        add_arc_from_to(t_silent2, final_p, subnet_net)
+
+    elif len(init_places) == len(final_places) == 0:
+        init_transitions = [node for node in subnet_nodes if
+                            isinstance(node, PetriNet.Transition) and len(node_map[node].in_arcs) < len(node.in_arcs)]
+        final_transitions = [node for node in subnet_nodes if
+                             isinstance(node, PetriNet.Transition) and len(node_map[node].out_arcs) < len(node.out_arcs)]
+
+        if len(init_transitions) == 0 or len(final_transitions) == 0:
+            raise Exception("This should not happen!")
+
+        for t in init_transitions:
+            add_arc_from_to(init_p, node_map[t], subnet_net)
+        for t in final_transitions:
+            add_arc_from_to(node_map[t], final_p, subnet_net)
+    else:
+        raise Exception("This should not happen!")
+
+    subnet_initial_marking = Marking()
+    subnet_initial_marking[init_p] = 1
+    subnet_final_marking = Marking()
+    subnet_final_marking[final_p] = 1
+    return {
+        'net': subnet_net,
+        'initial_marking': subnet_initial_marking,
+        'final_marking': subnet_final_marking
+    }
+
+
 def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
                     target: Union[PetriNet.Transition, PetriNet.Place], net: PetriNet):
     """
@@ -518,8 +781,9 @@ def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
 
 if __name__ == "__main__":
     # net, initial_marking, final_marking = test_choice2()
-    net, initial_marking, final_marking = test_loop()
+    # net, initial_marking, final_marking = test_loop()
+    net, initial_marking, final_marking = test_po()
 
-    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
     pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
+    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
     pm4py.view_powl(powl_model, format="SVG")

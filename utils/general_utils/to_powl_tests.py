@@ -299,7 +299,8 @@ def test_loop(n=5):
     # For the remaining main choice places, connect directly to end via their transitions
     for i in range(3, n + 1):
         parent_place = main_choice_place
-        t = PetriNet.Transition(f"t{i}", f"Action {i}")
+
+        t = PetriNet.Transition(f"t{i}", f"A {i}")
         net.transitions.add(t)
         add_arc_from_to(end, t, net)
 
@@ -307,10 +308,15 @@ def test_loop(n=5):
         net.places.add(seq_place)
         add_arc_from_to(t, seq_place, net)
 
-        t2 = PetriNet.Transition(f"t{i}", f"after Action {i}")
+        t2 = PetriNet.Transition(f"t{i}", f"B {i}")
         net.transitions.add(t2)
         add_arc_from_to(seq_place, t2, net)
         add_arc_from_to(t2, parent_place, net)
+
+        t3 = PetriNet.Transition(f"t{i}", f"C {i}")
+        net.transitions.add(t3)
+        add_arc_from_to(end, t3, net)
+        add_arc_from_to(t3, parent_place, net)
 
     parent_place = main_choice_place
     t = PetriNet.Transition(f"SILENT", None)
@@ -369,5 +375,10 @@ def test_simple_loop(n=5):
     final_marking = Marking()
     initial_marking[p_start] = 1
     final_marking[p_end] = 1
+
+    return net, initial_marking, final_marking
+
+def test_po():
+    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\20.pnml")
 
     return net, initial_marking, final_marking
