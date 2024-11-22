@@ -1,0 +1,9 @@
+digraph {
+	"Operator_96e3579f-59fa-4d40-9c5c-964348c1202b" [label=XOR fillcolor=lightblue shape=ellipse style=filled]
+	"Transition_6d11cdbf-e306-48ac-bf93-4220d4e79bd5" [label="Action 1" fillcolor=lightgrey shape=rectangle style=filled]
+	"Operator_96e3579f-59fa-4d40-9c5c-964348c1202b" -> "Transition_6d11cdbf-e306-48ac-bf93-4220d4e79bd5"
+	"Transition_7b80bcaa-c00a-4cd9-8740-2b29c478f167" [label="Action 2" fillcolor=lightgrey shape=rectangle style=filled]
+	"Operator_96e3579f-59fa-4d40-9c5c-964348c1202b" -> "Transition_7b80bcaa-c00a-4cd9-8740-2b29c478f167"
+	"Transition_f6621bf1-5c1e-4672-a629-904720ce153d" [label="Action 3" fillcolor=lightgrey shape=rectangle style=filled]
+	"Operator_96e3579f-59fa-4d40-9c5c-964348c1202b" -> "Transition_f6621bf1-5c1e-4672-a629-904720ce153d"
+}

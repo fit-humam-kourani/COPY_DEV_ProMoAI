@@ -13,7 +13,7 @@ from pm4py.objects.bpmn.exporter.variants.etree import get_xml_string
 
 from utils import llm_model_generator
 from utils.app_utils import InputType, ViewType, footer
-from utils.general_utils import pt_to_powl_code
+from utils.general_utils import pt_to_powl_code, to_powl
 from utils.general_utils.ai_providers import AIProviders
 
 
@@ -55,7 +55,6 @@ def run_app():
             st.session_state.pop('model_gen')
         st.session_state['model_name'] = model_defaults[st.session_state['provider']]
 
-
     with st.expander("🔧 Configuration", expanded=True):
         provider = st.selectbox(
             "Choose AI Provider:",
@@ -78,7 +77,7 @@ def run_app():
                                           key='model_name',
                                           help=model_help[st.session_state['provider']])
         with col2:
-           api_key = st.text_input("API key:", type="password")
+            api_key = st.text_input("API key:", type="password")
 
     if 'selected_mode' not in st.session_state:
         st.session_state['selected_mode'] = "Model Generation"
@@ -163,7 +162,7 @@ def run_app():
                 "For **process model re-design**, upload a block-structured BPMN or Petri net:",
                 type=["bpmn", "pnml"],
                 help="Block-structured workflow.",
-                )
+            )
             submit_button = st.form_submit_button(label='Upload')
             if submit_button:
                 if uploaded_file is None:
@@ -188,14 +187,21 @@ def run_app():
                             F.close()
                             pn, im, fm = pm4py.read_pnml("temp.pnml")
                             os.remove("temp.pnml")
-                            process_tree = pm4py.convert_to_process_tree(pn, im, fm)
+                            powl = to_powl.apply(pn, im, fm)
+                            # process_tree = pm4py.convert_to_process_tree(pn, im, fm)
+                            # pm4py.view_petri_net(pn, im, fm, format="SVG")
+                            # powl
                         else:
                             st.error(body=f"Unsupported file format {file_extension}!", icon="⚠️")
                             return
 
-                        powl_code = pt_to_powl_code.recursively_transform_process_tree(process_tree)
+                        # powl_code = pt_to_powl_code.recursively_transform_process_tree(process_tree)
+                        # obj = llm_model_generator.initialize(None, api_key=api_key,
+                        #                                      powl_model_code=powl_code, llm_name=ai_model_name,
+                        #                                      ai_provider=provider,
+                        #                                      debug=False)
                         obj = llm_model_generator.initialize(None, api_key=api_key,
-                                                             powl_model_code=powl_code, llm_name=ai_model_name,
+                                                             powl_model=powl, llm_name=ai_model_name,
                                                              ai_provider=provider,
                                                              debug=False)
                         st.session_state['model_gen'] = obj

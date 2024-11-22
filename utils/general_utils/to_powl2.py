@@ -4,7 +4,10 @@ import pm4py
 from pm4py.objects.petri_net.obj import PetriNet, Marking
 from typing import Union, List, Dict, Set
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
-from pm4py.objects.powl.obj import POWL, Transition, OperatorPOWL, Operator, StrictPartialOrder, SilentTransition
+from pm4py.objects.powl.obj import POWL, Transition, OperatorPOWL, Operator, StrictPartialOrder, SilentTransition, \
+    Sequence
+
+from utils.general_utils.to_powl_tests import test_loop, test_choice, test_choice2
 
 
 def id_generator():
@@ -30,6 +33,9 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     Returns:
     - POWL model
     """
+    print("Transitions: ", net.transitions)
+    print("Places: ", net.places)
+    print("Arcs: ", net.arcs)
     validate_petri_net(net, initial_marking, final_marking)
     preprocess_net(net, initial_marking, final_marking)
 
@@ -45,16 +51,24 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
 
     # Check for base case
     if is_base_case(net, start_place, end_place):
-        print("Base case:", net.transitions)
+        print("Base case detected")
         return translate_single_transition(net, start_place, end_place)
 
+    # Check for Sequence split
+    seq_points, sorted_places, reachability_map = is_sequence(net, start_place, end_place)
+    # we need at least three connection poits for a sequence: start_place, cut_point, end_place
+    if len(seq_points) > 2:
+        print("Seq detected")
+        return translate_seq(net, seq_points, sorted_places, reachability_map)
+
     # Check for XOR split
-    if is_xor(net, start_place, end_place):
-        print("XOR:", net.transitions)
-        return translate_xor(net, start_place, end_place)
+    choice_branches = is_xor(net, start_place, end_place)
+    if choice_branches and len(choice_branches) > 1:
+        print("XOR detected")
+        return translate_xor(net, start_place, end_place, choice_branches)
 
     if is_loop(net, start_place, end_place):
-        print("Loop detected:", net.transitions)
+        print("Loop detected")
         return translate_loop(net, start_place, end_place)
 
     # Placeholder for other cases (e.g., AND splits, loops)
@@ -75,23 +89,19 @@ def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: M
 
     # 1. Initial and final markings must each contain exactly one place
     if len(initial_marking) != 1:
-        print(initial_marking)
-        raise Exception("Initial marking must consist of exactly one place.")
+        raise Exception(f"Initial marking must consist of exactly one place: {initial_marking}")
     if len(final_marking) != 1:
-        raise Exception("Final marking must consist of exactly one place.")
+        raise Exception(f"Final marking must consist of exactly one place: {final_marking}")
 
     # 2. Initial marking must be the same as all places with no incoming arcs
     places_no_incoming = [p for p in net.places if not p.in_arcs]
-    print(places_no_incoming)
     if set(places_no_incoming) != set(initial_marking.keys()):
-        raise Exception("Initial marking must match all places with no incoming arcs.")
+        raise Exception(f"Initial marking must match all places with no incoming arcs. {places_no_incoming}")
 
     # 3. Final marking must be the same as all places with no outgoing arcs
     places_no_outgoing = [p for p in net.places if not p.out_arcs]
     if set(places_no_outgoing) != set(final_marking.keys()):
-        print(places_no_outgoing)
-        print(final_marking.keys())
-        raise Exception("Final marking must match all places with no outgoing arcs.")
+        raise Exception(f"Final marking must match all places with no outgoing arcs. {places_no_outgoing}")
 
 
 def preprocess_net(net: PetriNet, initial_marking: Marking, final_marking: Marking):
@@ -103,7 +113,6 @@ def preprocess_net(net: PetriNet, initial_marking: Marking, final_marking: Marki
     if len(net.transitions) < 2:
         return
     # Preprocess start: remove p -> silent_transition -> p2
-    start_preprocessed = False
     start_places = [p for p in net.places if p in initial_marking]
     if len(start_places) == 1:
         start_place = start_places[0]
@@ -125,7 +134,6 @@ def preprocess_net(net: PetriNet, initial_marking: Marking, final_marking: Marki
                     print(f"Preprocessed start: Removed {start_place} and {transition}, set {p2} as initial marking.")
 
     # Preprocess end: remove p3 -> silent_transition -> p4
-    end_preprocessed = False
     end_places = [p for p in net.places if p in final_marking]
     if len(end_places) == 1:
         end_place = end_places[0]
@@ -182,7 +190,119 @@ def translate_single_transition(net: PetriNet, start_place: PetriNet.Place, end_
         return SilentTransition()
 
 
-def is_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place) -> bool:
+def translate_seq(net, connection_points, ordered_places, reachability_map):
+    powl_sub_models = []
+    index = 0
+    # excluded last place, which must be a connection point (otherwise, exception would have been thrown earlier)
+    for i in range(len(ordered_places) - 1):
+        p = ordered_places[i]
+        if p in connection_points:
+            node_map = {}
+
+            index = index + 1
+            sub_net = PetriNet(f"Subnet_{index}")
+            sub_start_place = PetriNet.Place(name=f"{p.name}_subnet{index}",
+                                             in_arcs=set(),
+                                             out_arcs=p.out_arcs)
+            node_map[p] = sub_start_place
+            sub_net.places.add(sub_start_place)
+            subnet_initial_marking = Marking()
+            subnet_final_marking = Marking()
+            subnet_initial_marking[sub_start_place] = 1
+            p_next = None
+            # add all next places until reaching a connection point
+            for j in range(i + 1, len(ordered_places)):
+                p_next = ordered_places[j]
+                if p_next in connection_points:
+                    cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}",
+                                                  in_arcs=p_next.in_arcs,
+                                                  out_arcs=set())
+                    sub_net.places.add(cloned_place)
+                    subnet_final_marking[cloned_place] = 1
+                    node_map[p_next] = cloned_place
+                    break
+                else:
+                    cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}",
+                                                  in_arcs=p_next.in_arcs,
+                                                  out_arcs=p_next.out_arcs)
+                    sub_net.places.add(cloned_place)
+                    node_map[p_next] = cloned_place
+
+            # add transitions
+            for t in net.transitions:
+                if t in reachability_map[p] and t not in reachability_map[p_next]:
+                    new_t = PetriNet.Transition(f"{t.name}_subnet{index}", t.label)
+                    sub_net.transitions.add(new_t)
+                    node_map[t] = new_t
+
+            # add arcs
+            for arc in net.arcs:
+                source = arc.source
+                target = arc.target
+                if source in node_map.keys() and target in node_map.keys():
+                    add_arc_from_to(node_map[source], node_map[target], sub_net)
+
+            powl = translate_petri_to_powl(sub_net, subnet_initial_marking, subnet_final_marking)
+            powl_sub_models.append(powl)
+
+    return Sequence(nodes=powl_sub_models)
+
+
+def is_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
+    """
+    Determine if the Petri net represents a sequence by identifying connection points.
+
+    Parameters:
+    - net: PetriNet
+    - start_place: Place (start of the sequence)
+    - end_place: Place (end of the sequence)
+
+    Returns:
+    - Tuple (is_sequence_detected: bool, connection_points: List[PetriNet.Place])
+      - is_sequence_detected: True if a sequence is detected, False otherwise.
+      - connection_points: List of connection places if a sequence is detected; otherwise, [start_place, end_place].
+    """
+    reachability_map = get_reachable_nodes_mapping(net)
+
+    reachable_places_map = {key: value for key, value in reachability_map.items() if isinstance(key, PetriNet.Place)}
+
+    sorted_places = sorted(reachable_places_map.keys(), key=lambda k: len(reachability_map[k]), reverse=True)
+    connection_points = []
+
+    for i in range(len(sorted_places)):
+        p = sorted_places[i]
+        if set(node for node in reachability_map[p] if isinstance(node, PetriNet.Place)) == set(sorted_places[i + 1:]):
+            if all(p in reachability_map[q] for q in sorted_places[:i]):
+                connection_points.append(p)
+
+    if len(connection_points) >= 2:
+        if start_place not in connection_points:
+            raise Exception("Start place not detected as a connection_point!")
+        if end_place not in connection_points:
+            raise Exception("End place not detected as a connection_point!")
+
+    return connection_points, sorted_places, reachability_map
+
+
+def get_reachable_nodes_mapping(net: PetriNet):
+    """
+    Compute the reachability of each place in the Petri net.
+
+    Parameters:
+    - net: PetriNet
+
+    Returns:
+    - Dictionary where each key is a place and the value is a set of places reachable from it.
+    """
+    reachability = {}
+    for place in net.places:
+        res = set()
+        add_reachable(place, res)
+        reachability[place] = res
+    return reachability
+
+
+def is_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
     """
     Determine if the Petri net starts with an XOR split at start_place and ends with an XOR join at end_place.
 
@@ -194,31 +314,49 @@ def is_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place
     Returns:
     - Boolean indicating whether an XOR structure exists.
     """
+
     len_start_incoming = len(start_place.in_arcs)
     len_start_outgoing = len(start_place.out_arcs)
     len_end_incoming = len(end_place.in_arcs)
     len_end_outgoing = len(end_place.out_arcs)
 
     if len_start_outgoing <= 1:
-        print("Not an XOR split: start_place has <=1 outgoing transitions.")
-        return False
+        # print("Not an XOR split: start_place has <=1 outgoing transitions.")
+        return None
 
     if len_end_incoming <= 1:
-        print("Not an XOR join: end_place has <=1 incoming transitions.")
-        return False
+        # print("Not an XOR join: end_place has <=1 incoming transitions.")
+        return None
 
-    if len_start_incoming > 0 or len_end_outgoing:
-        print("Not an XOR: possible loop!")
-        return False
+    if len_start_incoming > 0 or len_end_outgoing > 0:
+        # print("Not an XOR: possible loop!")
+        return None
 
-    # Step 3: Verify that the number of outgoing transitions equals incoming transitions
-    if len_start_outgoing != len_end_incoming:
-        print("Mismatch in number of outgoing and incoming transitions.")
-        return False
+    choice_branches = []
+    # Connectivity between split and join
+    for start_transition in pn_util.post_set(start_place):
+        new_branch = set()
+        new_branch.update([start_transition])
+        add_reachable(start_transition, new_branch)
+        if end_place not in new_branch:
+            raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
+        new_branch.remove(end_place)
+        choice_branches.append(new_branch)
 
-    # Optional: Further verification can be added here (e.g., connectivity between split and join)
+    # Combine overlapping branches
+    merged_branches = []
+    while choice_branches:
+        branch = choice_branches.pop(0)  # Take the first branch
+        merged = False
+        for i, other_branch in enumerate(merged_branches):
+            if branch & other_branch:  # Check for intersection
+                merged_branches[i] = other_branch | branch  # Merge branches
+                merged = True
+                break
+        if not merged:
+            merged_branches.append(branch)
 
-    return True
+    return merged_branches
 
 
 def add_reachable(out_trans, res):
@@ -230,7 +368,16 @@ def add_reachable(out_trans, res):
             add_reachable(node, res)
 
 
-def translate_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place) -> OperatorPOWL:
+def create_sub_powl_model(net, branch, start_place, end_place):
+    subnet = create_subnet(net, branch, start_place, end_place)
+    return translate_petri_to_powl(
+        subnet['net'],
+        subnet['initial_marking'],
+        subnet['final_marking']
+    )
+
+
+def translate_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place, choice_branches):
     """
     Translate an XOR split and join in the Petri net into a POWL OperatorPOWL with Operator.XOR.
 
@@ -241,107 +388,16 @@ def translate_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNe
 
     Returns:
     - OperatorPOWL object representing the XOR operator with translated subnets.
-
-    Raises:
-    - Exception if the XOR join is not found or subnets are not disjoint.
     """
-    # Step 1: Get outgoing transitions from start_place (XOR split)
-    outgoing_transitions = [
-        arc.target for arc in net.arcs
-        if arc.source == start_place and isinstance(arc.target, PetriNet.Transition)
-    ]
-
-    # Step 2: Get incoming transitions to end_place (XOR join)
-    incoming_transitions = [
-        arc.source for arc in net.arcs
-        if arc.target == end_place and isinstance(arc.source, PetriNet.Transition)
-    ]
-
-    if len(outgoing_transitions) != len(incoming_transitions):
-        raise Exception("Number of outgoing transitions does not match incoming transitions.")
-
-    # Step 3: Iterate over each outgoing transition and collect all nodes in the subnet
-    subnets = []
-    print(outgoing_transitions)
-    for start_transition in reversed(outgoing_transitions):
-        # Collect all nodes in this subnet by traversing from out_trans to the XOR join
-        subnet_nodes = set()
-        subnet_nodes.add(start_transition)
-        add_reachable(start_transition, subnet_nodes)
-        print(f"from {start_transition} reachable: {subnet_nodes}")
-        subnet_nodes.remove(end_place)
-
-        # Validate that subnet contains exactly one end transition (leading to XOR join)
-        end_transitions = [t for t in subnet_nodes if
-                           isinstance(t, PetriNet.Transition) and end_place in pn_util.post_set(t)]
-        if len(end_transitions) != 1:
-            raise Exception(
-                f"Subnet starting with transition {start_transition.name} does not have exactly one end transition: {end_transitions}")
-
-        end_transition = end_transitions[0]
-
-        subnet_net = PetriNet(f"Subnet_{next(id_gen)}")
-
-        # Introduce fresh start place and fresh end place
-        fresh_start_p = PetriNet.Place(f"fresh_start_{next(id_gen)}")
-        subnet_net.places.add(fresh_start_p)
-        subnet_initial_marking = Marking()
-        subnet_initial_marking[fresh_start_p] = 1
-
-        fresh_end_p = PetriNet.Place(f"fresh_end_{next(id_gen)}")
-        subnet_net.places.add(fresh_end_p)
-        subnet_final_marking = Marking()
-        subnet_final_marking[fresh_end_p] = 1
-
-        place_map = {}
-        trans_map = {}
-        for node in subnet_nodes:
-            if isinstance(node, PetriNet.Place):
-                cloned_place = PetriNet.Place(f"{node.name}_cloned")
-                subnet_net.places.add(cloned_place)
-                place_map[node] = cloned_place
-            elif isinstance(node, PetriNet.Transition):
-                cloned_trans = PetriNet.Transition(f"{node.name}_cloned", node.label)
-                subnet_net.transitions.add(cloned_trans)
-                trans_map[node] = cloned_trans
-
-        # Add arcs within the subnet
-        for arc in net.arcs:
-            if arc.source in subnet_nodes and arc.target in subnet_nodes:
-                cloned_source = trans_map.get(arc.source, place_map.get(arc.source, None))
-                cloned_target = trans_map.get(arc.target, place_map.get(arc.target, None))
-                if cloned_source and cloned_target:
-                    add_arc_from_to(cloned_source, cloned_target, subnet_net)
-
-        add_arc_from_to(fresh_start_p, trans_map.get(start_transition), subnet_net)
-        add_arc_from_to(trans_map.get(end_transition), fresh_end_p, subnet_net)
-
-        subnets.append({
-            'net': subnet_net,
-            'initial_marking': subnet_initial_marking,
-            'final_marking': subnet_final_marking
-        })
-
-    # Step 4: Ensure all subnets are disjoint
-    check_disjoint_subnets(subnets)
-
-    # Step 5: Recursively translate each subnet into POWL models
     children = []
-    for subnet in subnets:
-        child_powl = translate_petri_to_powl(
-            subnet['net'],
-            subnet['initial_marking'],
-            subnet['final_marking']
-        )
+    for branch in choice_branches:
+        child_powl = create_sub_powl_model(net, branch, start_place, end_place)
         children.append(child_powl)
-
-    # Step 6: Create and return the XOR OperatorPOWL
     xor_operator = OperatorPOWL(operator=Operator.XOR, children=children)
-
     return xor_operator
 
 
-def is_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place) -> bool:
+def is_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
     """
     Determine if the Petri net represents a loop structure.
 
@@ -353,11 +409,6 @@ def is_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Plac
     end_has_incoming = len(end_place.in_arcs) > 0
     end_has_outgoing = len(end_place.out_arcs) > 0
 
-    print(start_has_incoming)
-    print(start_has_outgoing)
-    print(end_has_incoming)
-    print(end_has_outgoing)
-
     return (start_has_incoming and start_has_outgoing and
             end_has_incoming and end_has_outgoing and start_place != end_place)
 
@@ -366,26 +417,14 @@ def translate_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriN
     """
     Translate a loop structure in the Petri net into a POWL OperatorPOWL with Operator.LOOP.
     """
-    # Collect 'do' part nodes (from start_place to end_place)
     do_subnet_nodes = collect_subnet_nodes(net, start_place, end_place)
-    do_subnet_nodes.remove(start_place)
-    do_subnet_nodes.remove(end_place)
-
-    # Collect 'redo' part nodes (from end_place back to start_place)
     redo_subnet_nodes = collect_subnet_nodes(net, end_place, start_place)
-    redo_subnet_nodes.remove(start_place)
-    redo_subnet_nodes.remove(end_place)
 
-    # Create subnets for 'do' and 'redo'
-    do_subnet = create_subnet(net, do_subnet_nodes, start_place, end_place)
-    redo_subnet = create_subnet(net, redo_subnet_nodes, end_place, start_place)
+    if len(do_subnet_nodes.intersection(redo_subnet_nodes)) > 0:
+        raise Exception("Not a WF-net!")
 
-    # Recursively translate the 'do' and 'redo' subnets
-    do_powl = translate_petri_to_powl(do_subnet['net'], do_subnet['initial_marking'], do_subnet['final_marking'])
-    redo_powl = translate_petri_to_powl(redo_subnet['net'], redo_subnet['initial_marking'],
-                                        redo_subnet['final_marking'])
-
-    # Create and return the LOOP OperatorPOWL
+    do_powl = create_sub_powl_model(net, do_subnet_nodes, start_place, end_place)
+    redo_powl = create_sub_powl_model(net, redo_subnet_nodes, end_place, start_place)
     loop_operator = OperatorPOWL(operator=Operator.LOOP, children=[do_powl, redo_powl])
 
     return loop_operator
@@ -407,6 +446,8 @@ def collect_subnet_nodes(net: PetriNet, source_place: PetriNet.Place, target_pla
                 continue
             successors = pn_util.post_set(node)
             queue.extend(successors)
+    visited.remove(source_place)
+    visited.remove(target_place)
     return visited
 
 
@@ -428,198 +469,35 @@ def create_subnet(net: PetriNet, subnet_nodes: Set[Union[PetriNet.Place, PetriNe
     subnet_final_marking = Marking()
     subnet_final_marking[fresh_end_p] = 1
 
-    place_map = {}
-    trans_map = {}
+    node_map = {}
     for node in subnet_nodes:
         if isinstance(node, PetriNet.Place):
             cloned_place = PetriNet.Place(f"{node.name}_cloned")
             subnet_net.places.add(cloned_place)
-            place_map[node] = cloned_place
+            node_map[node] = cloned_place
         elif isinstance(node, PetriNet.Transition):
             cloned_trans = PetriNet.Transition(f"{node.name}_cloned", node.label)
             subnet_net.transitions.add(cloned_trans)
-            trans_map[node] = cloned_trans
+            node_map[node] = cloned_trans
 
     # Add arcs within the subnet
     for arc in net.arcs:
         if arc.source in subnet_nodes and arc.target in subnet_nodes:
-            cloned_source = trans_map.get(arc.source, place_map.get(arc.source))
-            cloned_target = trans_map.get(arc.target, place_map.get(arc.target))
-            if cloned_source and cloned_target:
-                add_arc_from_to(cloned_source, cloned_target, subnet_net)
+            cloned_source = node_map[arc.source]
+            cloned_target = node_map[arc.target]
+            add_arc_from_to(cloned_source, cloned_target, subnet_net)
 
     # Connect fresh start and end places
     for t in pn_util.post_set(start_place).intersection(subnet_nodes):
-        add_arc_from_to(fresh_start_p, trans_map[t], subnet_net)
+        add_arc_from_to(fresh_start_p, node_map[t], subnet_net)
     for t in pn_util.pre_set(end_place).intersection(subnet_nodes):
-        add_arc_from_to(trans_map[t], fresh_end_p, subnet_net)
+        add_arc_from_to(node_map[t], fresh_end_p, subnet_net)
 
     return {
         'net': subnet_net,
         'initial_marking': subnet_initial_marking,
         'final_marking': subnet_final_marking
     }
-
-
-def check_disjoint_subnets(subnets: List[Dict]):
-    """
-    Ensure that all subnets are disjoint (no shared transitions or places).
-
-    Parameters:
-    - subnets: List of subnet dictionaries containing 'net', 'initial_marking', 'final_marking'
-
-    Raises:
-    - Exception if any subnets share transitions or places
-    """
-    all_transitions: Set[PetriNet.Transition] = set()
-    all_places: Set[PetriNet.Place] = set()
-
-    for subnet in subnets:
-        net_sub = subnet['net']
-        # Check for overlapping transitions
-        shared_trans = all_transitions.intersection(net_sub.transitions)
-        if shared_trans:
-            shared_trans_names = [t.name for t in shared_trans]
-            raise Exception(f"Subnets share transitions: {shared_trans_names}")
-        all_transitions.update(net_sub.transitions)
-
-        # Check for overlapping places
-        shared_places = all_places.intersection(net_sub.places)
-        if shared_places:
-            shared_place_names = [p.name for p in shared_places]
-            raise Exception(f"Subnets share places: {shared_place_names}")
-        all_places.update(net_sub.places)
-
-
-def create_simple_petri_net() -> (PetriNet, Marking, Marking):
-    """
-    Create a simple Petri net with one transition (base case).
-
-    Returns:
-    - net: PetriNet
-    - initial_marking: Marking
-    - final_marking: Marking
-    """
-    net = PetriNet("Simple Net")
-    start = PetriNet.Place("start")
-    end = PetriNet.Place("end")
-    net.places.add(start)
-    net.places.add(end)
-
-    t1 = PetriNet.Transition("t1", "Do something")
-    net.transitions.add(t1)
-
-    add_arc_from_to(start, t1, net)
-    add_arc_from_to(t1, end, net)
-
-    initial_marking = Marking()
-    final_marking = Marking()
-    initial_marking[start] = 1
-    final_marking[end] = 1
-
-    return net, initial_marking, final_marking
-
-
-def create_petri_net_with_choice(n: int) -> (PetriNet, Marking, Marking):
-    """
-    Create a Petri net with an XOR split into n base case subnets.
-
-    Parameters:
-    - n: Number of choices
-
-    Returns:
-    - net: PetriNet
-    - initial_marking: Marking
-    - final_marking: Marking
-    """
-    net = PetriNet("Enhanced Choice Net with Silent Transitions")
-
-    # Define places
-    start = PetriNet.Place("start")
-    end = PetriNet.Place("end")
-    net.places.add(start)
-    net.places.add(end)
-
-    # Create main transition from start to main choice places
-    t_main = PetriNet.Transition("t_main", None)
-    net.transitions.add(t_main)
-    add_arc_from_to(start, t_main, net)
-
-    # Create n main choice places (p1 to pn)
-    main_choice_place = PetriNet.Place("p")
-    net.places.add(main_choice_place)
-    add_arc_from_to(t_main, main_choice_place, net)
-
-    # For the first two main choices, add secondary choices using silent transitions
-    for i in range(1, 3):  # Assuming you want to add secondary choices to the first two places
-        parent_place = main_choice_place
-
-        # Create a silent transition for splitting
-        s = PetriNet.Transition(f"s{i}", None)
-        net.transitions.add(s)
-        add_arc_from_to(parent_place, s, net)
-
-        # Create an intermediate place between silent transition and sub-transitions
-        intermediate_p = PetriNet.Place(f"intermediate_p{i}")
-        net.places.add(intermediate_p)
-        add_arc_from_to(s, intermediate_p, net)
-
-        intermediate_p2 = PetriNet.Place(f"intermediate2_p{i}")
-        net.places.add(intermediate_p2)
-
-        # Create sub-choice transitions (t1_1 to t1_n and t2_1 to t2_n)
-        for j in range(1, n + 1):
-            sub_t = PetriNet.Transition(f"t{i}_{j}", f"Action {i}_{j}")
-            net.transitions.add(sub_t)
-            add_arc_from_to(intermediate_p, sub_t, net)
-            add_arc_from_to(sub_t, intermediate_p2, net)
-        sub_t = PetriNet.Transition(f"t{i}_silent", None)
-        net.transitions.add(sub_t)
-        add_arc_from_to(intermediate_p, sub_t, net)
-        add_arc_from_to(sub_t, intermediate_p2, net)
-
-        sub_t2 = PetriNet.Transition(f"final", None)
-        net.transitions.add(sub_t2)
-
-        add_arc_from_to(intermediate_p2, sub_t2, net)
-        add_arc_from_to(sub_t2, end, net)
-
-    # For the remaining main choice places, connect directly to end via their transitions
-    for i in range(3, n + 1):
-        parent_place = main_choice_place
-        t = PetriNet.Transition(f"t{i}", f"Action {i}")
-        net.transitions.add(t)
-        add_arc_from_to(parent_place, t, net)
-        add_arc_from_to(t, end, net)
-
-    parent_place = main_choice_place
-    t = PetriNet.Transition(f"SILENT", None)
-    net.transitions.add(t)
-    add_arc_from_to(parent_place, t, net)
-    add_arc_from_to(t, end, net)
-
-    second_endt = PetriNet.Transition(f"second_end_t", None)
-    net.transitions.add(second_endt)
-
-    second_endp = PetriNet.Place(f"second_end_p")
-    net.places.add(second_endp)
-
-    add_arc_from_to(end, second_endt, net)
-    add_arc_from_to(second_endt, second_endp, net)
-
-    # Define initial and final markings
-    initial_marking = Marking()
-    final_marking = Marking()
-    initial_marking[start] = 1
-    final_marking[second_endp] = 1
-
-    # Visualize the Petri net
-    pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-
-    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
-
-    # Visualize the POWL model
-    pm4py.view_powl(powl_model, format="SVG")
 
 
 def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
@@ -638,161 +516,10 @@ def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
     target.in_arcs.add(arc)
 
 
-# Testing the conversion
-def test_base_case():
-    print("=== Testing Base Case ===")
-    net, initial_marking, final_marking = create_simple_petri_net()
-    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
-
-    # Visualize the Petri net
-    pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-
-    # Visualize the POWL model
-    pm4py.view_powl(powl_model, format="SVG")
-
-    if isinstance(powl_model, Transition):
-        print(f"Converted POWL model: {powl_model.label}")
-    else:
-        print("Converted POWL model is not a Transition as expected.")
-
-
-def test_loop(n=5):
-    net = PetriNet("Enhanced Choice Net with Silent Transitions")
-
-    # Define places
-    start = PetriNet.Place("start")
-    end = PetriNet.Place("end")
-    net.places.add(start)
-    net.places.add(end)
-
-    # Create main transition from start to main choice places
-    t_main = PetriNet.Transition("t_main", None)
-    net.transitions.add(t_main)
-    add_arc_from_to(start, t_main, net)
-
-    # Create n main choice places (p1 to pn)
-    main_choice_place = PetriNet.Place("p")
-    net.places.add(main_choice_place)
-    add_arc_from_to(t_main, main_choice_place, net)
-
-    # For the first two main choices, add secondary choices using silent transitions
-    for i in range(1, 3):  # Assuming you want to add secondary choices to the first two places
-        parent_place = main_choice_place
-
-        # Create a silent transition for splitting
-        s = PetriNet.Transition(f"s{i}", None)
-        net.transitions.add(s)
-        add_arc_from_to(parent_place, s, net)
-
-        # Create an intermediate place between silent transition and sub-transitions
-        intermediate_p = PetriNet.Place(f"intermediate_p{i}")
-        net.places.add(intermediate_p)
-        add_arc_from_to(s, intermediate_p, net)
-
-        intermediate_p2 = PetriNet.Place(f"intermediate2_p{i}")
-        net.places.add(intermediate_p2)
-
-        # Create sub-choice transitions (t1_1 to t1_n and t2_1 to t2_n)
-        for j in range(1, n + 1):
-            sub_t = PetriNet.Transition(f"t{i}_{j}", f"Action {i}_{j}")
-            net.transitions.add(sub_t)
-            add_arc_from_to(intermediate_p, sub_t, net)
-            add_arc_from_to(sub_t, intermediate_p2, net)
-        sub_t = PetriNet.Transition(f"t{i}_silent", None)
-        net.transitions.add(sub_t)
-        add_arc_from_to(intermediate_p, sub_t, net)
-        add_arc_from_to(sub_t, intermediate_p2, net)
-
-        sub_t2 = PetriNet.Transition(f"final", None)
-        net.transitions.add(sub_t2)
-
-        add_arc_from_to(intermediate_p2, sub_t2, net)
-        add_arc_from_to(sub_t2, end, net)
-
-    # For the remaining main choice places, connect directly to end via their transitions
-    for i in range(3, n + 1):
-        parent_place = main_choice_place
-        t = PetriNet.Transition(f"t{i}", f"Action {i}")
-        net.transitions.add(t)
-        add_arc_from_to(t, parent_place, net)
-        add_arc_from_to(end, t, net)
-
-    parent_place = main_choice_place
-    t = PetriNet.Transition(f"SILENT", None)
-    net.transitions.add(t)
-    add_arc_from_to(parent_place, t, net)
-    add_arc_from_to(t, end, net)
-
-    second_endt = PetriNet.Transition(f"second_end_t", None)
-    net.transitions.add(second_endt)
-
-    second_endp = PetriNet.Place(f"second_end_p")
-    net.places.add(second_endp)
-
-    add_arc_from_to(end, second_endt, net)
-    add_arc_from_to(second_endt, second_endp, net)
-
-    # Define initial and final markings
-    initial_marking = Marking()
-    final_marking = Marking()
-    initial_marking[start] = 1
-    final_marking[second_endp] = 1
-
-    # Visualize the Petri net
-    pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-
-    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
-
-    # Visualize the POWL model
-    pm4py.view_powl(powl_model, format="SVG")
-
-
-def test_simple_loop(n=5):
-    net = PetriNet("Minimal Loop Workflow Net")
-
-    # Define places
-    p_start = PetriNet.Place("p_start")
-    p1 = PetriNet.Place("p1")
-    p11 = PetriNet.Place("p11")
-    p_end = PetriNet.Place("p_end")
-    net.places.update([p_start, p1, p11, p_end])
-
-    # Define transitions
-    t1 = PetriNet.Transition("t1", None)
-    t2 = PetriNet.Transition("t2", "Action 2")  # Loop transition
-    t22 = PetriNet.Transition("t22", "Action 3")
-    t3 = PetriNet.Transition("t3", None)
-    net.transitions.update([t1, t2, t22, t3])
-
-    # Add arcs
-    add_arc_from_to(p_start, t1, net)
-    add_arc_from_to(t1, p1, net)
-    add_arc_from_to(p1, t2, net)
-    add_arc_from_to(t2, p11, net)
-    add_arc_from_to(p11, t22, net)
-    add_arc_from_to(t22, p1, net)
-    # Loop back to p1
-    add_arc_from_to(p11, t3, net)
-    add_arc_from_to(t3, p_end, net)
-
-    # Define initial and final markings
-    initial_marking = Marking()
-    final_marking = Marking()
-    initial_marking[p_start] = 1
-    final_marking[p_end] = 1
-
-    # Visualize the Petri net
-    pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-
-    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
-
-    # Visualize the POWL model
-    pm4py.view_powl(powl_model, format="SVG")
-
-
 if __name__ == "__main__":
-    # Run tests
-    # test_base_case()
-    # create_petri_net_with_choice(5)
-    test_loop()
-    # test_simple_loop()
+    # net, initial_marking, final_marking = test_choice2()
+    net, initial_marking, final_marking = test_loop()
+
+    powl_model = translate_petri_to_powl(net, initial_marking, final_marking)
+    pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
+    pm4py.view_powl(powl_model, format="SVG")
