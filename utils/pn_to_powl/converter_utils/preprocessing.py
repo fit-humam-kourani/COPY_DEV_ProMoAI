@@ -8,11 +8,6 @@ DEBUGGING = True
 def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: Marking):
     from pm4py.algo.analysis.workflow_net import algorithm as wf_eval
 
-    if not wf_eval.apply(net):
-        if DEBUGGING:
-            pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-        raise ValueError('The Petri net provided is not a WF-net')
-
     if len(initial_marking) != 1:
         raise Exception(f"Initial marking must consist of exactly one place: {initial_marking}")
     if len(final_marking) != 1:
@@ -35,7 +30,9 @@ def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: M
 
     places_no_outgoing = [p for p in net.places if not p.out_arcs]
     if set(places_no_outgoing) != set(final_marking.keys()):
-        raise Exception(f"Final marking must match all places with no outgoing arcs. {places_no_outgoing}")
+        raise Exception(f"Final marking must match all places with no outgoing arcs. {net}")
+    if not wf_eval.apply(net):
+        raise ValueError('The Petri net provided is not a WF-net')
 
     return start_place, end_place
 

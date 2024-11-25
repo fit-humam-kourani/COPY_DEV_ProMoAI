@@ -380,8 +380,7 @@ def test_simple_loop(n=5):
 
 
 def test_po():
-    # net, initial_marking, final_marking = pm4py.read_pnml(
-        # r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
     net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
 
     return net, initial_marking, final_marking

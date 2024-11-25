@@ -23,7 +23,7 @@ def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriN
             powl_transition = pn_transition_to_powl(activity)
             num_places = len(net.places)
             if num_places == 2:
-                return activity
+                return powl_transition
             elif num_places == 1:
                 return OperatorPOWL(operator=Operator.LOOP, children=[SilentTransition(), powl_transition])
             else:
@@ -163,9 +163,12 @@ def mine_partial_order(net, start_place, end_place, reachability_graph):
         elif len(not_in_every_branch) > 1:
             partitions = combine_partitions(not_in_every_branch, partitions)
 
-    # print("partitions")
-    # print(partitions)
-    return partitions
+    transition_partitions = []
+    for group in partitions:
+        t_group = [node for node in group if isinstance(node, PetriNet.Transition)]
+        if len(t_group) > 0:
+            transition_partitions.append(t_group)
+    return transition_partitions
 
 
 def combine_partitions(input_set, partitions):
@@ -230,7 +233,5 @@ def mine_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNe
         if end_place not in connection_points:
             raise Exception("End place not detected as a connection_point!")
 
-    # print(sorted_places)
-    # print(connection_points)
 
     return connection_points, [p for p in sorted_nodes if isinstance(p, PetriNet.Place)]
