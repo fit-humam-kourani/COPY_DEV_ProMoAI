@@ -3,6 +3,7 @@ from typing import Union, Dict, Set
 
 from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
+from pm4py.objects.powl.obj import Transition, SilentTransition
 
 
 def id_generator():
@@ -15,10 +16,9 @@ def id_generator():
 id_gen = id_generator()
 
 
-def collect_subnet_nodes(net: PetriNet, source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[
-    Union[PetriNet.Place, PetriNet.Transition]]:
+def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
     """
-    Collect all nodes in the subnet from source_place to target_place.
+    Collect all transitions in the subnet from source_place to target_place.
     """
     visited = set()
     queue = deque()
@@ -31,52 +31,68 @@ def collect_subnet_nodes(net: PetriNet, source_place: PetriNet.Place, target_pla
                 continue
             successors = pn_util.post_set(node)
             queue.extend(successors)
-    visited.remove(source_place)
-    visited.remove(target_place)
+    # visited.remove(source_place)
+    # visited.remove(target_place)
+    visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
     return visited
 
 
-def create_subnet(net: PetriNet, subnet_nodes: Set[Union[PetriNet.Place, PetriNet.Transition]],
-                  start_place: PetriNet.Place, end_place: PetriNet.Place) -> Dict:
+def create_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition], start_place, end_place) -> Dict:
     """
     Create a subnet Petri net from the given nodes.
     """
     subnet_net = PetriNet(f"Subnet_{next(id_gen)}")
+    node_map = {}
 
     # Introduce fresh start and end places
-    fresh_start_p = PetriNet.Place(f"fresh_start_{next(id_gen)}")
+    fresh_start_p = PetriNet.Place(f"{start_place.name}_cloned")
     subnet_net.places.add(fresh_start_p)
     subnet_initial_marking = Marking()
     subnet_initial_marking[fresh_start_p] = 1
+    node_map[start_place] = fresh_start_p
 
-    fresh_end_p = PetriNet.Place(f"fresh_end_{next(id_gen)}")
+    fresh_end_p = PetriNet.Place(f"{end_place.name}_cloned")
     subnet_net.places.add(fresh_end_p)
     subnet_final_marking = Marking()
     subnet_final_marking[fresh_end_p] = 1
+    node_map[end_place] = fresh_end_p
 
-    node_map = {}
-    for node in subnet_nodes:
-        if isinstance(node, PetriNet.Place):
-            cloned_place = PetriNet.Place(f"{node.name}_cloned")
-            subnet_net.places.add(cloned_place)
-            node_map[node] = cloned_place
-        elif isinstance(node, PetriNet.Transition):
-            cloned_trans = PetriNet.Transition(f"{node.name}_cloned", node.label)
-            subnet_net.transitions.add(cloned_trans)
-            node_map[node] = cloned_trans
+    for node in subnet_transitions:
+        cloned_trans = PetriNet.Transition(f"{node.name}_cloned", node.label)
+        subnet_net.transitions.add(cloned_trans)
+        node_map[node] = cloned_trans
+
+    # for place in net.places:
+    #
+    #     cloned_place = PetriNet.Place(f"{node.name}_cloned")
+    #     subnet_net.places.add(cloned_place)
+    #     node_map[node] = cloned_place
 
     # Add arcs within the subnet
     for arc in net.arcs:
-        if arc.source in subnet_nodes and arc.target in subnet_nodes:
-            cloned_source = node_map[arc.source]
-            cloned_target = node_map[arc.target]
+        source = arc.source
+        target = arc.target
+        if source in subnet_transitions or arc.target in subnet_transitions:
+            if source in node_map.keys():
+                cloned_source = node_map[source]
+            else:
+                cloned_source = PetriNet.Place(f"{source.name}_cloned")
+                subnet_net.places.add(cloned_source)
+                node_map[source] = cloned_source
+            if target in node_map.keys():
+                cloned_target = node_map[target]
+            else:
+                cloned_target = PetriNet.Place(f"{target.name}_cloned")
+                subnet_net.places.add(cloned_target)
+                node_map[target] = cloned_target
+
             add_arc_from_to(cloned_source, cloned_target, subnet_net)
 
-    # Connect fresh start and end places
-    for t in pn_util.post_set(start_place).intersection(subnet_nodes):
-        add_arc_from_to(fresh_start_p, node_map[t], subnet_net)
-    for t in pn_util.pre_set(end_place).intersection(subnet_nodes):
-        add_arc_from_to(node_map[t], fresh_end_p, subnet_net)
+    # # Connect fresh start and end places
+    # for t in pn_util.post_set(start_place).intersection(subnet_nodes):
+    #     add_arc_from_to(fresh_start_p, node_map[t], subnet_net)
+    # for t in pn_util.pre_set(end_place).intersection(subnet_nodes):
+    #     add_arc_from_to(node_map[t], fresh_end_p, subnet_net)
 
     return {
         'net': subnet_net,
@@ -181,3 +197,11 @@ def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
     net.arcs.add(arc)
     source.out_arcs.add(arc)
     target.in_arcs.add(arc)
+
+
+def pn_transition_to_powl(transition: PetriNet.Transition) -> Transition:
+    label = transition.label
+    if label:
+        return Transition(label=label)
+    else:
+        return SilentTransition()

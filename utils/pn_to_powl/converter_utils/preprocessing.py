@@ -1,12 +1,16 @@
+import pm4py
 from pm4py import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
+
+DEBUGGING = True
 
 
 def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: Marking):
     from pm4py.algo.analysis.workflow_net import algorithm as wf_eval
 
     if not wf_eval.apply(net):
-        print(net)
+        if DEBUGGING:
+            pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
         raise ValueError('The Petri net provided is not a WF-net')
 
     if len(initial_marking) != 1:

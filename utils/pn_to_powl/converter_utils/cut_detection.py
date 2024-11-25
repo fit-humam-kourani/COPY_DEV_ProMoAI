@@ -1,9 +1,12 @@
 from collections import defaultdict
 
+from pm4py.objects.powl.obj import OperatorPOWL, Operator, SilentTransition
+
 from utils.pn_to_powl.converter_utils.reachability_map import add_reachable
-from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_nodes
 from pm4py.objects.petri_net.obj import PetriNet
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
+
+from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_transitions, pn_transition_to_powl
 
 
 def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
@@ -14,10 +17,20 @@ def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriN
     - Boolean
     """
     # A base case has exactly one transition and two places (start and end)
-    if len(net.transitions) == 1 and len(net.places) == 2 and len(net.arcs) == 2:
-        return list(net.transitions)[0]
-    else:
-        return None
+    if len(net.transitions) == 1:
+        if len(net.arcs) == 2:
+            activity = list(net.transitions)[0]
+            powl_transition = pn_transition_to_powl(activity)
+            num_places = len(net.places)
+            if num_places == 2:
+                return activity
+            elif num_places == 1:
+                return OperatorPOWL(operator=Operator.LOOP, children=[SilentTransition(), powl_transition])
+            else:
+                raise Exception(f"Unsupported structure: a Petri net with one transition and more than 2 places! {net}")
+        else:
+            raise Exception(f"Unsupported structure: a Petri net with one transition and not 2 arcs! {net}")
+    return None
 
 
 def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
@@ -29,11 +42,11 @@ def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Pl
 
     if (start_has_incoming and start_has_outgoing and
             end_has_incoming and end_has_outgoing and start_place != end_place):
-        do_subnet_nodes = collect_subnet_nodes(net, start_place, end_place)
-        redo_subnet_nodes = collect_subnet_nodes(net, end_place, start_place)
-        if len(do_subnet_nodes.intersection(redo_subnet_nodes)) > 0:
+        do_subnet_transitions = collect_subnet_transitions(start_place, end_place)
+        redo_subnet_transitions = collect_subnet_transitions(end_place, start_place)
+        if len(do_subnet_transitions.intersection(redo_subnet_transitions)) > 0:
             raise Exception("Not a WF-net!")
-        return do_subnet_nodes, redo_subnet_nodes
+        return do_subnet_transitions, redo_subnet_transitions
     else:
         return None, None
 
@@ -79,7 +92,8 @@ def mine_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Pla
         # print(f"reachable from {start_transition}: {new_branch}")
         if end_place not in new_branch:
             raise Exception(f"Not a WF-net! End place {end_place} not reachable from {start_transition}!")
-        new_branch.remove(end_place)
+        # new_branch.remove(end_place)
+        new_branch = {node for node in new_branch if isinstance(node, PetriNet.Transition)}
         choice_branches.append(new_branch)
 
     # Combine overlapping branches

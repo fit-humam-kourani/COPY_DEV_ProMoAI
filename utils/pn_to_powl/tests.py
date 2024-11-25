@@ -24,6 +24,8 @@ def test_base_case():
     print("=== Testing Base Case ===")
     net, initial_marking, final_marking = create_simple_petri_net()
     return net, initial_marking, final_marking
+
+
 def create_simple_petri_net() -> (PetriNet, Marking, Marking):
     """
     Create a simple Petri net with one transition (base case).
@@ -107,7 +109,6 @@ def test_choice(n=5) -> (PetriNet, Marking, Marking):
         net.transitions.add(sub_t)
         add_arc_from_to(intermediate_p, sub_t, net)
         add_arc_from_to(sub_t, end, net)
-
 
     # For the remaining main choice places, connect directly to end via their transitions
     for i in range(3, n + 1):
@@ -202,8 +203,6 @@ def test_choice2(n=5) -> (PetriNet, Marking, Marking):
         add_arc_from_to(intermediate_p2, new_silent, net)
         add_arc_from_to(new_silent, end, net)
 
-
-
     # For the remaining main choice places, connect directly to end via their transitions
     for i in range(3, n + 1):
         parent_place = main_choice_place
@@ -242,6 +241,7 @@ def test_choice2(n=5) -> (PetriNet, Marking, Marking):
     final_marking[second_endp] = 1
 
     return net, initial_marking, final_marking
+
 
 def test_loop(n=5):
     net = PetriNet("Enhanced Choice Net with Silent Transitions")
@@ -378,7 +378,10 @@ def test_simple_loop(n=5):
 
     return net, initial_marking, final_marking
 
+
 def test_po():
-    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\20.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(
+        # r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
+    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
 
     return net, initial_marking, final_marking
