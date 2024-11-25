@@ -13,7 +13,8 @@ from pm4py.objects.bpmn.exporter.variants.etree import get_xml_string
 
 from utils import llm_model_generator
 from utils.app_utils import InputType, ViewType, footer
-from utils.general_utils import pt_to_powl_code, to_powl
+from utils.general_utils import pt_to_powl_code
+from utils.pn_to_powl import to_powl
 from utils.general_utils.ai_providers import AIProviders
 
 
