@@ -3,7 +3,7 @@ from pm4py.objects.process_tree.obj import Operator
 
 def recursively_transform_process_tree(process_tree, stru=None, level=0):
     if stru is None:
-        stru = ["```python\nfrom utils.model_generation import ModelGenerator\n\nmodel_generator = ModelGenerator(True, True)\n\n"]
+        stru = ["```python\nfrom converter_utils.model_generation import ModelGenerator\n\nmodel_generator = ModelGenerator(True, True)\n\n"]
 
     node_id = str(id(process_tree))
 

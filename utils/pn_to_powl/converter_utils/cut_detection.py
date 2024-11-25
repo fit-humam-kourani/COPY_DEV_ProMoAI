@@ -1,7 +1,7 @@
 from collections import defaultdict
 
-from utils.pn_to_powl.utils.reachability_map import add_reachable
-from utils.pn_to_powl.utils.subnet_creation import collect_subnet_nodes
+from utils.pn_to_powl.converter_utils.reachability_map import add_reachable
+from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_nodes
 from pm4py.objects.petri_net.obj import PetriNet
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 

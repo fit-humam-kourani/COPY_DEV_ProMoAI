@@ -1,12 +1,14 @@
 import pm4py
+from pm4py import Marking, PetriNet
 from pm4py.objects.powl.obj import POWL, Transition, OperatorPOWL, Operator, StrictPartialOrder, SilentTransition, \
     Sequence
 
+from utils.pn_to_powl.converter_utils.cut_detection import mine_base_case, mine_sequence, mine_xor, mine_loop, mine_partial_order
 from utils.pn_to_powl.tests import test_po
-from utils.pn_to_powl.utils.cut_detection import *
-from utils.pn_to_powl.utils.preprocessing import *
-from utils.pn_to_powl.utils.reachability_map import *
-from utils.pn_to_powl.utils.subnet_creation import *
+
+from utils.pn_to_powl.converter_utils.preprocessing import validate_petri_net, preprocess_net
+from utils.pn_to_powl.converter_utils.reachability_map import get_reachable_nodes_mapping, get_reachability_graph
+from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet_over_nodes, add_arc_from_to, create_subnet
 
 
 def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:

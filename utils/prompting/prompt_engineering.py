@@ -3,7 +3,7 @@ from typing import List
 
 from utils.prompting.shots import SHOTS
 
-import_statement = 'from utils.model_generation import ModelGenerator'
+import_statement = 'from converter_utils.model_generation import ModelGenerator'
 
 ERROR_MESSAGE_FOR_MODEL_GENERATION = """
 Please update the model to fix the error. Make sure" \

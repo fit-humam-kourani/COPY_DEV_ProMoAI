@@ -43,7 +43,7 @@ def preprocess_net(net: PetriNet, start_place, end_place):
     Modifies the net and markings in place.
     """
     if len(net.transitions) < 2:
-        return
+        return start_place, end_place
     # Preprocess start: remove p -> silent_transition -> p2
     successors = list(pn_util.post_set(start_place))
     if len(successors) == 1:
