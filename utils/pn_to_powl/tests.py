@@ -2,6 +2,7 @@ from typing import Union
 
 import pm4py
 from pm4py import PetriNet, Marking
+from pm4py.objects.petri_net.utils import petri_utils
 
 
 def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
@@ -382,5 +383,170 @@ def test_simple_loop(n=5):
 def test_po():
     # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
     net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
+
+    return net, initial_marking, final_marking
+
+def test_self_loop():
+    net = PetriNet(name="Custom_Petri_Net")
+
+    # Define Places
+    source = PetriNet.Place("source")
+    p1 = PetriNet.Place("p1")
+    B = PetriNet.Place("B")  # Intermediate place after p1
+    p2 = PetriNet.Place("p2")
+    C = PetriNet.Place("C")
+    D = PetriNet.Place("D")
+    p3 = PetriNet.Place("p3")
+    sink = PetriNet.Place("sink")
+
+    # Add Places to the Petri net
+    net.places.update([source, p1, p2, sink])
+
+    # Define Transitions
+    trans_A = PetriNet.Transition("A", "A")
+    trans_B = PetriNet.Transition("B", "B")
+    trans_C = PetriNet.Transition("C", "C")
+    trans_D = PetriNet.Transition("D", "D")
+    trans_E = PetriNet.Transition("E", "E")
+
+    # Add Transitions to the Petri net
+    net.transitions.update([trans_A, trans_B, trans_C, trans_D, trans_E])
+
+    # Add Arcs according to the specified sequence
+
+    # source place -> A
+    petri_utils.add_arc_from_to(source, trans_A, net)
+
+    # A -> p1
+    petri_utils.add_arc_from_to(trans_A, p1, net)
+
+    # p1 -> B
+    petri_utils.add_arc_from_to(p1, trans_E, net)
+
+    # B -> p2
+    petri_utils.add_arc_from_to(p1, trans_B, net)
+    petri_utils.add_arc_from_to(trans_B, p2, net)
+
+    # p2 -> C
+    petri_utils.add_arc_from_to(p2, trans_C, net)
+
+    # p2 -> D
+    petri_utils.add_arc_from_to(p2, trans_D, net)
+
+    # C -> p3
+    petri_utils.add_arc_from_to(trans_C, p1, net)
+
+    # D -> p3
+    petri_utils.add_arc_from_to(trans_D, p1, net)
+
+    # C -> sink
+    petri_utils.add_arc_from_to(trans_E, sink, net)
+
+    # Define Initial Marking
+    initial_marking = Marking()
+    initial_marking[source] = 1  # Token in the source place
+
+    # Define Final Marking
+    final_marking = Marking()
+    final_marking[sink] = 1
+
+    return net, initial_marking, final_marking
+
+
+def test_loop_ending_with_par():
+    from pm4py.objects.petri_net.obj import PetriNet, Marking
+    from pm4py.objects.petri_net.utils import petri_utils
+
+    # Create the Petri net
+    net = PetriNet(name="Custom_Petri_Net")
+
+    # Define Places
+    source = PetriNet.Place(name="source")
+    p1 = PetriNet.Place(name="p1")
+    p2 = PetriNet.Place(name="p2")
+    p3 = PetriNet.Place(name="p3")
+    p4 = PetriNet.Place(name="p4")
+    p5 = PetriNet.Place(name="p5")
+    sink = PetriNet.Place(name="sink")
+
+    # Add Places to the net
+    net.places.add(source)
+    net.places.add(p1)
+    net.places.add(p2)
+    net.places.add(p3)
+    net.places.add(p4)
+    net.places.add(p5)
+    net.places.add(sink)
+
+    # Define Transitions
+    A = PetriNet.Transition(name="A", label="A")
+    B = PetriNet.Transition(name="B", label="B")
+    C = PetriNet.Transition(name="C", label="C")
+    D = PetriNet.Transition(name="D", label="D")
+    E = PetriNet.Transition(name="E", label="E")
+    F = PetriNet.Transition(name="F", label="F")
+
+    # Add Transitions to the net
+    net.transitions.add(A)
+    net.transitions.add(B)
+    net.transitions.add(C)
+    net.transitions.add(D)
+    net.transitions.add(E)
+    net.transitions.add(F)
+
+    # Add Arcs according to the sequence
+
+    # source -> A
+    petri_utils.add_arc_from_to(source, A, net)
+
+    # A -> p1
+    petri_utils.add_arc_from_to(A, p1, net)
+
+    # p1 -> B
+    petri_utils.add_arc_from_to(p1, B, net)
+
+    # B -> p2
+    petri_utils.add_arc_from_to(B, p2, net)
+
+    # B -> p3
+    petri_utils.add_arc_from_to(B, p3, net)
+
+    # p2 -> C
+    petri_utils.add_arc_from_to(p2, C, net)
+
+    # p3 -> D
+    petri_utils.add_arc_from_to(p3, D, net)
+
+    # C -> p4
+    petri_utils.add_arc_from_to(C, p4, net)
+
+    # D -> p5
+    petri_utils.add_arc_from_to(D, p5, net)
+
+    # p4 -> E
+    petri_utils.add_arc_from_to(p4, E, net)
+
+    # p5 -> E
+    petri_utils.add_arc_from_to(p5, E, net)
+
+    # p4 -> F
+    petri_utils.add_arc_from_to(p4, F, net)
+
+    # p5 -> F
+    petri_utils.add_arc_from_to(p5, F, net)
+
+    # E -> p1
+    petri_utils.add_arc_from_to(E, p1, net)
+
+    # F -> sink
+    petri_utils.add_arc_from_to(F, sink, net)
+
+    # Define Initial Marking (source has 1 token)
+    initial_marking = Marking()
+    initial_marking[source] = 1
+
+    # Define Final Marking (sink has 1 token)
+    final_marking = Marking()
+    final_marking[sink] = 1
 
     return net, initial_marking, final_marking

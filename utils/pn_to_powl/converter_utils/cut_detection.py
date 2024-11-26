@@ -1,4 +1,5 @@
 from collections import defaultdict
+from copy import copy
 
 from pm4py.objects.powl.obj import OperatorPOWL, Operator, SilentTransition
 
@@ -6,30 +7,41 @@ from utils.pn_to_powl.converter_utils.reachability_map import add_reachable
 from pm4py.objects.petri_net.obj import PetriNet
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 
-from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_transitions, pn_transition_to_powl
+from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_transitions, pn_transition_to_powl, \
+    clone_place, add_arc_from_to, remove_arc
 
 
 def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
-    """
-    Determine if the Petri net is a base case: single transition between start and end.
-
-    Returns:
-    - Boolean
-    """
     # A base case has exactly one transition and two places (start and end)
     if len(net.transitions) == 1:
-        if len(net.arcs) == 2:
+        if len(net.arcs) == 2 == len(net.places):
             activity = list(net.transitions)[0]
             powl_transition = pn_transition_to_powl(activity)
-            num_places = len(net.places)
-            if num_places == 2:
-                return powl_transition
-            elif num_places == 1:
-                return OperatorPOWL(operator=Operator.LOOP, children=[SilentTransition(), powl_transition])
-            else:
-                raise Exception(f"Unsupported structure: a Petri net with one transition and more than 2 places! {net}")
-        else:
-            raise Exception(f"Unsupported structure: a Petri net with one transition and not 2 arcs! {net}")
+            return powl_transition
+    return None
+
+
+def mine_self_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
+    # A base case has exactly one transition and two places (start and end)
+    if start_place == end_place:
+        place = start_place
+        place_copy = clone_place(net, place, {})
+        redo = copy(net.transitions)
+
+        out_arcs = place.out_arcs
+        for arc in list(out_arcs):
+            target = arc.target
+            remove_arc(arc, net)
+            add_arc_from_to(place_copy, target, net)
+
+        do_transition = PetriNet.Transition(f"silent_do_{place.name}", None)
+        do = set()
+        do.add(do_transition)
+        net.transitions.add(do_transition)
+        add_arc_from_to(place, do_transition, net)
+        add_arc_from_to(do_transition, place_copy, net)
+        return do, redo, place, place_copy
+
     return None
 
 
@@ -232,6 +244,5 @@ def mine_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNe
             raise Exception("Start place not detected as a connection_point!")
         if end_place not in connection_points:
             raise Exception("End place not detected as a connection_point!")
-
 
     return connection_points, [p for p in sorted_nodes if isinstance(p, PetriNet.Place)]

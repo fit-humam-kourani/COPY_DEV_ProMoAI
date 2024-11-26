@@ -58,8 +58,8 @@ def preprocess_net(net: PetriNet, start_place, end_place):
                 pn_util.remove_transition(net, transition)
                 pn_util.remove_place(net, start_place)
                 # Update initial_marking to p2
-                start_place = p2
                 print(f"Preprocessed start: Removed {start_place} and {transition}, set {p2} as initial marking.")
+                start_place = p2
 
     # Preprocess end: remove p3 -> silent_transition -> p4
     predecessors = list(pn_util.pre_set(end_place))
@@ -73,8 +73,8 @@ def preprocess_net(net: PetriNet, start_place, end_place):
                 pn_util.remove_transition(net, transition)
                 pn_util.remove_place(net, end_place)
                 # Update final_marking to p3
-                end_place = p3
                 print(f"Preprocessed end: Removed {end_place} and {transition}, set {p3} as final marking.")
+                end_place = p3
 
     return start_place, end_place
 

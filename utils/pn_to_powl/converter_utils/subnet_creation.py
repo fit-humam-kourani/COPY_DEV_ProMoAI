@@ -48,50 +48,94 @@ def clone_transition(net, transition, node_map):
     return cloned_transition
 
 
-def check_and_repair_markings(net, subnet_net, node_map, start_places, end_places):
+def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_places):
     if len(start_places) == 0 or len(end_places) == 0:
-        print(net, start_places, end_places)
         raise Exception("This should not happen!")
-    start_place = start_places[0]
     if len(start_places) > 1:
-        for p in start_places[1:]:
-            if pn_util.post_set(node_map[p]) != pn_util.post_set(node_map[start_place]):
-                raise Exception("This should not happen!")
-            subnet_net = pn_util.remove_place(subnet_net, node_map[p])
-    end_place = end_places[0]
-    if len(end_places) > 1:
-        for p in end_places[1:]:
-            if pn_util.pre_set(node_map[p]) != pn_util.pre_set(node_map[end_place]):
-                raise Exception("This should not happen!")
-            subnet_net = pn_util.remove_place(subnet_net, node_map[p])
+        new_silent = PetriNet.Transition(f"silent_start_{next(id_generator())}")
+        subnet_net.transitions.add(new_silent)
 
-    if len(node_map[start_place].in_arcs) > 0:
+        new_source = PetriNet.Place(f"source_{next(id_generator())}")
+        subnet_net.places.add(new_source)
+
+        old_start_pre = pn_util.pre_set(node_map[start_places[0]])
+        for p in start_places:
+            if pn_util.pre_set(node_map[p]) != old_start_pre:
+                raise Exception("This should not happen!")
+            arcs = list(node_map[p].in_arcs)
+            for arc in arcs:
+                remove_arc(arc, subnet_net)
+
+            add_arc_from_to(new_silent, node_map[p], subnet_net)
+
+        for node in old_start_pre:
+            add_arc_from_to(node, new_source, subnet_net)
+
+        add_arc_from_to(new_source, new_silent, subnet_net)
+
+        start_place = new_source
+    else:
+        start_place = node_map[start_places[0]]
+
+    # end_place = end_places[0]
+    # if len(end_places) > 1:
+    #     for p in end_places[1:]:
+    #         if pn_util.pre_set(node_map[p]) != pn_util.pre_set(node_map[end_place]):
+    #             raise Exception("This should not happen!")
+    #         subnet_net = pn_util.remove_place(subnet_net, node_map[p])
+
+    if len(end_places) > 1:
+        new_silent = PetriNet.Transition(f"silent_end_{next(id_generator())}")
+        subnet_net.transitions.add(new_silent)
+
+        new_sink = PetriNet.Place(f"sink_{next(id_generator())}")
+        subnet_net.places.add(new_sink)
+        print(subnet_net)
+        old_end_post = pn_util.post_set(node_map[end_places[0]])
+        for p in end_places:
+            if pn_util.post_set(node_map[p]) != old_end_post:
+                raise Exception("This should not happen!")
+            arcs = list(node_map[p].out_arcs)
+            for arc in arcs:
+                remove_arc(arc, subnet_net)
+
+            add_arc_from_to(node_map[p], new_silent, subnet_net)
+
+        for node in old_end_post:
+            add_arc_from_to(new_sink, node, subnet_net)
+
+        add_arc_from_to(new_silent, new_sink, subnet_net)
+
+        end_place = new_sink
+    else:
+        end_place = node_map[end_places[0]]
+
+    if len(start_place.in_arcs) > 0:
         new_id = next(id_generator())
         new_start = PetriNet.Place(name=f"new_start_{new_id}")
         silent_start = PetriNet.Transition(name=f"silent_start{new_id}", label=None)
         subnet_net.places.add(new_start)
         subnet_net.transitions.add(silent_start)
         add_arc_from_to(new_start, silent_start, subnet_net)
-        add_arc_from_to(silent_start, node_map[start_place], subnet_net)
+        add_arc_from_to(silent_start, start_place, subnet_net)
     else:
-        new_start = node_map[start_place]
+        new_start = start_place
 
-    if len(node_map[end_place].out_arcs) > 0:
+    if len(end_place.out_arcs) > 0:
         new_id = next(id_generator())
         new_end = PetriNet.Place(name=f"new_end_{new_id}")
         silent_end = PetriNet.Transition(name=f"silent_end{new_id}", label=None)
         subnet_net.places.add(new_end)
         subnet_net.transitions.add(silent_end)
-        add_arc_from_to(node_map[end_place], silent_end, subnet_net)
+        add_arc_from_to(end_place, silent_end, subnet_net)
         add_arc_from_to(silent_end, new_end, subnet_net)
     else:
-        new_end = node_map[end_place]
+        new_end = end_place
 
     return subnet_net, new_start, new_end
 
 
-
-def create_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition], start_place, end_place) -> Dict:
+def create_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition], start_places, end_places) -> Dict:
     """
     Create a subnet Petri net from the given nodes.
     """
@@ -116,14 +160,13 @@ def create_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition], s
                 cloned_target = clone_place(subnet_net, target, node_map)
             add_arc_from_to(cloned_source, cloned_target, subnet_net)
 
-    subnet_net, new_start, new_end = check_and_repair_markings(net, subnet_net, node_map, start_place, end_place)
+    subnet_net, new_start, new_end = check_and_repair_markings(net, subnet_net, node_map, start_places, end_places)
 
     subnet_initial_marking = Marking()
     subnet_initial_marking[new_start] = 1
 
     subnet_final_marking = Marking()
     subnet_final_marking[new_end] = 1
-
 
     return {
         'net': subnet_net,
@@ -228,6 +271,22 @@ def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
     net.arcs.add(arc)
     source.out_arcs.add(arc)
     target.in_arcs.add(arc)
+
+
+def remove_arc(arc: PetriNet.Arc, net: PetriNet):
+    """
+    Add an arc from source to target in the Petri net.
+
+    Parameters:
+    - source: Place or Transition
+    - target: Transition or Place
+    - net: PetriNet
+    """
+    net.arcs.remove(arc)
+    source = arc.source
+    target = arc.target
+    source.out_arcs.remove(arc)
+    target.in_arcs.remove(arc)
 
 
 def pn_transition_to_powl(transition: PetriNet.Transition) -> Transition:
