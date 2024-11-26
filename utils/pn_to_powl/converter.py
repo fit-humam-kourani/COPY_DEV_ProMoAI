@@ -1,3 +1,4 @@
+import pm4py
 from pm4py.objects.powl.BinaryRelation import BinaryRelation
 from pm4py.objects.powl.obj import POWL, OperatorPOWL, Operator, StrictPartialOrder
 
@@ -44,6 +45,15 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     # print("final_marking: ", end_places)
     # print("Arcs: ", net.arcs)
 
+    im = Marking()
+    for p in start_places:
+        im[p] = 1
+    fm = Marking()
+    for p in end_places:
+        fm[p] = 1
+
+    reachab_graph, map_states, transition_map = generate_reachability_graph(net, im)
+    pm4py.view_transition_system(reachab_graph)
 
     # Mine for base case
     base_case = mine_base_case(net)
@@ -56,14 +66,7 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         print("Self_loop detected!")
         return __translate_loop(net, self_loop[0], self_loop[1], self_loop[2], self_loop[3])
 
-    im = Marking()
-    for p in start_places:
-        im[p] = 1
-    fm = Marking()
-    for p in end_places:
-        fm[p] = 1
 
-    reachab_graph, map_states, transition_map = generate_reachability_graph(net, im)
 
     # Mine for XOR
     choice_branches = mine_xor(im, map_states, transition_map)
@@ -217,8 +220,8 @@ def __create_sub_powl_model(net, branch, start_places, end_places):
 
 if __name__ == "__main__":
     # pn, im, fm = test_choice()
-    pn, im, fm = test_loop()
-    # pn, im, fm = test_po()
+    # pn, im, fm = test_loop()
+    pn, im, fm = test_po()
     # pn, im, fm = test_xor_ending_and_starting_with_par()
 
     pm4py.view_petri_net(pn, im, fm, format="SVG")

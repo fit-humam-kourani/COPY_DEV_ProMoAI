@@ -63,7 +63,7 @@ def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, transition_ma
         raise Exception("Loop is detected but the do and redo parts are not disjoint!")
 
     if net.transitions != (do_subnet_transitions | redo_subnet_transitions):
-        raise Exception("Something went wrong!")
+        raise Exception("Something went wrong!", net.transitions, do_subnet_transitions, redo_subnet_transitions)
 
     return do_subnet_transitions, redo_subnet_transitions
     # Start and end places must have both incoming and outgoing arcs

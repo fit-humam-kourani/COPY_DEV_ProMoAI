@@ -104,21 +104,39 @@ def get_reachable_transitions_from_marking_branch(branch_start, transition_map):
 
 
 def get_reachable_transitions_from_marking_to_another(im: Marking, fm: Marking, map_states, transition_map):
+    """
+    Returns all transitions that lie on some path from the initial marking (im) to the final marking (fm).
+    """
     i_state = map_states[im]
     f_state = map_states[fm]
+
     reachable_transitions = set()
-    queue = deque()
-    queue.extend(i_state.outgoing)
-    while queue:
-        next_elm = queue.popleft()
-        pn_transition = transition_map[next_elm]
-        if pn_transition not in reachable_transitions:
-            reachable_transitions.add(pn_transition)
-            state = next_elm.to_state
-            if not state == f_state:
-                successors = state.outgoing
-                queue.extend(successors)
-    return reachable_transitions
+
+    # Step 1: Backward BFS to find all states that can reach fm
+    reachable_states_from_fm = set()
+    backward_queue = deque([f_state])
+    while backward_queue:
+        current_state = backward_queue.popleft()
+        if current_state not in reachable_states_from_fm:
+            reachable_states_from_fm.add(current_state)
+            # Assuming each state has incoming transitions
+            for incoming_transition in current_state.incoming:
+                from_state = incoming_transition.from_state
+                backward_queue.append(from_state)
+
+    # Step 2: Forward BFS from im, only considering transitions leading to reachable states
+    forward_queue = deque(i_state.outgoing)
+    while forward_queue:
+        transition = forward_queue.popleft()
+        if transition not in reachable_transitions:
+            to_state = transition.to_state
+            # Only consider this transition if to_state can reach fm
+            if to_state in reachable_states_from_fm:
+                reachable_transitions.add(transition)
+                if to_state != f_state:
+                    forward_queue.extend(to_state.outgoing)
+
+    return {transition_map[elm] for elm in reachable_transitions}
 
 
 def add_arc_from_to_ts(t_map, pn_transition, fr, to, tsys, data=None):
