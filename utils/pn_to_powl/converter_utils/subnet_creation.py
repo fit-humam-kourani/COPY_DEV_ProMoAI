@@ -13,25 +13,25 @@ def id_generator():
         count += 1
 
 
-def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
-    """
-    Collect all transitions in the subnet from source_place to target_place.
-    """
-    visited = set()
-    queue = deque()
-    queue.append(source_place)
-    while queue:
-        node = queue.popleft()
-        if node not in visited:
-            visited.add(node)
-            if node == target_place:
-                continue
-            successors = pn_util.post_set(node)
-            queue.extend(successors)
-    # visited.remove(source_place)
-    # visited.remove(target_place)
-    visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
-    return visited
+# def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
+#     """
+#     Collect all transitions in the subnet from source_place to target_place.
+#     """
+#     visited = set()
+#     queue = deque()
+#     queue.append(source_place)
+#     while queue:
+#         node = queue.popleft()
+#         if node not in visited:
+#             visited.add(node)
+#             if node == target_place:
+#                 continue
+#             successors = pn_util.post_set(node)
+#             queue.extend(successors)
+#     # visited.remove(source_place)
+#     # visited.remove(target_place)
+#     visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
+#     return visited
 
 
 def clone_place(net, place, node_map):
@@ -49,6 +49,14 @@ def clone_transition(net, transition, node_map):
 
 
 def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_places):
+    start_places = list(start_places)
+    end_places = list(end_places)
+
+    print("start repair")
+    print(subnet_net)
+    print(start_places)
+    print(end_places)
+
     if len(start_places) == 0 or len(end_places) == 0:
         raise Exception("This should not happen!")
     if len(start_places) > 1:
@@ -77,20 +85,12 @@ def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_p
     else:
         start_place = node_map[start_places[0]]
 
-    # end_place = end_places[0]
-    # if len(end_places) > 1:
-    #     for p in end_places[1:]:
-    #         if pn_util.pre_set(node_map[p]) != pn_util.pre_set(node_map[end_place]):
-    #             raise Exception("This should not happen!")
-    #         subnet_net = pn_util.remove_place(subnet_net, node_map[p])
-
     if len(end_places) > 1:
         new_silent = PetriNet.Transition(f"silent_end_{next(id_generator())}")
         subnet_net.transitions.add(new_silent)
 
         new_sink = PetriNet.Place(f"sink_{next(id_generator())}")
         subnet_net.places.add(new_sink)
-        print(subnet_net)
         old_end_post = pn_util.post_set(node_map[end_places[0]])
         for p in end_places:
             if pn_util.post_set(node_map[p]) != old_end_post:

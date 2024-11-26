@@ -1,17 +1,17 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 from copy import copy
 
-from pm4py.objects.powl.obj import OperatorPOWL, Operator, SilentTransition
-
-from utils.pn_to_powl.converter_utils.reachability_map import add_reachable
-from pm4py.objects.petri_net.obj import PetriNet
+import pm4py
+from pm4py.objects.petri_net.utils.reachability_graph import construct_reachability_graph, marking_flow_petri
+from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 
-from utils.pn_to_powl.converter_utils.subnet_creation import collect_subnet_transitions, pn_transition_to_powl, \
+from utils.pn_to_powl.converter_utils.reachability_map import get_reachable_transitions_from_marking_branch, add_reachable, get_reachable_transitions_from_marking_to_another
+from utils.pn_to_powl.converter_utils.subnet_creation import pn_transition_to_powl, \
     clone_place, add_arc_from_to, remove_arc
 
 
-def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
+def mine_base_case(net: PetriNet):
     # A base case has exactly one transition and two places (start and end)
     if len(net.transitions) == 1:
         if len(net.arcs) == 2 == len(net.places):
@@ -21,97 +21,80 @@ def mine_base_case(net: PetriNet, start_place: PetriNet.Place, end_place: PetriN
     return None
 
 
-def mine_self_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
+def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
     # A base case has exactly one transition and two places (start and end)
-    if start_place == end_place:
-        place = start_place
-        place_copy = clone_place(net, place, {})
-        redo = copy(net.transitions)
+    if len(start_places) == len(end_places) == 1:
+        start_place = list(start_places)[0]
+        end_place = list(end_places)[0]
+        if start_place == end_place:
+            print("NET: ", net)
+            print("start_place: ", start_place)
+            print("end_place: ", end_place)
+            place = start_place
+            place_copy = clone_place(net, place, {})
+            redo = copy(net.transitions)
 
-        out_arcs = place.out_arcs
-        for arc in list(out_arcs):
-            target = arc.target
-            remove_arc(arc, net)
-            add_arc_from_to(place_copy, target, net)
+            out_arcs = place.out_arcs
+            for arc in list(out_arcs):
+                target = arc.target
+                remove_arc(arc, net)
+                add_arc_from_to(place_copy, target, net)
 
-        do_transition = PetriNet.Transition(f"silent_do_{place.name}", None)
-        do = set()
-        do.add(do_transition)
-        net.transitions.add(do_transition)
-        add_arc_from_to(place, do_transition, net)
-        add_arc_from_to(do_transition, place_copy, net)
-        return do, redo, place, place_copy
+            do_transition = PetriNet.Transition(f"silent_do_{place.name}", None)
+            do = set()
+            do.add(do_transition)
+            net.transitions.add(do_transition)
+            add_arc_from_to(place, do_transition, net)
+            add_arc_from_to(do_transition, place_copy, net)
+            return do, redo, {place}, {place_copy}
 
     return None
 
 
-def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
-    # Start and end places must have both incoming and outgoing arcs
-    start_has_incoming = len(start_place.in_arcs) > 0
-    start_has_outgoing = len(start_place.out_arcs) > 0
-    end_has_incoming = len(end_place.in_arcs) > 0
-    end_has_outgoing = len(end_place.out_arcs) > 0
+def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, transition_map):
+    redo_subnet_transitions = get_reachable_transitions_from_marking_to_another(fm, im, map_states, transition_map)
 
-    if (start_has_incoming and start_has_outgoing and
-            end_has_incoming and end_has_outgoing and start_place != end_place):
-        do_subnet_transitions = collect_subnet_transitions(start_place, end_place)
-        redo_subnet_transitions = collect_subnet_transitions(end_place, start_place)
-        if len(do_subnet_transitions.intersection(redo_subnet_transitions)) > 0:
-            raise Exception("Not a WF-net!")
-        return do_subnet_transitions, redo_subnet_transitions
-    else:
+    if len(redo_subnet_transitions) == 0:
         return None, None
 
+    do_subnet_transitions = get_reachable_transitions_from_marking_to_another(im, fm, map_states, transition_map)
 
-def mine_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place):
-    """
-    Determine if the Petri net starts with an XOR split at start_place and ends with an XOR join at end_place.
+    if do_subnet_transitions & redo_subnet_transitions:
+        raise Exception("Loop is detected but the do and redo parts are not disjoint!")
 
-    Parameters:
-    - net: PetriNet
-    - start_place: Place (start of the XOR split)
-    - end_place: Place (end of the XOR join)
+    if net.transitions != (do_subnet_transitions | redo_subnet_transitions):
+        raise Exception("Something went wrong!")
 
-    Returns:
-    - Boolean indicating whether an XOR structure exists.
-    """
+    return do_subnet_transitions, redo_subnet_transitions
+    # Start and end places must have both incoming and outgoing arcs
+    # start_place = list(start_places)[0]
+    # end_place = list(end_places)[0]
+    # start_has_incoming = len(start_place.in_arcs) > 0
+    # start_has_outgoing = len(start_place.out_arcs) > 0
+    # end_has_incoming = len(end_place.in_arcs) > 0
+    # end_has_outgoing = len(end_place.out_arcs) > 0
 
-    len_start_incoming = len(start_place.in_arcs)
-    len_start_outgoing = len(start_place.out_arcs)
-    len_end_incoming = len(end_place.in_arcs)
-    len_end_outgoing = len(end_place.out_arcs)
+    # if (start_has_incoming and start_has_outgoing and
+    #         end_has_incoming and end_has_outgoing and start_place != end_place):
+    #     do_subnet_transitions = collect_subnet_transitions(start_place, end_place)
+    #     redo_subnet_transitions = collect_subnet_transitions(end_place, start_place)
+    #     if len(do_subnet_transitions.intersection(redo_subnet_transitions)) > 0:
+    #         raise Exception("Not a WF-net!")
+    #     return do_subnet_transitions, redo_subnet_transitions
+    # else:
+    #     return None, None
 
-    if len_start_outgoing <= 1:
-        # print("Not an XOR split: start_place has <=1 outgoing transitions.")
-        return None
 
-    if len_end_incoming <= 1:
-        # print("Not an XOR join: end_place has <=1 incoming transitions.")
-        return None
-
-    if len_start_incoming > 0 or len_end_outgoing > 0:
-        # print("Not an XOR: possible loop!")
-        return None
-
+def mine_xor(im, map_states, transition_map):
     choice_branches = []
-    # Connectivity between split and join
-    for start_transition in pn_util.post_set(start_place):
-        # print(f"start_place: {start_place}")
-        # print(pn_util.post_set(start_place))
-        new_branch = set()
-        add_reachable(start_transition, new_branch)
-        # print(net)
-        # print(f"reachable from {start_transition}: {new_branch}")
-        if end_place not in new_branch:
-            raise Exception(f"Not a WF-net! End place {end_place} not reachable from {start_transition}!")
-        # new_branch.remove(end_place)
-        new_branch = {node for node in new_branch if isinstance(node, PetriNet.Transition)}
+    i_state = map_states[im]
+    for start_transition in i_state.outgoing:
+        new_branch = get_reachable_transitions_from_marking_branch(start_transition, transition_map)
         choice_branches.append(new_branch)
 
-    # Combine overlapping branches
     merged_branches = []
     while choice_branches:
-        branch = choice_branches.pop(0)  # Take the first branch
+        branch = choice_branches.pop(0)
         merged = False
         for i, other_branch in enumerate(merged_branches):
             if branch & other_branch:  # Check for intersection
@@ -124,13 +107,14 @@ def mine_xor(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Pla
     return merged_branches
 
 
-def mine_partial_order(net, start_place, end_place, reachability_graph):
+def mine_partial_order(net, start_places, end_places, reachability_graph):
     # if not (len(start_place.in_arcs) == 0):
     #     raise Exception(f"This should not happen for start place! {start_place}")
     # if not (len(end_place.out_arcs) == 0):
     #     raise Exception(f"This should not happen for end place! {end_place}")
     # print("reachability_graph: ", reachability_graph)
     # all nodes sharing the same reachability graph must be within a loop
+
     partition_map = defaultdict(list)
     for key, value_set in reachability_graph.items():
         partition_map[frozenset(value_set)].append(key)
@@ -147,9 +131,9 @@ def mine_partial_order(net, start_place, end_place, reachability_graph):
     for place in places_not_grouped:
         in_size = len(place.in_arcs)
         out_size = len(place.out_arcs)
-        if in_size == 0 and not start_place:
+        if in_size == 0 and place not in start_places:
             raise Exception(f"A place with no incoming arcs! {place}")
-        if out_size == 0 and not end_place:
+        if out_size == 0 and place not in end_places:
             raise Exception(f"A place with no outgoing arcs! {place}")
         # if in_size > 1 and out_size == 1:
         #     candidate_xor_end.add(place)
@@ -162,8 +146,8 @@ def mine_partial_order(net, start_place, end_place, reachability_graph):
             new_branch = set()
             add_reachable(start_transition, new_branch)
 
-            if end_place not in new_branch:
-                raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
+            # if end_place not in new_branch:
+            #     raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
             xor_branches.append(new_branch)
 
         # extract the set of nodes that are not present in EVERY branch
