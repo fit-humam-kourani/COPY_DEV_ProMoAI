@@ -10,7 +10,7 @@ from utils.pn_to_powl.tests import *
 from utils.pn_to_powl.converter_utils.preprocessing import validate_petri_net, preprocess_net, remove_duplicate_places
 from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet
 
-SIMPLIFIED_REACHABILITY = True
+SIMPLIFIED_REACHABILITY = False
 
 
 def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:

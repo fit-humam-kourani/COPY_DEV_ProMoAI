@@ -140,10 +140,10 @@ def mine_partial_order(net, reachability_map, transition_map, simplified_reachab
                                                                  t2,
                                                                  transition_map,
                                                                  reachability_map) \
-                    or can_transitions_be_on_same_path(t1,
-                                                       t2,
-                                                       transition_map,
-                                                       reachability_map)
+                    or not can_transitions_be_on_same_path(t1,
+                                                           t2,
+                                                           transition_map,
+                                                           reachability_map)
 
         if merge:
             p1 = next(idx for idx, p in enumerate(partitions) if t1 in p)
