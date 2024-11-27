@@ -35,8 +35,8 @@ def validate_petri_net(net: PetriNet, initial_marking: Marking, final_marking: M
         raise Exception(f"Final marking must match all places with no outgoing arcs. {net}")
     if not wf_eval.apply(net):
         raise ValueError('The Petri net provided is not a WF-net')
-    if not pm4py.check_soundness(net, initial_marking, final_marking)[0]:
-        raise ValueError(f'The WF-net provided is not sound! {net}')
+    # if not pm4py.check_soundness(net, initial_marking, final_marking)[0]:
+    #     raise ValueError(f'The WF-net provided is not sound! {net}')
 
     return start_place, end_place
 
@@ -47,6 +47,8 @@ def preprocess_net(net: PetriNet, start_place, end_place):
 
     Modifies the net and markings in place.
     """
+    # return {start_place}, {end_place}
+
     if len(net.transitions) < 2:
         return {start_place}, {end_place}
     # Preprocess start: remove p -> silent_transition -> p2
@@ -90,6 +92,13 @@ def preprocess_net(net: PetriNet, start_place, end_place):
                     # Update final_marking to p3
                     # print(f"Preprocessed end: Removed {end_place} and {transition}, set {p3} as final marking.")
                     end_places.add(p)
+
+    places = list(net.places)
+    for p in places:
+        if len(p.in_arcs) == 0 == len(p.out_arcs):
+            pn_util.remove_place(net, p)
+            start_places.remove(p)
+            end_places.remove(p)
 
     return start_places, end_places
 

@@ -7,9 +7,8 @@ from pm4py.objects.petri_net.utils.reachability_graph import construct_reachabil
 from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 
-from utils.pn_to_powl.converter_utils.reachability_map import get_reachable_transitions_from_marking_branch, \
-    get_reachable_transitions_from_marking_to_another, find_reachable_transitions_per_petri_transition, \
-    is_transition_always_reachable, can_transitions_be_on_same_path
+from utils.pn_to_powl.converter_utils.reachability_map import get_reachable_transitions_from_marking_to_another, \
+    can_transitions_be_on_same_path, transitions_reachable_from_each_other
 from utils.pn_to_powl.converter_utils.subnet_creation import pn_transition_to_powl, \
     clone_place, add_arc_from_to, remove_arc
 
@@ -54,16 +53,20 @@ def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places:
     return None
 
 
-def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map):
-    redo_subnet_transitions = get_reachable_transitions_from_marking_to_another(fm, im, map_states, transition_map)
+def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, reachable_ts_transitions_dict, transition_map,
+              simplified_reachability):
+    redo_subnet_transitions = get_reachable_transitions_from_marking_to_another(fm, im, map_states, transition_map,
+                                                                                simplified_reachability)
 
     if len(redo_subnet_transitions) == 0:
         return None, None
 
-    do_subnet_transitions = get_reachable_transitions_from_marking_to_another(im, fm, map_states, transition_map)
+    do_subnet_transitions = get_reachable_transitions_from_marking_to_another(im, fm, map_states, transition_map,
+                                                                              simplified_reachability)
 
     if do_subnet_transitions & redo_subnet_transitions:
-        raise Exception("Loop is detected but the do and redo parts are not disjoint!")
+        # This could happen if we have ->(..., Loop)
+        return None, None
 
     if net.transitions != (do_subnet_transitions | redo_subnet_transitions):
         raise Exception("Something went wrong!", net.transitions, do_subnet_transitions, redo_subnet_transitions)
@@ -88,32 +91,36 @@ def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, reachable_pn_
     #     return None, None
 
 
-def mine_xor(net, im, fm, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map):
+def mine_xor(net, im, fm, reachable_ts_transitions_dict, transition_map, simplified_reachability):
     choice_branches = [[t] for t in net.transitions]
-    # i_state = map_states[im]
-    # f_state = map_states[fm]
-    for t1, t2 in combinations(net.transitions, 2):
-        if can_transitions_be_on_same_path(reachable_pn_transitions_dict, t1, t2):
-            new_branch = {t1, t2}
-            choice_branches = combine_partitions(new_branch, choice_branches)
 
-    # merged_branches = combine_partitions()
-    # while choice_branches:
-    #     branch = choice_branches.pop(0)
-    #     merged = False
-    #     for i, other_branch in enumerate(merged_branches):
-    #         if branch & other_branch:  # Check for intersection
-    #             merged_branches[i] = other_branch | branch  # Merge branches
-    #             merged = True
-    #             break
-    #     if not merged:
-    #         merged_branches.append(branch)
-    print("merged_branches")
-    print(choice_branches)
+    if simplified_reachability:
+        if len(im) > 1:
+            # this is only allowed for partial orders; for choice, we combine start places
+            return None
+        start_place = list(im.keys())[0]
+            # len_start_incoming = len(start_place.in_arcs)
+            # len_start_outgoing = len(start_place.out_arcs)
+            # if len_start_outgoing <= 1 or len_start_incoming > 0:
+            #     return None
+        for start_transition in pn_util.post_set(start_place):
+            new_branch = {node for node in reachable_ts_transitions_dict[start_transition]
+                          if isinstance(node, PetriNet.Transition)}
+            choice_branches = combine_partitions(new_branch, choice_branches)
+    else:
+        for t1, t2 in combinations(net.transitions, 2):
+            if can_transitions_be_on_same_path(reachable_ts_transitions_dict, transition_map, t1, t2):
+                new_branch = {t1, t2}
+                choice_branches = combine_partitions(new_branch, choice_branches)
+
+    if net.transitions != set().union(*choice_branches):
+        raise Exception("This should not happen!")
+
     return choice_branches
 
 
-def mine_partial_order(net, start_places, end_places, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map):
+def mine_partial_order(net, start_places, end_places, reachable_ts_transitions_dict, transition_map,
+                       simplified_reachability):
     # partition_map = defaultdict(list)
     #
     # for key, value_set in reachable_transitions_dict.items():
@@ -182,14 +189,16 @@ def mine_partial_order(net, start_places, end_places, reachable_pn_transitions_d
         if root_i != root_j:
             parent[root_j] = root_i  # Merge j into i
 
-    # Step 3: Iterate through all pairs of transitions to determine incompatibility
     for t1, t2 in combinations(net.transitions, 2):
-        ts_1 = {t for t in transition_map.keys() if transition_map[t] == t1}
-        ts_2 = {t for t in transition_map.keys() if transition_map[t] == t2}
-
-        if (is_transition_always_reachable(ts_1, t2, reachable_ts_transitions_dict)
-            and is_transition_always_reachable(ts_2, t1, reachable_ts_transitions_dict)) \
-                or not can_transitions_be_on_same_path(reachable_pn_transitions_dict, t1, t2):
+        if transitions_reachable_from_each_other(t1,
+                                                 t2,
+                                                 transition_map,
+                                                 reachable_ts_transitions_dict,
+                                                 simplified_reachability) \
+                or (not simplified_reachability and not can_transitions_be_on_same_path(reachable_ts_transitions_dict,
+                                                                                        transition_map,
+                                                                                        t1,
+                                                                                        t2)):
             # Find the indices of the partitions containing t1 and t2
             p1 = next(idx for idx, p in enumerate(partitions) if t1 in p)
             p2 = next(idx for idx, p in enumerate(partitions) if t2 in p)
@@ -207,8 +216,27 @@ def mine_partial_order(net, start_places, end_places, reachable_pn_transitions_d
     # Optional: If you want to remove duplicates after merging
     partitions = [list(set(part)) for part in partitions]
 
-    print("final p:")
-    print(partitions)
+    if simplified_reachability:
+        for place in net.places:
+            # in_size = len(place.in_arcs)
+            out_size = len(place.out_arcs)
+            # if in_size == 0 and not start_place:
+            #     raise Exception(f"A place with no incoming arcs! {place}")
+            # if out_size == 0 and not end_place:
+            #     raise Exception(f"A place with no outgoing arcs! {place}")
+            # if in_size > 1 and out_size == 1:
+            #     candidate_xor_end.add(place)
+            if out_size > 1:
+                xor_branches = []
+                for start_transition in pn_util.post_set(place):
+                    new_branch = {node for node in reachable_ts_transitions_dict[start_transition]
+                                  if isinstance(node, PetriNet.Transition)}
+                    xor_branches.append(new_branch)
+                union_of_branches = set().union(*xor_branches)
+                intersection_of_branches = set.intersection(*xor_branches)
+                not_in_every_branch = union_of_branches - intersection_of_branches
+                if len(not_in_every_branch) > 1:
+                    partitions = combine_partitions(not_in_every_branch, partitions)
 
     return partitions
 

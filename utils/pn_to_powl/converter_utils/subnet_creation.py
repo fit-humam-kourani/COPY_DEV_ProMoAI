@@ -1,6 +1,7 @@
 from collections import deque
 from typing import Union, Dict, Set
 
+import pm4py
 from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 from pm4py.objects.powl.obj import Transition, SilentTransition
@@ -13,25 +14,25 @@ def id_generator():
         count += 1
 
 
-# def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
-#     """
-#     Collect all transitions in the subnet from source_place to target_place.
-#     """
-#     visited = set()
-#     queue = deque()
-#     queue.append(source_place)
-#     while queue:
-#         node = queue.popleft()
-#         if node not in visited:
-#             visited.add(node)
-#             if node == target_place:
-#                 continue
-#             successors = pn_util.post_set(node)
-#             queue.extend(successors)
-#     # visited.remove(source_place)
-#     # visited.remove(target_place)
-#     visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
-#     return visited
+def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
+    """
+    Collect all transitions in the subnet from source_place to target_place.
+    """
+    visited = set()
+    queue = deque()
+    queue.append(source_place)
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            visited.add(node)
+            if node == target_place:
+                continue
+            successors = pn_util.post_set(node)
+            queue.extend(successors)
+    # visited.remove(source_place)
+    # visited.remove(target_place)
+    visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
+    return visited
 
 
 def clone_place(net, place, node_map):
@@ -52,6 +53,8 @@ def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_p
     start_places = list(start_places)
     end_places = list(end_places)
 
+    # pm4py.view_petri_net(subnet_net, None, None, format="SVG")
+
     print("start repair")
     print(subnet_net)
     print(start_places)
@@ -59,54 +62,99 @@ def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_p
 
     if len(start_places) == 0 or len(end_places) == 0:
         raise Exception("This should not happen!")
+
     if len(start_places) > 1:
-        new_silent = PetriNet.Transition(f"silent_start_{next(id_generator())}")
-        subnet_net.transitions.add(new_silent)
+        shared_pre_set = set(pn_util.pre_set(node_map[start_places[0]]))
+        len_pre_set_first = len(shared_pre_set)
+        for p in start_places[1:]:
+            shared_pre_set &= set(pn_util.pre_set(node_map[p]))
+        shared_post_set = set(pn_util.post_set(node_map[start_places[0]]))
+        len_post_set_first = len(shared_post_set)
+        for p in start_places[1:]:
+            shared_post_set &= set(pn_util.post_set(node_map[p]))
 
-        new_source = PetriNet.Place(f"source_{next(id_generator())}")
-        subnet_net.places.add(new_source)
+        if len_pre_set_first == len(shared_pre_set) and len_post_set_first == len(shared_post_set):
+            for p in start_places[1:]:
+                pn_util.remove_place(subnet_net, node_map[p])
+            start_place = node_map[start_places[0]]
+        else:
+            new_silent = PetriNet.Transition(f"silent_start_{next(id_generator())}")
+            subnet_net.transitions.add(new_silent)
 
-        old_start_pre = pn_util.pre_set(node_map[start_places[0]])
-        for p in start_places:
-            if pn_util.pre_set(node_map[p]) != old_start_pre:
-                raise Exception("This should not happen!")
-            arcs = list(node_map[p].in_arcs)
+            new_source = PetriNet.Place(f"source_{next(id_generator())}")
+            subnet_net.places.add(new_source)
+
+            arcs = list(subnet_net.arcs)
+            mapped_start_places = [node_map[p] for p in start_places]
             for arc in arcs:
-                remove_arc(arc, subnet_net)
-
-            add_arc_from_to(new_silent, node_map[p], subnet_net)
-
-        for node in old_start_pre:
-            add_arc_from_to(node, new_source, subnet_net)
-
-        add_arc_from_to(new_source, new_silent, subnet_net)
-
-        start_place = new_source
+                source = arc.source
+                target = arc.target
+                if (source in shared_pre_set and target in mapped_start_places) \
+                        or (source in mapped_start_places and target in shared_post_set): \
+                        remove_arc(arc, subnet_net)
+            for node in shared_pre_set:
+                add_arc_from_to(node, new_source, subnet_net)
+            for node in shared_post_set:
+                add_arc_from_to(new_source, node, subnet_net)
+            for p in mapped_start_places:
+                add_arc_from_to(new_silent, p, subnet_net)
+            add_arc_from_to(new_source, new_silent, subnet_net)
+            start_place = new_source
     else:
         start_place = node_map[start_places[0]]
 
     if len(end_places) > 1:
-        new_silent = PetriNet.Transition(f"silent_end_{next(id_generator())}")
-        subnet_net.transitions.add(new_silent)
+        shared_pre_set = set(pn_util.pre_set(node_map[end_places[0]]))
+        len_pre_set_first = len(shared_pre_set)
+        for p in end_places[1:]:
+            shared_pre_set &= set(pn_util.pre_set(node_map[p]))
+        shared_post_set = set(pn_util.post_set(node_map[end_places[0]]))
+        len_post_set_first = len(shared_post_set)
+        for p in end_places[1:]:
+            shared_post_set &= set(pn_util.post_set(node_map[p]))
 
-        new_sink = PetriNet.Place(f"sink_{next(id_generator())}")
-        subnet_net.places.add(new_sink)
-        old_end_post = pn_util.post_set(node_map[end_places[0]])
-        for p in end_places:
-            if pn_util.post_set(node_map[p]) != old_end_post:
-                raise Exception("This should not happen!")
-            arcs = list(node_map[p].out_arcs)
+        if len_pre_set_first == len(shared_pre_set) and len_post_set_first == len(shared_post_set):
+            for p in end_places[1:]:
+                pn_util.remove_place(subnet_net, node_map[p])
+            end_place = node_map[end_places[0]]
+        else:
+            new_silent = PetriNet.Transition(f"silent_end_{next(id_generator())}")
+            subnet_net.transitions.add(new_silent)
+
+            new_sink = PetriNet.Place(f"sink_{next(id_generator())}")
+            subnet_net.places.add(new_sink)
+
+            arcs = list(subnet_net.arcs)
+            mapped_end_places = [node_map[p] for p in end_places]
             for arc in arcs:
-                remove_arc(arc, subnet_net)
+                source = arc.source
+                target = arc.target
+                if (source in shared_pre_set and target in mapped_end_places) \
+                        or (source in mapped_end_places and target in shared_post_set): \
+                        remove_arc(arc, subnet_net)
+            for node in shared_pre_set:
+                add_arc_from_to(node, new_sink, subnet_net)
+            for node in shared_post_set:
+                add_arc_from_to(new_sink, node, subnet_net)
+            for p in mapped_end_places:
+                add_arc_from_to(p, new_silent, subnet_net)
 
-            add_arc_from_to(node_map[p], new_silent, subnet_net)
+            # old_end_post = pn_util.post_set(node_map[end_places[0]])
+            # for p in end_places:
+            #     if pn_util.post_set(node_map[p]) != old_end_post:
+            #         raise Exception("This should not happen!")
+            #     arcs = list(node_map[p].out_arcs)
+            #     for arc in arcs:
+            #         remove_arc(arc, subnet_net)
+            #
+            #     add_arc_from_to(node_map[p], new_silent, subnet_net)
+            #
+            # for node in old_end_post:
+            #     add_arc_from_to(new_sink, node, subnet_net)
 
-        for node in old_end_post:
-            add_arc_from_to(new_sink, node, subnet_net)
+            add_arc_from_to(new_silent, new_sink, subnet_net)
 
-        add_arc_from_to(new_silent, new_sink, subnet_net)
-
-        end_place = new_sink
+            end_place = new_sink
     else:
         end_place = node_map[end_places[0]]
 
@@ -132,6 +180,7 @@ def check_and_repair_markings(old_net, subnet_net, node_map, start_places, end_p
     else:
         new_end = end_place
 
+    # pm4py.view_petri_net(subnet_net, None, None, format="SVG")
     return subnet_net, new_start, new_end
 
 
