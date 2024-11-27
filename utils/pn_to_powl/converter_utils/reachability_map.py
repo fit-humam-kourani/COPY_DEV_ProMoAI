@@ -1,4 +1,5 @@
-from collections import deque
+from collections import deque, defaultdict
+from itertools import combinations
 
 import pm4py
 from pm4py.objects.petri_net.obj import PetriNet, Marking
@@ -37,20 +38,20 @@ from pm4py.objects.transition_system import obj as ts
 #     return reachable
 
 
-def get_reachability_graph(net: PetriNet):
-    graph = {node: set() for node in set(net.places).union(net.transitions)}  # Initialize with all nodes as keys
-    for start_node in graph.keys():
-        reachable = set()
-        queue = deque()
-        queue.append(start_node)
-        while queue:
-            node = queue.popleft()
-            if node not in reachable:
-                reachable.add(node)
-                successors = pn_util.post_set(node)
-                queue.extend(successors)
-        graph[start_node].update(reachable)
-    return graph
+# def get_reachability_graph(net: PetriNet):
+#     graph = {node: set() for node in set(net.places).union(net.transitions)}  # Initialize with all nodes as keys
+#     for start_node in graph.keys():
+#         reachable = set()
+#         queue = deque()
+#         queue.append(start_node)
+#         while queue:
+#             node = queue.popleft()
+#             if node not in reachable:
+#                 reachable.add(node)
+#                 successors = pn_util.post_set(node)
+#                 queue.extend(successors)
+#         graph[start_node].update(reachable)
+#     return graph
 
 
 # def get_reachable_nodes_mapping(net: PetriNet):
@@ -71,35 +72,36 @@ def get_reachability_graph(net: PetriNet):
 #     return reachability
 
 
-def add_reachable(out_trans, res):
-    # post = pn_util.post_set(out_trans)
-    # new_nodes = post.difference(res)
-    # if len(new_nodes) > 0:
-    #     res.update(new_nodes)
-    #     for node in new_nodes:
-    #         add_reachable(node, res)
-    queue = deque()
-    queue.append(out_trans)
-    while queue:
-        node = queue.popleft()
-        if node not in res:
-            res.add(node)
-            successors = pn_util.post_set(node)
-            queue.extend(successors)
+# def add_reachable(out_trans, res):
+#     # post = pn_util.post_set(out_trans)
+#     # new_nodes = post.difference(res)
+#     # if len(new_nodes) > 0:
+#     #     res.update(new_nodes)
+#     #     for node in new_nodes:
+#     #         add_reachable(node, res)
+#     queue = deque()
+#     queue.append(out_trans)
+#     while queue:
+#         node = queue.popleft()
+#         if node not in res:
+#             res.add(node)
+#             successors = pn_util.post_set(node)
+#             queue.extend(successors)
 
 
-def get_reachable_transitions_from_marking_branch(branch_start, transition_map):
+def get_reachable_transitions_from_marking_branch(branch_start, f_state, transition_map):
     reachable_transitions = set()
     queue = deque()
     queue.append(branch_start)
     while queue:
         next_elm = queue.popleft()
         pn_transition = transition_map[next_elm]
-        if pn_transition not in reachable_transitions:
-            reachable_transitions.add(pn_transition)
-            state = next_elm.to_state
+        reachable_transitions.add(pn_transition)
+        state = next_elm.to_state
+        if state is not f_state:
             successors = state.outgoing
             queue.extend(successors)
+
     return reachable_transitions
 
 
@@ -169,3 +171,110 @@ def generate_reachability_graph(net, im):
 
 def staterep(name):
     return re.sub(r'\W+', '', name)
+
+
+def find_reachable_transitions_per_petri_transition(re_gr, transition_map):
+    """
+    For each Petri net transition, find all other Petri net transitions that are reachable from it
+    based on the reachability graph.
+
+    Args:
+        re_gr (ts.TransitionSystem): The reachability graph.
+        transition_map (dict): Mapping from reachability graph transitions to Petri net transitions.
+
+    Returns:
+        dict: A dictionary where keys are Petri net transitions and values are sets of reachable Petri net transitions.
+    """
+
+    petri_to_reach = defaultdict(set)
+    for reach_tr, petri_tr in transition_map.items():
+        petri_to_reach[petri_tr].add(reach_tr)
+
+    petri_reachable = defaultdict(set)
+    ts_reachable = defaultdict(set)
+
+    reach_tr_reachable_cache = {}
+
+    for petri_tr, reach_tr_set in petri_to_reach.items():
+        reachable_petri = set()
+
+        for reach_tr in reach_tr_set:
+            if reach_tr in reach_tr_reachable_cache:
+                # Use cached results
+                reachable_petri.update(reach_tr_reachable_cache[reach_tr])
+                continue
+
+            # Perform BFS starting from the target state of the current reach_tr
+            start_state = reach_tr.to_state
+            queue = deque(start_state.outgoing)
+            visited_reach_tr = set()
+            local_reachable_petri = set()
+
+            while queue:
+                current_tr = queue.popleft()
+                if current_tr not in visited_reach_tr:
+                    visited_reach_tr.add(current_tr)
+                    mapped_petri_tr = transition_map.get(current_tr)
+                    if mapped_petri_tr:
+                        local_reachable_petri.add(mapped_petri_tr)
+                    # Enqueue successors
+                    queue.extend(current_tr.to_state.outgoing)
+
+            # Cache the reachable Petri transitions for the current reach_tr
+            reach_tr_reachable_cache[reach_tr] = local_reachable_petri
+
+            # Update the reachable Petri transitions for the current Petri transition
+            reachable_petri.update(local_reachable_petri)
+            ts_reachable[reach_tr] = local_reachable_petri
+
+        reachable_petri.add(petri_tr)
+        petri_reachable[petri_tr] = reachable_petri
+
+    return petri_reachable, ts_reachable
+
+
+def can_transition_be_reachable(A, B, reachable_transitions_dict):
+    """
+    Determines if transition A can be reached from transition B.
+
+    Parameters:
+    - A: The transition to check reachability for.
+    - B: The transition from which reachability is checked.
+    - reachable_transitions_dict: A dictionary mapping each transition to the set of transitions reachable from it.
+
+    Returns:
+    - True if A is reachable from B, False otherwise.
+    """
+    return A in reachable_transitions_dict.get(B, set())
+
+
+def is_transition_always_reachable(ts_a, b, reachable_ts_transitions_dict):
+    """
+    Determines if transition A is always reachable from transition B.
+    This means that in every possible path starting from B, A will eventually be reached.
+
+    Parameters:
+    - A: The transition that must always be reached.
+    - B: The transition from which reachability is checked.
+    - reachable_transitions_dict: A dictionary mapping each transition to the set of transitions reachable from it.
+
+    Returns:
+    - True if A is always reachable from B, False otherwise.
+    """
+    # First, check if A is reachable from B at all
+    for t in ts_a:
+        if b not in reachable_ts_transitions_dict[t]:
+            return False
+
+    return True
+
+
+def can_transitions_be_on_same_path(reachable_transitions_dict, t1, t2):
+    """
+    Determines whether two Petri net transitions can be on the same path
+    """
+    all_reachable = set(reachable_transitions_dict.keys())
+    if t1 not in all_reachable or t2 not in all_reachable:
+        raise Exception("This should not happen!")
+
+    return t2 in reachable_transitions_dict[t1] or t1 in reachable_transitions_dict[t2]

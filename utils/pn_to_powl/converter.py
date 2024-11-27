@@ -4,13 +4,15 @@ from pm4py.objects.powl.obj import POWL, OperatorPOWL, Operator, StrictPartialOr
 
 from utils.pn_to_powl.converter_utils.cut_detection import mine_base_case, mine_xor, mine_loop, mine_partial_order, \
     mine_self_loop
-from utils.pn_to_powl.converter_utils.reachability_map import get_reachability_graph, generate_reachability_graph
+from utils.pn_to_powl.converter_utils.reachability_map import generate_reachability_graph, \
+    find_reachable_transitions_per_petri_transition
 from utils.pn_to_powl.tests import *
 
 from utils.pn_to_powl.converter_utils.preprocessing import validate_petri_net, preprocess_net, remove_duplicate_places
 from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet, \
     pn_transition_to_powl
 
+SIMPLIFIED_REACHABILITY = False
 
 def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:
     """
@@ -24,11 +26,11 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     Returns:
     - POWL model
     """
-    # print("Transitions: ", net.transitions)
-    # print("Places: ", net.places)
-    # print("initial_marking: ", initial_marking)
-    # print("final_marking: ", final_marking)
-    # print("Arcs: ", net.arcs)
+    print("Transitions: ", net.transitions)
+    print("Places: ", net.places)
+    print("initial_marking: ", initial_marking)
+    print("final_marking: ", final_marking)
+    print("Arcs: ", net.arcs)
 
     # Validation and preprocessing for base case
     i_place, e_place = validate_petri_net(net, initial_marking, final_marking)
@@ -53,7 +55,7 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         fm[p] = 1
 
     reachab_graph, map_states, transition_map = generate_reachability_graph(net, im)
-    pm4py.view_transition_system(reachab_graph)
+    # pm4py.view_transition_system(reachab_graph)
 
     # Mine for base case
     base_case = mine_base_case(net)
@@ -66,23 +68,22 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         print("Self_loop detected!")
         return __translate_loop(net, self_loop[0], self_loop[1], self_loop[2], self_loop[3])
 
-
+    reachable_pn_transitions_dict, reachable_ts_transitions_dict = find_reachable_transitions_per_petri_transition(reachab_graph, transition_map)
 
     # Mine for XOR
-    choice_branches = mine_xor(im, map_states, transition_map)
+    choice_branches = mine_xor(net, im, fm, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map)
     if choice_branches and len(choice_branches) > 1:
         print("XOR detected: ", choice_branches)
         return __translate_xor(net, start_places, end_places, choice_branches)
 
     # Mine for Loop
-    do, redo = mine_loop(net, im, fm, map_states, transition_map)
+    do, redo = mine_loop(net, im, fm, map_states, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map)
     if do and redo:
         print("Loop detected")
         return __translate_loop(net, do, redo, start_places, end_places)
 
-    full_reachability_map = get_reachability_graph(net)
     # Mine for partial order
-    partitions = mine_partial_order(net, start_places, end_places, full_reachability_map)
+    partitions = mine_partial_order(net, start_places, end_places, reachable_pn_transitions_dict, reachable_ts_transitions_dict, transition_map)
     if len(partitions) > 1:
         print(f"PO detected: {partitions}")
         return __translate_partial_order(net, partitions, start_places, end_places)

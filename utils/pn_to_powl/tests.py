@@ -859,7 +859,8 @@ def test_loop_ending_with_par2():
 
 
 def test_po():
-    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\19.pnml")
-    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
+    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\beast.pnml")
 
     return net, initial_marking, final_marking
