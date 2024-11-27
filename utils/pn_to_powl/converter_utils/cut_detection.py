@@ -8,7 +8,7 @@ from utils.pn_to_powl.converter_utils.reachability_graph import transitions_alwa
 from utils.pn_to_powl.converter_utils.weak_reachability import transitions_reachable_from_each_other, \
     get_reachable_transitions_from_place_to_another
 from utils.pn_to_powl.converter_utils.subnet_creation import pn_transition_to_powl, \
-    clone_place, add_arc_from_to, remove_arc
+    clone_place, add_arc_from_to
 
 
 def mine_base_case(net: PetriNet):
@@ -31,7 +31,7 @@ def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places:
             out_arcs = place.out_arcs
             for arc in list(out_arcs):
                 target = arc.target
-                remove_arc(arc, net)
+                pn_util.remove_arc(net, arc)
                 add_arc_from_to(place_copy, target, net)
             do_transition = PetriNet.Transition(f"silent_do_{place.name}", None)
             do = set()

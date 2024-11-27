@@ -1,16 +1,14 @@
-import pm4py
 from pm4py.objects.powl.BinaryRelation import BinaryRelation
 from pm4py.objects.powl.obj import POWL, OperatorPOWL, Operator, StrictPartialOrder
 
 from utils.pn_to_powl.converter_utils.cut_detection import mine_base_case, mine_xor, mine_loop, mine_partial_order, \
     mine_self_loop
-from utils.pn_to_powl.converter_utils.weak_reachability import generate_reachability_graph, \
-    find_reachable_transitions_per_petri_transition, get_simplified_reachability_graph
+from utils.pn_to_powl.converter_utils.reachability_graph import generate_reachability_graph
+from utils.pn_to_powl.converter_utils.weak_reachability import get_simplified_reachability_graph
 from utils.pn_to_powl.tests import *
 
 from utils.pn_to_powl.converter_utils.preprocessing import validate_petri_net, preprocess_net, remove_duplicate_places
-from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet, \
-    pn_transition_to_powl
+from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet
 
 SIMPLIFIED_REACHABILITY = True
 
@@ -27,29 +25,12 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     Returns:
     - POWL model
     """
-    # print("Transitions: ", net.transitions)
-    # print("Places: ", net.places)
-    # print("initial_marking: ", initial_marking)
-    # print("final_marking: ", final_marking)
-    # print("Arcs: ", net.arcs)
 
-    # Validation and preprocessing for base case
     i_place, e_place = validate_petri_net(net, initial_marking, final_marking)
     # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
     start_places, end_places = preprocess_net(net, i_place, e_place)
     # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-    # print("Transitions: ", net.transitions)
-    # print("Places: ", net.places)
-    # print("initial_marking: ", start_places)
-    # print("final_marking: ", end_places)
-    # print("Arcs: ", net.arcs)
     start_places, end_places = remove_duplicate_places(net, start_places, end_places)
-
-    # print("Transitions: ", net.transitions)
-    # print("Places: ", net.places)
-    # print("initial_marking: ", start_places)
-    # print("final_marking: ", end_places)
-    # print("Arcs: ", net.arcs)
 
     im = Marking()
     for p in start_places:
@@ -58,48 +39,33 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     for p in end_places:
         fm[p] = 1
 
-    # pm4py.view_transition_system(reachab_graph)
-
-    # Mine for base case
     base_case = mine_base_case(net)
     if base_case:
-        print("Base case detected: ", base_case)
         return base_case
 
     self_loop = mine_self_loop(net, start_places, end_places)
     if self_loop:
-        print("Self_loop detected!")
         return __translate_loop(net, self_loop[0], self_loop[1], self_loop[2], self_loop[3])
 
     if SIMPLIFIED_REACHABILITY:
         map_states = transition_map = None
-        reachable_ts_transitions_dict = get_simplified_reachability_graph(net)
+        reachability_map = get_simplified_reachability_graph(net)
     else:
-        reachab_graph, map_states, transition_map = generate_reachability_graph(net, im)
-        reachable_ts_transitions_dict = find_reachable_transitions_per_petri_transition(reachab_graph, transition_map)
+        reachability_map, map_states, transition_map = generate_reachability_graph(net, im)
 
-    # Mine for XOR
-    choice_branches = mine_xor(net, im, fm, transition_map, SIMPLIFIED_REACHABILITY)
+    choice_branches = mine_xor(net, im, fm, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
     if len(choice_branches) > 1:
         return __translate_xor(net, start_places, end_places, choice_branches)
 
-    # Mine for Loop
     do, redo = mine_loop(net, im, fm, map_states, transition_map, SIMPLIFIED_REACHABILITY)
     if do and redo:
         return __translate_loop(net, do, redo, start_places, end_places)
 
-    # Mine for partial order
-    partitions = mine_partial_order(net, start_places, end_places, reachable_ts_transitions_dict, transition_map,
-                                    SIMPLIFIED_REACHABILITY)
+    partitions = mine_partial_order(net, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
     if len(partitions) > 1:
-        print(f"PO detected: {partitions}")
         return __translate_partial_order(net, partitions, start_places, end_places)
 
-    print(start_places)
-    print(end_places)
-    print(im)
-    print(fm)
-    pm4py.view_petri_net(net, im, fm, format="SVG")
+    # pm4py.view_petri_net(net, im, fm, format="SVG")
     raise Exception(f"Failed to detected a POWL structure over the following transitions: {net.transitions}")
 
 
@@ -113,8 +79,6 @@ def __translate_xor(net: PetriNet, start_places: set[PetriNet.Place], end_places
 
 
 def __translate_loop(net: PetriNet, do_nodes, redo_nodes, start_places, end_places) -> OperatorPOWL:
-    print("LOOP")
-    print(net)
     do_powl = __create_sub_powl_model(net, do_nodes, start_places, end_places)
     redo_powl = __create_sub_powl_model(net, redo_nodes, end_places, start_places)
     loop_operator = OperatorPOWL(operator=Operator.LOOP, children=[do_powl, redo_powl])
@@ -154,7 +118,6 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
 
     group_to_powl_map = {}
     children = []
-    print("TUPLES:", groups_as_tuples)
     for group in groups_as_tuples:
         init_p = list(start_places[group])
         final_p = list(end_places[group])
@@ -172,54 +135,6 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
     return po
 
 
-# def __translate_seq(net, connection_points, ordered_places, reachability_map):
-#     powl_sub_models = []
-#     index = 0
-#     # excluded last place, which must be a connection point (otherwise, exception would have been thrown earlier)
-#     for i in range(len(ordered_places) - 1):
-#         p = ordered_places[i]
-#         if p in connection_points:
-#             node_map = {}
-#
-#             index = index + 1
-#             sub_net = PetriNet(f"Subnet_{index}")
-#             sub_start_place = PetriNet.Place(name=f"{p.name}_subnet{index}")
-#             node_map[p] = sub_start_place
-#             sub_net.places.add(sub_start_place)
-#             subnet_initial_marking = Marking()
-#             subnet_final_marking = Marking()
-#             subnet_initial_marking[sub_start_place] = 1
-#             p_next = None
-#             # add all next places until reaching a connection point
-#             for j in range(i + 1, len(ordered_places)):
-#                 p_next = ordered_places[j]
-#                 cloned_place = PetriNet.Place(name=f"{p_next.name}_subnet{index}")
-#                 sub_net.places.add(cloned_place)
-#                 node_map[p_next] = cloned_place
-#                 if p_next in connection_points:
-#                     subnet_final_marking[cloned_place] = 1
-#                     break
-#
-#             # add transitions
-#             for t in net.transitions:
-#                 if t in reachability_map[p] and t not in reachability_map[p_next]:
-#                     new_t = PetriNet.Transition(f"{t.name}_subnet{index}", t.label)
-#                     sub_net.transitions.add(new_t)
-#                     node_map[t] = new_t
-#
-#             # add arcs
-#             for arc in net.arcs:
-#                 source = arc.source
-#                 target = arc.target
-#                 if source in node_map.keys() and target in node_map.keys():
-#                     add_arc_from_to(node_map[source], node_map[target], sub_net)
-#
-#             powl = translate_petri_to_powl(sub_net, subnet_initial_marking, subnet_final_marking)
-#             powl_sub_models.append(powl)
-#
-#     return Sequence(nodes=powl_sub_models)
-
-
 def __create_sub_powl_model(net, branch, start_places, end_places):
     subnet = create_subnet(net, branch, start_places, end_places)
     return translate_petri_to_powl(
@@ -230,14 +145,13 @@ def __create_sub_powl_model(net, branch, start_places, end_places):
 
 
 if __name__ == "__main__":
-    # pn, im, fm = test_choice()
-    # pn, im, fm = test_loop()
-    pn, im, fm = test_po()
-    # pn, im, fm = test_loop_ending_with_par2()
-    # pn, im, fm = test_xor_ending_and_starting_with_par()
+    # pn, init_mark, final_mark = test_choice()
+    # pn, init_mark, final_mark = test_loop()
+    pn, init_mark, final_mark = test_po()
+    # pn, init_mark, final_mark = test_loop_ending_with_par2()
+    # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 
-    pm4py.view_petri_net(pn, im, fm, format="SVG")
-    powl_model = translate_petri_to_powl(pn, im, fm)
-    print(powl_model)
+    pm4py.view_petri_net(pn, init_mark, final_mark, format="SVG")
+    powl_model = translate_petri_to_powl(pn, init_mark, final_mark)
 
     pm4py.view_powl(powl_model, format="SVG")
