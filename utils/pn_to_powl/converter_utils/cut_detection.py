@@ -1,20 +1,17 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 from copy import copy
 from itertools import combinations
-
-import pm4py
-from pm4py.objects.petri_net.utils.reachability_graph import construct_reachability_graph, marking_flow_petri
 from pm4py.objects.petri_net.obj import PetriNet, Marking
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
-
-from utils.pn_to_powl.converter_utils.reachability_map import get_reachable_transitions_from_marking_to_another, \
-    can_transitions_be_on_same_path, transitions_reachable_from_each_other
+from utils.pn_to_powl.converter_utils.reachability_graph import transitions_always_reachable_from_each_other, \
+    can_transitions_be_on_same_path, get_reachable_transitions_from_marking_to_another
+from utils.pn_to_powl.converter_utils.weak_reachability import transitions_reachable_from_each_other, \
+    get_reachable_transitions_from_place_to_another
 from utils.pn_to_powl.converter_utils.subnet_creation import pn_transition_to_powl, \
     clone_place, add_arc_from_to, remove_arc
 
 
 def mine_base_case(net: PetriNet):
-    # A base case has exactly one transition and two places (start and end)
     if len(net.transitions) == 1:
         if len(net.arcs) == 2 == len(net.places):
             activity = list(net.transitions)[0]
@@ -24,24 +21,18 @@ def mine_base_case(net: PetriNet):
 
 
 def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
-    # A base case has exactly one transition and two places (start and end)
     if len(start_places) == len(end_places) == 1:
         start_place = list(start_places)[0]
         end_place = list(end_places)[0]
         if start_place == end_place:
-            print("NET: ", net)
-            print("start_place: ", start_place)
-            print("end_place: ", end_place)
             place = start_place
             place_copy = clone_place(net, place, {})
             redo = copy(net.transitions)
-
             out_arcs = place.out_arcs
             for arc in list(out_arcs):
                 target = arc.target
                 remove_arc(arc, net)
                 add_arc_from_to(place_copy, target, net)
-
             do_transition = PetriNet.Transition(f"silent_do_{place.name}", None)
             do = set()
             do.add(do_transition)
@@ -53,63 +44,63 @@ def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places:
     return None
 
 
-def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, reachable_ts_transitions_dict, transition_map,
-              simplified_reachability):
-    redo_subnet_transitions = get_reachable_transitions_from_marking_to_another(fm, im, map_states, transition_map,
-                                                                                simplified_reachability)
-
-    if len(redo_subnet_transitions) == 0:
+def mine_loop(net: PetriNet, im: Marking, fm: Marking, map_states, transition_map, simplified_reachability):
+    if len(im) != 1 or len(fm) != 1:
+        # This should not happen for loops as we merge the places in the previous iteration
         return None, None
 
-    do_subnet_transitions = get_reachable_transitions_from_marking_to_another(im, fm, map_states, transition_map,
-                                                                              simplified_reachability)
+    if simplified_reachability:
+
+        start_place = list(im.keys())[0]
+        end_place = list(fm.keys())[0]
+        redo_subnet_transitions = get_reachable_transitions_from_place_to_another(end_place, start_place)
+
+        if len(redo_subnet_transitions) == 0:
+            return None, None
+
+        do_subnet_transitions = get_reachable_transitions_from_place_to_another(start_place, end_place)
+
+    else:
+
+        redo_subnet_transitions = get_reachable_transitions_from_marking_to_another(fm, im, map_states, transition_map)
+
+        if len(redo_subnet_transitions) == 0:
+            return None, None
+
+        do_subnet_transitions = get_reachable_transitions_from_marking_to_another(im, fm, map_states, transition_map)
+
+    if len(do_subnet_transitions) == 0:
+        raise Exception("This should not be possible!")
 
     if do_subnet_transitions & redo_subnet_transitions:
         # This could happen if we have ->(..., Loop)
         return None, None
 
     if net.transitions != (do_subnet_transitions | redo_subnet_transitions):
-        raise Exception("Something went wrong!", net.transitions, do_subnet_transitions, redo_subnet_transitions)
+        raise Exception("Something went wrong!")
 
+    # A loop is detected: the set of transitions is partitioned into two disjoint, non-empty subsets (do and redo)
     return do_subnet_transitions, redo_subnet_transitions
-    # Start and end places must have both incoming and outgoing arcs
-    # start_place = list(start_places)[0]
-    # end_place = list(end_places)[0]
-    # start_has_incoming = len(start_place.in_arcs) > 0
-    # start_has_outgoing = len(start_place.out_arcs) > 0
-    # end_has_incoming = len(end_place.in_arcs) > 0
-    # end_has_outgoing = len(end_place.out_arcs) > 0
-
-    # if (start_has_incoming and start_has_outgoing and
-    #         end_has_incoming and end_has_outgoing and start_place != end_place):
-    #     do_subnet_transitions = collect_subnet_transitions(start_place, end_place)
-    #     redo_subnet_transitions = collect_subnet_transitions(end_place, start_place)
-    #     if len(do_subnet_transitions.intersection(redo_subnet_transitions)) > 0:
-    #         raise Exception("Not a WF-net!")
-    #     return do_subnet_transitions, redo_subnet_transitions
-    # else:
-    #     return None, None
 
 
-def mine_xor(net, im, fm, reachable_ts_transitions_dict, transition_map, simplified_reachability):
+def mine_xor(net, im, fm, reachability_map, transition_map, simplified_reachability):
+    if len(im) != 1 or len(fm) != 1:
+        # This should not happen for xor as we merge the places in the previous iteration
+        return set()
+
     choice_branches = [[t] for t in net.transitions]
 
     if simplified_reachability:
-        if len(im) > 1:
-            # this is only allowed for partial orders; for choice, we combine start places
-            return None
+
         start_place = list(im.keys())[0]
-            # len_start_incoming = len(start_place.in_arcs)
-            # len_start_outgoing = len(start_place.out_arcs)
-            # if len_start_outgoing <= 1 or len_start_incoming > 0:
-            #     return None
+
         for start_transition in pn_util.post_set(start_place):
-            new_branch = {node for node in reachable_ts_transitions_dict[start_transition]
+            new_branch = {node for node in reachability_map[start_transition]
                           if isinstance(node, PetriNet.Transition)}
             choice_branches = combine_partitions(new_branch, choice_branches)
     else:
         for t1, t2 in combinations(net.transitions, 2):
-            if can_transitions_be_on_same_path(reachable_ts_transitions_dict, transition_map, t1, t2):
+            if can_transitions_be_on_same_path(t1, t2, transition_map, reachability_map):
                 new_branch = {t1, t2}
                 choice_branches = combine_partitions(new_branch, choice_branches)
 
@@ -119,62 +110,10 @@ def mine_xor(net, im, fm, reachable_ts_transitions_dict, transition_map, simplif
     return choice_branches
 
 
-def mine_partial_order(net, start_places, end_places, reachable_ts_transitions_dict, transition_map,
-                       simplified_reachability):
-    # partition_map = defaultdict(list)
-    #
-    # for key, value_set in reachable_transitions_dict.items():
-    #     partition_map[frozenset(value_set)].append(key)
-    # partitions = list(partition_map.values())
-    #
-    # print("partitions")
+def mine_partial_order(net, reachability_map, transition_map, simplified_reachability):
     partitions = [[t] for t in net.transitions]
-    print(partitions)
 
-    # nodes_not_grouped = [group[0] for group in partitions if len(group) == 1]
-    # places_not_grouped = [node for node in nodes_not_grouped if isinstance(node, PetriNet.Place)]
-    #
-    # candidate_xor_start = set()
-    # # candidate_xor_end = set()
-    #
-    # for place in places_not_grouped:
-    #     in_size = len(place.in_arcs)
-    #     out_size = len(place.out_arcs)
-    #     if in_size == 0 and place not in start_places:
-    #         raise Exception(f"A place with no incoming arcs! {place}")
-    #     if out_size == 0 and place not in end_places:
-    #         raise Exception(f"A place with no outgoing arcs! {place}")
-    #     # if in_size > 1 and out_size == 1:
-    #     #     candidate_xor_end.add(place)
-    #     if out_size > 1 and in_size == 1:
-    #         candidate_xor_start.add(place)
-    #
-    # for place_xor_split in candidate_xor_start:
-    #     xor_branches = []
-    #     for start_transition in pn_util.post_set(place_xor_split):
-    #         new_branch = set()
-    #         # add_reachable(start_transition, new_branch)
-    #
-    #         # if end_place not in new_branch:
-    #         #     raise Exception(f"Not a WF-net! End place not reachable from {start_transition}!")
-    #         xor_branches.append(new_branch)
-    #
-    #     # extract the set of nodes that are not present in EVERY branch
-    #     union_of_branches = set().union(*xor_branches)
-    #     intersection_of_branches = set.intersection(*xor_branches)
-    #     not_in_every_branch = union_of_branches - intersection_of_branches
-    #     if len(not_in_every_branch) == 1:
-    #         raise Exception("This is not possible")
-    #     elif len(not_in_every_branch) > 1:
-    #         partitions = combine_partitions(not_in_every_branch, partitions)
-
-    # transition_partitions = []
-    # for group in partitions:
-    #     t_group = [node for node in group if isinstance(node, PetriNet.Transition)]
-    #     if len(t_group) > 0:
-    #         transition_partitions.append(t_group)
-
-    parent = list(range(len(partitions)))  # Each partition is initially its own parent
+    parent = list(range(len(partitions)))
 
     def find(i):
         """Find the root parent of partition i with path compression."""
@@ -187,25 +126,30 @@ def mine_partial_order(net, start_places, end_places, reachable_ts_transitions_d
         root_i = find(i)
         root_j = find(j)
         if root_i != root_j:
-            parent[root_j] = root_i  # Merge j into i
+            parent[root_j] = root_i
 
     for t1, t2 in combinations(net.transitions, 2):
-        if transitions_reachable_from_each_other(t1,
-                                                 t2,
-                                                 transition_map,
-                                                 reachable_ts_transitions_dict,
-                                                 simplified_reachability) \
-                or (not simplified_reachability and not can_transitions_be_on_same_path(reachable_ts_transitions_dict,
-                                                                                        transition_map,
-                                                                                        t1,
-                                                                                        t2)):
-            # Find the indices of the partitions containing t1 and t2
+
+        if simplified_reachability:
+            merge = transitions_reachable_from_each_other(t1,
+                                                          t2,
+                                                          reachability_map)
+
+        else:
+            merge = transitions_always_reachable_from_each_other(t1,
+                                                                 t2,
+                                                                 transition_map,
+                                                                 reachability_map) \
+                    or can_transitions_be_on_same_path(t1,
+                                                       t2,
+                                                       transition_map,
+                                                       reachability_map)
+
+        if merge:
             p1 = next(idx for idx, p in enumerate(partitions) if t1 in p)
             p2 = next(idx for idx, p in enumerate(partitions) if t2 in p)
-            # Union the partitions if they are not already in the same set
             union(p1, p2)
 
-    # Step 4: Merge partitions based on the Union-Find structure
     merged_partitions = defaultdict(list)
     for idx, partition in enumerate(partitions):
         root = find(idx)
@@ -213,23 +157,15 @@ def mine_partial_order(net, start_places, end_places, reachable_ts_transitions_d
 
     partitions = list(merged_partitions.values())
 
-    # Optional: If you want to remove duplicates after merging
     partitions = [list(set(part)) for part in partitions]
 
     if simplified_reachability:
         for place in net.places:
-            # in_size = len(place.in_arcs)
             out_size = len(place.out_arcs)
-            # if in_size == 0 and not start_place:
-            #     raise Exception(f"A place with no incoming arcs! {place}")
-            # if out_size == 0 and not end_place:
-            #     raise Exception(f"A place with no outgoing arcs! {place}")
-            # if in_size > 1 and out_size == 1:
-            #     candidate_xor_end.add(place)
             if out_size > 1:
                 xor_branches = []
                 for start_transition in pn_util.post_set(place):
-                    new_branch = {node for node in reachable_ts_transitions_dict[start_transition]
+                    new_branch = {node for node in reachability_map[start_transition]
                                   if isinstance(node, PetriNet.Transition)}
                     xor_branches.append(new_branch)
                 union_of_branches = set().union(*xor_branches)
@@ -242,69 +178,18 @@ def mine_partial_order(net, start_places, end_places, reachable_ts_transitions_d
 
 
 def combine_partitions(input_set, partitions):
-    """
-    Combines groups of partitions if they share elements in the given input set.
-
-    Args:
-    - input_set (set): The set of elements to check for intersection.
-    - partitions (list of lists): The current list of partitions to combine.
-
-    Returns:
-    - list of lists: Updated partitions after combining groups that share elements.
-    """
     combined_partitions = []
     new_combined_group = set()
 
     for partition in partitions:
         partition_set = set(partition)
-        # Check if there is an intersection with the input_set
+
         if partition_set & input_set:
             new_combined_group.update(partition_set)
         else:
             combined_partitions.append(partition)
 
-    # Combine all visited sets into one partition
     if new_combined_group:
         combined_partitions.append(list(new_combined_group))
 
     return combined_partitions
-
-
-def mine_sequence(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place, reachability_graph):
-    """
-    Determine if the Petri net represents a sequence by identifying connection points.
-
-    Parameters:
-    - net: PetriNet
-    - start_place: Place (start of the sequence)
-    - end_place: Place (end of the sequence)
-
-    Returns:
-    - Tuple (is_sequence_detected: bool, connection_points: List[PetriNet.Place])
-      - is_sequence_detected: True if a sequence is detected, False otherwise.
-      - connection_points: List of connection places if a sequence is detected; otherwise, [start_place, end_place].
-    """
-    # reachability_map_places = {key: value for key, value in reachability_graph.items() if isinstance(key, PetriNet.Place)}
-
-    sorted_nodes = sorted(reachability_graph.keys(), key=lambda k: len(reachability_graph[k]), reverse=True)
-    connection_points = []
-
-    for i in range(len(sorted_nodes)):
-        p = sorted_nodes[i]
-        if isinstance(p, PetriNet.Place):
-            if set(reachability_graph[p]) == set(sorted_nodes[i:]):
-                if all(p in reachability_graph[q] for q in sorted_nodes[:i]):
-                    if not any(p in reachability_graph[q] for q in sorted_nodes[i + 1:]):
-                        connection_points.append(p)
-
-    if len(connection_points) >= 2:
-        if start_place not in connection_points:
-            raise Exception("Start place not detected as a connection_point!")
-        if end_place not in connection_points:
-            raise Exception("End place not detected as a connection_point!")
-
-    return connection_points, [p for p in sorted_nodes if isinstance(p, PetriNet.Place)]
-
-
-def find_states_with_transition(transition_map, petri_transition):
-    return {tr for tr, pt in transition_map.items() if pt == petri_transition}

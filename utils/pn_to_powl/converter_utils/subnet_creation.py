@@ -14,27 +14,6 @@ def id_generator():
         count += 1
 
 
-def collect_subnet_transitions(source_place: PetriNet.Place, target_place: PetriNet.Place) -> Set[PetriNet.Transition]:
-    """
-    Collect all transitions in the subnet from source_place to target_place.
-    """
-    visited = set()
-    queue = deque()
-    queue.append(source_place)
-    while queue:
-        node = queue.popleft()
-        if node not in visited:
-            visited.add(node)
-            if node == target_place:
-                continue
-            successors = pn_util.post_set(node)
-            queue.extend(successors)
-    # visited.remove(source_place)
-    # visited.remove(target_place)
-    visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
-    return visited
-
-
 def clone_place(net, place, node_map):
     cloned_place = PetriNet.Place(f"{place.name}_cloned")
     net.places.add(cloned_place)

@@ -4,7 +4,7 @@ from pm4py.objects.powl.obj import POWL, OperatorPOWL, Operator, StrictPartialOr
 
 from utils.pn_to_powl.converter_utils.cut_detection import mine_base_case, mine_xor, mine_loop, mine_partial_order, \
     mine_self_loop
-from utils.pn_to_powl.converter_utils.reachability_map import generate_reachability_graph, \
+from utils.pn_to_powl.converter_utils.weak_reachability import generate_reachability_graph, \
     find_reachable_transitions_per_petri_transition, get_simplified_reachability_graph
 from utils.pn_to_powl.tests import *
 
@@ -79,16 +79,13 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
         reachable_ts_transitions_dict = find_reachable_transitions_per_petri_transition(reachab_graph, transition_map)
 
     # Mine for XOR
-    choice_branches = mine_xor(net, im, fm, reachable_ts_transitions_dict, transition_map, SIMPLIFIED_REACHABILITY)
-    if choice_branches and len(choice_branches) > 1:
-        print("XOR detected: ", choice_branches)
+    choice_branches = mine_xor(net, im, fm, transition_map, SIMPLIFIED_REACHABILITY)
+    if len(choice_branches) > 1:
         return __translate_xor(net, start_places, end_places, choice_branches)
 
     # Mine for Loop
-    do, redo = mine_loop(net, im, fm, map_states, reachable_ts_transitions_dict, transition_map,
-                         SIMPLIFIED_REACHABILITY)
+    do, redo = mine_loop(net, im, fm, map_states, transition_map, SIMPLIFIED_REACHABILITY)
     if do and redo:
-        print("Loop detected")
         return __translate_loop(net, do, redo, start_places, end_places)
 
     # Mine for partial order
