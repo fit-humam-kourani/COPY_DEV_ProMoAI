@@ -28,35 +28,19 @@ def convert_workflow_net_to_powl(net: PetriNet, initial_marking: Marking, final_
     - POWL model
     """
     start_place, end_place = validate_workflow_net(net, initial_marking, final_marking)
-    return __translate_petri_to_powl(net, {start_place}, {end_place})
+    res = __translate_petri_to_powl(net, {start_place}, {end_place})
+    return res
+
 
 
 def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
                               end_places: set[PetriNet.Place]) -> POWL:
-    """
-    Convert a Petri net to a POWL model.
-
-    Parameters:
-    - net: PetriNet
-    - initial_marking: Marking
-    - final_marking: Marking
-
-    Returns:
-    - POWL model
-    """
 
     start_places, end_places = remove_initial_and_end_silent_activities(net, start_places, end_places)
     # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
     start_places, end_places = remove_unconnected_places(net, start_places, end_places)
     start_places, end_places = remove_duplicated_places(net, start_places, end_places)
     start_places, end_places = add_new_start_and_end_if_needed(net, start_places, end_places)
-
-    im = Marking()
-    for p in start_places:
-        im[p] = 1
-    fm = Marking()
-    for p in end_places:
-        fm[p] = 1
 
     base_case = mine_base_case(net)
     if base_case:
@@ -67,18 +51,29 @@ def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
         return __translate_loop(net, self_loop[0], self_loop[1], self_loop[2], self_loop[3])
 
     if SIMPLIFIED_REACHABILITY:
-        map_states = transition_map = None
+        im = fm = map_states = transition_map = None
         reachability_map = get_simplified_reachability_graph(net)
     else:
+        im = Marking()
+        for p in start_places:
+            im[p] = 1
+        fm = Marking()
+        for p in end_places:
+            fm[p] = 1
         reachability_map, map_states, transition_map = generate_reachability_graph(net, im)
 
-    choice_branches = mine_xor(net, im, fm, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
-    if len(choice_branches) > 1:
-        return __translate_xor(net, start_places, end_places, choice_branches)
+    if len(start_places) == 1 == len(end_places):
+        # for xor and loops we should have a unique start/end place due to the performed preprocessing step
+        start_place = list(start_places)[0]
+        end_place = list(end_places)[0]
 
-    do, redo = mine_loop(net, im, fm, map_states, transition_map, SIMPLIFIED_REACHABILITY)
-    if do and redo:
-        return __translate_loop(net, do, redo, start_places, end_places)
+        choice_branches = mine_xor(net, start_place, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
+        if len(choice_branches) > 1:
+            return __translate_xor(net, start_places, end_places, choice_branches)
+
+        do, redo = mine_loop(net, start_place, end_place, im, fm, map_states, transition_map, SIMPLIFIED_REACHABILITY)
+        if do and redo:
+            return __translate_loop(net, do, redo, start_places, end_places)
 
     partitions = mine_partial_order(net, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
     if len(partitions) > 1:
@@ -156,7 +151,7 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
 
 def __create_sub_powl_model(net, branch, start_places, end_places):
     subnet, subnet_start_places, subnet_end_places = clone_subnet(net, branch, start_places, end_places)
-    powl = translate_petri_to_powl(subnet, subnet_start_places, subnet_end_places)
+    powl = __translate_petri_to_powl(subnet, subnet_start_places, subnet_end_places)
     return powl
 
 
@@ -168,6 +163,6 @@ if __name__ == "__main__":
     # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 
     pm4py.view_petri_net(pn, init_mark, final_mark, format="SVG")
-    powl_model = translate_petri_to_powl(pn, init_mark, final_mark)
+    powl_model = convert_workflow_net_to_powl(pn, init_mark, final_mark)
 
     pm4py.view_powl(powl_model, format="SVG")
