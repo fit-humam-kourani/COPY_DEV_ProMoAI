@@ -34,7 +34,6 @@ def convert_workflow_net_to_powl(net: PetriNet, initial_marking: Marking, final_
 
 def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
                               end_places: set[PetriNet.Place]) -> POWL:
-
     start_places, end_places = remove_initial_and_end_silent_activities(net, start_places, end_places)
     start_places, end_places = remove_unconnected_places(net, start_places, end_places)
     start_places, end_places = remove_duplicated_places(net, start_places, end_places)
@@ -93,50 +92,60 @@ def __translate_xor(net: PetriNet, start_places: set[PetriNet.Place], end_places
     return xor_operator
 
 
-def __translate_loop(net: PetriNet, do_nodes, redo_nodes, start_places, end_places) -> OperatorPOWL:
+def __translate_loop(net: PetriNet, do_nodes, redo_nodes,
+                     start_places: set[PetriNet.Place],
+                     end_places: set[PetriNet.Place]) -> OperatorPOWL:
     do_powl = __create_sub_powl_model(net, do_nodes, start_places, end_places)
     redo_powl = __create_sub_powl_model(net, redo_nodes, end_places, start_places)
     loop_operator = OperatorPOWL(operator=Operator.LOOP, children=[do_powl, redo_powl])
     return loop_operator
 
 
+def __validate_partial_order(po: StrictPartialOrder):
+    po.order.add_transitive_edges()
+    if po.order.is_irreflexive():
+        return po
+    else:
+        raise Exception("Conversion failed!")
+
+
 def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Place], f_places: set[PetriNet.Place]):
-    groups_as_tuples = [tuple(g) for g in transition_groups]
-    start_places = {g: set() for g in groups_as_tuples}
-    end_places = {g: set() for g in groups_as_tuples}
-    transition_to_group = {}
-    for g in groups_as_tuples:
-        for member in g:
-            transition_to_group[member] = g
 
-    temp_po = BinaryRelation(groups_as_tuples)
-    for place in net.places:
-        sources = set([arc.source for arc in place.in_arcs])
-        targets = set([arc.target for arc in place.out_arcs])
-        if place in i_places:
-            for target in targets:
-                group_target = transition_to_group[target]
-                start_places[group_target].add(place)
-        if place in f_places:
-            for source in sources:
-                group_source = transition_to_group[source]
-                end_places[group_source].add(place)
+    groups = [tuple(g) for g in transition_groups]
+    transition_to_group_map = {transition: g for g in groups for transition in g}
 
-        for source in sources:
-            group_source = transition_to_group[source]
-            for target in targets:
-                group_target = transition_to_group[target]
-                if group_source != group_target:
-                    temp_po.add_edge(group_source, group_target)
-                    end_places[group_source].add(place)
-                    start_places[group_target].add(place)
+    group_start_places = {g: set() for g in groups}
+    group_end_places = {g: set() for g in groups}
+    temp_po = BinaryRelation(groups)
+
+    for p in net.places:
+        sources = {arc.source for arc in p.in_arcs}
+        targets = {arc.target for arc in p.out_arcs}
+
+        # if p is start place and (p -> t), then p should be a start place in the subnet that contains t
+        if p in i_places:
+            for t in targets:
+                group_start_places[transition_to_group_map[t]].add(p)
+        # if p is end place and (t -> p), then p should be end place in the subnet that contains t
+        if p in f_places:
+            for t in sources:
+                group_end_places[transition_to_group_map[t]].add(p)
+
+        # if (t1 -> p -> t2) and t1 and t2 are in different subsets, then add an edge in the partial order
+        # and set p as end place in g1 and as start place in g2
+        for t1 in sources:
+            group_1 = transition_to_group_map[t1]
+            for t2 in targets:
+                group_2 = transition_to_group_map[t2]
+                if group_1 != group_2:
+                    temp_po.add_edge(group_1, group_2)
+                    group_end_places[group_1].add(p)
+                    group_start_places[group_2].add(p)
 
     group_to_powl_map = {}
     children = []
-    for group in groups_as_tuples:
-        init_p = list(start_places[group])
-        final_p = list(end_places[group])
-        child = __create_sub_powl_model(net, set(group), init_p, final_p)
+    for group in groups:
+        child = __create_sub_powl_model(net, set(group), group_start_places[group], group_end_places[group])
         group_to_powl_map[group] = child
         children.append(child)
 
@@ -147,10 +156,14 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
             if temp_po.is_edge(source, target):
                 new_target = group_to_powl_map[target]
                 po.order.add_edge(new_source, new_target)
+
+    po = __validate_partial_order(po)
     return po
 
 
-def __create_sub_powl_model(net, branch: set[PetriNet.Transition], start_places, end_places):
+def __create_sub_powl_model(net, branch: set[PetriNet.Transition],
+                            start_places: set[PetriNet.Place],
+                            end_places: set[PetriNet.Place]):
     subnet, subnet_start_places, subnet_end_places = clone_subnet(net, branch, start_places, end_places)
     powl = __translate_petri_to_powl(subnet, subnet_start_places, subnet_end_places)
     return powl
@@ -158,8 +171,8 @@ def __create_sub_powl_model(net, branch: set[PetriNet.Transition], start_places,
 
 if __name__ == "__main__":
     # pn, init_mark, final_mark = test_choice()
-    pn, init_mark, final_mark = test_loop()
-    # pn, init_mark, final_mark = test_po()
+    # pn, init_mark, final_mark = test_loop()
+    pn, init_mark, final_mark = test_po()
     # pn, init_mark, final_mark = test_loop_ending_with_par2()
     # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 

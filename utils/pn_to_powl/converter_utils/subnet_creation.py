@@ -24,7 +24,8 @@ def clone_transition(net, transition, node_map):
     return cloned_transition
 
 
-def clone_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition], start_places, end_places):
+def clone_subnet(net: PetriNet, subnet_transitions: Set[PetriNet.Transition],
+                 start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
     subnet_net = PetriNet(f"Subnet_{next(id_generator())}")
     node_map = {}
 
