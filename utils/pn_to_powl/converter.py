@@ -1,5 +1,5 @@
 from pm4py.objects.powl.BinaryRelation import BinaryRelation
-from pm4py.objects.powl.obj import POWL, OperatorPOWL, Operator, StrictPartialOrder
+from pm4py.objects.powl.obj import OperatorPOWL, POWL, Operator, StrictPartialOrder
 
 from utils.pn_to_powl.converter_utils.cut_detection import mine_base_case, mine_xor, mine_loop, mine_partial_order, \
     mine_self_loop
@@ -7,13 +7,32 @@ from utils.pn_to_powl.converter_utils.reachability_graph import generate_reachab
 from utils.pn_to_powl.converter_utils.weak_reachability import get_simplified_reachability_graph
 from utils.pn_to_powl.tests import *
 
-from utils.pn_to_powl.converter_utils.preprocessing import validate_petri_net, preprocess_net, remove_duplicate_places
-from utils.pn_to_powl.converter_utils.subnet_creation import create_subnet
+from utils.pn_to_powl.converter_utils.preprocessing import validate_workflow_net, remove_duplicated_places, \
+    remove_unconnected_places, \
+    add_new_start_and_end_if_needed, remove_initial_and_end_silent_activities
+from utils.pn_to_powl.converter_utils.subnet_creation import clone_subnet
 
 SIMPLIFIED_REACHABILITY = False
 
 
-def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:
+def convert_workflow_net_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:
+    """
+    Convert a Petri net to a POWL model.
+
+    Parameters:
+    - net: PetriNet
+    - initial_marking: Marking
+    - final_marking: Marking
+
+    Returns:
+    - POWL model
+    """
+    start_place, end_place = validate_workflow_net(net, initial_marking, final_marking)
+    return __translate_petri_to_powl(net, {start_place}, {end_place})
+
+
+def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
+                              end_places: set[PetriNet.Place]) -> POWL:
     """
     Convert a Petri net to a POWL model.
 
@@ -26,11 +45,11 @@ def translate_petri_to_powl(net: PetriNet, initial_marking: Marking, final_marki
     - POWL model
     """
 
-    i_place, e_place = validate_petri_net(net, initial_marking, final_marking)
+    start_places, end_places = remove_initial_and_end_silent_activities(net, start_places, end_places)
     # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-    start_places, end_places = preprocess_net(net, i_place, e_place)
-    # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-    start_places, end_places = remove_duplicate_places(net, start_places, end_places)
+    start_places, end_places = remove_unconnected_places(net, start_places, end_places)
+    start_places, end_places = remove_duplicated_places(net, start_places, end_places)
+    start_places, end_places = add_new_start_and_end_if_needed(net, start_places, end_places)
 
     im = Marking()
     for p in start_places:
@@ -136,12 +155,9 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
 
 
 def __create_sub_powl_model(net, branch, start_places, end_places):
-    subnet = create_subnet(net, branch, start_places, end_places)
-    return translate_petri_to_powl(
-        subnet['net'],
-        subnet['initial_marking'],
-        subnet['final_marking']
-    )
+    subnet, subnet_start_places, subnet_end_places = clone_subnet(net, branch, start_places, end_places)
+    powl = translate_petri_to_powl(subnet, subnet_start_places, subnet_end_places)
+    return powl
 
 
 if __name__ == "__main__":
