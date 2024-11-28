@@ -78,15 +78,15 @@ def remove_initial_and_end_silent_activities(net: PetriNet, start_places: set[Pe
     return start_places, end_places
 
 
-def __get_identical_place(place, places_to_keep):
-    for other in places_to_keep:
+def __get_identical_place(place: PetriNet.Place, places_set: set[PetriNet.Place]):
+    for other in places_set:
         if(pn_util.post_set(place) == pn_util.post_set(other)
-                and pn_util.pre_set(place) == pn_util.pre_set(other) ):
+                and pn_util.pre_set(place) == pn_util.pre_set(other)):
             return other
     return None
 
 
-def __remove_and_replace_if_present(old_p, new_p, place_set):
+def __remove_and_replace_if_present(old_p: PetriNet.Place, new_p: PetriNet.Place, place_set: set[PetriNet.Place]):
     if old_p in place_set:
         place_set.remove(old_p)
         if new_p not in place_set:
@@ -97,8 +97,8 @@ def __remove_and_replace_if_present(old_p, new_p, place_set):
 def remove_duplicated_places(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
 
     all_places = list(net.places)
-    places_to_keep = all_places[0]
-    for place in all_places:
+    places_to_keep = {all_places[0]}
+    for place in all_places[1:]:
         other = __get_identical_place(place, places_to_keep)
         if other:
             pn_util.remove_place(net, place)

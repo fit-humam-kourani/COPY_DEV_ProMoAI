@@ -12,7 +12,7 @@ from utils.pn_to_powl.converter_utils.preprocessing import validate_workflow_net
     add_new_start_and_end_if_needed, remove_initial_and_end_silent_activities
 from utils.pn_to_powl.converter_utils.subnet_creation import clone_subnet
 
-SIMPLIFIED_REACHABILITY = False
+SIMPLIFIED_REACHABILITY = True
 
 
 def convert_workflow_net_to_powl(net: PetriNet, initial_marking: Marking, final_marking: Marking) -> POWL:
@@ -32,15 +32,15 @@ def convert_workflow_net_to_powl(net: PetriNet, initial_marking: Marking, final_
     return res
 
 
-
 def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
                               end_places: set[PetriNet.Place]) -> POWL:
 
     start_places, end_places = remove_initial_and_end_silent_activities(net, start_places, end_places)
-    # pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
     start_places, end_places = remove_unconnected_places(net, start_places, end_places)
     start_places, end_places = remove_duplicated_places(net, start_places, end_places)
     start_places, end_places = add_new_start_and_end_if_needed(net, start_places, end_places)
+    # pm4py.view_petri_net(net, None, None, format="SVG")
+    # print(start_places, end_places)
 
     base_case = mine_base_case(net)
     if base_case:
@@ -83,7 +83,8 @@ def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
     raise Exception(f"Failed to detected a POWL structure over the following transitions: {net.transitions}")
 
 
-def __translate_xor(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place], choice_branches):
+def __translate_xor(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place],
+                    choice_branches: list[set[PetriNet.Transition]]):
     children = []
     for branch in choice_branches:
         child_powl = __create_sub_powl_model(net, branch, start_places, end_places)
@@ -149,7 +150,7 @@ def __translate_partial_order(net, transition_groups, i_places: set[PetriNet.Pla
     return po
 
 
-def __create_sub_powl_model(net, branch, start_places, end_places):
+def __create_sub_powl_model(net, branch: set[PetriNet.Transition], start_places, end_places):
     subnet, subnet_start_places, subnet_end_places = clone_subnet(net, branch, start_places, end_places)
     powl = __translate_petri_to_powl(subnet, subnet_start_places, subnet_end_places)
     return powl
@@ -157,8 +158,8 @@ def __create_sub_powl_model(net, branch, start_places, end_places):
 
 if __name__ == "__main__":
     # pn, init_mark, final_mark = test_choice()
-    # pn, init_mark, final_mark = test_loop()
-    pn, init_mark, final_mark = test_po()
+    pn, init_mark, final_mark = test_loop()
+    # pn, init_mark, final_mark = test_po()
     # pn, init_mark, final_mark = test_loop_ending_with_par2()
     # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 

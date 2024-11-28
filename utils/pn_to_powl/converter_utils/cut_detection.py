@@ -45,7 +45,6 @@ def mine_self_loop(net: PetriNet, start_places: set[PetriNet.Place], end_places:
 
 def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Place, im: Marking, fm: Marking,
               map_states, transition_map, simplified_reachability):
-
     if simplified_reachability:
 
         redo_subnet_transitions = get_reachable_transitions_from_place_to_another(end_place, start_place)
@@ -79,8 +78,7 @@ def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Pl
 
 
 def mine_xor(net: PetriNet, start_place: PetriNet.Place, reachability_map, transition_map, simplified_reachability):
-
-    choice_branches = [[t] for t in net.transitions]
+    choice_branches = [{t} for t in net.transitions]
 
     if simplified_reachability:
         for start_transition in pn_util.post_set(start_place):
@@ -141,7 +139,7 @@ def mine_partial_order(net, reachability_map, transition_map, simplified_reachab
 
 
 def __combine_partitions(transitions_to_group_together: set[PetriNet.Transition],
-                       partitions: list[set[PetriNet.Transition]]):
+                         partitions: list[set[PetriNet.Transition]]):
     combined_partitions = []
     new_combined_group = set()
 
