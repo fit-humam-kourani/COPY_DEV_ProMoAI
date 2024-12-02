@@ -21,33 +21,102 @@ def add_arc_from_to(source: Union[PetriNet.Place, PetriNet.Transition],
     target.in_arcs.add(arc)
 
 
-def test_base_case():
-    print("=== Testing Base Case ===")
-    net, initial_marking, final_marking = create_simple_petri_net()
+def create_ld() -> (PetriNet, Marking, Marking):
+    # Create a new Petri net
+    net = PetriNet("LD")
+
+    # Define Places
+    start = PetriNet.Place("start")
+    p1 = PetriNet.Place("p1")
+    p2 = PetriNet.Place("p2")
+    p3 = PetriNet.Place("p3")
+    end = PetriNet.Place("end")
+    net.places.update([start, p1, p2, p3, end])
+
+    # Define Transitions
+    A = PetriNet.Transition("A", "A")
+    B = PetriNet.Transition("B", "B")
+    C = PetriNet.Transition("C", "C")
+    D = PetriNet.Transition("D", "D")
+    net.transitions.update([A, B, C, D])
+
+    # Add Arcs
+    # From start to the first choice (A or B)
+    petri_utils.add_arc_from_to(start, A, net)
+    petri_utils.add_arc_from_to(start, B, net)
+
+    # From A and B to the second choice (C or D)
+    petri_utils.add_arc_from_to(A, p1, net)
+    petri_utils.add_arc_from_to(B, p1, net)
+    petri_utils.add_arc_from_to(p1, C, net)
+    petri_utils.add_arc_from_to(p1, D, net)
+
+    # From C and D to the end
+    petri_utils.add_arc_from_to(C, end, net)
+    petri_utils.add_arc_from_to(D, end, net)
+
+    petri_utils.add_arc_from_to(A, p2, net)
+    petri_utils.add_arc_from_to(p2, C, net)
+
+    petri_utils.add_arc_from_to(B, p3, net)
+    petri_utils.add_arc_from_to(p3, D, net)
+
+    # Define Initial and Final Markings
+    initial_marking = Marking()
+    final_marking = Marking()
+    initial_marking[start] = 1
+    final_marking[end] = 1
+
     return net, initial_marking, final_marking
 
 
-def create_simple_petri_net() -> (PetriNet, Marking, Marking):
-    """
-    Create a simple Petri net with one transition (base case).
+def create_complex_ld() -> (PetriNet, Marking, Marking):
+    # Create a new Petri net
+    net = PetriNet("LD")
 
-    Returns:
-    - net: PetriNet
-    - initial_marking: Marking
-    - final_marking: Marking
-    """
-    net = PetriNet("Simple Net")
+    # Define Places
     start = PetriNet.Place("start")
+    p1 = PetriNet.Place("p1")
+    p11 = PetriNet.Place("p11")
+    p2 = PetriNet.Place("p2")
+    p3 = PetriNet.Place("p3")
     end = PetriNet.Place("end")
-    net.places.add(start)
-    net.places.add(end)
+    net.places.update([start, p1, p11, p2, p3, end])
 
-    t1 = PetriNet.Transition("t1", "Do something")
-    net.transitions.add(t1)
+    # Define Transitions
+    A = PetriNet.Transition("A", "A")
+    B = PetriNet.Transition("B", "B")
+    mid = PetriNet.Transition("mid", "D")
+    C = PetriNet.Transition("C", "C")
+    D = PetriNet.Transition("D", "D")
+    net.transitions.update([A, B, C, D, mid])
 
-    add_arc_from_to(start, t1, net)
-    add_arc_from_to(t1, end, net)
+    # Add Arcs
+    # From start to the first choice (A or B)
+    petri_utils.add_arc_from_to(start, A, net)
+    petri_utils.add_arc_from_to(start, B, net)
 
+    # From A and B to the second choice (C or D)
+    petri_utils.add_arc_from_to(A, p1, net)
+    petri_utils.add_arc_from_to(B, p1, net)
+
+    petri_utils.add_arc_from_to(p1, mid, net)
+    petri_utils.add_arc_from_to(mid, p11, net)
+
+    petri_utils.add_arc_from_to(p11, C, net)
+    petri_utils.add_arc_from_to(p11, D, net)
+
+    # From C and D to the end
+    petri_utils.add_arc_from_to(C, end, net)
+    petri_utils.add_arc_from_to(D, end, net)
+
+    petri_utils.add_arc_from_to(A, p2, net)
+    petri_utils.add_arc_from_to(p2, C, net)
+
+    petri_utils.add_arc_from_to(B, p3, net)
+    petri_utils.add_arc_from_to(p3, D, net)
+
+    # Define Initial and Final Markings
     initial_marking = Marking()
     final_marking = Marking()
     initial_marking[start] = 1
@@ -380,8 +449,6 @@ def test_simple_loop(n=5):
     return net, initial_marking, final_marking
 
 
-
-
 def test_self_loop():
     net = PetriNet(name="Custom_Petri_Net")
 
@@ -707,9 +774,6 @@ def test_xor_ending_and_starting_with_par():
 
     # B -> p2
     petri_utils.add_arc_from_to(B, p2, net)
-
-
-
 
     # B -> p3
     petri_utils.add_arc_from_to(B2, p3, net)

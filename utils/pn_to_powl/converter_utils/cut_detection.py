@@ -81,10 +81,14 @@ def mine_xor(net: PetriNet, start_place: PetriNet.Place, reachability_map, trans
     choice_branches = [{t} for t in net.transitions]
 
     if simplified_reachability:
-        for start_transition in pn_util.post_set(start_place):
-            new_branch = {node for node in reachability_map[start_transition]
-                          if isinstance(node, PetriNet.Transition)}
-            choice_branches = __combine_partitions(new_branch, choice_branches)
+        # for start_transition in pn_util.post_set(start_place):
+        #     new_branch = {node for node in reachability_map[start_transition]
+        #                   if isinstance(node, PetriNet.Transition)}
+        #     choice_branches = __combine_partitions(new_branch, choice_branches)
+        for t1, t2 in combinations(net.transitions, 2):
+            if t1 in reachability_map[t2] or t2 in reachability_map[t1]:
+                new_branch = {t1, t2}
+                choice_branches = __combine_partitions(new_branch, choice_branches)
     else:
         for t1, t2 in combinations(net.transitions, 2):
             if can_transitions_be_on_same_path(t1, t2, transition_map, reachability_map):

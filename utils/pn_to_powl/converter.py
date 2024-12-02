@@ -172,7 +172,8 @@ def __create_sub_powl_model(net, branch: set[PetriNet.Transition],
 if __name__ == "__main__":
     # pn, init_mark, final_mark = test_choice()
     # pn, init_mark, final_mark = test_loop()
-    pn, init_mark, final_mark = test_po()
+    # pn, init_mark, final_mark = test_po()
+    pn, init_mark, final_mark = create_ld()
     # pn, init_mark, final_mark = test_loop_ending_with_par2()
     # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 
