@@ -1,3 +1,4 @@
+import pm4py
 from pm4py.objects.powl.BinaryRelation import BinaryRelation
 from pm4py.objects.powl.obj import OperatorPOWL, POWL, Operator, StrictPartialOrder
 
@@ -63,12 +64,13 @@ def __translate_petri_to_powl(net: PetriNet, start_places: set[PetriNet.Place],
 
     if len(start_places) == 1 == len(end_places):
         # for xor and loops we should have a unique start/end place due to the performed preprocessing step
-        start_place = list(start_places)[0]
-        end_place = list(end_places)[0]
 
-        choice_branches = mine_xor(net, start_place, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
+        choice_branches = mine_xor(net, reachability_map, transition_map, SIMPLIFIED_REACHABILITY)
         if len(choice_branches) > 1:
             return __translate_xor(net, start_places, end_places, choice_branches)
+
+        start_place = list(start_places)[0]
+        end_place = list(end_places)[0]
 
         do, redo = mine_loop(net, start_place, end_place, im, fm, map_states, transition_map, SIMPLIFIED_REACHABILITY)
         if do and redo:
@@ -172,8 +174,8 @@ def __create_sub_powl_model(net, branch: set[PetriNet.Transition],
 if __name__ == "__main__":
     # pn, init_mark, final_mark = test_choice()
     # pn, init_mark, final_mark = test_loop()
-    # pn, init_mark, final_mark = test_po()
-    pn, init_mark, final_mark = create_ld()
+    pn, init_mark, final_mark = test_po()
+    # pn, init_mark, final_mark = create_ld()
     # pn, init_mark, final_mark = test_loop_ending_with_par2()
     # pn, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 

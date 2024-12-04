@@ -77,7 +77,7 @@ def mine_loop(net: PetriNet, start_place: PetriNet.Place, end_place: PetriNet.Pl
     return do_subnet_transitions, redo_subnet_transitions
 
 
-def mine_xor(net: PetriNet, start_place: PetriNet.Place, reachability_map, transition_map, simplified_reachability):
+def mine_xor(net: PetriNet, reachability_map, transition_map, simplified_reachability):
     choice_branches = [{t} for t in net.transitions]
 
     if simplified_reachability:
