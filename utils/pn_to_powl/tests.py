@@ -742,9 +742,9 @@ def test_xor_ending_and_starting_with_par():
     net.places.add(sink)
 
     # Define Transitions
-    A = PetriNet.Transition(name="A", label="A")
+    A = PetriNet.Transition(name="S", label="S")
     B = PetriNet.Transition(name="B", label="B")
-    B2 = PetriNet.Transition(name="B2", label="B2")
+    B2 = PetriNet.Transition(name="A", label="A")
     C = PetriNet.Transition(name="C", label="C")
     D = PetriNet.Transition(name="D", label="D")
     E = PetriNet.Transition(name="E", label="E")
@@ -922,10 +922,19 @@ def test_loop_ending_with_par2():
     return net, initial_marking, final_marking
 
 
-def test_po():
-    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\18.pnml")
+def get_test_pn():
+    # net, init_mark, final_mark = test_choice()
+    # net, init_mark, final_mark = test_loop()
+    # net, init_mark, final_mark = create_ld()
+    # net, init_mark, final_mark = test_loop_ending_with_par2()
+    # net, init_mark, final_mark = test_xor_ending_and_starting_with_par()
+
+    net, initial_marking, final_marking = pm4py.read_pnml(
+        r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\17.pnml")
     # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
-    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\beast.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\process_model (18).pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\beast.pnml")
     # tree = pm4py.convert_to_process_tree(net, initial_marking, final_marking)
     # pm4py.view_process_tree(tree, format="SVG")
-    return net, initial_marking, final_marking
+
+    return net

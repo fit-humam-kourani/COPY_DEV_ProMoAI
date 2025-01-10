@@ -34,9 +34,3 @@ def get_reachable_transitions_from_place_to_another(start_place: PetriNet.Place,
             queue.extend(successors)
     visited = {node for node in visited if isinstance(node, PetriNet.Transition)}
     return visited
-
-
-def transitions_reachable_from_each_other(t1: PetriNet.Transition,
-                                          t2: PetriNet.Transition,
-                                          reachable_ts_transitions_dict):
-    return t1 in reachable_ts_transitions_dict[t2] and t2 in reachable_ts_transitions_dict[t1]

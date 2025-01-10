@@ -1,48 +1,33 @@
-import pm4py
-from pm4py import PetriNet, Marking
+from itertools import combinations
+
+from pm4py import PetriNet
 from pm4py.objects.petri_net.utils import petri_utils as pn_util
 from pm4py.algo.analysis.workflow_net import algorithm as wf_eval
 
 from utils.pn_to_powl.converter_utils.subnet_creation import add_arc_from_to, id_generator
 
 
-def validate_workflow_net(net: PetriNet, initial_marking: Marking, final_marking: Marking):
-    if len(initial_marking) != 1:
-        raise Exception(f"Initial marking must consist of exactly one place: {initial_marking}")
-
-    if len(final_marking) != 1:
-        raise Exception(f"Final marking must consist of exactly one place: {final_marking}")
-
-    start_place = list(initial_marking.keys())[0]
-    end_place = list(final_marking.keys())[0]
-
-    if initial_marking[start_place] != 1:
-        raise Exception(f"Number of tokens in initial marking must be 1!")
-
-    if final_marking[end_place] != 1:
-        raise Exception(f"Number of tokens in final marking must be 1!")
-
-    if start_place not in net.places or end_place not in net.places:
-        raise Exception(f"Start or end place in the Petri net!")
-
+def validate_workflow_net(net: PetriNet):
     places_no_incoming = [p for p in net.places if not p.in_arcs]
-    if set(places_no_incoming) != set(initial_marking.keys()):
-        pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-        raise Exception(f"Initial marking must match all places with no incoming arcs. {places_no_incoming}")
+    if len(places_no_incoming) == 1:
+        start_place = places_no_incoming[0]
+    else:
+        raise Exception(f"Not a WF-net!")
 
     places_no_outgoing = [p for p in net.places if not p.out_arcs]
-    if set(places_no_outgoing) != set(final_marking.keys()):
-        pm4py.view_petri_net(net, initial_marking, final_marking, format="SVG")
-        raise Exception(f"Final marking must match all places with no outgoing arcs. {net}")
+    if len(places_no_outgoing) == 1:
+        end_place = places_no_outgoing[0]
+    else:
+        raise Exception(f"Not a WF-net!")
 
     if not wf_eval.apply(net):
-        raise ValueError('The Petri net provided is not a WF-net')
+        raise Exception(f"Not a WF-net!")
 
     return start_place, end_place
 
 
-def remove_initial_and_end_silent_activities(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
-
+def remove_initial_and_end_silent_activities(net: PetriNet, start_places: set[PetriNet.Place],
+                                             end_places: set[PetriNet.Place]):
     change = True
     while change and len(net.transitions) > 1:
         change = False
@@ -80,7 +65,7 @@ def remove_initial_and_end_silent_activities(net: PetriNet, start_places: set[Pe
 
 def __get_identical_place(place: PetriNet.Place, places_set: set[PetriNet.Place]):
     for other in places_set:
-        if(pn_util.post_set(place) == pn_util.post_set(other)
+        if (pn_util.post_set(place) == pn_util.post_set(other)
                 and pn_util.pre_set(place) == pn_util.pre_set(other)):
             return other
     return None
@@ -95,7 +80,6 @@ def __remove_and_replace_if_present(old_p: PetriNet.Place, new_p: PetriNet.Place
 
 
 def remove_duplicated_places(net: PetriNet, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
-
     all_places = list(net.places)
     places_to_keep = {all_places[0]}
     for place in all_places[1:]:
@@ -119,6 +103,74 @@ def remove_unconnected_places(net: PetriNet, start_places: set[PetriNet.Place], 
             end_places.remove(p)
 
     return start_places, end_places
+
+
+def preprocess(net):
+    all_places = net.places
+    for p1, p2 in combinations(all_places, 2):
+        pre1 = pn_util.pre_set(p1)
+        pre2 = pn_util.pre_set(p2)
+        post1 = pn_util.post_set(p1)
+        post2 = pn_util.post_set(p2)
+
+        if (pre1 == pre2) and (post1 == post2):
+            pn_util.remove_place(net, p2)
+            return preprocess(net)
+
+        if pre1 == pre2:
+            common_post = post1 & post2
+            if len(pre1) > 1 or len(common_post) > 0:
+                new_place = PetriNet.Place(f"place_{next(id_generator())}")
+                net.places.add(new_place)
+
+                for transition in pre1:
+                    add_arc_from_to(transition, new_place, net)
+                    arcs_to_remove = p1.in_arcs | p2.in_arcs
+                    for arc in arcs_to_remove:
+                        pn_util.remove_arc(net, arc)
+
+                for transition in common_post:
+                    add_arc_from_to(new_place, transition, net)
+                    out_arcs = p1.out_arcs | p2.out_arcs
+                    for arc in out_arcs:
+                        if arc.target in common_post:
+                            pn_util.remove_arc(net, arc)
+
+                new_silent = PetriNet.Transition(f"silent_transition_{next(id_generator())}")
+                net.transitions.add(new_silent)
+                add_arc_from_to(new_place, new_silent, net)
+                add_arc_from_to(new_silent, p1, net)
+                add_arc_from_to(new_silent, p2, net)
+                return preprocess(net)
+
+        if post1 == post2:
+            common_pre = pre1 & pre2
+            if len(post1) > 1 or len(common_pre) > 0:
+                new_place = PetriNet.Place(f"place_{next(id_generator())}")
+                net.places.add(new_place)
+
+                for transition in post1:
+                    add_arc_from_to(new_place, transition, net)
+                    arcs_to_remove = p1.out_arcs | p2.out_arcs
+                    for arc in arcs_to_remove:
+                        pn_util.remove_arc(net, arc)
+
+                for transition in common_pre:
+                    add_arc_from_to(transition, new_place, net)
+                    in_arcs = p1.in_arcs | p2.in_arcs
+                    for arc in in_arcs:
+                        if arc.source in common_pre:
+                            pn_util.remove_arc(net, arc)
+
+                new_silent = PetriNet.Transition(f"silent_transition_{next(id_generator())}")
+                net.transitions.add(new_silent)
+                add_arc_from_to(p1, new_silent, net)
+                add_arc_from_to(p2, new_silent, net)
+                add_arc_from_to(new_silent, new_place, net)
+
+                return preprocess(net)
+
+    return net
 
 
 def add_new_start_and_end_if_needed(net, start_places: set[PetriNet.Place], end_places: set[PetriNet.Place]):
@@ -162,7 +214,6 @@ def add_new_start_and_end_if_needed(net, start_places: set[PetriNet.Place], end_
 
 
 def __redirect_shared_arcs_to_new_place(net, places: list[PetriNet.Place], new_place_id):
-
     shared_pre_set = set(pn_util.pre_set(places[0]))
     for p in places[1:]:
         shared_pre_set &= set(pn_util.pre_set(p))
