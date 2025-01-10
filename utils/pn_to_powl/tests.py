@@ -929,11 +929,10 @@ def get_test_pn():
     # net, init_mark, final_mark = test_loop_ending_with_par2()
     # net, init_mark, final_mark = test_xor_ending_and_starting_with_par()
 
-    net, initial_marking, final_marking = pm4py.read_pnml(
-        r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\17.pnml")
+    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\PycharmProjects\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_pn\17.pnml")
     # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\trial5.pnml")
     # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\process_model (18).pnml")
-    # net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\beast.pnml")
+    net, initial_marking, final_marking = pm4py.read_pnml(r"C:\Users\kourani\Downloads\beast.pnml")
     # tree = pm4py.convert_to_process_tree(net, initial_marking, final_marking)
     # pm4py.view_process_tree(tree, format="SVG")
 
