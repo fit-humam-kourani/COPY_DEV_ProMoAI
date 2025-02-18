@@ -92,7 +92,7 @@ def generate_response_with_history(conversation_history, api_key, llm_name, api_
     if api_url.endswith("/"):
         api_url = api_url[:-1]
 
-    response = requests.post(api_url + "/chat/completions", headers=headers, json=payload).json()
+    response = requests.post(api_url + "/chat/completions", headers=headers, json=payload, timeout=20*60).json()
 
     try:
         return response["choices"][0]["message"]["content"]

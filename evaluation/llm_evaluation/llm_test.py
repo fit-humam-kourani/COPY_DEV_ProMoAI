@@ -7,16 +7,17 @@ import time
 
 # IDS_TO_CONSIDER = ['hotel']
 IDS_TO_CONSIDER = "21"
+IDS_TO_CONSIDER = None
 CREATE_FILES = True
-ITERATION = 7
+ITERATION = 1
 
 # Read API configurations
-api_url = open("../api_url.txt", "r").read().strip()
-api_key = open("../api_key.txt", "r").read().strip()
-openai_model = open("../api_model.txt", "r").read().strip()
+api_url = "https://api.deepseek.com/chat/completions"
+api_key = "sk-a7b43e118a284abf831aaedc016a00e4"
+openai_model = "deepseek-chat"
 
-description_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\ground_truth\ground_truth_process_descriptions"
-ground_truth_log_folder = r"C:\Users\kourani\git\ProMoAI\evaluation\llm_evaluation\ground_truth\ground_truth_xes_one_trace_per_variant"
+description_folder = r"C:\Users\berti\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_process_descriptions"
+ground_truth_log_folder = r"C:\Users\berti\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_xes_one_trace_per_variant"
 
 base_dir = f"llm_com/{openai_model.replace('/', '_')}/IT{ITERATION}"
 
