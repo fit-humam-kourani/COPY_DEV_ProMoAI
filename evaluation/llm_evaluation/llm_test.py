@@ -1,25 +1,32 @@
 import csv
 import os
 import pm4py
-from utils.model_generation.model_generation import generate_model
-from utils.prompting import create_conversation
 import time
+import traceback
+import pyperclip
+import subprocess
+
+from utils.model_generation.model_generation import generate_model, extract_model_from_response
+from utils.prompting import create_conversation
+
+# New boolean flag
+MANUAL = True  # Set to True for manual mode
 
 # IDS_TO_CONSIDER = ['hotel']
-IDS_TO_CONSIDER = "21"
+IDS_TO_CONSIDER = ["18"]
 IDS_TO_CONSIDER = None
 CREATE_FILES = True
 ITERATION = 1
 
 # Read API configurations
-api_url = "https://api.deepseek.com/chat/completions"
-api_key = "sk-a7b43e118a284abf831aaedc016a00e4"
-openai_model = "deepseek-chat"
+api_url = "https://api.x.ai/v1"
+api_key = "aaaaaa"
+openai_model = "Grok-3-beta"
 
-description_folder = r"C:\Users\berti\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_process_descriptions"
+description_folder = r"C:\Users\berti\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_process_descriptions\long"
 ground_truth_log_folder = r"C:\Users\berti\EvaluatingLLMsProcessModeling\ground_truth\ground_truth_xes_one_trace_per_variant"
 
-base_dir = f"llm_com/{openai_model.replace('/', '_')}/IT{ITERATION}"
+base_dir = f"llm_com/{openai_model.replace('/', '_').replace(':', '')}/IT{ITERATION}"
 
 # Ensure base directories exist for saving results
 if not os.path.exists(base_dir):
@@ -50,12 +57,6 @@ if CREATE_FILES:
             "visible_transitions_ground_truth",
             "visible_transitions_generated",
             "shared_activities",
-            # "percFitTraces",
-            # "averageFitness",
-            # "percentage_of_fitting_traces",
-            # "average_trace_fitness",
-            # "log_fitness",
-            # "precision",
             "time",
             "error message",
         ])
@@ -70,35 +71,85 @@ for proc_file in os.listdir(description_folder):
 
     ground_truth_log_path = os.path.join(ground_truth_log_folder, f"{proc_id}.xes")
 
-    # Check if the corresponding ground truth files exist
+    print(proc_id, proc_file)
+    # Check if the corresponding ground truth file exists
     if not os.path.exists(ground_truth_log_path):
-        raise Exception(f"Ground truth files not found for {proc_file}, skipping.")
+        raise Exception(f"Ground truth file not found for {proc_file}, skipping.")
 
     # Load process description
     proc_descr = open(os.path.join(description_folder, proc_file), "r").read().strip()
 
-    # Load ground truth Petri net and log
-    # ground_truth_net, ground_truth_im, ground_truth_fm = pm4py.read_pnml(ground_truth_pn_path)
+    # Load ground truth log
     ground_truth_log = pm4py.read_xes(ground_truth_log_path, return_legacy_log_object=True)
-    # activities_in_ground_truth = [x for x in ground_truth_net.transitions if x.label is not None]
-
     log_activities = set(event["concept:name"] for trace in ground_truth_log for event in trace)
     activities_in_ground_truth = log_activities
-    proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(
-        log_activities)
+
+    # Append instructions to use ground truth activities
+    proc_descr += "\n\nEnsure the generated model uses the following activity labels (please also note upper and lower case): " + ", ".join(log_activities)
     init_conversation = create_conversation(proc_descr)
+
     start_time = time.time()
     try:
-        code, process_model, conversation = generate_model(init_conversation,
-                                                           api_key=api_key,
-                                                           llm_name=openai_model,
-                                                           api_url=api_url,
-                                                           max_iterations=10,
-                                                           additional_iterations=5
-                                                           )
+        if MANUAL:
+            # Manual mode: copy prompt to clipboard and open Notepad on a designated file
+            manual_file = os.path.join(base_dir, f"{proc_id}_manual_response.txt")
+            # Copy the prompt to the clipboard
+            pyperclip.copy(init_conversation[0]["content"])
+
+            if os.path.exists(manual_file):
+                # Create/clear the manual file so the user can edit it
+                F = open(manual_file, "r", encoding="utf-8")
+                current_content = F.read().strip()
+                F.close()
+
+                if current_content:
+                    continue
+
+            F = open(manual_file, "w", encoding="utf-8")
+            F.close()
+
+            # Open Notepad and wait until it is closed
+            subprocess.run(["notepad.exe", manual_file])
+
+            # Initialize manual iteration counter
+            manual_iteration_count = 0
+
+            # Loop until the extraction succeeds
+            while True:
+                manual_iteration_count += 1
+                with open(manual_file, "r", encoding="utf-8") as f:
+                    response_text = f.read()
+                try:
+                    # Attempt to extract the model from the response text
+                    code, process_model = extract_model_from_response(response_text, auto_duplicate=True)
+                    powl = process_model
+                except Exception as extraction_error:
+                    print("Error extracting model from response:", extraction_error)
+                    # Re-copy the same prompt to clipboard and re-open Notepad for editing
+                    pyperclip.copy(init_conversation[0]["content"])
+                    subprocess.run(["notepad.exe", manual_file])
+                else:
+                    break
+
+            # In manual mode, we assign the response as the "code"
+            # Create a conversation history with two turns: the prompt and the manual response
+            conversation = [init_conversation, response_text]
+        else:
+            # Automatic mode: generate the model using the LLM API
+            code, process_model, conversation = generate_model(
+                init_conversation,
+                api_key=api_key,
+                llm_name=openai_model,
+                api_url=api_url,
+                max_iterations=10,
+                additional_iterations=5
+            )
+            powl = process_model
+
         end_time = time.time()
         time_difference = str(end_time - start_time)
     except Exception as e:
+        traceback.print_exc()
         end_time = time.time()
         time_difference = str(end_time - start_time)
         stats = {
@@ -107,16 +158,13 @@ for proc_file in os.listdir(description_folder):
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": "None",
             "shared_activities": "None",
-            # "fitness": "None",
-            # "precision": "None",
-            "time (sec)": time_difference,
+            "time": time_difference,
             "error message": str(e)
         }
         print(e)
-
     else:
         conversation_history = conversation
-        powl = process_model
+        # Convert the extracted model (powl) to a Petri net
         net, im, fm = pm4py.convert_to_petri_net(powl)
         activities_in_generated = [x for x in net.transitions if x.label is not None]
 
@@ -125,10 +173,9 @@ for proc_file in os.listdir(description_folder):
         if CREATE_FILES:
             pm4py.write_pnml(net, im, fm, pnml_path)
 
-        # Save conversation history
+        # Save conversation history and code
         conversation_path = os.path.join(conv_folder, f"{proc_id}.txt")
         code_path = os.path.join(code_folder, f"{proc_id}.txt")
-
         if CREATE_FILES:
             with open(conversation_path, "w", encoding="utf-8") as conv_file:
                 conv_file.write(str(conversation_history))
@@ -137,25 +184,25 @@ for proc_file in os.listdir(description_folder):
 
         # Compare with ground truth
         shared_activities = len(set(t.label for t in net.transitions if t.label) & log_activities)
-        # fitness = pm4py.fitness_alignments(ground_truth_log, net, im, fm)
-        # precision = pm4py.precision_alignments(ground_truth_log, net, im, fm)
 
-        # Extract statistics
+        # Use different iteration counting based on manual mode
+        if MANUAL:
+            num_iterations = manual_iteration_count
+        else:
+            num_iterations = len(conversation_history) / 2
+
         stats = {
             "log_name": proc_file,
-            "num_it": len(conversation_history) / 2,
+            "num_it": num_iterations,
             "visible_transitions_ground_truth": len(activities_in_ground_truth),
             "visible_transitions_generated": len(activities_in_generated),
             "shared_activities": shared_activities,
-            # "fitness": "skipped",
-            # "precision": "skipped",
-            "time (sec)": time_difference,
+            "time": time_difference,
             "error message": ""
         }
 
     # Save statistics
     results_table.append(stats)
-
     if CREATE_FILES:
         # Append to CSV for every iteration
         with open(statistics_csv_file, "a", newline='', encoding="utf-8") as csv_file:
@@ -166,19 +213,9 @@ for proc_file in os.listdir(description_folder):
                 stats["visible_transitions_ground_truth"],
                 stats["visible_transitions_generated"],
                 stats["shared_activities"],
-                # "skipped",
-                # "skipped",
-                # "skipped",
-                # "skipped",
-                # "skipped",
-                # "skipped",
-                stats["time (sec)"],
+                stats["time"],
                 stats["error message"]
             ])
 
     print(stats)
-    # if CREATE_FILES:
-    #     # Save the statistics table
-    #     statistics_file = os.path.join(base_dir, "results_statistics.json")
-    #     with open(statistics_file, "a") as stats_file:
-    #         json.dump(stats, stats_file, indent=4)
+    # Optionally, you can also save the statistics table to a JSON file
