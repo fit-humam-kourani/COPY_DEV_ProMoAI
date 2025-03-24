@@ -2,8 +2,11 @@ from typing import Callable, List, TypeVar, Any
 from utils import constants
 import requests
 import sys
+from copy import copy
 import google.generativeai as genai
 import time
+import json
+import traceback
 
 from utils.prompting.prompt_engineering import ERROR_MESSAGE_FOR_MODEL_GENERATION
 
@@ -133,3 +136,85 @@ def generate_response_with_history_anthropic(conversation, api_key, llm_name):
         return message.content[0].text
     except Exception as e:
         raise Exception("Connection failed! This is the response: " + str(message))
+
+
+def generate_response_with_history_anthropic(conversation, api_key, llm_name):
+    ANTHROPIC_THINKING_TOKENS = 65536
+
+    complete_url = "https://api.anthropic.com/v1/messages"
+
+    messages = copy(conversation)
+
+    headers = {
+        "content-type": "application/json",
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": "output-128k-2025-02-19",
+        "x-api-key": api_key
+    }
+
+    payload = {
+        "model": llm_name,
+        "max_tokens": 128000,
+        "messages": messages
+    }
+
+    if ANTHROPIC_THINKING_TOKENS is not None:
+        payload["thinking"] = {"type": "enabled", "budget_tokens": ANTHROPIC_THINKING_TOKENS}
+        payload["max_tokens"] += ANTHROPIC_THINKING_TOKENS
+        payload["max_tokens"] = min(128000, payload["max_tokens"])
+        print(payload)
+
+    streaming_enabled = False
+
+    if streaming_enabled is True:
+        payload["stream"] = True
+        response_message = ""
+        chunk_count = 0
+
+        # Make a streaming POST request
+        with requests.post(complete_url, headers=headers, json=payload, stream=True) as resp:
+            print(resp)
+            print(resp.status_code)
+            print(resp.text)
+
+            for line in resp.iter_lines():
+                if not line:
+                    continue
+                # Decode the line
+                decoded_line = line.decode("utf-8").strip()
+
+                # Optionally check for a stream end marker (Anthropic may send "[DONE]")
+                if "message_stop" in decoded_line:
+                    break
+
+                if "message_start" in decoded_line:
+                    continue
+
+                try:
+                    decoded_line = decoded_line.split("data: ")[-1].strip()
+                    if "text" in decoded_line:
+                        chunk = decoded_line.split('"text":"')[-1].split('"')[0].replace("\\n", "\n")
+                        response_message += chunk
+                        chunk_count += 1
+                        #print(chunk_count)
+
+                        # You could add logging or progress updates here if desired
+                        if chunk_count % 10 == 0:
+                            #print(chunk_count, len(response_message), response_message)
+                            pass
+
+                except json.JSONDecodeError:
+                    # Skip any malformed lines
+                    traceback.print_exc()
+                    continue
+    else:
+        with requests.post(complete_url, headers=headers, json=payload, stream=True) as resp:
+            print(resp)
+            print(resp.status_code)
+
+            resp = resp.json()
+
+            response_message = resp["content"][-1]["text"]
+            print(response_message)
+
+    return response_message
