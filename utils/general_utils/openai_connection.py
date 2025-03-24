@@ -29,6 +29,8 @@ def generate_result_with_error_handling(conversation: List[dict[str:str]],
             response = generate_response_with_history_google(conversation, api_key, llm_name)
         elif api_url == "https://api.anthropic.com/v1/messages":
             response = generate_response_with_history_anthropic(conversation, api_key, llm_name)
+        elif "11434" in api_url:
+            response = generate_response_with_history_ollama(conversation, api_key, llm_name, api_url)
         else:
             response = generate_response_with_history(conversation, api_key, llm_name, api_url)
 
@@ -101,6 +103,64 @@ def generate_response_with_history(conversation_history, api_key, llm_name, api_
         return response["choices"][0]["message"]["content"]
     except Exception as e:
         raise Exception("Connection failed! This is the response: " + str(response))
+
+
+def generate_response_with_history_ollama(conversation_history, api_key, llm_name, api_url):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
+
+    messages_payload = []
+    for message in conversation_history:
+        messages_payload.append({
+            "role": message["role"],
+            "content": message["content"]
+        })
+
+    options = {"num_ctx": 131072}
+
+    payload = {
+        "model": llm_name,
+        "prompt": "\n\n".join([str(x) for x in messages_payload]),
+        "options": options,
+        "stream": True
+    }
+
+    if api_url.endswith("/"):
+        api_url = api_url[:-1]
+
+    ollama_url = api_url + "/api/generate"
+
+    response_message = ""
+    chunk_count = 0
+
+    # Use stream=True to process response chunks as they arrive
+    with requests.post(ollama_url, headers=headers, json=payload, stream=True) as resp:
+        # Iterate over each line in the streamed response
+        for line in resp.iter_lines():
+            if not line:
+                continue  # skip empty lines
+
+            try:
+                # Each line should be a JSON-encoded object with a "response" field
+                data = json.loads(line.decode("utf-8"))
+            except json.JSONDecodeError:
+                # If the line is not valid JSON, skip it
+                continue
+
+            # Append the chunk's text to our overall response message
+            chunk = data.get("response", "")
+            response_message += chunk
+            chunk_count += 1
+            #print(chunk_count)
+
+            if chunk_count % 10 == 0:
+                #print(chunk_count, len(response_message), response_message.replace("\n", " ").replace("\r", "").strip())
+                print(chunk_count)
+                pass
+
+    return response_message
 
 
 def generate_response_with_history_google(conversation_history, api_key, google_model) -> str:
