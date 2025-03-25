@@ -122,7 +122,7 @@ def generate_response_with_history_ollama(conversation_history, api_key, llm_nam
 
     payload = {
         "model": llm_name,
-        "prompt": "\n\n".join([str(x) for x in messages_payload]),
+        "prompt": messages_payload[0]["content"],
         "options": options,
         "stream": True
     }
