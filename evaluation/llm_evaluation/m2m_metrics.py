@@ -1,5 +1,6 @@
 import pandas as pd
 import pm4py
+import traceback
 import os
 
 
@@ -72,8 +73,12 @@ def create_results_df(target_llms):
     dataframe = []
     print(len(target_llms))
     for index, llm in enumerate(target_llms):
-        print(index, llm)
-        dataframe.append(execute_script(llm))
+        try:
+            print(index, llm)
+            dataframe.append(execute_script(llm))
+        except:
+            traceback.print_exc()
+
     dataframe = pd.DataFrame(dataframe)
     dataframe.columns = ["model", "f_score_tbr_avg", "f_score_fps_avg", "label_set_simil_avg", "behav_fps_simil_avg",
                          "structural_simil_avg", "embeddings_simil_avg"]
