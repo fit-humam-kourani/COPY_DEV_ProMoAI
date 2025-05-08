@@ -19,7 +19,7 @@ def execute_script(evaluated_llm):
 
     for file in os.listdir(folder_this_models):
         dictio = {}
-        gt_model = open(os.path.join(folder_ground_truth_models, file), "r").read()
+        gt_model = open(os.path.join(folder_ground_truth_models, file.replace(".py", ".txt")), "r", encoding="utf-8").read()
         exec(gt_model, dictio)
         gt_model = dictio["final_model"]
 
@@ -27,7 +27,7 @@ def execute_script(evaluated_llm):
                                 return_legacy_log_object=True)
 
         dictio = {}
-        thi_model = open(os.path.join(folder_this_models, file), "r").read()
+        thi_model = open(os.path.join(folder_this_models, file), "r", encoding="utf-8").read()
         exec(thi_model, dictio)
         thi_model = dictio["final_model"]
 
