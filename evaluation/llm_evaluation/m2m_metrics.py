@@ -23,7 +23,7 @@ def execute_script(evaluated_llm):
         exec(gt_model, dictio)
         gt_model = dictio["final_model"]
 
-        gt_log = pm4py.read_xes(os.path.join(folder_ground_truth_logs, file.replace("txt", "xes")),
+        gt_log = pm4py.read_xes(os.path.join(folder_ground_truth_logs, file.replace("txt", "xes").replace("py", "xes")),
                                 return_legacy_log_object=True)
 
         dictio = {}
@@ -88,6 +88,6 @@ def create_results_df(target_llms):
 
 
 if __name__ == "__main__":
-    dataframe = create_results_df([x for x in os.listdir("llm_com") if "." not in x])
+    dataframe = create_results_df([x for x in os.listdir("llm_com") if os.path.isdir(os.path.join("llm_com", x))])
     print(dataframe)
     dataframe.to_csv("overall_m2m_metrics.csv", index=False)
