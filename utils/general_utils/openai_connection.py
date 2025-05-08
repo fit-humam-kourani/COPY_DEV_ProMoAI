@@ -80,19 +80,26 @@ def generate_response_with_history(conversation_history, api_key, llm_name, api_
     }
 
     messages_payload = []
+
+    #messages_payload.append({"role": "system", "content": "detailed thinking on"})
+    #print("SIII", messages_payload)
+
     for message in conversation_history:
-        messages_payload.append({
-            "role": message["role"],
-            "content": message["content"]
-        })
+        if message["role"] != "system":
+            messages_payload.append({
+                "role": message["role"],
+                "content": message["content"]
+            })
 
     payload = {
         "model": llm_name,
-        "messages": messages_payload
+        "messages": messages_payload,
     }
 
     if constants.MAX_TOKENS < sys.maxsize:
         payload["max_tokens"] = constants.MAX_TOKENS
+
+    payload["max_tokens"] = 131072
 
     if api_url.endswith("/"):
         api_url = api_url[:-1]
